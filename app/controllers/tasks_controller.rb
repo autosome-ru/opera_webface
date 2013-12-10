@@ -32,7 +32,7 @@ class TasksController < ApplicationController
 protected
 
   def permitted_params
-    params.permit(:task => [])
+    params.permit(:task => model_class.task_param_names + model_class.virtual_task_param_names)
   end
 
   def default_params

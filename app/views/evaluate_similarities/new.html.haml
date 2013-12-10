@@ -1,7 +1,17 @@
 = simple_form_for @task, :as => :task, html: {class: 'task_params'}, remote: true do |f|
-  .matrix= f.input :matrix_first, label: 'First matrix:', :as => :text
-  .matrix= f.input :matrix_second, label: 'Second matrix:', :as => :text
-  .background= f.input :background, label: 'Background:'
+  .row
+    .span3
+      .data_model= f.input :data_model_first, label: 'Data model'
+      .matrix= f.input :matrix_first, label: 'First matrix:', :as => :text
+    .span3
+      .data_model= f.input :data_model_second, label: 'Data model'
+      .matrix= f.input :matrix_second, label: 'Second matrix:', :as => :text
+  .background
+    Background:
+    = f.input :background_a, label: 'A', wrapper: false
+    = f.input :background_c, label: 'C', wrapper: false
+    = f.input :background_g, label: 'G', wrapper: false
+    = f.input :background_t, label: 'T', wrapper: false
   .pvalue= f.input :pvalue, label: 'P-value:'
   .dicretization= f.input :discretization, label: 'Discretization:'
   .pvalue_boundary= f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false

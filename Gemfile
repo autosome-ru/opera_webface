@@ -55,3 +55,5 @@ group :development do
   gem "binding_of_caller"
 end
 
+gem 'macroape', '~> 4.0'
+gem 'bioinform', '~> 0.1.13'

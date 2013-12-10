@@ -50,6 +50,7 @@ class OperaStatus
 
   def task_results
     return {} unless finished?
+    return {} unless File.exist?(File.join(path_on_scene,'task_results.yaml'))
     @task_results ||= YAML.load_file(File.join(path_on_scene,'task_results.yaml'))
   end
   
