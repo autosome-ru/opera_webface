@@ -1,0 +1,11 @@
+1) from inner_perform excluded support for ytilib and bismark. If you need - connect to it manually
+2) in overture you should create module named as key in OVERTURE_PATH, containing method perform_overture(opera_status, run_params)
+
+
+Это нормально, что тикет, который extended, больше уже никогда не будет удален т.к. он и из expired, и из sold тоже исчез?
+
+Разнести создание сценария и его выполнение OperaScene#perform --> OperaAction#inner_perform
+
+Чем всё-таки OperaAction фундаментально отличается от OperaSoloist?
+
+Разнести методы модуля Opera на разные части: хелперы и методы, обеспечивающие общение солистов с театром. Кстати, надо бы определиться эти методы чем-то отличаются от аналогичных методов SmbsmCore

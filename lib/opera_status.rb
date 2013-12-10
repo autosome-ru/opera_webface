@@ -1,0 +1,60 @@
+require 'opera'
+require 'opera_house_configuration'
+require 'support'
+require 'fileutils'
+require 'yaml'
+
+class OperaStatus
+  PERFORMANCE = "performance in progress"
+  ALREADY_PERFORMING = "already performing"
+  ALREADY_FINISHED = "already finished"
+  PERFORMANCE_FINISHED = "performance finished"
+  PERFORMANCE_SIDESCENES = "performance queued in a sidescene"
+  INCORRECT_TICKET = "incorrect ticket"
+  
+  attr_accessor :ticket, :message, :opera_name, :queue_time, :start_time, :end_time
+  def initialize(ticket, message, opera_name)
+    @ticket, @message, @opera_name = ticket, message, opera_name
+    @queue_time, @start_time, @end_time  =  Time.now, nil, nil
+  end
+  
+  def overture_exist?; OperaHouseConfiguration::OVERTURE_PATH.include?(@opera_name); end
+  # def opera_exist?; Opera.opera_exist?(@opera_name); end
+  def opera_path; OperaHouseConfiguration::OPERA_PATH[@opera_name];  end
+  def overture_path; OperaHouseConfiguration::OVERTURE_PATH[@opera_name];  end
+  def finish; @message, @end_time = PERFORMANCE_FINISHED, Time.now; end
+  def finished?; @end_time; end
+  alias_method :ended?, :finished?
+  
+  def performer_class; Object.const_get(@opera_name); end
+  
+  def perform_overture(params)
+    return unless overture_exist?
+    in_dir(Opera.get_new_dir(@ticket)) do
+      File.write('task_params.yaml', params.to_yaml)
+      #OperaLogger.instance.debug("Overture changed directory to #{Dir.pwd}")
+      performer_class.perform_overture(self, params)
+      #OperaLogger.instance.debug("Overture finished directory to #{Dir.pwd}")
+      #OperaLogger.instance.debug("Overture changed directory back to #{Dir.pwd}")
+    end
+  end
+                       
+  def ticket_xml_path; Opera.ticket_xml_path(@ticket); end
+  def path_on_scene; Opera.path_on_scene(@ticket); end
+  def ticket_xml_path_on_scene; File.join(path_on_scene, "#{@ticket}.xml"); end
+  def path_to_opera_file; File.join(path_on_scene, File.basename(opera_path)); end
+
+  def task_params
+    @task_params ||= YAML.load_file(File.join(path_on_scene,'task_params.yaml'))
+  end
+
+  def task_results
+    return {} unless finished?
+    @task_results ||= YAML.load_file(File.join(path_on_scene,'task_results.yaml'))
+  end
+  
+  def introduction
+    Dir.mkdir(path_on_scene)
+    #FileUtils.cp(ticket_xml_path, ticket_xml_path_on_scene)  if File.exist? ticket_xml_path
+  end
+end
