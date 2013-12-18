@@ -1,22 +1,16 @@
 module OperaHouseConfiguration  
   DRubyURI = 'druby://localhost:1111'
   
-  OS = RUBY_PLATFORM.include?('linux') ? :LINUX : :WINDOWS
-  case OS
-  when :WINDOWS
-    root_path = File.join('D:', 'programming', 'onemoreweb')
-  when :LINUX
-    root_path = '/home/ilya/programming'
-  end
+  root_path = File.expand_path("../../", __FILE__)
   
-  OPERAHOUSE_PATH = File.join(root_path, 'opera_webface','lib')
+  OPERAHOUSE_PATH = File.join(root_path, 'lib')
   
-  SCENE_PATH = File.join(root_path, 'opera_webface', 'scene')
+  SCENE_PATH = File.join(root_path, 'scene')
   SCORES_PATH = File.join(OPERAHOUSE_PATH, 'scores')
   ASSETS_PATH = File.join(SCORES_PATH, 'assets')
   
-  TICKETS_PATH = File.join(root_path, 'opera_webface', 'log', 'tickets')
-  STORIES_PATH = File.join(root_path, 'opera_webface', 'log', 'stories')
+  TICKETS_PATH = File.join(root_path, 'log', 'tickets')
+  STORIES_PATH = File.join(root_path, 'log', 'stories')
   
   task_names = {'EvaluateSimilarity' => 'evaluate_similarity',
                 'ScanCollection' => 'scan_collection' }

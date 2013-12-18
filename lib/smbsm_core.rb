@@ -3,7 +3,8 @@ require 'drb'
 module SMBSMCore
   DRubyURI = 'druby://localhost:1111'
   TimeoutForTheatreToStart = 5
-  PATH_TO_THEATER_START = 'ruby /home/ilya/programming/opera_webface/lib/opera_house_start.rb'
+  root_path = File.expand_path("../../", __FILE__)
+  PATH_TO_THEATER_START = "ruby #{File.join(root_path, 'lib', 'opera_house_start.rb')}"
   
   def self.theatre; (DRb.thread && @theatre) || opera_manager;  end
   

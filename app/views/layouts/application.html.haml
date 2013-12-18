@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title OperaWebface
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body{"data-no-turbolink" => ""}
+    %header
+    %nav
+      = link_to 'Macroape: compare two motifs', new_evaluate_similarity_path
+      = link_to 'Macroape: scan for a motif', new_scan_collection_path
+    %section
+      %header
+      %article
+        = yield
+      %footer
