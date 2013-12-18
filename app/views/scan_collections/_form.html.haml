@@ -1,0 +1,18 @@
+= simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
+  .row
+    .span3
+      .data_model= f.input :query_data_model, label: 'Data model', include_blank: false
+      .matrix= f.input :query_matrix, label: 'First matrix:', :as => :text
+  .collection_background
+    = f.input :collection_background, include_blank: false
+  .background
+    Query background:
+    = f.input :query_background_a, label: 'A', wrapper: false
+    = f.input :query_background_c, label: 'C', wrapper: false
+    = f.input :query_background_g, label: 'G', wrapper: false
+    = f.input :query_background_t, label: 'T', wrapper: false
+  .pvalue= f.input :pvalue, label: 'P-value:'
+  .pvalue_boundary= f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
+  .similarity_cutoff= f.input :similarity_cutoff, label: 'Similarity cutoff'
+  .precise_recalc_cutoff= f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode'
+  = f.submit data: {disable_with: 'Sending request'}

@@ -1,0 +1,19 @@
+.input_data
+  .matrix
+    .label 
+      PWM
+      = download_list ticket, {'pcm' => 'query.pcm', 'pwm' => 'query.pwm'}
+    %pre= Bioinform::PWM.new(task_params.query_pwm).round(3)
+    .logo= show_image(ticket, 'query_direct.png')
+  / .matrix
+  /   .label Second PWM
+  /   = download_list ticket, {'pcm' => 'pcm_second.pcm', 'pwm' => 'pwm_second.pwm'}
+  /   %pre= Bioinform::PWM.new(task_params.pwm_second).round(3)
+  /   .logo= show_image(ticket, "pcm_second_#{task_results.orientation}.png")
+
+.result_data
+  = table_from_txt(task_results, task_params)
+  / .similarity
+  /   .label Similarity:
+  /   .value= task_results.similarity
+    

@@ -17,3 +17,6 @@
 /log/stories/
 /scene/
 /tmp
+/public/pcm/*.pcm
+/public/pwm/**/*.pwm
+/app/assets/images/hocomoco_logo/*.png

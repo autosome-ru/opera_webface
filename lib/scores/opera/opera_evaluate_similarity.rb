@@ -39,6 +39,11 @@ info.merge!(threshold_first: threshold_first.to_f / discretization,
             pvalue_boundary: pvalue_boundary)
 File.write 'result.txt', Macroape::CLI::Helper.similarity_info_string(info)
 File.write 'task_results.yaml', info.to_yaml
+['pcm_first.pcm', 'pcm_second.pcm'].each do |pcm_filename|
+  if File.exist?(pcm_filename)
+    SMBSMCore.soloist("sequence_logo #{pcm_filename}", $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)  
+  end
+end
 
 
 #pwm_first = Bioinform::PWM.new(File.read('pwm_first.pwm')).set_parameters(background: first_background).discrete(discretization)

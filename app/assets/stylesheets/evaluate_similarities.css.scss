@@ -1,3 +1,18 @@
 // Place all the styles related to the EvaluateSimilarities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.input_data {
+  position: relative;
+  border: 1px solid black;
+  .matrix {
+    padding: 5px 20px;
+    vertical-align: top;
+    display: inline-block; 
+  }
+}
+.result_data {
+  .similarity {
+    .value { margin-left: 15px; }
+  }
+}

@@ -30,12 +30,13 @@ class OperaAction
       f << <<-EOS
         $:.unshift '#{OperaHouseConfiguration::OPERAHOUSE_PATH}'
         require 'opera'
-        ticket = '#{ticket}'
+        require 'smbsm_core'
+        $ticket = '#{ticket}'
         Dir.chdir('#{File.dirname(path_to_opera_file)}')
         begin
           #{File.read(opera_path)}
         ensure
-          Opera.ending(ticket)
+          Opera.ending($ticket)
         end
       EOS
     end

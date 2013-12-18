@@ -2,13 +2,13 @@ require 'opera'
 require 'opera_house_configuration'
 require 'support'
 require 'fileutils'
-require 'yaml'
 
 class OperaStatus
   PERFORMANCE = "performance in progress"
   ALREADY_PERFORMING = "already performing"
   ALREADY_FINISHED = "already finished"
   PERFORMANCE_FINISHED = "performance finished"
+  PARAMS_SETUP = "task parameters saving"
   PERFORMANCE_SIDESCENES = "performance queued in a sidescene"
   INCORRECT_TICKET = "incorrect ticket"
   
@@ -31,11 +31,7 @@ class OperaStatus
   def perform_overture(params)
     return unless overture_exist?
     in_dir(Opera.get_new_dir(@ticket)) do
-      File.write('task_params.yaml', params.to_yaml)
-      #OperaLogger.instance.debug("Overture changed directory to #{Dir.pwd}")
-      performer_class.perform_overture(self, params)
-      #OperaLogger.instance.debug("Overture finished directory to #{Dir.pwd}")
-      #OperaLogger.instance.debug("Overture changed directory back to #{Dir.pwd}")
+      performer_class.perform_overture(self, params)  if performer_class.respond_to?(:perform_overture)
     end
   end
                        
@@ -43,16 +39,6 @@ class OperaStatus
   def path_on_scene; Opera.path_on_scene(@ticket); end
   def ticket_xml_path_on_scene; File.join(path_on_scene, "#{@ticket}.xml"); end
   def path_to_opera_file; File.join(path_on_scene, File.basename(opera_path)); end
-
-  def task_params
-    @task_params ||= YAML.load_file(File.join(path_on_scene,'task_params.yaml'))
-  end
-
-  def task_results
-    return {} unless finished?
-    return {} unless File.exist?(File.join(path_on_scene,'task_results.yaml'))
-    @task_results ||= YAML.load_file(File.join(path_on_scene,'task_results.yaml'))
-  end
   
   def introduction
     Dir.mkdir(path_on_scene)

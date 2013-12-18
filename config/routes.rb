@@ -1,11 +1,18 @@
 OperaWebface::Application.routes.draw do
 
+  get "scene/:id/download/:filename" => "scene#download", :as => :download_from_scene, filename: /[^\/]+/ 
+  get "scene/:id/show/:filename" => "scene#show", :as => :show_from_scene, filename: /[^\/]+/ 
+
   resources :tasks, only: [:new, :create, :show] do
-    get 'status', :on => :member
+    get 'perform', :on => :member
   end
   
   resources :evaluate_similarities, only: [:new, :create, :show] do
-    get 'status', :on => :member
+    get 'perform', :on => :member
+  end
+
+  resources :scan_collections, only: [:new, :create, :show] do
+    get 'perform', :on => :member
   end
 
   

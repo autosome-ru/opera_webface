@@ -1,31 +1,34 @@
+require 'yaml'
+require 'ostruct'
+
+# to work from box, params should be saved into task_params.yaml (in overture), results - into task_results.yaml (in opera)
 class TasksController < ApplicationController
-  respond_to :json, only: [:status, :create]
-  respond_to :js, only: [:create]
   def new
     @task = model_class.new( default_params.merge(permitted_params[:task] || {}) )
   end
 
   def create
-    ticket = SMBSMCore.get_ticket
     @task = model_class.new(permitted_params[:task] || {})
-    if @task.valid?
-      SMBSMCore.perform_opera(ticket, @task.task_type, @task.task_params)
+    unless @task.valid?
+      render action: 'new'
     end
-    respond_with do |format|
-      format.js { 
-        render :js => "window.location = '#{url_for(action: 'show', id: ticket)}'"
-      }
-    end
+    @ticket = SMBSMCore.get_ticket
+    SMBSMCore.perform_overture(@ticket, @task.task_type, @task.task_params)
+  end
+
+  def perform
+    @ticket = params[:id]
+    SMBSMCore.perform_opera(@ticket, model_class.name)
+    redirect_to action: 'show', id: @ticket
   end
 
   def show
+    @ticket = params[:id]
     @status = SMBSMCore.get_status(params[:id])
-  end
-
-  def status
-    @status = SMBSMCore.get_status(params[:id])
-    respond_with do |format|
-      format.json{ render(json: {finished: @task.finished?, message: @task.message} ) }
+    if @status.finished?
+      render template: 'tasks/show', locals: {ticket: @ticket, status: @status, task_params: task_params(@ticket), task_results: task_results(@ticket)}
+    else
+      render template: 'tasks/in_process', locals: {ticket: @ticket, status: @status}
     end
   end
 
@@ -42,5 +45,13 @@ protected
   # Task.new or Macroape.new for MacroapesController
   def model_class
     Object.const_get(controller_name.classify)
+  end
+
+  def task_params(ticket)
+    OpenStruct.new(YAML.load(SMBSMCore.get_content(ticket, 'task_params.yaml')))  if SMBSMCore.check_content(ticket, 'task_params.yaml')
+  end
+
+  def task_results(ticket)
+    OpenStruct.new(YAML.load(SMBSMCore.get_content(ticket, 'task_results.yaml')))  if SMBSMCore.check_content(ticket, 'task_results.yaml')
   end
 end

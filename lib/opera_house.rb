@@ -21,7 +21,7 @@ class OperaHouse
     
     @log = OperaLogger.new(Opera.last_ticket_number.next)
         
-    @side_scenes, @cleanable = [], []
+    @before_side_scenes, @side_scenes, @cleanable = [], [], []
     @tickets_sold, @tickets_expired = {}, {}
     @soloists = {}
     
@@ -41,10 +41,32 @@ class OperaHouse
     @@service = DRb.start_service(OperaHouseConfiguration::DRubyURI, OperaHouse.new)
   end
   
-  def perform_opera(ticket, opera_name, params)
+  def perform_overture(ticket, opera_name, params)
     ### need2try .reload on params - if they are DRbUnknown - and halt
     ###puts params.reload().inspect
     
+    @log.debug("cannot shedule unknown overture #{opera_name}") and return nil  unless Opera.opera_exist?(opera_name)
+    @log.debug("setting params of #{opera_name} | #{ticket}")
+    
+    ticket_service_lock.synchronize do
+      return OperaStatus.new(ticket, OperaStatus::INCORRECT_TICKET, opera_name)  unless @tickets_sold.has_key?(ticket)
+      # @tickets_sold.delete(ticket)
+      # @tickets_expired.delete(ticket)
+    end
+    setup_task(ticket, opera_name, params)
+  end
+  
+  def setup_task(ticket, opera_name, params)
+    new_status = OperaStatus.new(ticket, OperaStatus::PARAMS_SETUP, opera_name)
+    new_status.introduction
+    scene_lock.synchronize do
+      @before_side_scenes.push(new_status)
+      new_status.perform_overture(params)
+    end
+    @log.debug("task params've been set")
+  end
+
+  def perform_opera(ticket, opera_name)
     @log.debug("cannot shedule unknown opera #{opera_name}") and return nil  unless Opera.opera_exist?(opera_name)
     @log.debug("sheduling performance of #{opera_name} | #{ticket}")
     
@@ -54,18 +76,19 @@ class OperaHouse
       @tickets_expired.delete(ticket)
     end
     
-    run_task(ticket, opera_name, params)
+    run_task(ticket, opera_name)
   end
-  
-  def run_task(ticket, opera_name, params)
+
+  def run_task(ticket, opera_name)
     # TODO: move system procedures from house to opera.rb, all in ending also
     # ENSURE THAT overture\introduction plays correctly, or it'll ruin the action-slot
-
     new_status = OperaStatus.new(ticket, OperaStatus::PERFORMANCE_SIDESCENES, opera_name)
-    new_status.introduction
-    scene_lock.synchronize do
-      new_status.perform_overture(params)
+    scene_lock.synchronize do      
+      stat = @before_side_scenes.detect{|status| status.ticket == ticket}
+      #$stderr.puts "========\n#{@before_side_scenes.inspect}\n#{@side_scenes.inspect}\n==============="
+      @before_side_scenes.delete(stat)
       @side_scenes.push(new_status)
+      #$stderr.puts "========\n#{@before_side_scenes.inspect}\n#{@side_scenes.inspect}\n==============="
     end
     
     @log.debug("sheduling finished successfully")
@@ -130,7 +153,9 @@ class OperaHouse
   
   def get_status(ticket)
     scene_lock.synchronize {
-      @side_scenes.find{|status| status.ticket == ticket } || get_performance(ticket).try(&:status) || get_finale(ticket)
+      @side_scenes.find{|status| status.ticket == ticket } || 
+      @before_side_scenes.find{|status| status.ticket == ticket } ||
+      get_performance(ticket).try(&:status) || get_finale(ticket)
     }
   end
   

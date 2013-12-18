@@ -15,15 +15,6 @@ module Opera
     DRbObject.new(nil, OperaHouseConfiguration::DRubyURI).ending(ticket)
   end
   
-  # def self.soloist(command, ticket = $ticket)
-  def self.soloist(command, ticket)
-    raise 'ticket not set' unless ticket
-    solo = OperaSoloist.new(command)
-    DRb.start_service
-    DRbObject.new(nil, OperaHouseConfiguration::DRubyURI).soloist(ticket, solo.pid)
-    solo.result
-  end
-  
   def self.ticket_xml_path(ticket); File.join(OperaHouseConfiguration::TICKETS_PATH, "#{ticket}.xml"); end
   def self.ticket_yaml_path(ticket); File.join(OperaHouseConfiguration::TICKETS_PATH, "#{ticket}.yaml"); end
   def self.file_on_scene(ticket, what); File.join(path_on_scene(ticket), File.basename(what)); end
