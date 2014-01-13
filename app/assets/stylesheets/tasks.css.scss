@@ -23,6 +23,7 @@
 }
 
 #info {
+  margin-left: 30px;
   display: inline-block;
   position: absolute;
   border-left: 1px solid black;
@@ -60,13 +61,17 @@ em {
   display: inline-block;
 }
 
+.result_data {
+  margin-top: 20px;
+}
+
 .data_model_specifiers {
   .effective_count, .pseudocount {
     display: inline-block;
   }
 }
 
-.background {
+.background, .query_background {
   .background_mode, .background_gc_content, .background_frequencies {
     display: inline-block;
   }

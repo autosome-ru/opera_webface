@@ -1,0 +1,13 @@
+%div{ class: background_class, data: task.attribute_data(background_variable.to_sym) }
+  = background_title
+  %br
+  .background_mode{ data: task.attribute_data("#{background_variable}_mode".to_sym) }
+    = form_builder.input "#{background_variable}_mode".to_sym, label: 'Background mode:', include_blank: false
+  .background_gc_content{ data: task.attribute_data("#{background_variable}_gc_content".to_sym) }
+    = form_builder.input "#{background_variable}_gc_content".to_sym, label: 'GC-content:'
+  .background_frequencies{ data: task.attribute_data("#{background_variable}_frequencies".to_sym) }
+    Background frequencies:
+    = form_builder.input "#{background_variable}_a".to_sym, label: 'A', wrapper: false
+    = form_builder.input "#{background_variable}_c".to_sym, label: 'C', wrapper: false
+    = form_builder.input "#{background_variable}_g".to_sym, label: 'G', wrapper: false
+    = form_builder.input "#{background_variable}_t".to_sym, label: 'T', wrapper: false

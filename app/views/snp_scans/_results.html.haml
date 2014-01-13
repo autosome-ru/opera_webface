@@ -1,0 +1,10 @@
+.input_data
+  .snp_list
+    .label
+      SNP list
+      = download_list ticket, {'txt' => 'snp_list.txt'}
+    %pre= (task_params.snp_list.lines.size <= 5) ? task_params.snp_list : task_params.snp_list.lines.first(5).join("\n") + "\n...\n"
+  = download_link 'View more parameters', ticket, 'task_params.yaml'
+.result_data
+  = download_link 'Download results', ticket, 'task_result.txt'
+  = table_from_txt(task_results, task_params)

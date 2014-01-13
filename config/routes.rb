@@ -1,21 +1,26 @@
 OperaWebface::Application.routes.draw do
 
   root 'welcome#index'
-  get "scene/:id/download/:filename" => "scene#download", :as => :download_from_scene, filename: /[^\/]+/ 
-  get "scene/:id/show/:filename" => "scene#show", :as => :show_from_scene, filename: /[^\/]+/ 
+  get "scene/:id/download/:filename" => "scene#download", :as => :download_from_scene, filename: /[^\/]+/
+  get "scene/:id/show/:filename" => "scene#show", :as => :show_from_scene, filename: /[^\/]+/
 
   resources :tasks, only: [:new, :create, :show] do
     get 'perform', :on => :member
     post 'show', :on => :collection, as: :search
   end
 
-  get 'evaluate_similarities' => 'evaluate_similarities#new'
+  get 'evaluate_similarity' => 'evaluate_similarities#new'
   resources :evaluate_similarities, only: [:new, :create, :show] do
     get 'perform', :on => :member
   end
 
-  get 'scan_collections' => 'scan_collections#new'
+  get 'scan_collection' => 'scan_collections#new'
   resources :scan_collections, only: [:new, :create, :show] do
+    get 'perform', :on => :member
+  end
+
+  get 'snp_scan' => 'snp_scans#new'
+  resources :snp_scans, only: [:new, :create, :show] do
     get 'perform', :on => :member
   end
 

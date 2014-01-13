@@ -26,7 +26,8 @@ class TasksController < ApplicationController
     @ticket = params[:id]
     @status = SMBSMCore.get_status(params[:id])
 
-    if self.class.name == 'TasksController'
+    #if self.class.name == 'TasksController'
+    if self.class.name != "#{@status.opera_name.pluralize}Controller"
       redirect_to controller: @status.opera_name.pluralize.snake_case, action: 'show', id: @ticket
       return
     end

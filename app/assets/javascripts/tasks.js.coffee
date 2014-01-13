@@ -2,6 +2,32 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+window.update_data_model = (modelClass)->
+  $(modelClass).empty
+  data_model = ($(modelClass).find('.data_model select').prop('value') || '').toUpperCase()
+  if data_model == 'PCM'
+    $(modelClass + '.data_model_specifiers .effective_count').hide()
+    $(modelClass + '.data_model_specifiers .pseudocount').show()
+  else if data_model == 'PPM'
+    $(modelClass + '.data_model_specifiers .effective_count').show()
+    $(modelClass + '.data_model_specifiers .pseudocount').show()
+  else if data_model == 'PWM'
+    $(modelClass + '.data_model_specifiers .effective_count').hide()
+    $(modelClass + '.data_model_specifiers .pseudocount').hide()
+
+window.update_background_model = (background_selector)->
+  background_selector = $(background_selector)
+  background_mode = (background_selector.find('.background_mode select').prop('value') || '').toLowerCase()
+  if background_mode == 'wordwise'
+    background_selector.find('.background_frequencies').hide()
+    background_selector.find('.background_gc_content').hide()
+  else if background_mode == 'gc_content'
+    background_selector.find('.background_frequencies').hide()
+    background_selector.find('.background_gc_content').show()
+  else if background_mode == 'frequencies'
+    background_selector.find('.background_frequencies').show()
+    background_selector.find('.background_gc_content').hide()
+
 $(document).ready ->
   # form_sent = false
   # $('.task_params')
@@ -29,41 +55,3 @@ $(document).ready ->
   $('.expand_button').click ->
     $(this).next('.advanced_options').toggle()
 
-  update_data_model = (modelClass)->
-    data_model = $(modelClass).find('.data_model select')[0].value.toUpperCase()
-    if data_model == 'PCM'
-      $(modelClass + '.data_model_specifiers .effective_count').hide()
-      $(modelClass + '.data_model_specifiers .pseudocount').show()
-    else if data_model == 'PPM'
-      $(modelClass + '.data_model_specifiers .effective_count').show()
-      $(modelClass + '.data_model_specifiers .pseudocount').show()
-    else if data_model == 'PWM'
-      $(modelClass + '.data_model_specifiers .effective_count').hide()
-      $(modelClass + '.data_model_specifiers .pseudocount').hide()
-
-  update_data_model('.first_model')
-  $('.first_model .data_model select').change ->
-    update_data_model('.first_model')
-
-  update_data_model('.second_model')
-  $('.second_model .data_model select').change ->
-    update_data_model('.second_model')
-
-  update_background_model = (background_selector)->
-    background_selector = $(background_selector)
-    background_mode = background_selector.find('.background_mode select')[0].value.toLowerCase()
-    if background_mode == 'wordwise'
-      background_selector.find('.background_frequencies').hide()
-      background_selector.find('.background_gc_content').hide()
-    else if background_mode == 'gc_content'
-      background_selector.find('.background_frequencies').hide()
-      background_selector.find('.background_gc_content').show()
-    else if background_mode == 'frequencies'
-      background_selector.find('.background_frequencies').show()
-      background_selector.find('.background_gc_content').hide()
-
-  update_background_model('.background')
-  $('.background').each ->
-    background_selector = $(this)
-    background_selector.find('.background_mode select').change ->
-      update_background_model(background_selector)

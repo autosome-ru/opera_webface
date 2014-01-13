@@ -10,8 +10,7 @@
         = f.input :data_model_second, label: 'Data model', include_blank: false
       .matrix{ data: task.attribute_data(:second_matrix) }
         = f.input :matrix_second, label: 'Second matrix:', :as => :text
-  /.background= f.input :background_first, label: 'First background:'
-  /.background= f.input :background_second, label: 'Second background:'
+
   Advanced options:
   .expand_button
   .advanced_options
@@ -19,17 +18,9 @@
       = f.input :pvalue, label: 'P-value:'
     .pvalue_boundary{ data: task.attribute_data(:pvalue_boundary) }
       = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
-    .background{ data: task.attribute_data(:background) }
-      .background_mode{ data: task.attribute_data(:background_mode) }
-        = f.input :background_mode, label: 'Background mode:', include_blank: false
-      .background_gc_content{ data: task.attribute_data(:background_gc_content) }
-        = f.input :background_gc_content, label: 'GC-content:'
-      .background_frequencies{ data: task.attribute_data(:background_frequencies) }
-        Background frequencies:
-        = f.input :background_a, label: 'A', wrapper: false
-        = f.input :background_c, label: 'C', wrapper: false
-        = f.input :background_g, label: 'G', wrapper: false
-        = f.input :background_t, label: 'T', wrapper: false
+
+    = render partial:'shared/background_model', locals: {task: task, form_builder: f, background_variable: :background, background_title: '', background_class: 'background'}
+
     .dicretization{ data: task.attribute_data(:discretization) }
       = f.input :discretization, label: 'Discretization:'
 

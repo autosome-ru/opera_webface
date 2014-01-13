@@ -9,12 +9,13 @@ class ScanCollection < Task
   add_task_params :precise_recalc_cutoff
   add_task_params :collection_background
   add_task_params :query_data_model
-  
+  add_task_params :query_effective_count, :query_pseudocount, &->(x){ (x && !x.blank?) ? x.to_f : nil}
+
 
   extend Enumerize
   enumerize :pvalue_boundary, in: [:lower, :upper]
   enumerize :collection_background, in: [:uniform, :hg19]
-  enumerize :query_data_model, in: [:PCM, :PWM]
+  enumerize :query_data_model, in: [:PCM, :PPM, :PWM]
 
   def initialize(*)
     super
