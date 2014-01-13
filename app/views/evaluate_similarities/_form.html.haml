@@ -1,20 +1,48 @@
 = simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .row
-    .span3
-      .data_model= f.input :data_model_first, label: 'Data model', include_blank: false
-      .matrix= f.input :matrix_first, label: 'First matrix:', :as => :text
-    .span3
-      .data_model= f.input :data_model_second, label: 'Data model', include_blank: false
-      .matrix= f.input :matrix_second, label: 'Second matrix:', :as => :text
-  .background
-    Background:
-    = f.input :background_a, label: 'A', wrapper: false
-    = f.input :background_c, label: 'C', wrapper: false
-    = f.input :background_g, label: 'G', wrapper: false
-    = f.input :background_t, label: 'T', wrapper: false
-  .pvalue= f.input :pvalue, label: 'P-value:'
-  .dicretization= f.input :discretization, label: 'Discretization:'
-  .pvalue_boundary= f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
+    .span3.first_model
+      .data_model{ data: task.attribute_data(:data_model_first) }
+        = f.input :data_model_first, label: 'Data model', include_blank: false
+      .matrix{ data: task.attribute_data(:first_matrix) }
+        = f.input :matrix_first, label: 'First matrix:', :as => :text
+    .span3.second_model
+      .data_model{ data: task.attribute_data(:data_model_second) }
+        = f.input :data_model_second, label: 'Data model', include_blank: false
+      .matrix{ data: task.attribute_data(:second_matrix) }
+        = f.input :matrix_second, label: 'Second matrix:', :as => :text
   /.background= f.input :background_first, label: 'First background:'
   /.background= f.input :background_second, label: 'Second background:'
-  = f.submit data: {disable_with: 'Sending request'}
+  Advanced options:
+  .expand_button
+  .advanced_options
+    .pvalue{ data: task.attribute_data(:pvalue) }
+      = f.input :pvalue, label: 'P-value:'
+    .pvalue_boundary{ data: task.attribute_data(:pvalue_boundary) }
+      = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
+    .background{ data: task.attribute_data(:background) }
+      .background_mode{ data: task.attribute_data(:background_mode) }
+        = f.input :background_mode, label: 'Background mode:', include_blank: false
+      .background_gc_content{ data: task.attribute_data(:background_gc_content) }
+        = f.input :background_gc_content, label: 'GC-content:'
+      .background_frequencies{ data: task.attribute_data(:background_frequencies) }
+        Background frequencies:
+        = f.input :background_a, label: 'A', wrapper: false
+        = f.input :background_c, label: 'C', wrapper: false
+        = f.input :background_g, label: 'G', wrapper: false
+        = f.input :background_t, label: 'T', wrapper: false
+    .dicretization{ data: task.attribute_data(:discretization) }
+      = f.input :discretization, label: 'Discretization:'
+
+    .data_model_specifiers.first_model
+      .effective_count{ data: task.attribute_data(:effective_count_first) }
+        = f.input :effective_count_first
+      .pseudocount{ data: task.attribute_data(:pseudocount_first) }
+        = f.input :pseudocount_first, placeholder: 'Leave empty to use default value (logarithm of count)'
+
+    .data_model_specifiers.second_model
+      .effective_count{ data: task.attribute_data(:effective_count_second) }
+        = f.input :effective_count_second
+      .pseudocount{ data: task.attribute_data(:pseudocount_second) }
+        = f.input :pseudocount_second, placeholder: 'Leave empty to use default value (logarithm of count)'
+  %br
+  = f.submit 'Run', data: {disable_with: 'Sending request'}

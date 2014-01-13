@@ -8,8 +8,17 @@
   %body{"data-no-turbolink" => ""}
     %header
     %nav
-      = link_to 'Macroape: compare two motifs', new_evaluate_similarity_path
-      = link_to 'Macroape: scan for a motif', new_scan_collection_path
+      %ul
+        %li
+          = link_to 'Macroape: compare two motifs', new_evaluate_similarity_path
+        %li
+          = link_to 'Macroape: scan for a motif', new_scan_collection_path
+        %li#search
+          = form_tag search_tasks_path do
+            = label_tag do
+              Ticket number
+              = text_field_tag 'id'
+            = submit_tag 'Search'
     %section
       %header
       %article

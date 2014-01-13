@@ -1,2 +1,4 @@
-.redirect_to{:data => {url: url_for(action: 'perform', id: @ticket), timeout: 2000}}
-Task will be performed in two seconds.
+= I18n.t 'opera.will_start_soon'
+= notice_and_reload(url_for(action: 'perform', id: @ticket), 2)
+%h5
+  = raw I18n.t('opera.ticket_number', ticket: @ticket)

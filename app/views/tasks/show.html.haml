@@ -1,1 +1,3 @@
+%h5
+  = raw I18n.t('opera.ticket_number', ticket: ticket)
 = render partial: 'results', locals: {ticket: ticket, status: status, task_params: task_params, task_results: task_results}

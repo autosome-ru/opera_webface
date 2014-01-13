@@ -7,8 +7,11 @@ require 'yaml'
 #puts 'opera_macroape.rb started'
 params = YAML.load_file('task_params.yaml')
 
-first_background = params[:first_background]
-second_background = params[:first_background]
+# first_background = params[:first_background]
+# second_background = params[:first_background]
+first_background = params[:background]
+second_background = params[:background]
+
 discretization = params[:discretization]
 pvalue = params[:pvalue]
 
@@ -41,7 +44,7 @@ File.write 'result.txt', Macroape::CLI::Helper.similarity_info_string(info)
 File.write 'task_results.yaml', info.to_yaml
 ['pcm_first.pcm', 'pcm_second.pcm'].each do |pcm_filename|
   if File.exist?(pcm_filename)
-    SMBSMCore.soloist("sequence_logo #{pcm_filename}", $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)  
+    SMBSMCore.soloist("sequence_logo #{pcm_filename}", $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)
   end
 end
 

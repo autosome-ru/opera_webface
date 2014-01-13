@@ -14,7 +14,7 @@ module ApplicationHelper
 
   def download_list(ticket, names_hash, html_options = nil)
     content = '<small>('
-    content << names_hash.map {|name, filename| download_link(name, html_options, ticket, filename) }.join(', ')
+    content << names_hash.map {|name, filename| download_link(name, html_options, ticket, filename) }.compact.join(', ')
     content << ')</small>'
     content.html_safe
   end
@@ -31,5 +31,12 @@ module ApplicationHelper
   end
   def collection_motif_image(motif, orientation)
     image_tag("hocomoco_logo/#{motif}_#{orientation}.png")
+  end
+
+  def notice_and_reload(redirect_url, timeout)
+    result = ""
+    result << "<div class=\"redirect_to\" data-url=#{redirect_url} data-timeout=#{timeout*1000}></div>"
+    result << I18n.t('opera.reload_manually', timeout: timeout, redirect_url: redirect_url)
+    result.html_safe
   end
 end

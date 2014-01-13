@@ -6,17 +6,19 @@ OperaWebface::Application.routes.draw do
 
   resources :tasks, only: [:new, :create, :show] do
     get 'perform', :on => :member
+    post 'show', :on => :collection, as: :search
   end
-  
+
+  get 'evaluate_similarities' => 'evaluate_similarities#new'
   resources :evaluate_similarities, only: [:new, :create, :show] do
     get 'perform', :on => :member
   end
 
+  get 'scan_collections' => 'scan_collections#new'
   resources :scan_collections, only: [:new, :create, :show] do
     get 'perform', :on => :member
   end
 
-  
   # get "tasks/new", :as => :new_task
   # post "tasks/create", :as => :tasks
   # get "tasks/:ticket/show" => "tasks#show", :as => :task

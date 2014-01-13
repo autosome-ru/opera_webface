@@ -1,2 +1,4 @@
-.redirect_to{:data => {url: url_for(ticket), timeout: 5000}}
-Task is performing. You'll see results just as calculations are complete.
+= I18n.t 'opera.task_performing'
+= notice_and_reload(url_for(ticket), 5)
+%h5
+  = raw I18n.t('opera.ticket_number', ticket: ticket)

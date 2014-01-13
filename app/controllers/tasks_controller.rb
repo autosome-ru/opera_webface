@@ -25,6 +25,12 @@ class TasksController < ApplicationController
   def show
     @ticket = params[:id]
     @status = SMBSMCore.get_status(params[:id])
+
+    if self.class.name == 'TasksController'
+      redirect_to controller: @status.opera_name.pluralize.snake_case, action: 'show', id: @ticket
+      return
+    end
+
     if @status.finished?
       render template: 'tasks/show', locals: {ticket: @ticket, status: @status, task_params: task_params(@ticket), task_results: task_results(@ticket)}
     else

@@ -20,4 +20,39 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  opera:
+    will_start_soon: 'Task will start in two seconds.'
+    task_performing: "Task is performing. You'll see results just as calculations are complete."
+    reload_manually: "This page is to be updated/reloaded in %{timeout} seconds. If it's not done automatically, click <a href=\"%{redirect_url}\">here</a>"
+    ticket_number: "Remember your ticket number <em>%{ticket}</em> to be able to view results later"
+  enumerize:
+    data_model_first:
+      PCM: 'PCM'
+      PWM: 'PWM'
+      PPM: 'PPM'
+    data_model_second:
+      PCM: 'PCM'
+      PWM: 'PWM'
+      PPM: 'PPM'
+    background_mode:
+      wordwise: 'Wordwise background'
+      gc_content: 'GC-content'
+      frequencies: 'Frequencies'
+  task_descriptions:
+    EvaluateSimilarity: 'Evaluate similarity between two TFBS motifs using Jaccard metrics'
+    ScanCollection: 'Scan collection for TFBS motifs similar to a given one'
+  task_parameters:
+    EvaluateSimilarity:
+      first_matrix: 'Positional matrix of the first motif in format according to its data model'
+      data_model_first: 'Data model of the first motif. Can be either positional weight matrix(PWM) or positional count matrix(PCM) or positional frequency matrix(PFM)'
+      second_matrix: 'Positional matrix of the second motif in format according to its data model'
+      data_model_second: 'Data model of the second motif. Can be either positional weight matrix(PWM) or positional count matrix(PCM) or positional frequency matrix(PFM)'
+      #background: 'Background model. One can specify ACGT-frequencies or use wordwise background (uniform background represented in number of words instead of part of all words)'
+      background_mode: 'Background model. One can specify ACGT-frequencies or use wordwise background (uniform background represented in number of words instead of part of all words)'
+      background_gc_content: 'Background defined by GC-content. It should be value in range 0 to 1'
+      background_frequencies: 'Background defined by frequencies of ACGT-nucleotides. There should be four values in range 0 to 1, their sum should be 1'
+      pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value'
+      effective_count_first: 'Effective samples set size for PPM-to-PWM conversion'
+      effective_count_second: 'Effective samples set size for PPM-to-PWM conversion'
+      pvalue: 'P-value to obtain motif thresholds'
+      discretization: 'PWM discretization'
