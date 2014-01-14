@@ -6,5 +6,5 @@ class SnpScan < Task
   add_background_task_params :background
 
   extend Enumerize
-  enumerize :collection, in: [:hocomoco]
+  enumerize :collection, in: [:hocomoco, :jaspar, :selex, :swissregulon, :homer]
 end

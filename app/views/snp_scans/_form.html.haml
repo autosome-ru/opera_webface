@@ -1,7 +1,7 @@
 = simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .snp_list{ data: task.attribute_data(:snp_list) }
     = f.input :snp_list, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side)', :as => :text
-  .collection{ data: task.attribute_data(:first_matrix) }
+  .collection{ data: task.attribute_data(:collection) }
     = f.input :collection, label: 'TFBS motif collection:', include_blank: false
 
   Advanced options:

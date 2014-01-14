@@ -7,12 +7,12 @@ similarity_cutoff = task_params.similarity_cutoff
 precise_recalc_cutoff = task_params.precise_recalc_cutoff
 pvalue_boundary = task_params.pvalue_boundary
 
-command = ["scan_collection query.pwm collection.yaml",
+command = ["java -jar scan-collection.jar query.pwm collection --precalc collection_precalc",
             "-p #{pvalue}",
-            query_background_string,
             "-c #{similarity_cutoff}",
             "--boundary #{pvalue_boundary}",
             "--precise #{precise_recalc_cutoff}",
+            query_background_string,
             "--silent"
           ].join(' ')
 

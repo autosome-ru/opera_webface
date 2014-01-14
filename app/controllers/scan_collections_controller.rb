@@ -3,7 +3,7 @@ class ScanCollectionsController < TasksController
 protected
 
   def default_params
-    { collection_background: 'uniform',
+    { collection: :hocomoco,
       query_background_mode: :wordwise,
       query_background_frequencies: [0.25, 0.25, 0.25, 0.25],
       query_background_gc_content: 0.5,

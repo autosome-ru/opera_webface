@@ -22,14 +22,7 @@ class EvaluateSimilarity < Task
 
   def initialize(*)
     super
-    pm_first = Bioinform.const_get(data_model_first).new(matrix_first).set_parameters(background: background)
-    pm_first.set_parameters(pseudocount: pseudocount_first)  if pseudocount_first && ! pseudocount_first.blank? && [:PCM,:PPM].include?(data_model_first.to_sym)
-    pm_first.set_parameters(effective_count: effective_count_first)  if effective_count_first && [:PPM].include?(data_model_first.to_sym)
-    self.pwm_first = pm_first.to_pwm.tap{|pwm| pwm.name = pm_first.name}.to_s
-
-    pm_second = Bioinform.const_get(data_model_second).new(matrix_second).set_parameters(background: background)
-    pm_second.set_parameters(pseudocount: pseudocount_second)  if pseudocount_second && ! pseudocount_second.blank? && [:PCM,:PPM].include?(data_model_second.to_sym)
-    pm_second.set_parameters(effective_count: effective_count_second)  if effective_count_second && [:PPM].include?(data_model_second.to_sym)
-    self.pwm_second = pm_second.to_pwm.tap{|pwm| pwm.name = pm_second.name}.to_s
+    self.pwm_first = Bioinform.get_pwm(data_model_first, matrix_first, background, pseudocount_first, effective_count_first).to_s
+    self.pwm_second = Bioinform.get_pwm(data_model_second, matrix_second, background, pseudocount_second, effective_count_second).to_s
   end
 end

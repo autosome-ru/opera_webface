@@ -1,4 +1,7 @@
 .input_data
+  %h5.collection_name
+    Collection:
+    %em= I18n.t "enumerize.collection.#{task_params.collection}"
   .snp_list
     .label
       SNP list
@@ -7,4 +10,4 @@
   = download_link 'View more parameters', ticket, 'task_params.yaml'
 .result_data
   = download_link 'Download results', ticket, 'task_result.txt'
-  = table_from_txt(task_results, task_params)
+  = snp_scan_table(task_results, task_params)
