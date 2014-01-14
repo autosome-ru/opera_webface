@@ -9,15 +9,14 @@ OperaWebface::Application.routes.draw do
     post 'show', :on => :collection, as: :search
   end
 
-  get 'macroape/compare' => 'evaluate_similarities#new'
-  get 'evaluate_similarity' => 'evaluate_similarities#new'
-  resources :evaluate_similarities, only: [:new, :create, :show] do
-    get 'perform', :on => :member
-  end
-
   namespace :macroape do
     get 'scan' => 'scans#new'
     resources :scans, only: [:new, :create, :show] do
+      get 'perform', :on => :member
+    end
+
+    get 'compare' => 'compares#new'
+    resources :compares, only: [:new, :create, :show] do
       get 'perform', :on => :member
     end
   end

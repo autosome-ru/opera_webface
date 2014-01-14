@@ -1,0 +1,2 @@
+module Macroape::ComparesHelper
+end

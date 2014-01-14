@@ -1,4 +1,4 @@
-class EvaluateSimilaritiesController < TasksController
+class Macroape::ComparesController < ::TasksController
 
 protected
 

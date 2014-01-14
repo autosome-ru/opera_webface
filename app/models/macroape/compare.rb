@@ -1,6 +1,6 @@
 require 'bioinform'
 
-class EvaluateSimilarity < Task
+class Macroape::Compare < ::Task
   add_task_params :matrix_first, :matrix_second, :pwm_first, :pwm_second
   add_background_task_params :background
   add_task_params :pvalue, :discretization, &:to_f
