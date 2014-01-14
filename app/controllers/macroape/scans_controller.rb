@@ -1,4 +1,4 @@
-class ScanCollectionsController < TasksController
+class Macroape::ScansController < ::TasksController
 
 protected
 

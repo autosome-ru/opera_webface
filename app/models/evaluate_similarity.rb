@@ -25,4 +25,8 @@ class EvaluateSimilarity < Task
     self.pwm_first = Bioinform.get_pwm(data_model_first, matrix_first, background, pseudocount_first, effective_count_first).to_s
     self.pwm_second = Bioinform.get_pwm(data_model_second, matrix_second, background, pseudocount_second, effective_count_second).to_s
   end
+
+  def self.task_type
+    'EvaluateSimilarity'
+  end
 end

@@ -18,7 +18,7 @@ class TasksController < ApplicationController
 
   def perform
     @ticket = params[:id]
-    SMBSMCore.perform_opera(@ticket, model_class.name)
+    SMBSMCore.perform_opera(@ticket, model_class.task_type)
     redirect_to action: 'show', id: @ticket
   end
 
@@ -26,8 +26,7 @@ class TasksController < ApplicationController
     @ticket = params[:id]
     @status = SMBSMCore.get_status(params[:id])
 
-    #if self.class.name == 'TasksController'
-    if self.class.name != "#{@status.opera_name.pluralize}Controller"
+    if model_class.task_type != @status.opera_name
       redirect_to controller: @status.opera_name.pluralize.snake_case, action: 'show', id: @ticket
       return
     end
@@ -51,7 +50,7 @@ protected
 
   # Task.new or Macroape.new for MacroapesController
   def model_class
-    Object.const_get(controller_name.classify)
+    (self.class.parent_name ? Object.const_get(self.class.parent_name) : Object).const_get(controller_name.classify)
   end
 
   def task_params(ticket)

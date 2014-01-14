@@ -1,4 +1,4 @@
-module ScanCollectionsHelper
+module Macroape::ScansHelper
   def scan_collection_table(task_results, task_params)
     collection_name = task_params.collection
     table_from_txt(task_results, task_params, header: results_header_from_txt(task_results) + ['logo']) do |line|

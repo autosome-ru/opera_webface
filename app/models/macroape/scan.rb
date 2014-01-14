@@ -1,6 +1,6 @@
 require 'bioinform'
 
-class ScanCollection < Task
+class Macroape::Scan < ::Task
   add_task_params :query_matrix, :query_pwm
   add_background_task_params :query_background
   add_task_params :pvalue, &:to_f
@@ -20,5 +20,9 @@ class ScanCollection < Task
   def initialize(*)
     super
     self.query_pwm = Bioinform.get_pwm(query_data_model, query_matrix, query_background, query_pseudocount, query_effective_count).to_s
+  end
+
+  def self.task_type
+    'ScanCollection'
   end
 end

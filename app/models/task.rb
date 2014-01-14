@@ -79,8 +79,8 @@ class Task
     end
   end
 
-  def task_type
-    self.class.name
+  def self.task_type
+    name
   end
 
   def attribute_data(attribute)
@@ -95,4 +95,7 @@ class Task
     I18n.t "task_descriptions.#{task_type}"
   end
 
+  def task_type
+    self.class.task_type
+  end
 end

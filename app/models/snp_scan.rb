@@ -7,4 +7,8 @@ class SnpScan < Task
 
   extend Enumerize
   enumerize :collection, in: [:hocomoco, :jaspar, :selex, :swissregulon, :homer]
+
+  def self.task_type
+    'SnpScan'
+  end
 end
