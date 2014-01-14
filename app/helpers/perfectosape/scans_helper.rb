@@ -1,4 +1,4 @@
-module SnpScansHelper
+module Perfectosape::ScansHelper
   def snp_scan_table(task_results, task_params)
     header = ["SNP name", "motif", "logo", "P-value 1", "P-value 2", "Fold change", "position 1", "orientation 1", "word 1", "position 2", "orientation 2", "word 2", "allele 1/allele 2"]
     table_from_txt(task_results, task_params, header: header) do |line|

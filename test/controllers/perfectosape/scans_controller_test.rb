@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ScanCollectionControllerTest < ActionController::TestCase
+class Perfectosape::ScansControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,4 +1,4 @@
-class SnpScan < Task
+class Perfectosape::Scan < ::Task
   add_task_params :snp_list
   add_task_params :collection
   add_task_params :pvalue_cutoff, :fold_change_cutoff, &:to_f

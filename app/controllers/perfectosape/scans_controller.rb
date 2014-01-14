@@ -1,4 +1,4 @@
-class SnpScansController < TasksController
+class Perfectosape::ScansController < ::TasksController
   protected
 
   def default_params

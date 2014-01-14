@@ -20,11 +20,11 @@ OperaWebface::Application.routes.draw do
       get 'perform', :on => :member
     end
   end
-
-  get 'perfectosape/scan' => 'snp_scans#new'
-  get 'snp_scan' => 'snp_scans#new'
-  resources :snp_scans, only: [:new, :create, :show] do
-    get 'perform', :on => :member
+  namespace :perfectosape do
+    get 'scan' => 'scans#new'
+    resources :scans, only: [:new, :create, :show] do
+      get 'perform', :on => :member
+    end
   end
 
   # get "tasks/new", :as => :new_task
