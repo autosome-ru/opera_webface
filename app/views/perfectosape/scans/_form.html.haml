@@ -1,6 +1,8 @@
 = simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .snp_list{ data: task.attribute_data(:snp_list) }
+    %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequencess to scan
     = f.input :snp_list, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side)', :as => :text
+    = f.input :snp_list_file, label: 'Load file with SNP-sequences', :as => :file
   .collection{ data: task.attribute_data(:collection) }
     = f.input :collection, label: 'TFBS motif collection:', include_blank: false
 

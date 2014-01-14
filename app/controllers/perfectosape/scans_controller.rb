@@ -20,7 +20,7 @@ rs10431961  tggcggggctggtcaggcggcgtcg[C/T]cggtacgctctgagcggcagcgtgt
     }
   end
 
-   def task_results(ticket)
+  def task_results(ticket)
     SMBSMCore.get_content(ticket, 'task_result.txt')  if SMBSMCore.check_content(ticket, 'task_result.txt')
   end
 end
