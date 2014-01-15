@@ -27,7 +27,7 @@ class TasksController < ApplicationController
     @status = SMBSMCore.get_status(params[:id])
 
     if model_class.task_type != @status.opera_name
-      redirect_to controller: @status.opera_name.pluralize.snake_case, action: 'show', id: @ticket
+      redirect_to controller: choose_opera_controller(@status.opera_name).controller_path, action: 'show', id: @ticket
       return
     end
 
@@ -40,6 +40,10 @@ class TasksController < ApplicationController
 
 protected
 
+  def choose_opera_controller(opera_name)
+    [Macroape::ScansController, Macroape::ComparesController, Perfectosape::ScansController].detect{|cntrl| cntrl.model_class.task_type == opera_name}
+  end
+
   def permitted_params
     params.permit(:task => model_class.task_param_names + model_class.virtual_task_param_names)
   end
@@ -49,8 +53,12 @@ protected
   end
 
   # Task.new or Macroape.new for MacroapesController
+  def self.model_class
+    (parent_name ? Object.const_get(parent_name) : Object).const_get(controller_name.classify)
+  end
+
   def model_class
-    (self.class.parent_name ? Object.const_get(self.class.parent_name) : Object).const_get(controller_name.classify)
+    self.class.model_class
   end
 
   def task_params(ticket)
