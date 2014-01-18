@@ -2,27 +2,23 @@
 %html
   %head
     %title OperaWebface
-    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => false # true
+    = javascript_include_tag "application", "data-turbolinks-track" => false # true
     = csrf_meta_tags
   %body{"data-no-turbolink" => ""}
     %header
-    %nav
-      %ul
-        %li
-          = link_to 'Macroape: compare two motifs', new_macroape_compare_path
-        %li
-          = link_to 'Macroape: scan for a motif', new_macroape_scan_path
-        %li
-          = link_to 'Perfectosape: rSNP functional annotation', new_perfectosape_scan_path
-        %li#search
-          = form_tag search_tasks_path do
-            = label_tag do
-              Ticket number
-              = text_field_tag 'id'
-            = submit_tag 'Search'
-    %section
-      %header
-      %article
-        = yield
-      %footer
+      = nav_bar do
+        = menu_group do
+          = drop_down 'Macroape' do
+            = menu_item 'Compare two motifs', new_macroape_compare_path
+            = menu_item 'Scan for a motif', new_macroape_scan_path
+          = drop_down 'Perfectosape' do
+            = menu_item 'rSNP functional annotation', new_perfectosape_scan_path
+        = form_tag search_tasks_path, class: 'pull-right navbar-search' do
+          = label_tag do
+            Ticket number:
+            = text_field_tag 'id'
+          = submit_tag 'Search'
+    .container
+      = yield
+    %footer

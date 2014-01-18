@@ -1,11 +1,11 @@
 = simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .row
-    .span3.first_model
+    .span4.first_model
       .data_model{ data: task.attribute_data(:data_model_first) }
         = f.input :data_model_first, label: 'Data model', include_blank: false
       .matrix{ data: task.attribute_data(:first_matrix) }
         = f.input :matrix_first, label: 'First matrix:', :as => :text
-    .span3.second_model
+    .span4.second_model
       .data_model{ data: task.attribute_data(:data_model_second) }
         = f.input :data_model_second, label: 'Data model', include_blank: false
       .matrix{ data: task.attribute_data(:second_matrix) }

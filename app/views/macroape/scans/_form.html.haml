@@ -1,29 +1,30 @@
 = simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .row
-    .span3.query_model
+    .span4.query_model
       .data_model{ data: task.attribute_data(:query_data_model) }
         = f.input :query_data_model, label: 'Data model', include_blank: false
       .matrix{ data: task.attribute_data(:query_matrix) }
         = f.input :query_matrix, label: 'Query matrix:', :as => :text
-  .collection_background
-    = f.input :collection, include_blank: false
-  Advanced options:
-  .expand_button
-  .advanced_options
-    = render partial: 'shared/background_model', locals: {task: task, form_builder: f, background_variable: :query_background, background_title: 'Query background', background_class: 'query_background'}
-    .pvalue{ data: task.attribute_data(:pvalue) }
-      = f.input :pvalue, label: 'P-value:'
-    .pvalue_boundary{ data: task.attribute_data(:pvalue_boundary) }
-      = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
-    .similarity_cutoff{ data: task.attribute_data(:similarity_cutoff) }
-      = f.input :similarity_cutoff, label: 'Similarity cutoff'
-    .precise_recalc_cutoff{ data: task.attribute_data(:precise_recalc_cutoff) }
-      = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode'
+    .span4
+      .collection_background
+        = f.input :collection, include_blank: false
+      Advanced options:
+      .expand_button
+      .advanced_options
+        = render partial: 'shared/background_model', locals: {task: task, form_builder: f, background_variable: :query_background, background_title: 'Query background', background_class: 'query_background'}
+        .pvalue{ data: task.attribute_data(:pvalue) }
+          = f.input :pvalue, label: 'P-value:'
+        .pvalue_boundary{ data: task.attribute_data(:pvalue_boundary) }
+          = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
+        .similarity_cutoff{ data: task.attribute_data(:similarity_cutoff) }
+          = f.input :similarity_cutoff, label: 'Similarity cutoff'
+        .precise_recalc_cutoff{ data: task.attribute_data(:precise_recalc_cutoff) }
+          = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode'
 
-    .data_model_specifiers.query_model
-      .effective_count{ data: task.attribute_data(:query_effective_count) }
-        = f.input :query_effective_count
-      .pseudocount{ data: task.attribute_data(:query_pseudocount) }
-        = f.input :query_pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)'
-  %br
-  = f.submit 'Run', data: {disable_with: 'Sending request'}
+        .data_model_specifiers.query_model
+          .effective_count{ data: task.attribute_data(:query_effective_count) }
+            = f.input :query_effective_count
+          .pseudocount{ data: task.attribute_data(:query_pseudocount) }
+            = f.input :query_pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)'
+      %br
+      = f.submit 'Run', data: {disable_with: 'Sending request'}

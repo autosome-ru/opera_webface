@@ -1,16 +1,16 @@
-#task
-  = render partial: 'form', locals: {task: @task}
-#info
-  -if @task.errors.any?
-    .errors
-      %h2
-        Fix #{pluralize(@task.errors.count, "error")} in order to run calculations
-      %ul
-        -@task.errors.full_messages.each do |msg|
-          %li= msg
-  .task_description
-    %h2 Info
-    %h4= @task.task_description
-  %hr
-  .parameter_description
-
+.row
+  #task.span8
+    = render partial: 'form', locals: {task: @task}
+  #info.span4
+    -if @task.errors.any?
+      .errors
+        %h2
+          Fix #{pluralize(@task.errors.count, "error")} in order to run calculations
+        %ul
+          -@task.errors.full_messages.each do |msg|
+            %li= msg
+    .task_description
+      %h2 Info
+      %h4= @task.task_description
+    %hr
+    .parameter_description
