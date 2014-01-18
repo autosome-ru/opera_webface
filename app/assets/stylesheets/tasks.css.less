@@ -37,16 +37,6 @@
   }
 }
 
-nav {
-  ul {
-    list-style-type: none;
-    li {
-      display: inline-block;
-      padding: 5px 10px;
-    }
-  }
-}
-
 em {
   font-size: 1.5em;
 }
@@ -54,10 +44,8 @@ em {
 .advanced_options {
   display: none;
 }
+
 .expand_button {
-  background-image: image-url('expand_button.jpg');
-  width: 16px;
-  height: 16px;
   display: inline-block;
 }
 
@@ -71,8 +59,25 @@ em {
   }
 }
 
-.background, .query_background {
+.background_model {
   .background_mode, .background_gc_content, .background_frequencies {
     display: inline-block;
   }
+  .background_mode {
+    select { margin-right: 10px; }
+  }
+  .background_frequencies {
+    label { display: inline-block; margin-right: 5px; }
+  }
+  input {
+    display: inline;
+    width: 35px;
+  }
+}
+
+.query_background {
+  .background
+}
+.background {
+  .background_model
 }

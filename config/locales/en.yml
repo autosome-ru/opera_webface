@@ -42,6 +42,10 @@ en:
       wordwise: 'Wordwise background'
       gc_content: 'GC-content'
       frequencies: 'Frequencies'
+    query_background_mode:
+      wordwise: 'Wordwise background'
+      gc_content: 'GC-content'
+      frequencies: 'Frequencies'
     collection:
       hocomoco: 'HOCOMOCO'
       jaspar: 'Jaspar'
