@@ -17,11 +17,11 @@ module EvaluateSimilarity
     effective_count_second = run_params[:effective_count_second]
 
     if %w[PCM PPM].include?(data_model_first)
-      pcm = Bioinform.get_pcm(data_model_first, matrix_first, background, effective_count_first)
+      pcm = Bioinform.get_pcm(data_model_first, matrix_first, effective_count_first)
       File.write('pcm_first.pcm', pcm)
     end
     if %w[PCM PPM].include?(data_model_second)
-      pcm = Bioinform.get_pcm(data_model_second, matrix_second, background, effective_count_second)
+      pcm = Bioinform.get_pcm(data_model_second, matrix_second, effective_count_second)
       File.write('pcm_second.pcm', pcm)
     end
 

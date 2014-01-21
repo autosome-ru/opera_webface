@@ -13,7 +13,7 @@ module ScanCollection
     query_effective_count = run_params[:query_effective_count]
 
     if %w[PCM PPM].include?(query_data_model)
-      pcm = Bioinform.get_pcm(query_data_model, query_matrix, background, query_effective_count)
+      pcm = Bioinform.get_pcm(query_data_model, query_matrix, query_effective_count)
       File.write('query.pcm', pcm)
     end
 
