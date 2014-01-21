@@ -2,7 +2,7 @@ require 'bioinform'
 
 class Macroape::Compare < ::Task
   add_task_params :matrix_first, :matrix_second, :pwm_first, :pwm_second
-  add_background_task_params :background
+  add_background_task_param :background
   add_task_params :pvalue, :discretization, &:to_f
   add_task_params :pvalue_boundary
 

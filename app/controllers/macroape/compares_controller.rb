@@ -3,9 +3,7 @@ class Macroape::ComparesController < ::TasksController
 protected
 
   def default_params
-    { background_mode: :wordwise,
-      background_frequencies: [0.25, 0.25, 0.25, 0.25],
-      background_gc_content: 0.5,
+    { _bg_background_attributes: {mode: :wordwise, frequencies_attributes: [0.25, 0.25, 0.25, 0.25], gc_content: 0.5},
       data_model_first: :PWM, effective_count_first: 100, pseudocount_first: nil,
       data_model_second: :PWM, effective_count_second: 100, pseudocount_second: nil,
       pvalue: 0.0005,

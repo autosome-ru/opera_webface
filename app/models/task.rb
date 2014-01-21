@@ -30,39 +30,21 @@ class Task
 
     def add_background_task_param(param_name)
       class_eval do
-        add_task_param(param_name.to_sym)
-        extend Enumerize
-        add_task_param("#{param_name}_mode".to_sym)
-        enumerize "#{param_name}_mode".to_sym, in: [:wordwise, :gc_content, :frequencies]
-        add_task_param("#{param_name}_frequencies".to_sym)
-        add_task_param("#{param_name}_gc_content".to_sym, &:to_f)
-
-        self.virtual_task_param_names += %w[a c g t].map{|letter| "#{param_name}_#{letter}" }
-        %w[a c g t].each_with_index do |letter, index|
-          define_method "#{param_name}_#{letter}" do
-            instance_variable_set("@#{param_name}_frequencies", [])  unless instance_variable_get("@#{param_name}_frequencies")
-            instance_variable_get("@#{param_name}_frequencies")[index]
-          end
-          define_method "#{param_name}_#{letter}=" do |value|
-            instance_variable_set("@#{param_name}_frequencies", [])  unless instance_variable_get("@#{param_name}_frequencies")
-            instance_variable_get("@#{param_name}_frequencies")[index] = value.to_f
-          end
-        end
+        param_name = param_name.to_sym
+        task_param_names << param_name
+        virtual_task_param_names << {"_bg_#{param_name}_attributes".to_sym => [:mode, :gc_content, :frequencies_attributes => [:a,:c,:g,:t]]}
 
         define_method "#{param_name}" do
-          case instance_variable_get("@#{param_name}_mode").to_sym
-          when :wordwise
-            [1,1,1,1]
-          when :gc_content
-            gc_content = instance_variable_get("@#{param_name}_gc_content")
-            [(1 - gc_content) / 2.0, gc_content / 2.0, gc_content / 2.0, (1 - gc_content) / 2.0]
-          when :frequencies
-            instance_variable_get("@#{param_name}_frequencies")
-          else
-            raise 'Unknown background mode'
-          end
+          instance_variable_get("@_bg_#{param_name}").background
         end
 
+        define_method "_bg_#{param_name}" do
+          instance_variable_get("@_bg_#{param_name}")
+        end
+
+        define_method "_bg_#{param_name}_attributes=" do |value|
+          instance_variable_set("@_bg_#{param_name}", Background.new(value))
+        end
       end
     end
 
