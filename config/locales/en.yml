@@ -26,26 +26,16 @@ en:
     reload_manually: "This page is to be updated/reloaded in %{timeout} seconds. If it's not done automatically, click <a href=\"%{redirect_url}\">here</a>"
     ticket_number: "Remember your ticket number <em>%{ticket}</em> to be able to view results later"
   enumerize:
-    query_data_model:
-      PCM: 'PCM'
-      PWM: 'PWM'
-      PPM: 'PPM'
-    data_model_first:
-      PCM: 'PCM'
-      PWM: 'PWM'
-      PPM: 'PPM'
-    data_model_second:
-      PCM: 'PCM'
-      PWM: 'PWM'
-      PPM: 'PPM'
-    background_mode:
-      wordwise: 'Wordwise background'
-      gc_content: 'GC-content'
-      frequencies: 'Frequencies'
-    query_background_mode:
-      wordwise: 'Wordwise background'
-      gc_content: 'GC-content'
-      frequencies: 'Frequencies'
+    data_model:
+      data_model:
+        PCM: 'PCM'
+        PWM: 'PWM'
+        PPM: 'PPM'
+    background:
+      mode:
+        wordwise: 'Wordwise background'
+        gc_content: 'GC-content'
+        frequencies: 'Frequencies'
     collection:
       hocomoco: 'HOCOMOCO'
       jaspar: 'Jaspar'

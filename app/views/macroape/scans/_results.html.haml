@@ -3,11 +3,11 @@
     .label
       PWM
       = download_list ticket, {'pwm' => 'query.pwm', 'pcm' => 'query.pcm', 'ppm' => 'query.ppm'}
-    %pre= Bioinform::PWM.new(task_params.query_pwm).round(3)
+    %pre= Bioinform::PWM.new(task_params[:query][:pwm]).round(3)
     .logo= show_image(ticket, 'query_direct.png')
   %h5.collection_name
     Collection:
-    %em= I18n.t "enumerize.collection.#{task_params.collection}"
+    %em= I18n.t "enumerize.collection.#{task_params[:collection]}"
   = download_link 'View more parameters', ticket, 'task_params.yaml'
 .result_data
   = scan_collection_table(task_results, task_params)

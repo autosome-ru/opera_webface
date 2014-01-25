@@ -8,12 +8,28 @@ class Background
     def frequencies=(value)
       @a, @c, @g, @t = value
     end
+    validate do |record|
+      record.errors.add(:base, 'Must give 1 being summed')  unless (record.frequencies.inject(0.0, &:+) - 1.0).abs < 0.001
+    end
   end
 
   include ActiveModel::Model
   attr_reader :background, :gc_content, :mode
   extend Enumerize
   enumerize :mode, in: [:wordwise, :gc_content, :frequencies]
+
+  def attributes
+    result = {mode: mode}
+    case mode
+    when :wordwise
+      # do nothing
+    when :gc_content
+      result.merge!(gc_content: gc_content)
+    when :frequencies
+      result.merge!(frequencies: frequencies.frequencies)
+    end
+    result.merge(background: background)
+  end
 
   def frequencies
     @frequencies ||= Frequencies.new
@@ -52,6 +68,15 @@ class Background
       frequencies.frequencies
     else
       raise 'Unknown mode'
+    end
+  end
+
+  validate do |record|
+    case record.mode
+    when :gc_content
+      record.errors.add(:gc_content, 'Must be in 0 to 1')  unless (0..1).include?(record.gc_content)
+    when :frequencies
+      record.errors.add(:frequencies)  unless frequencies.valid?
     end
   end
 end

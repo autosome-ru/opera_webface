@@ -3,16 +3,16 @@
     .label
       First PWM
       = download_list ticket, {'pcm' => 'pcm_first.pcm', 'ppm' => 'ppm_first.ppm', 'pwm' => 'pwm_first.pwm'}
-    %pre= Bioinform::PWM.new(task_params.pwm_first).round(3)
+    %pre= Bioinform::PWM.new(task_params[:first_motif][:pwm]).round(3)
     .logo= show_image(ticket, 'pcm_first_direct.png')
   .matrix
     .label
       Second PWM
       = download_list ticket, {'pcm' => 'pcm_second.pcm', 'ppm' => 'ppm_second.ppm', 'pwm' => 'pwm_second.pwm'}
-    %pre= Bioinform::PWM.new(task_params.pwm_second).round(3)
-    .logo= show_image(ticket, "pcm_second_#{task_results.orientation}.png")
+    %pre= Bioinform::PWM.new(task_params[:second_motif][:pwm]).round(3)
+    .logo= show_image(ticket, "pcm_second_#{task_results[:orientation]}.png")
   = download_link 'View more parameters', ticket, 'task_params.yaml'
 .result_data
   .similarity
     .label Similarity:
-    .value= task_results.similarity
+    .value= task_results[:similarity]

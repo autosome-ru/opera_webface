@@ -3,6 +3,10 @@ require 'ostruct'
 
 # to work from box, params should be saved into task_params.yaml (in overture), results - into task_results.yaml (in opera)
 class TasksController < ApplicationController
+  rescue_from SubmissionParameters::Error do |e|
+    render action: 'new'
+  end
+
   def new
     @task = model_class.new( default_params.merge(permitted_params[:task] || {}) )
   end
@@ -11,6 +15,7 @@ class TasksController < ApplicationController
     @task = model_class.new(permitted_params[:task] || {})
     unless @task.valid?
       render action: 'new'
+      return
     end
     @ticket = SMBSMCore.get_ticket
     SMBSMCore.perform_overture(@ticket, @task.task_type, @task.task_params)
@@ -25,6 +30,7 @@ class TasksController < ApplicationController
   def show
     @ticket = params[:id]
     @status = SMBSMCore.get_status(params[:id])
+    render action: 'ticket_not_found' and return  unless @status
 
     if model_class.task_type != @status.opera_name
       redirect_to controller: choose_opera_controller(@status.opera_name).controller_path, action: 'show', id: @ticket
@@ -45,7 +51,7 @@ protected
   end
 
   def permitted_params
-    params.permit(:task => model_class.task_param_names + model_class.virtual_task_param_names)
+    params.permit(:task => model_class.permitted_params_list)
   end
 
   def default_params

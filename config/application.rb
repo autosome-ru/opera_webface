@@ -20,7 +20,6 @@ module OperaWebface
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    require Rails.root.join('lib','background_validator')
     require Rails.root.join('lib','smbsm_core')
     require Rails.root.join('lib','opera_status')
     require Rails.root.join('lib','bioinform_support')

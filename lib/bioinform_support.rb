@@ -1,10 +1,15 @@
 module Bioinform
+  class Error < StandardError
+  end
   class PWM
     def round(n)
       PWM.new(matrix.map{|pos| pos.map{|x| x.round(n) } }).tap{|pwm| pwm.name = name}
     end
   end
 
+  class PCM
+    make_parameters :pseudocount
+  end
   class PPM
     make_parameters :effective_count, :pseudocount
     def to_pcm
@@ -25,6 +30,8 @@ module Bioinform
       pm.set_parameters(effective_count: effective_count)
     end
     pm.to_pwm
+  rescue => e
+    raise "PWM creation failed (#{e})"
   end
 
   def self.get_pcm(data_model, matrix, effective_count)

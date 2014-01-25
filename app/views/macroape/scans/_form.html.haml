@@ -1,10 +1,11 @@
 = simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .row
     .span4.query_model
-      .data_model{ data: task.attribute_data(:query_data_model) }
-        = f.input :query_data_model, label: 'Data model', include_blank: false
-      .matrix{ data: task.attribute_data(:query_matrix) }
-        = f.input :query_matrix, label: 'Query matrix:', :as => :text
+      = f.fields_for :query do |motif_form|
+        .data_model{ data: attribute_data(motif_form.object, nil, :data_model) }
+          = motif_form.input :data_model, label: 'Data model', include_blank: false
+        .matrix{ data: attribute_data(motif_form.object, nil, :data_model) }
+          = motif_form.input :matrix, label: 'Query matrix:', :as => :text
     .span4
       .collection
         = f.input :collection, include_blank: false
@@ -23,9 +24,10 @@
       = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode'
 
     .data_model_specifiers.query_model
-      .effective_count{ data: task.attribute_data(:query_effective_count) }
-        = f.input :query_effective_count
-      .pseudocount{ data: task.attribute_data(:query_pseudocount) }
-        = f.input :query_pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)'
+      = f.fields_for :query do |motif_form|
+        .effective_count{ data: attribute_data(motif_form.object, nil, :effective_count) }
+          = motif_form.input :effective_count
+        .pseudocount{ data: attribute_data(motif_form.object, nil, :pseudocount) }
+          = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)'
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}

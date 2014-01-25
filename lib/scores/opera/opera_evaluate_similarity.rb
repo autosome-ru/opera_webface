@@ -1,14 +1,8 @@
-# program_path = File.dirname(File.absolute_path __FILE__)
-# Dir.chdir(program_path)
-
 require 'macroape'
 require 'yaml'
 
-#puts 'opera_macroape.rb started'
 params = YAML.load_file('task_params.yaml')
 
-# first_background = params[:first_background]
-# second_background = params[:first_background]
 first_background = params[:background]
 second_background = params[:background]
 
@@ -19,8 +13,8 @@ max_hash_size = 10000000
 max_pair_hash_size = 10000
 pvalue_boundary = :upper
 
-pwm_first = Bioinform::PWM.new(params[:pwm_first]).set_parameters(background: first_background, max_hash_size: max_hash_size).discrete!(discretization)
-pwm_second = Bioinform::PWM.new(params[:pwm_second]).set_parameters(background: second_background, max_hash_size: max_hash_size).discrete!(discretization)
+pwm_first = Bioinform::PWM.new(params[:first_motif][:pwm]).set_parameters(background: first_background, max_hash_size: max_hash_size).discrete!(discretization)
+pwm_second = Bioinform::PWM.new(params[:second_motif][:pwm]).set_parameters(background: second_background, max_hash_size: max_hash_size).discrete!(discretization)
 cmp = Macroape::PWMCompare.new(pwm_first, pwm_second).set_parameters(max_pair_hash_size: max_pair_hash_size)
 
 
@@ -47,15 +41,3 @@ File.write 'task_results.yaml', info.to_yaml
     SMBSMCore.soloist("sequence_logo #{pcm_filename}", $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)
   end
 end
-
-
-#pwm_first = Bioinform::PWM.new(File.read('pwm_first.pwm')).set_parameters(background: first_background).discrete(discretization)
-#pwm_second = Bioinform::PWM.new(File.read('pwm_second.pwm')).with_background(background).discrete(discretization)
-# cmp = PWMCompare::PWMCompare.new(pwm_first, pwm_second)
-# first_threshold = pwm_first.thresh(pvalue)
-# second_threshold = pwm_second.thresh(pvalue)
-# info = cmp.jaccard(first_threshold, second_threshold)
-# info[:first_pwm_name] = pwm_first.name
-# info[:second_pwm_name] = pwm_second.name
-
-# File.open('results.yaml', 'w') {|f| f.puts info.to_yaml }

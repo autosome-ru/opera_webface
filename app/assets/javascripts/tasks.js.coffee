@@ -50,7 +50,9 @@ $(document).ready ->
 
   $('.task_params *').focus (event)->
     event.preventDefault()
-    $('#info .parameter_description').html($(this).closest('*[data-parameter-description]').data('parameter-description') || '')
+    parameter_description = $(this).closest('*[data-parameter-description]').data('parameter-description') || ''
+    parameter_errors = $(this).closest('*[data-error]').data('error') || ''
+    $('#info .parameter_description').html(parameter_description + "<br/>" + parameter_errors)
 
   $('.expand_button').click ->
     $(this).next('.advanced_options').toggle()
