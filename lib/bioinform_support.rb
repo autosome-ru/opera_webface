@@ -9,9 +9,15 @@ module Bioinform
 
   class PCM
     make_parameters :pseudocount
+    def round(n)
+      PCM.new(matrix.map{|pos| pos.map{|x| x.round(n) } }).tap{|pwm| pwm.name = name}
+    end
   end
   class PPM
     make_parameters :effective_count, :pseudocount
+    def round(n)
+      PPM.new(matrix.map{|pos| pos.map{|x| x.round(n) } }).tap{|pwm| pwm.name = name}
+    end
     def to_pcm
       PCM.new(matrix.map{|pos| pos.map{|el| el * effective_count} }).tap{|pcm| pcm.name = name}
     end

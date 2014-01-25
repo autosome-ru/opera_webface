@@ -1,6 +1,14 @@
 class Macroape::ScansController < ::TasksController
 
 protected
+  def query_matrix_examples
+    {
+      pwm: Bioinform::PWM.new( File.read(Rails.root.join('public','KLF4_f2.pwm')) ).round(3),
+      pcm: Bioinform::PCM.new( File.read(Rails.root.join('public','KLF4_f2.pcm')) ).round(3),
+      ppm: Bioinform::PPM.new( File.read(Rails.root.join('public','KLF4_f2.ppm')) ).round(3)
+    }
+  end
+  helper_method :query_matrix_examples
 
   def default_params
     { collection: :hocomoco,

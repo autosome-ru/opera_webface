@@ -1,7 +1,22 @@
 class Macroape::ComparesController < ::TasksController
 
 protected
-
+  def first_matrix_examples
+    {
+      pwm: Bioinform::PWM.new( File.read(Rails.root.join('public','KLF4_f2.pwm')) ).round(3),
+      pcm: Bioinform::PCM.new( File.read(Rails.root.join('public','KLF4_f2.pcm')) ).round(3),
+      ppm: Bioinform::PPM.new( File.read(Rails.root.join('public','KLF4_f2.ppm')) ).round(3)
+    }
+  end
+  def second_matrix_examples
+    {
+      pwm: Bioinform::PWM.new( File.read(Rails.root.join('public','SP1_f1.pwm')) ).round(3),
+      pcm: Bioinform::PCM.new( File.read(Rails.root.join('public','SP1_f1.pcm')) ).round(3),
+      ppm: Bioinform::PPM.new( File.read(Rails.root.join('public','SP1_f1.ppm')) ).round(3)
+    }
+  end
+  helper_method :first_matrix_examples
+  helper_method :second_matrix_examples
   def default_params
     { background_attributes: {mode: :wordwise, frequencies_attributes: [0.25, 0.25, 0.25, 0.25], gc_content: 0.5},
       pvalue: 0.0005,

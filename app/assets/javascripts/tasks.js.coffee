@@ -7,12 +7,15 @@ update_data_model_form = (dataModelClass)->
   if data_model == 'PCM'
     $(dataModelClass + '.data_model_specifiers .effective_count').hide()
     $(dataModelClass + '.data_model_specifiers .pseudocount').show()
+    $(dataModelClass).find('.matrix textarea')[0].value  = $(dataModelClass).find('.data_model_examples .pcm').text()
   else if data_model == 'PPM'
     $(dataModelClass + '.data_model_specifiers .effective_count').show()
     $(dataModelClass + '.data_model_specifiers .pseudocount').show()
+    $(dataModelClass).find('.matrix textarea')[0].value = $(dataModelClass).find('.data_model_examples .ppm').text()
   else if data_model == 'PWM'
     $(dataModelClass + '.data_model_specifiers .effective_count').hide()
     $(dataModelClass + '.data_model_specifiers .pseudocount').hide()
+    $(dataModelClass).find('.matrix textarea')[0].value = $(dataModelClass).find('.data_model_examples .pwm').text()
 
 window.register_data_model_form = (dataModelClass)->
   update_data_model_form(dataModelClass)

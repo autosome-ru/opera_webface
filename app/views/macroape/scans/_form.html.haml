@@ -1,6 +1,9 @@
 = task_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .row
     .span4.query_model
+      .data_model_examples
+        - query_matrix_examples.each do |data_model, matrix|
+          %div{class: data_model}<= matrix
       = f.fields_for :query do |motif_form|
         .data_model
           = motif_form.input :data_model, label: 'Data model', include_blank: false
