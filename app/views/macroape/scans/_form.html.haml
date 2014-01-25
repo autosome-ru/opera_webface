@@ -1,10 +1,10 @@
-= simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
+= task_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .row
     .span4.query_model
       = f.fields_for :query do |motif_form|
-        .data_model{ data: attribute_data(motif_form.object, nil, :data_model) }
+        .data_model
           = motif_form.input :data_model, label: 'Data model', include_blank: false
-        .matrix{ data: attribute_data(motif_form.object, nil, :data_model) }
+        .matrix
           = motif_form.input :matrix, label: 'Query matrix:', :as => :text
     .span4
       .collection
@@ -13,21 +13,21 @@
   .expand_button
     %a [+]
   .advanced_options
-    = render partial: 'shared/background_model', locals: {task: task, form_builder: f, background_variable: :query_background, background_title: 'Query background', background_class: 'query_background'}
-    .pvalue{ data: task.attribute_data(:pvalue) }
+    = render partial: 'shared/background_model', locals: {form_builder: f, background_variable: :query_background, background_title: 'Query background'}
+    .pvalue
       = f.input :pvalue, label: 'P-value:'
-    .pvalue_boundary{ data: task.attribute_data(:pvalue_boundary) }
+    .pvalue_boundary
       = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
-    .similarity_cutoff{ data: task.attribute_data(:similarity_cutoff) }
+    .similarity_cutoff
       = f.input :similarity_cutoff, label: 'Similarity cutoff'
-    .precise_recalc_cutoff{ data: task.attribute_data(:precise_recalc_cutoff) }
+    .precise_recalc_cutoff
       = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode'
 
     .data_model_specifiers.query_model
       = f.fields_for :query do |motif_form|
-        .effective_count{ data: attribute_data(motif_form.object, nil, :effective_count) }
-          = motif_form.input :effective_count
-        .pseudocount{ data: attribute_data(motif_form.object, nil, :pseudocount) }
+        .pseudocount
           = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)'
+        .effective_count
+          = motif_form.input :effective_count
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}

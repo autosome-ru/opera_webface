@@ -67,18 +67,4 @@ def params_from_txt(task_results)
     content << "</table>"
     content.html_safe
   end
-
-
-  def attribute_data(obj, task_type, attribute)
-    attribute = attribute.to_sym
-    result = {}
-
-    all_errors = []
-    all_errors += obj.send(attribute).errors[:base]  if obj.send(attribute).respond_to?(:errors)
-    all_errors += obj.errors[attribute]  if all_errors.empty?
-    result[:error] = all_errors.join('; ')  unless all_errors.empty?
-
-    result[:parameter_description] = I18n.t(['task_parameters', task_type, attribute].compact.join('.'), default: '')
-    result
-  end
 end

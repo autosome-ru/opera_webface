@@ -27,11 +27,7 @@
   display: inline-block;
   position: absolute;
   border-left: 1px solid black;
-  .task_description {
-    margin-left: 10px;
-    min-height: 100px;
-  }
-  .parameter_description {
+  .task_description, .parameter_description, .errors {
     margin-left: 10px;
     min-height: 100px;
   }
@@ -60,24 +56,17 @@ em {
 }
 
 .background_model {
-  .background_mode, .background_gc_content, .background_frequencies {
+  .mode, .gc_content, .frequencies {
     display: inline-block;
   }
-  .background_mode {
+  .mode {
     select { margin-right: 10px; }
   }
-  .background_frequencies {
+  .frequencies {
     label { display: inline-block; margin-right: 5px; }
   }
   input {
     display: inline;
     width: 35px;
   }
-}
-
-.query_background {
-  .background
-}
-.background {
-  .background_model
 }

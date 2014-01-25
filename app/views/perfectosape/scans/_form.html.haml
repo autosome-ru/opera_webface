@@ -1,23 +1,23 @@
-= simple_form_for task, :as => :task, html: {class: 'task_params'} do |f|
-  .snp_list{ data: task.attribute_data(:snp_list) }
+= task_form_for task, :as => :task, html: {class: 'task_params'} do |f|
+  .snp_list
     %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequencess to scan
     .row
       .span6= f.input :snp_list, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side)', :as => :text
     .row
       .span2= f.input :snp_list_file, label: 'or load file with SNP-sequences', :as => :file
-  .collection{ data: task.attribute_data(:collection) }
+  .collection
     = f.input :collection, label: 'TFBS motif collection:', include_blank: false
 
   Advanced options:
   .expand_button
     %a [+]
   .advanced_options
-    .pvalue_cutoff{ data: task.attribute_data(:pvalue_cutoff) }
+    .pvalue_cutoff
       = f.input :pvalue_cutoff, label: 'P-value cutoff:'
-    .fold_change_cutoff{ data: task.attribute_data(:fold_change_cutoff) }
+    .fold_change_cutoff
       = f.input :fold_change_cutoff, label: 'Fold change cutoff:'
 
-    = render partial:'shared/background_model', locals: {task: task, form_builder: f, background_variable: :background, background_title: '', background_class: 'background'}
+    = render partial:'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: ''}
 
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}
