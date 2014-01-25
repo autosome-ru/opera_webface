@@ -2,42 +2,46 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.update_data_model = (modelClass)->
-  $(modelClass).empty
-  data_model = ($(modelClass).find('.data_model select').prop('value') || '').toUpperCase()
+update_data_model_form = (dataModelClass)->
+  data_model = ($(dataModelClass).find('.data_model select').prop('value') || '').toUpperCase()
   if data_model == 'PCM'
-    $(modelClass + '.data_model_specifiers .effective_count').hide()
-    $(modelClass + '.data_model_specifiers .pseudocount').show()
+    $(dataModelClass + '.data_model_specifiers .effective_count').hide()
+    $(dataModelClass + '.data_model_specifiers .pseudocount').show()
   else if data_model == 'PPM'
-    $(modelClass + '.data_model_specifiers .effective_count').show()
-    $(modelClass + '.data_model_specifiers .pseudocount').show()
+    $(dataModelClass + '.data_model_specifiers .effective_count').show()
+    $(dataModelClass + '.data_model_specifiers .pseudocount').show()
   else if data_model == 'PWM'
-    $(modelClass + '.data_model_specifiers .effective_count').hide()
-    $(modelClass + '.data_model_specifiers .pseudocount').hide()
+    $(dataModelClass + '.data_model_specifiers .effective_count').hide()
+    $(dataModelClass + '.data_model_specifiers .pseudocount').hide()
 
-window.update_background_model = (background_selector)->
-  background_selector = $(background_selector)
-  background_mode = (background_selector.find('.background_mode select').prop('value') || '').toLowerCase()
-  if background_mode == 'wordwise'
-    background_selector.find('.background_frequencies').hide()
-    background_selector.find('.background_gc_content').hide()
-  else if background_mode == 'gc_content'
-    background_selector.find('.background_frequencies').hide()
-    background_selector.find('.background_gc_content').show()
-  else if background_mode == 'frequencies'
-    background_selector.find('.background_frequencies').show()
-    background_selector.find('.background_gc_content').hide()
+window.register_data_model_form = (dataModelClass)->
+  update_data_model_form(dataModelClass)
+  $(dataModelClass).find('.data_model select').change ->
+    update_data_model_form(dataModelClass)
 
 $(document).ready ->
-  # form_sent = false
-  # $('.task_params')
-  #   .on('ajax:beforeSend', (xhr)->
-  #     if form_sent
-  #       alert('Please, don\'t submit the same task many times')
-  #       false
-  #     else
-  #       form_sent = true
-  #   )
+  update_background_model_form = (background_form)->
+    background_form = $(background_form)
+    mode = (background_form.find('.mode select').prop('value') || '').toLowerCase()
+    if mode == 'wordwise'
+      background_form.find('.frequencies').hide()
+      background_form.find('.gc_content').hide()
+    else if mode == 'gc_content'
+      background_form.find('.frequencies').hide()
+      background_form.find('.gc_content').show()
+    else if mode == 'frequencies'
+      background_form.find('.frequencies').show()
+      background_form.find('.gc_content').hide()
+
+  register_background_model_form = (background_selector)->
+    $(background_selector).each ->
+      background_form = $(this)
+      update_background_model_form(background_form)
+      background_form.find('.mode select').change ->
+        update_background_model_form(background_form)
+
+  register_background_model_form('.background_model')
+
 
   $('.redirect_to').first().each ->
     url = $(this).data('url')
@@ -47,6 +51,7 @@ $(document).ready ->
         window.location.href = url
       timeout
     )
+
 
   $('.task_params *').focus (event)->
     event.preventDefault()

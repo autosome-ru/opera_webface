@@ -1,13 +1,12 @@
 = form_builder.fields_for background_variable do |background_form|
-  - background = background_form.object
-  %div{ class: background_class, data: task.attribute_data(background_variable) }
-    .background_mode{ data: attribute_data(background, 'background', "mode") }
-      = background_form.input "mode".to_sym, label: background_title, include_blank: false
-    .background_gc_content{ data: attribute_data(background, 'background', "gc_content") }
-      = background_form.input "gc_content".to_sym, label: 'GC-content:'
-    .background_frequencies{ data: attribute_data(background, 'background', "frequencies") }
+  .background_model
+    .mode
+      = background_form.input :mode, label: background_title, include_blank: false
+    .gc_content
+      = background_form.input :gc_content, label: 'GC-content:'
+    .frequencies
       = background_form.fields_for :frequencies do |frequencies_form|
-        = frequencies_form.input "a".to_sym, label: 'A', wrapper: false
-        = frequencies_form.input "c".to_sym, label: 'C', wrapper: false
-        = frequencies_form.input "g".to_sym, label: 'G', wrapper: false
-        = frequencies_form.input "t".to_sym, label: 'T', wrapper: false
+        = frequencies_form.input :a, label: 'A', wrapper: false
+        = frequencies_form.input :c, label: 'C', wrapper: false
+        = frequencies_form.input :g, label: 'G', wrapper: false
+        = frequencies_form.input :t, label: 'T', wrapper: false

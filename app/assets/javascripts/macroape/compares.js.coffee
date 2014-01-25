@@ -3,16 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-  update_data_model('.first_model')
-  $('.first_model .data_model select').change ->
-    update_data_model('.first_model')
-
-  update_data_model('.second_model')
-  $('.second_model .data_model select').change ->
-    update_data_model('.second_model')
-
-  update_background_model('.background')
-  $('.background').each ->
-    background_selector = $(this)
-    background_selector.find('.background_mode select').change ->
-      update_background_model(background_selector)
+  register_data_model_form('.first_model')
+  register_data_model_form('.second_model')
