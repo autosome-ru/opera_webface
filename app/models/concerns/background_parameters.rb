@@ -2,6 +2,7 @@ require 'active_support/concern'
 
 module BackgroundParameters
   extend ActiveSupport::Concern
+
   module ClassMethods
     def add_background_task_param(param_name)
       class_eval do
@@ -13,6 +14,10 @@ module BackgroundParameters
 
         define_method "#{param_name}_attributes=" do |value|
           instance_variable_set("@#{param_name}", Background.new(value))
+        end
+
+        validate do |record|
+          record.errors.add(param_name)  unless record.send(param_name).valid?
         end
       end
     end

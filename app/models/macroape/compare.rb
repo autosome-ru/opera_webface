@@ -13,10 +13,6 @@ class Macroape::Compare < ::Task
   extend Enumerize
   enumerize :pvalue_boundary, in: [:lower, :upper]
 
-  validate do |record|
-    record.errors.add(:background)  unless record.background.valid?
-  end
-
   def self.task_type
     'EvaluateSimilarity'
   end
