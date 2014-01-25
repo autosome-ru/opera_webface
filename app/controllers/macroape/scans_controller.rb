@@ -17,4 +17,8 @@ protected
   def task_results(ticket)
     SMBSMCore.get_content(ticket, 'task_result.txt')  if SMBSMCore.check_content(ticket, 'task_result.txt')
   end
+
+  def reload_page_time
+    30
+  end
 end

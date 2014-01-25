@@ -74,4 +74,9 @@ protected
   def task_results(ticket)
     OpenStruct.new(YAML.load(SMBSMCore.get_content(ticket, 'task_results.yaml')))  if SMBSMCore.check_content(ticket, 'task_results.yaml')
   end
+
+  def reload_page_time
+    5
+  end
+  helper_method :reload_page_time
 end
