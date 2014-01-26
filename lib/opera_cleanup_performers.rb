@@ -26,8 +26,8 @@ module OperaCleanupPerformers
         end
       end
     end
-  end 
- 
+  end
+
   def oh_performer
     perform_every OperaHouseConfiguration::PERFORMER_DELAY do
       scene_lock.synchronize do
@@ -54,7 +54,7 @@ module OperaCleanupPerformers
       end
     end
   end
-  
+
   def clean(ticket)
     cleaning = scene_lock.synchronize{ get_performance(ticket) }
     @log.debug("cleaning #{cleaning.inspect}")
@@ -63,6 +63,6 @@ module OperaCleanupPerformers
     @log.debug('cleaning done')
     clean_res
   end
-  
+
   private :oh_cleaner, :oh_checker, :oh_performer, :tt_checker
 end

@@ -5,16 +5,16 @@ module SMBSMCore
   TimeoutForTheatreToStart = 5
   root_path = File.expand_path("../../", __FILE__)
   PATH_TO_THEATER_START = "ruby #{File.join(root_path, 'lib', 'opera_house_start.rb')}"
-  
+
   def self.theatre; (DRb.thread && @theatre) || opera_manager;  end
-  
+
   # setup task parameters: ticket --> params
   def self.perform_overture(ticket, name, params = {});  theatre.perform_overture(ticket, name, params);  end
   # run task by ticket number
   def self.perform_opera(ticket, name);  theatre.perform_opera(ticket, name);  end
 
   def self.get_ticket;  theatre.get_ticket;  end
-  def self.get_status(ticket);  theatre.get_status(ticket);  end 
+  def self.get_status(ticket);  theatre.get_status(ticket);  end
   def self.get_content(ticket, what);  theatre.get_content(ticket, what)  rescue nil;  end
   def self.check_content(ticket, what);  theatre.check_content(ticket, what)  rescue nil;  end
 
@@ -25,13 +25,13 @@ module SMBSMCore
     theatre.soloist(ticket, solo.pid)
     solo.result
   end
-  
+
   def self.opera_manager
     begin
       if !DRb.thread || !@theatre
         DRb.start_service
         @theatre = DRbObject.new(nil, DRubyURI)
-      end  
+      end
       @theatre.ping
     rescue
       Thread.new { system(PATH_TO_THEATER_START) }

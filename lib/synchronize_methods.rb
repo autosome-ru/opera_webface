@@ -8,7 +8,7 @@ class Module
       end
     end
   end
-  
+
   # create attr_readers for mutices with lazy initialization
   def create_mutex(*mutices)
     mutices.each do |mutex|
@@ -18,7 +18,7 @@ class Module
     end
   end
 end
-  
+
 =begin
 
 # This is an example of object. Both readers can be runned simultaneous; But no one can be runned with writer
@@ -38,7 +38,7 @@ end
     ensure
       @w_mutex.unlock
   end
-  
+
   def writer
     @rw_mutex.synchronize{
       @w_mutex.synchronize {
@@ -58,7 +58,7 @@ end
 #   def writer_2; @y.next!;end
 #   def writer_3; @x.next!; @y.next!; end
 # synchronize_methods_rw :rw_mut, :w_lock, readers: [:reader_1,:reader_2], writers: [:writer_1,:writer_2,:writer_3]
-#end 
+#end
 
 =begin
  Need Testing
@@ -76,11 +76,11 @@ def synchronize_methods_rw(rw_lock,w_lock,options={})
       end
     end
   end
-  
+
   options[:writers].each do |meth|
     meth_old = instance_method(meth)
-    define_method meth do |*args,&block|        
-      send(rw_lock).synchronize { 
+    define_method meth do |*args,&block|
+      send(rw_lock).synchronize {
         send(w_lock).synchronize{
           meth_old.bind(self).call(*args,&block)
         }
@@ -88,5 +88,5 @@ def synchronize_methods_rw(rw_lock,w_lock,options={})
     end
   end
 end
- 
+
 =end
