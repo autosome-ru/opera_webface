@@ -51,6 +51,11 @@ en:
       mode: 'Background model. One can specify ACGT-frequencies or use wordwise background (uniform background represented in number of words instead of part of all words)'
       gc_content: 'Background defined by GC-content. It should be value in range 0 to 1'
       frequencies: 'Background defined by frequencies of ACGT-nucleotides. There should be four values in range 0 to 1, their sum should be 1'
+      Frequencies:
+        a: 'Frequency of nucleotide A'
+        c: 'Frequency of nucleotide C'
+        g: 'Frequency of nucleotide G'
+        t: 'Frequency of nucleotide T'
     DataModel:
       data_model: 'Data model of the motif. Can be either positional weight matrix(PWM) or positional count matrix(PCM) or positional frequency matrix(PFM)'
       matrix: 'Positional matrix of the motif in format according to its data model'
