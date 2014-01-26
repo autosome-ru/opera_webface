@@ -1,7 +1,8 @@
-== README
+# README
 
 This is OperaHouse webface which allows users to run our lab's computational-heavy tools using web form. Our lab is specialized on sequence and motif analysis so our tools have some stuff to simplifing this kind of tasks.
 
+## Setup
 In order to setup opera house you'd check several points:
 
 * Place motif collections onto their place in `public/motif_collections/` folder.
@@ -9,6 +10,7 @@ Each of subfolders pcm/pwm/thresholds/logo have its own subsubfolders: hocomoco/
 
 * Check for the latest versions of Java-tools (`scan-collection.jar`, `multi-SNP-scan.jar`). They should be placed in public folder.
 
+## Run and restart
 In order to run webface do:
 
 * `cd path_to_app && bundle install`
