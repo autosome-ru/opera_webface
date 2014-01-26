@@ -23,3 +23,6 @@
 /public/motif_collection/pwm/
 /public/motif_collection/ppm/
 /public/motif_collection/thresholds/
+
+public/scan-collection.jar
+public/multi-SNP-scan.jar
