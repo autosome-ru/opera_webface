@@ -7,6 +7,8 @@ class TasksController < ApplicationController
     render action: 'new'
   end
 
+  before_action :get_ticket, only: [:perform, :show]
+
   def new
     @task = model_class.new( default_params.merge(permitted_params[:task] || {}) )
   end
@@ -22,14 +24,12 @@ class TasksController < ApplicationController
   end
 
   def perform
-    @ticket = params[:id]
     SMBSMCore.perform_opera(@ticket, model_class.task_type)
     redirect_to action: 'show', id: @ticket
   end
 
   def show
-    @ticket = params[:id]
-    @status = SMBSMCore.get_status(params[:id])
+    @status = SMBSMCore.get_status(@ticket)
     render action: 'ticket_not_found' and return  unless @status
 
     if model_class.task_type != @status.opera_name
@@ -77,6 +77,10 @@ protected
 
   def reload_page_time
     5
+  end
+
+  def get_ticket
+    @ticket = params[:id].try(&:strip).tap{|x| puts "ticket #{x.inspect}"}
   end
   helper_method :reload_page_time
 end

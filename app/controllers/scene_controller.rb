@@ -1,17 +1,18 @@
-module SMBSMCore
-  def self.get_content(ticket, what); theatre.get_content(ticket, what)  rescue nil;  end
-end
-
 class SceneController < ApplicationController
+  before_action :get_ticket, only: [:show, :download]
+
   def show
-    ticket = params[:id]
     filename = params[:filename]
-    send_data SMBSMCore.get_content(ticket, filename), filename: "#{ticket}_#{filename}", type: MIME::Types.type_for(filename), disposition: 'inline'
+    send_data SMBSMCore.get_content(@ticket, filename), filename: "#{@ticket}_#{filename}", type: MIME::Types.type_for(filename), disposition: 'inline'
   end
 
   def download
-    ticket = params[:id]
     filename = params[:filename]
-    send_data SMBSMCore.get_content(ticket, filename), filename: "#{ticket}_#{filename}", disposition: 'attachment'
+    send_data SMBSMCore.get_content(@ticket, filename), filename: "#{@ticket}_#{filename}", disposition: 'attachment'
+  end
+
+protected
+  def get_ticket
+    @ticket = params[:id].try(&:strip)
   end
 end
