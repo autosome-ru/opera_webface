@@ -1,7 +1,7 @@
 = task_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .snp_list
     %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequencess to scan
-    .row
+    .row.sequence_list
       .span6= f.input :snp_list, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side)', :as => :text
     .row
       .span2= f.input :snp_list_file, label: 'or load file with SNP-sequences', :as => :file
@@ -10,7 +10,7 @@
 
   Advanced options:
   .expand_button
-    %a [+]
+    %a{href: '#'} [+]
   .advanced_options
     .pvalue_cutoff
       = f.input :pvalue_cutoff, label: 'P-value cutoff:'

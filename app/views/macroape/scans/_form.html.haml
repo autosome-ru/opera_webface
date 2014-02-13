@@ -14,7 +14,7 @@
         = f.input :collection, include_blank: false
   Advanced options:
   .expand_button
-    %a [+]
+    %a{href: '#'} [+]
   .advanced_options
     = render partial: 'shared/background_model', locals: {form_builder: f, background_variable: :query_background, background_title: 'Query background'}
     .pvalue
