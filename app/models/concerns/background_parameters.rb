@@ -7,7 +7,7 @@ module BackgroundParameters
     def add_background_task_param(param_name)
       class_eval do
         param_name = param_name.to_sym
-        add_task_submission_param(param_name){|obj| obj.send(param_name).background }
+        add_task_submission_param(param_name){|task, value| value.background }
         add_task_permitted_param("#{param_name}_attributes" => [:mode, :gc_content, :frequencies_attributes => [:a,:c,:g,:t] ])
 
         attr_reader param_name

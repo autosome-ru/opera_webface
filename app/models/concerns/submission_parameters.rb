@@ -9,7 +9,15 @@ module SubmissionParameters
     key_vals = self.class.submission_params_list.map do |param_name, options, block|
       begin
         next nil  if options[:if] && !options[:if].to_proc.call(self)
-        [param_name.to_sym, block ? block.call(self) : send(param_name)]
+        if block
+          if respond_to?(param_name)
+            [param_name.to_sym, block.call(self, send(param_name))]
+          else
+            [param_name.to_sym, block.call(self, nil)]
+          end
+        else
+          [param_name.to_sym, send(param_name)]
+        end
       rescue => e
         exception = Error.new "Submission of task failed due to exception `#{e.to_s}` in evaluating value of #{param_name}"
         errors.add(:base, exception.message)
