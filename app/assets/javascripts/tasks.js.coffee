@@ -64,4 +64,7 @@ $(document).ready ->
 
   $('.expand_button').click ->
     $(this).next('.advanced_options').toggle()
-
+  $('.advanced_options').each ->
+    advanced_section = $(this)
+    if  advanced_section.find('[data-error]').size() > 0
+      advanced_section.show()
