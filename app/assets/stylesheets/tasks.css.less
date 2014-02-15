@@ -73,3 +73,33 @@ em {
     width: 35px;
   }
 }
+
+.matrix {
+  label {
+    display: block;
+  }
+  textarea {
+    height: 270px;
+    width: 330px;
+    white-space: nowrap;
+  }
+  textarea, pre {
+    font-family: monospace;
+    word-spacing: 1em; // columns are separated with very a long space
+  }
+}
+
+.sequence_list {
+  textarea {
+    font-family: monospace;
+    //word-spacing: 1em;
+    font-size: 12px;
+  }
+}
+
+.field_with_errors {
+  background-color: lighten(red, 20%);
+  .error {
+    display: block;
+  }
+}
