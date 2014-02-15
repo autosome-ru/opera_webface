@@ -1,0 +1,78 @@
+require 'rspec'
+require 'app/models/task'
+
+# params --> (add_permitted_task_param) --> raw value --> (submission_task_param) -> typecasted value
+#                                                     --> (send) --> typecasted value
+#                                                     --> before_type_cast --> raw value
+
+describe ::Task do
+  describe '#add_permitted_task_param' do
+    let(:task) { klass.new }
+    context 'with any parameter' do 
+      let :klass do
+        Class.new(::Task) do
+          add_task_permitted_param :param_to_permit
+        end
+      end
+      it 'adds parameter to permitted_params_list of the class' do
+        expect(klass.permitted_params_list).to include(:param_to_permit)
+      end
+    end
+
+    context 'without typecast block' do
+      let(:value_to_store) { 'input value' }
+      let :klass do
+        Class.new(::Task) do
+          add_task_permitted_param :param_to_permit
+        end
+      end
+      it 'allows reading stored parameter' do
+        task.param_to_permit = value_to_store
+        expect(task.param_to_permit).to eq(value_to_store)
+      end
+      it 'allows reading stored parameter with {attribute}_before_type_cast' do
+        task.param_to_permit = value_to_store
+        expect(task.param_to_permit_before_type_cast).to eq(value_to_store)
+      end
+    end
+
+    context 'with typecast block' do
+      let(:value_to_store) { 'input value' }
+      let(:typecasted_value) { 'INPUT VALUE' }
+      let :klass do
+        Class.new(::Task) do    
+          add_task_permitted_param :param_to_permit, &:upcase
+        end
+      end
+      it 'allows reading stored parameter typecasted with a method specified by parameter name' do
+        task.param_to_permit = value_to_store
+        expect(task.param_to_permit).to eq(typecasted_value)
+      end
+      it 'allows reading stored parameter non-casted with {attribute}_before_type_cast' do
+        task.param_to_permit = value_to_store
+        expect(task.param_to_permit_before_type_cast).to eq(value_to_store)
+      end
+    end
+  end
+  
+  
+  describe '#add_submission_task_param' do
+    let(:task) { klass.new }
+    context 'with some parameter' do
+      let :klass do
+        Class.new(::Task) do
+          define_method :param_to_submit do
+            'value to submit'
+          end
+          add_task_submission_param :param_to_submit
+        end
+      end
+      it 'adds parameter to task_params' do
+        expect(task.task_params).to have_key(:param_to_submit)
+      end
+      it 'task_params value is equal to result of call of a method specified by parameter name' do
+        expect(task.task_params[:param_to_submit]).to eq(task.param_to_submit)
+      end
+    end
+  end
+end

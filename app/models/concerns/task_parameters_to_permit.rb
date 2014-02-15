@@ -11,13 +11,17 @@ module TaskParametersToPermit
       when String, Symbol
         permitted_params_list << param_name
         class_eval do
-          attr_reader param_name
+          attr_reader param_name, "#{param_name}_before_type_cast"
           if block_given?
             define_method "#{param_name}=" do |value|
+              instance_variable_set("@#{param_name}_before_type_cast", value)
               instance_variable_set("@#{param_name}", block.call(value))
             end
           else
-            attr_writer param_name
+            define_method "#{param_name}=" do |value|
+              instance_variable_set("@#{param_name}_before_type_cast", value)
+              instance_variable_set("@#{param_name}", value)
+            end
           end
         end
       when Hash

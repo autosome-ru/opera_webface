@@ -1,3 +1,9 @@
+require 'active_model'
+require_relative 'concerns/task_parameters_to_permit'
+require_relative 'concerns/submission_parameters'
+require_relative 'concerns/background_parameters'
+require_relative 'concerns/data_model_parameters'
+
 class Task
   include ActiveModel::Model
   include TaskParametersToPermit
