@@ -9,6 +9,8 @@ class Macroape::Scan < ::Task
   add_task_params :precise_recalc_cutoff
   add_task_params :collection
 
+  validates :pvalue, presence: true, numericality: {less_than_or_equal_to: 0.001, greater_than: 0}
+
   extend Enumerize
   enumerize :pvalue_boundary, in: [:lower, :upper]
   enumerize :collection, in: [:hocomoco, :jaspar, :selex, :swissregulon, :homer]
