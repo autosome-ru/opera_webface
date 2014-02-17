@@ -1,11 +1,11 @@
-.input_data
-  .matrix
+.input_data.row
+  .matrix.span3
     .logo= show_image(ticket, 'pcm_first_direct.png')
     .label
       First PWM
       = download_list ticket, {'pcm' => 'pcm_first.pcm', 'ppm' => 'ppm_first.ppm', 'pwm' => 'pwm_first.pwm'}
     %pre= Bioinform::PWM.new(task_params[:first_motif][:pwm]).round(3)
-  .matrix
+  .matrix.span3
     .logo= show_image(ticket, "pcm_second_#{task_results[:orientation]}.png")
     .label
       Second PWM
