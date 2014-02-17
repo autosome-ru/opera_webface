@@ -2,25 +2,29 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-update_data_model_form = (dataModelClass)->
-  data_model = ($(dataModelClass).find('.data_model select').prop('value') || '').toUpperCase()
-  if data_model == 'PCM'
-    $(dataModelClass + '.data_model_specifiers .effective_count').hide()
-    $(dataModelClass + '.data_model_specifiers .pseudocount').show()
-    $(dataModelClass).find('.matrix textarea')[0].value  = $(dataModelClass).find('.data_model_examples .pcm').text()
-  else if data_model == 'PPM'
-    $(dataModelClass + '.data_model_specifiers .effective_count').show()
-    $(dataModelClass + '.data_model_specifiers .pseudocount').show()
-    $(dataModelClass).find('.matrix textarea')[0].value = $(dataModelClass).find('.data_model_examples .ppm').text()
-  else if data_model == 'PWM'
-    $(dataModelClass + '.data_model_specifiers .effective_count').hide()
-    $(dataModelClass + '.data_model_specifiers .pseudocount').hide()
-    $(dataModelClass).find('.matrix textarea')[0].value = $(dataModelClass).find('.data_model_examples .pwm').text()
+update_data_model_form = (dataModelSelector)->
+  $model = $(dataModelSelector)
+  data_model_type = ($model.find('.data_model select').prop('value') || '').toUpperCase()
+  $data_model_specifiers = $model.filter('.data_model_specifiers')
+  if data_model_type == 'PCM'
+    $data_model_specifiers.find('.effective_count').hide()
+    $data_model_specifiers.find('.pseudocount').show()
+    $model.find('.matrix textarea').val( $model.find('.data_model_examples .pcm').text() )
+  else if data_model_type == 'PPM'
+    $data_model_specifiers.find('.effective_count').show()
+    $data_model_specifiers.find('.pseudocount').show()
+    $model.find('.matrix textarea').val( $model.find('.data_model_examples .ppm').text() )
+  else if data_model_type == 'PWM'
+    $data_model_specifiers.find('.effective_count').hide()
+    $data_model_specifiers.find('.pseudocount').hide()
+    $model.find('.matrix textarea').val( $model.find('.data_model_examples .pwm').text() )
 
-window.register_data_model_form = (dataModelClass)->
-  update_data_model_form(dataModelClass)
-  $(dataModelClass).find('.data_model select').change ->
-    update_data_model_form(dataModelClass)
+window.register_data_model_form = (dataModelSelector)->
+  $model = $(dataModelSelector)
+  if $model.find('.matrix textarea').length != 0 && $model.find('.matrix textarea').val().length == 0
+    update_data_model_form($model)
+  $model.find('.data_model select').change ->
+    update_data_model_form($model)
 
 $(document).ready ->
   update_background_model_form = (background_form)->
