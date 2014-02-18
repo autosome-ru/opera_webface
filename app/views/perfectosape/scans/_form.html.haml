@@ -1,10 +1,10 @@
 = task_form_for task, :as => :task, html: {class: 'task_params'} do |f|
   .snp_list
-    %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequencess to scan
+    %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequences to scan
     .row.sequence_list
-      .span6= f.input :snp_list, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side)', :as => :text
+      .span6.snp_list_text= f.input :snp_list, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side)', :as => :text
     .row
-      .span2= f.input :snp_list_file, label: 'or load file with SNP-sequences', :as => :file
+      .span6.snp_list_file= f.input :snp_list_file, label: 'or load a file with SNP-sequences', :as => :file
   .collection
     = f.input :collection, label: 'TFBS motif collection:', include_blank: false
 

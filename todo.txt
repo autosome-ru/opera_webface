@@ -56,10 +56,6 @@ http://opera.autosome.ru/macroape/scans/aaaaaaaaap
 вот например
 http://opera.autosome.ru/perfectosape/scans/aaaaaaaaaq
 
-16. В perfectosape/scans почему-то подпись
-or load file with SNP-sequences
-разрезана на две строки (после with).
-
 17.  Можно ли красненьким рамком подсветить поля, где есть ошибки? Сейчас
 просто список ошибок выводится
 (я вот кривой мотив ввел в compares).
