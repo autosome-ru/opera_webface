@@ -67,8 +67,11 @@ class DataModel
     end
   end
 
+  validates :effective_count, presence: true, numericality: {greater_than: 0}, :if => ->(model){ model.data_model == :PPM }
+  validates :pseudocount, numericality: {greater_than_or_equal_to: 0}, :if => ->(model){ [:PPM, :PCM].include?(model.data_model) && model.pseudocount }
+
   validate do |record|
     record.errors.add(:data_model, "Unknown data model #{record.data_model}")  unless [:PWM, :PCM, :PPM].include? record.data_model
-    record.errors.add(:matrix, "Motif model has errors")  unless record.data_model_object.valid?
+    record.errors.add(:matrix, record.data_model_object.validation_errors.join(";\n"))  unless record.data_model_object.valid?
   end
 end
