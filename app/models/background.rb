@@ -18,7 +18,7 @@ class Background
   extend Enumerize
   enumerize :mode, in: [:wordwise, :gc_content, :frequencies]
 
-  def attributes
+  def to_hash
     result = {mode: mode}
     case mode
     when :wordwise

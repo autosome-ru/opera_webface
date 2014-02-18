@@ -61,5 +61,5 @@ group :development do
 end
 
 gem 'macroape', '~> 4.0'
-gem 'bioinform', '~> 0.1.14'
+gem 'bioinform', '~> 0.1.15'
 gem 'sequence_logo'

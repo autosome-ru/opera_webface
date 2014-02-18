@@ -3,11 +3,12 @@ class DataModel
   extend Enumerize
   enumerize :data_model, in: [:PCM, :PWM, :PPM]
 
+# matrix - is text(!) representation of matrix
   attr_accessor :matrix, :background
   attr_reader :data_model, :effective_count, :pseudocount
 
-  def attributes
-    result = {matrix: matrix, data_model: data_model, effective_count: effective_count, pseudocount: pseudocount, background: background.attributes}
+  def to_hash
+    result = {matrix: matrix, data_model: data_model, effective_count: effective_count, pseudocount: pseudocount, background: background.to_hash}
     case data_model
     when :PWM
       result.merge(pwm: pwm.to_s)
@@ -53,5 +54,21 @@ class DataModel
     else
       nil
     end
+  end
+
+  def data_model_object
+    case data_model
+    when :PWM
+      pwm
+    when :PCM
+      pcm
+    when :PPM
+      ppm
+    end
+  end
+
+  validate do |record|
+    record.errors.add(:data_model, "Unknown data model #{record.data_model}")  unless [:PWM, :PCM, :PPM].include? record.data_model
+    record.errors.add(:matrix, "Motif model has errors")  unless record.data_model_object.valid?
   end
 end

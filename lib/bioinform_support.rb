@@ -1,22 +1,27 @@
 module Bioinform
   class Error < StandardError
   end
-  class PWM
-    def round(n)
-      PWM.new(matrix.map{|pos| pos.map{|x| x.round(n) } }).tap{|pwm| pwm.name = name}
-    end
+
+  def self.round_matrix(n, matrix)
+    matrix.map{|pos| pos.map{|x| x.round(n) } }
   end
 
+  class PWM
+    def round(n)
+      PWM.new(Bioinform::round_matrix(n, matrix)).tap{|pwm| pwm.name = name}
+    end
+  end
   class PCM
     make_parameters :pseudocount
     def round(n)
-      PCM.new(matrix.map{|pos| pos.map{|x| x.round(n) } }).tap{|pwm| pwm.name = name}
+      PCM.new(Bioinform::round_matrix(n, matrix)).tap{|pwm| pwm.name = name}
     end
   end
+
   class PPM
     make_parameters :effective_count, :pseudocount
     def round(n)
-      PPM.new(matrix.map{|pos| pos.map{|x| x.round(n) } }).tap{|pwm| pwm.name = name}
+      PPM.new(Bioinform::round_matrix(n, matrix)).tap{|pwm| pwm.name = name}
     end
     def to_pcm
       PCM.new(matrix.map{|pos| pos.map{|el| el * effective_count} }).tap{|pcm| pcm.name = name}

@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+//$error_color: lighten(red, 20%);
+
 .label {
   display: inline-block;
   font-weight: bold;
@@ -9,10 +11,6 @@
 }
 .value {
   display: inline-block;
-}
-
-*[data-error] {
-  background-color: #ff0000;
 }
 
 .article {
@@ -81,7 +79,7 @@ em {
   }
   textarea {
     height: 270px;
-    width: 330px;
+    width: 350px;
     white-space: nowrap;
   }
   textarea, pre {
@@ -99,8 +97,11 @@ em {
 }
 
 .field_with_errors {
-  background-color: lighten(red, 20%);
+  background-color: lighten(red, 20%); //$error_color;
   .error {
     display: block;
+  }
+  input, textarea {
+    background-color: lighten(red, 40%);
   }
 }

@@ -14,10 +14,14 @@ module DataModelParameters
 
         add_task_submission_param(param_name) do |task, value|
           begin
-            value.attributes
+            value.to_hash
           rescue Bioinform::Error => e
             raise SubmissionParameters::Error, e.message
           end
+        end
+
+        validate do |record|
+          record.errors.add(param_name)  unless record.send(param_name).valid?
         end
       end
     end
