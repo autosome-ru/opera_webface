@@ -78,3 +78,16 @@ en:
         pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value'
         pvalue: 'P-value to obtain motif thresholds'
         discretization: 'PWM discretization'
+  activemodel:
+    errors:
+      models:
+        background:
+          # The values :model, :attribute and :value are always available for interpolation
+          # The value :count is available when applicable. Can be used for pluralization.
+          attributes:
+            mode:
+              inclusion: "should be one of list: wordwise, GC-content, frequencies, but was %{value}"
+  errors:
+    attributes:
+      pvalue_boundary:
+        inclusion: "should be either lower or upper but was %{value}"
