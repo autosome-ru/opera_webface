@@ -19,7 +19,7 @@ module SubmissionParameters
           [param_name.to_sym, send(param_name)]
         end
       rescue => e
-        exception = Error.new "Submission of task failed due to exception `#{e.to_s}` in evaluating value of #{param_name}"
+        exception = SubmissionParameters::Error.new "Submission of task failed due to exception `#{e.to_s}` in evaluating value of #{param_name}"
         errors.add(:base, exception.message)
         exception.reason = e
         raise exception
