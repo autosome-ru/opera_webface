@@ -8,7 +8,7 @@ class Macroape::Compare < ::Task
 
   add_task_params :pvalue, &:to_f
   add_task_params :discretization, &:to_f
-  add_task_params :pvalue_boundary
+  add_task_params :pvalue_boundary, &:to_sym
 
   validates :pvalue, presence: true, numericality: {less_than_or_equal_to: 0.001, greater_than: 0}
   validates :discretization, presence: true, numericality: {less_than_or_equal_to: 10, greater_than: 0}
