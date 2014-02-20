@@ -10,11 +10,11 @@
       = nav_bar do
         = menu_group do
           = drop_down 'Macro-APE' do
-            = menu_item 'Tool description and related links', macroape_path
+            = menu_item 'Tool description and related links', macroape_description_path
             = menu_item 'Compare two motifs', new_macroape_compare_path
             = menu_item 'Scan for a motif', new_macroape_scan_path
           = drop_down 'Perfectos-APE' do
-            = menu_item 'Tool description and related links', perfectosape_path
+            = menu_item 'Tool description and related links', perfectosape_description_path
             = menu_item 'rSNP functional annotation', new_perfectosape_scan_path
         = form_tag search_tasks_path, class: 'pull-right navbar-search' do
           = label_tag do
