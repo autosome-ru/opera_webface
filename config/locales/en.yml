@@ -24,7 +24,11 @@ en:
     will_start_soon: 'Task will start in two seconds.'
     task_performing: "Task is performing. You'll see results just as calculations are complete."
     reload_manually: "This page is to be updated/reloaded in %{timeout} seconds. If it's not done automatically, click <a href=\"%{redirect_url}\">here</a>"
-    ticket_number: "Remember your ticket number <em>%{ticket}</em> to be able to view results later"
+    ticket_number:
+      just_submitted: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later"
+      in_queue: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Task was sheduled at %{time_scheduled} and is in queue now"
+      in_process: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Task was sheduled at %{time_scheduled} and started at %{time_started}"
+      finished: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Your task have been completed at %{time_finished}"
   enumerize:
     data_model:
       data_model:
@@ -91,3 +95,10 @@ en:
     attributes:
       pvalue_boundary:
         inclusion: "should be either lower or upper but was %{value}"
+
+  time:
+    formats:
+      # default: "%a, %d %b %Y %H:%M:%S %z"
+      default: "%B %d, %Y %H:%M:%S"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"

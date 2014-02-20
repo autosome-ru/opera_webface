@@ -1,3 +1,3 @@
 %h5
-  = raw I18n.t('opera.ticket_number', ticket: ticket)
+  = raw I18n.t('opera.ticket_number.finished', ticket: ticket, time_finished: I18n.l(status.end_time))
 = render partial: 'results', locals: {ticket: ticket, status: status, task_params: task_params, task_results: task_results}

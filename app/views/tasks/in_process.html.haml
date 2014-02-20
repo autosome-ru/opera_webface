@@ -1,4 +1,7 @@
 = I18n.t 'opera.task_performing'
 = notice_and_reload(url_for(ticket), reload_page_time)
 %h5
-  = raw I18n.t('opera.ticket_number', ticket: ticket)
+  - if @status.start_time
+    = raw I18n.t('opera.ticket_number.in_process', ticket: ticket, time_scheduled: I18n.l(@status.queue_time), time_started: I18n.l(@status.start_time))
+  - else
+    = raw I18n.t('opera.ticket_number.in_queue', ticket: ticket, time_scheduled: I18n.l(@status.queue_time))
