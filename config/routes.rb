@@ -13,18 +13,18 @@ OperaWebface::Application.routes.draw do
   get 'perfectosape/description' => 'welcome#perfectosape', as: :perfectosape_description
   namespace :macroape do
     get 'scan' => 'scans#new'
-    resources :scans, only: [:new, :create, :show] do
+    resources :scans, only: [:new, :create, :show], path: 'scan' do
       get 'perform', :on => :member
     end
 
     get 'compare' => 'compares#new'
-    resources :compares, only: [:new, :create, :show] do
+    resources :compares, only: [:new, :create, :show], path: 'compare' do
       get 'perform', :on => :member
     end
   end
   namespace :perfectosape do
     get 'scan' => 'scans#new'
-    resources :scans, only: [:new, :create, :show] do
+    resources :scans, only: [:new, :create, :show], path: 'scan' do
       get 'perform', :on => :member
     end
   end
