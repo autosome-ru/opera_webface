@@ -6,18 +6,18 @@
           %div{class: data_model}<= matrix
       = f.fields_for :first_motif do |motif_form|
         .data_model
-          = motif_form.input :data_model, label: 'Data model', include_blank: false
+          = motif_form.input :data_model, label: 'Model 1', include_blank: false
         .matrix
-          = motif_form.input :matrix, label: 'First matrix:', :as => :text
+          = motif_form.input :matrix, label: 'Matrix 1:', :as => :text
     .span4.second_model
       .data_model_examples
         - second_matrix_examples.each do |data_model, matrix|
           %div{class: data_model}<= matrix
       = f.fields_for :second_motif do |motif_form|
         .data_model
-          = motif_form.input :data_model, label: 'Data model', include_blank: false
+          = motif_form.input :data_model, label: 'Model 2', include_blank: false
         .matrix
-          = motif_form.input :matrix, label: 'Second matrix:', :as => :text
+          = motif_form.input :matrix, label: 'Matrix 2:', :as => :text
 
   Advanced options:
   .expand_button
@@ -36,14 +36,14 @@
       .span4.data_model_specifiers.first_model
         = f.fields_for :first_motif do |motif_form|
           .pseudocount
-            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)'
+            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)', label: 'Pseudocount (model 1)'
           .effective_count
-            = motif_form.input :effective_count
+            = motif_form.input :effective_count, label: 'Effective count (model 1)'
       .span4.data_model_specifiers.second_model
         = f.fields_for :second_motif do |motif_form|
           .pseudocount
-            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)'
+            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)', label: 'Pseudocount (model 2)'
           .effective_count
-            = motif_form.input :effective_count
+            = motif_form.input :effective_count, label: 'Effective count (model 2)'
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}
