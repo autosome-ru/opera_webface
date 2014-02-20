@@ -9,6 +9,8 @@
     %header
       = nav_bar do
         = menu_group do
+          = image_tag 'autosome20_48.png'
+        = menu_group do
           = drop_down 'Macro-APE' do
             = menu_item 'Tool description and related links', macroape_description_path
             = menu_item 'Compare two motifs', new_macroape_compare_path
