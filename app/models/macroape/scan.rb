@@ -10,6 +10,8 @@ class Macroape::Scan < ::Task
   add_task_params :collection
 
   validates :pvalue, presence: true, numericality: {less_than_or_equal_to: 0.001, greater_than: 0}
+  validates :similarity_cutoff, presence: true, numericality: {less_than_or_equal_to: 1, greater_than_or_equal_to: 0}
+  validates :precise_recalc_cutoff, presence: true, numericality: {less_than_or_equal_to: 1, greater_than_or_equal_to: 0}
 
   extend Enumerize
   enumerize :pvalue_boundary, in: [:lower, :upper]
