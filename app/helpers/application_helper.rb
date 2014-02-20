@@ -44,7 +44,7 @@ module ApplicationHelper
 # parse table #
 #################################################################
 
-def params_from_txt(task_results)
+  def params_from_txt(task_results)
     task_results.each_line.select{|l| l.start_with?('#') }[0..-2]
   end
   def results_header_from_txt(task_results)
@@ -56,15 +56,19 @@ def params_from_txt(task_results)
   def line_to_row(line, tag = 'td')
     "<tr>" + line.map{|el| "<#{tag}>#{el}</#{tag}>"}.join + "</tr>"
   end
-  def table_from_txt(task_results, task_params, options = {} )
-    header = options.fetch(:header){ results_header_from_txt(task_results) }
+  def create_table(header, lines)
     content = "<table>"
     content << line_to_row(header, 'th')
-    results_data_from_txt(task_results).each { |line|
-      line = yield(line)  if block_given?
+    lines.each { |line|
       content << line_to_row(line, 'td')
     }
     content << "</table>"
     content.html_safe
+  end
+  def table_from_txt(task_results, task_params, options = {}, &block)
+    header = options.fetch(:header){ results_header_from_txt(task_results) }
+    lines = results_data_from_txt(task_results)
+    lines.map!(&block)  if block_given?
+    create_table(header, lines)
   end
 end
