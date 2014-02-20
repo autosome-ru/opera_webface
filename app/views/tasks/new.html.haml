@@ -9,9 +9,9 @@
     .parameter_errors
     %hr
     .errors
-      -if @task.errors.any?
+      - if @task.errors.any?
         %h4
-          Fix #{pluralize(@task.errors.count, "error")} in order to run calculations
+          Fix following errors in order to run calculations:
         %ul
-          -@task.errors.full_messages.each do |msg|
+          - @task.errors.full_messages.each do |msg|
             %li= msg

@@ -5,9 +5,9 @@ module TasksHelper
       attribute = attribute_name.to_sym
       result = {}
       all_errors = []
-      all_errors += object.send(attribute).errors[:base]  if object.send(attribute).respond_to?(:errors)
-      all_errors += object.errors[attribute]  if all_errors.empty?
-      result[:error] = all_errors.join('; ')  unless all_errors.empty?
+      all_errors += object.send(attribute).errors.full_messages  if object.send(attribute).respond_to?(:errors)
+      all_errors += object.errors.full_messages_for(attribute)  if all_errors.empty?
+      result[:error] = all_errors.join(";\n")  unless all_errors.empty?
 
       i18n_path = ['task_parameters', task_type, attribute].compact.join('.')
       result[:parameter_description] = I18n.t(i18n_path, default: "Description not provided (#{i18n_path})")

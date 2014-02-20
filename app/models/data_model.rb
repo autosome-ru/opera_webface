@@ -72,6 +72,12 @@ class DataModel
 
   validate do |record|
     record.errors.add(:data_model, "Unknown data model #{record.data_model}")  unless [:PWM, :PCM, :PPM].include? record.data_model
-    record.errors.add(:matrix, record.data_model_object.validation_errors.join(";\n"))  unless record.data_model_object.valid?
+    # Don't check model unless background is valid: it will throw an exception
+    # because model evaluation with broken background is impossible
+    if record.background.valid?
+      record.errors.add(:matrix, record.data_model_object.validation_errors.join(";\n"))  unless record.data_model_object.valid?
+    else
+      record.errors.add(:base, "is invalid because it depends on invalid background value")
+    end
   end
 end

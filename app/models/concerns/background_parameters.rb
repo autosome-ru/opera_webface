@@ -17,7 +17,12 @@ module BackgroundParameters
         end
 
         validate do |record|
-          record.errors.add(param_name)  unless record.send(param_name).valid?
+          value = record.send(param_name)
+          unless value.valid?
+            errors = value.errors[:base]
+            errors << 'is invalid' if errors.empty?
+            record.errors.add(param_name, errors.join(";\n"))
+          end
         end
       end
     end
