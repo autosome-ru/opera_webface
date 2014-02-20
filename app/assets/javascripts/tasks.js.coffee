@@ -9,22 +9,31 @@ update_data_model_form = (dataModelSelector)->
   if data_model_type == 'PCM'
     $data_model_specifiers.find('.effective_count').hide()
     $data_model_specifiers.find('.pseudocount').show()
-    $model.find('.matrix textarea').val( $model.find('.data_model_examples .pcm').text() )
   else if data_model_type == 'PPM'
     $data_model_specifiers.find('.effective_count').show()
     $data_model_specifiers.find('.pseudocount').show()
-    $model.find('.matrix textarea').val( $model.find('.data_model_examples .ppm').text() )
   else if data_model_type == 'PWM'
     $data_model_specifiers.find('.effective_count').hide()
     $data_model_specifiers.find('.pseudocount').hide()
+
+set_default_data_model = (dataModelSelector)->
+  $model = $(dataModelSelector)
+  data_model_type = ($model.find('.data_model select').prop('value') || '').toUpperCase()
+  if data_model_type == 'PCM'
+    $model.find('.matrix textarea').val( $model.find('.data_model_examples .pcm').text() )
+  else if data_model_type == 'PPM'
+    $model.find('.matrix textarea').val( $model.find('.data_model_examples .ppm').text() )
+  else if data_model_type == 'PWM'
     $model.find('.matrix textarea').val( $model.find('.data_model_examples .pwm').text() )
 
 window.register_data_model_form = (dataModelSelector)->
   $model = $(dataModelSelector)
+  update_data_model_form($model)
   if $model.find('.matrix textarea').length != 0 && $model.find('.matrix textarea').val().length == 0
-    update_data_model_form($model)
+    set_default_data_model($model)
   $model.find('.data_model select').change ->
     update_data_model_form($model)
+    set_default_data_model($model)
 
 $(document).ready ->
   update_background_model_form = (background_form)->
