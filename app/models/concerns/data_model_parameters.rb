@@ -2,6 +2,8 @@ require 'active_support/concern'
 
 module DataModelParameters
   extend ActiveSupport::Concern
+  include DeepParameterValidation
+
   module ClassMethods
     def add_data_model_task_param(param_name, background_attribute_name)
       class_eval do
@@ -20,14 +22,7 @@ module DataModelParameters
           end
         end
 
-        validate do |record|
-          value = record.send(param_name)
-          unless value.valid?
-            errors = value.errors[:base]
-            errors << 'is invalid' if errors.empty?
-            record.errors.add(param_name, errors.join(";\n"))
-          end
-        end
+        add_deep_validation_for(param_name)
       end
     end
 

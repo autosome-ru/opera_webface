@@ -2,6 +2,7 @@ require 'active_support/concern'
 
 module BackgroundParameters
   extend ActiveSupport::Concern
+  include DeepParameterValidation
 
   module ClassMethods
     def add_background_task_param(param_name)
@@ -15,15 +16,7 @@ module BackgroundParameters
         define_method "#{param_name}_attributes=" do |value|
           instance_variable_set("@#{param_name}", Background.new(value))
         end
-
-        validate do |record|
-          value = record.send(param_name)
-          unless value.valid?
-            errors = value.errors[:base]
-            errors << 'is invalid' if errors.empty?
-            record.errors.add(param_name, errors.join(";\n"))
-          end
-        end
+        add_deep_validation_for(param_name)
       end
     end
   end
