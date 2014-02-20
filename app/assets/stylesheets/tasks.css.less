@@ -109,3 +109,21 @@ em {
     background-color: lighten(red, 40%);
   }
 }
+
+table.colorized {
+  thead {
+    th { height: 40px; }
+    th:nth-child(odd) { background-color: lighten(black, 75%); }
+    th:nth-child(even) { background-color: lighten(black, 65%); }
+  }
+  tbody {
+    tr:nth-child(odd) {
+      td:nth-child(odd) { background-color: lighten(#ff0000, 35%); }
+      td:nth-child(even) { background-color: lighten(#ff0000, 25%); }
+    }
+    tr:nth-child(even) {
+      td:nth-child(odd) { background-color: lighten(#00ff00, 35%); }
+      td:nth-child(even) { background-color: lighten(#00ff00, 25%); }
+    }
+  }
+}

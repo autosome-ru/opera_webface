@@ -54,21 +54,17 @@ module ApplicationHelper
     task_results.each_line.reject{|l| l.start_with?('#') }.map{|l| l.rstrip.split("\t") }
   end
   def line_to_row(line, tag = 'td')
-    "<tr>" + line.map{|el| "<#{tag}>#{el}</#{tag}>"}.join + "</tr>"
+    content_tag :tr do
+      line.map{|el|
+        content_tag(tag){ el.to_s.html_safe }
+      }.join.html_safe
+    end
   end
-  def create_table(header, lines)
-    content = "<table>"
-    content << line_to_row(header, 'th')
-    lines.each { |line|
-      content << line_to_row(line, 'td')
-    }
-    content << "</table>"
-    content.html_safe
-  end
-  def table_from_txt(task_results, task_params, options = {}, &block)
-    header = options.fetch(:header){ results_header_from_txt(task_results) }
-    lines = results_data_from_txt(task_results)
-    lines.map!(&block)  if block_given?
-    create_table(header, lines)
+  def create_table(header, lines, options = {})
+    content_tag :table, options[:table_html] do
+      content = content_tag(:thead) { line_to_row(header, 'th') }
+      content << content_tag(:tbody) { lines.map{|line| line_to_row(line, 'td') }.join.html_safe }
+      content.html_safe
+    end
   end
 end
