@@ -41,3 +41,13 @@ File.write 'task_results.yaml', info.to_yaml
     SMBSMCore.soloist("sequence_logo #{pcm_filename}", $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)
   end
 end
+
+shift = info[:shift]
+orientation = info[:orientation]
+if ['pcm_first.pcm', 'pcm_second.pcm'].all?{|pcm_filename| File.exist?(pcm_filename) }
+  File.open('alignment.txt', 'w') do |fw|
+    fw.puts "pcm_first.pcm\t0\tdirect\t#{pwm_first.name}"
+    fw.puts "pcm_second.pcm\t#{shift}\t#{orientation}\t#{pwm_second.name}"
+  end
+  SMBSMCore.soloist("glue_logos alignment.png alignment.txt", $ticket)
+end
