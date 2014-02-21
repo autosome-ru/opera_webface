@@ -13,8 +13,8 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/log/tickets/
-/log/stories/
+/log/tickets/*.yaml
+/log/stories/*.log
 /scene/
 /tmp
 
