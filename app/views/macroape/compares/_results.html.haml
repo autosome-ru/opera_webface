@@ -1,3 +1,9 @@
+.result_data
+  .similarity
+    .label Similarity:
+    .value= task_results[:similarity]
+    .download_results= download_link t('task_layout.download_results'), ticket, 'task_results.yaml'
+    .alignment_logo= show_image(ticket, 'alignment.png')
 .input_data
   .row
     .matrix.span3
@@ -14,9 +20,4 @@
       %pre= Bioinform::PWM.new(task_params[:second_motif][:pwm]).round(3)
   .row
     .span3
-      = download_link 'View more parameters', ticket, 'task_params.yaml'
-.result_data
-  .similarity
-    .label Similarity:
-    .value= task_results[:similarity]
-    .alignment_logo= show_image(ticket, 'alignment.png')
+      = download_link t('task_layout.task_details'), ticket, 'task_params.yaml'

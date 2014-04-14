@@ -1,3 +1,6 @@
+.result_data
+  = download_link t('task_layout.download_results'), ticket, 'task_result.txt'
+  = scan_collection_table(task_results, task_params)
 .input_data
   .matrix
     .label
@@ -8,6 +11,4 @@
   %h5.collection_name
     Collection:
     %em= I18n.t "enumerize.collection.#{task_params[:collection]}"
-  = download_link 'View more parameters', ticket, 'task_params.yaml'
-.result_data
-  = scan_collection_table(task_results, task_params)
+  = download_link t('task_layout.task_details'), ticket, 'task_params.yaml'
