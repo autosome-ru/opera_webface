@@ -78,6 +78,10 @@ $(document).ready ->
 
   $('.expand_button').click ->
     $(this).next('.advanced_options').toggle()
+    if $(this).next('.advanced_options').css('display') == 'none'
+      $(this).html('<a href="#">[+]</a>')
+    else
+      $(this).html('<a href="#">[&ndash;]</a>')
   $('.advanced_options').each ->
     advanced_section = $(this)
     if  advanced_section.find('[data-error]').size() > 0
