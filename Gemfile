@@ -62,4 +62,4 @@ end
 
 gem 'macroape', '~> 4.0'
 gem 'bioinform', '~> 0.1.15'
-gem 'sequence_logo', '~>1.0.5'
+gem 'sequence_logo', '~>1.0.6'
