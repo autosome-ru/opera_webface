@@ -39,6 +39,29 @@ module ApplicationHelper
     image_tag(collection_motif_image_path(collection_name, motif, orientation))
   end
 
+  def uniprot_mapping
+    return @uniprot_mapping  if @uniprot_mapping
+    @uniprot_mapping = begin
+      result = Hash.new{|h,k| h[k] = Hash.new }
+      @uniprot_mapping ||= File.readlines(Rails.root.join('public/uniprot_mapping.txt')).drop(1).map{|line|
+        collection, motif, uniprot, entrezgene = line.strip.split("\t")
+        result[collection.to_sym][motif] = uniprot.split(',')
+      }
+      result
+    end
+  end
+
+  def uniprot_links(collection_name, motif)
+    motif_id = motif.split.first # names in uniprot mapping aren't complete names but just first parts (e.g. `MA0512.1` for `MA0512.1 Rxra`)
+    uniprot_mapping[collection_name.to_sym][motif_id].map{|uniprot_name|
+      uniprot_link("#{uniprot_name}(uniprot)", uniprot_name)
+      }.join("<br>").html_safe
+  end
+
+  def uniprot_link(name, uniprot_name)
+    link_to(name, "http://uniprot.org/uniprot/#{uniprot_name}")
+  end
+
   def notice_and_reload(redirect_url, timeout)
     result = ""
     result << "<div class=\"redirect_to\" data-url=#{redirect_url} data-timeout=#{timeout*1000}></div>"
