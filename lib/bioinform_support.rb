@@ -1,3 +1,5 @@
+require_relative 'matrix_parser'
+
 module Bioinform
   class Error < StandardError
   end
