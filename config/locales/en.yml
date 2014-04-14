@@ -29,6 +29,9 @@ en:
       in_queue: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Task was sheduled at %{time_scheduled} and is in queue now"
       in_process: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Task was sheduled at %{time_scheduled} and started at %{time_started}"
       finished: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Your task have been completed at %{time_finished}"
+  task_layout:
+    download_results: 'Download results'
+    task_details: 'Download task execution details'
   enumerize:
     data_model:
       data_model:
@@ -37,12 +40,12 @@ en:
         PPM: 'PPM'
     background:
       mode:
-        wordwise: 'Wordwise background'
+        wordwise: 'None - word counts'
         gc_content: 'GC-content'
         frequencies: 'Frequencies'
     collection:
       hocomoco: 'HOCOMOCO'
-      jaspar: 'Jaspar'
+      jaspar: 'JASPAR'
       selex: 'HT-SELEX'
       swissregulon: 'SwissRegulon'
       homer: 'HOMER'
