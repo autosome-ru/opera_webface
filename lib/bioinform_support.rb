@@ -10,6 +10,12 @@ module Bioinform
     def round(n)
       PWM.new(Bioinform::round_matrix(n, matrix)).tap{|pwm| pwm.name = name}
     end
+
+    def consensus
+      matrix.map{|pos|
+        pos.each_with_index.max_by{|el, letter_index| el}
+      }.map{|el, letter_index| letter_index}.map{|letter_index| %w{A C G T}[letter_index] }.join
+    end
   end
   class PCM
     make_parameters :pseudocount
@@ -56,5 +62,4 @@ module Bioinform
   def self.get_ppm(data_model, matrix)
     Bioinform.const_get(data_model).new(matrix).to_ppm
   end
-
 end
