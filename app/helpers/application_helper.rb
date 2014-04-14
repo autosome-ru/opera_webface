@@ -29,8 +29,14 @@ module ApplicationHelper
   def collection_motif_links(collection_name, motif)
     "<small>(" + collection_motif_pcm_link(collection_name, motif) + ", " + collection_motif_pwm_link(collection_name, motif) + ")</small>"
   end
+  def collection_motif_image_path(collection_name, motif, orientation)
+    "/motif_collection/logo/#{collection_name}/#{motif}_#{orientation}.png"
+  end
+  def collection_motif_image_link(collection_name, motif, orientation, name = 'logo')
+    link_to name, collection_motif_image_path(collection_name, motif, orientation)
+  end
   def collection_motif_image(collection_name, motif, orientation)
-    image_tag("/motif_collection/logo/#{collection_name}/#{motif}_#{orientation}.png")
+    image_tag(collection_motif_image_path(collection_name, motif, orientation))
   end
 
   def notice_and_reload(redirect_url, timeout)
