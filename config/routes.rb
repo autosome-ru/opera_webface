@@ -10,7 +10,9 @@ OperaWebface::Application.routes.draw do
   end
 
   get 'macroape/description' => 'welcome#macroape', as: :macroape_description
+  get 'macroape' => 'welcome#macroape'
   get 'perfectosape/description' => 'welcome#perfectosape', as: :perfectosape_description
+  get 'perfectosape' => 'welcome#perfectosape'
   namespace :macroape do
     get 'scan' => 'scans#new'
     resources :scans, only: [:new, :create, :show], path: 'scan' do
