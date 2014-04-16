@@ -36,14 +36,14 @@
       .span4.data_model_specifiers.first_model
         = f.fields_for :first_motif do |motif_form|
           .pseudocount
-            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)', label: 'Pseudocount (model 1)'
+            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 1)'
           .effective_count
-            = motif_form.input :effective_count, label: 'Effective count (model 1)'
+            = motif_form.input :effective_count, label: 'Effective sample size (model 1)'
       .span4.data_model_specifiers.second_model
         = f.fields_for :second_motif do |motif_form|
           .pseudocount
-            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)', label: 'Pseudocount (model 2)'
+            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 2)'
           .effective_count
-            = motif_form.input :effective_count, label: 'Effective count (model 2)'
+            = motif_form.input :effective_count, label: 'Effective sample size (model 2)'
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}
