@@ -102,8 +102,8 @@ class OperaHouse
     }
   end
 
-  def soloist(ticket, pid)
-    @log.debug("registering soloist(#{pid}) for '#{ticket}'")
+  def soloist(ticket, pid, options = {})
+    @log.debug("registering soloist(#{pid}) for '#{ticket}' -- `#{options[:command]}`")
     soloists_lock.synchronize do
       silence_solo(@soloists[ticket])
       @soloists[ticket] = pid

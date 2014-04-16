@@ -22,7 +22,7 @@ module SMBSMCore
   def self.soloist(command, ticket)
     raise 'ticket not set' unless ticket
     solo = OperaSoloist.new(command)
-    theatre.soloist(ticket, solo.pid)
+    theatre.soloist(ticket, solo.pid, command: command)
     solo.result
   end
 
