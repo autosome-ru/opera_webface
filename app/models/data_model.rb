@@ -1,3 +1,8 @@
+require 'active_model'
+require 'enumerize'
+require 'bioinform'
+require_relative 'background'
+
 class DataModel
   include ActiveModel::Model
   extend Enumerize

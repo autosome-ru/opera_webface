@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require_relative 'deep_parameter_validation'
 
 module BackgroundParameters
   extend ActiveSupport::Concern

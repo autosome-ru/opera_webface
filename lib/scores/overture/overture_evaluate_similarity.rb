@@ -1,5 +1,5 @@
 require 'bioinform'
-require_relative '../../bioinform_support'
+
 module EvaluateSimilarity
   def self.perform_overture(opera_status, run_params)
     File.write('task_params.yaml', run_params.to_yaml)

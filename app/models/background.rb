@@ -1,3 +1,6 @@
+require 'active_model'
+require 'enumerize'
+
 class Background
   class Frequencies
     include ActiveModel::Model
