@@ -3,16 +3,16 @@ class Macroape::ComparesController < ::TasksController
 protected
   def first_matrix_examples
     {
-      pwm: Bioinform::PWM.new( File.read(Rails.root.join('public','KLF4_f2.pwm')) ).round(3),
-      pcm: Bioinform::PCM.new( File.read(Rails.root.join('public','KLF4_f2.pcm')) ).round(3),
-      ppm: Bioinform::PPM.new( File.read(Rails.root.join('public','KLF4_f2.ppm')) ).round(3)
+      pwm: Bioinform::PWM.new( File.read(Rails.root.join('public','motif_1.pwm')) ),
+      pcm: Bioinform::PCM.new( File.read(Rails.root.join('public','motif_1.pcm')) ),
+      ppm: Bioinform::PPM.new( File.read(Rails.root.join('public','motif_1.ppm')) )
     }
   end
   def second_matrix_examples
     {
-      pwm: Bioinform::PWM.new( File.read(Rails.root.join('public','SP1_f1.pwm')) ).round(3),
-      pcm: Bioinform::PCM.new( File.read(Rails.root.join('public','SP1_f1.pcm')) ).round(3),
-      ppm: Bioinform::PPM.new( File.read(Rails.root.join('public','SP1_f1.ppm')) ).round(3)
+      pwm: Bioinform::PWM.new( File.read(Rails.root.join('public','motif_2.pwm')) ),
+      pcm: Bioinform::PCM.new( File.read(Rails.root.join('public','motif_2.pcm')) ),
+      ppm: Bioinform::PPM.new( File.read(Rails.root.join('public','motif_2.ppm')) )
     }
   end
   helper_method :first_matrix_examples
@@ -24,11 +24,11 @@ protected
       pvalue_boundary: :upper,
       first_motif_attributes: {
         data_model: :PWM, effective_count: 100, pseudocount: nil,
-        matrix: Bioinform::PWM.new( File.read(Rails.root.join('public','KLF4_f2.pwm')) ).round(3)
+        matrix: Bioinform::PWM.new( File.read(Rails.root.join('public','motif_1.pwm')) ).round(3)
       },
       second_motif_attributes: {
         data_model: :PWM, effective_count: 100, pseudocount: nil,
-        matrix: Bioinform::PWM.new( File.read(Rails.root.join('public','SP1_f1.pwm')) ).round(3)
+        matrix: Bioinform::PWM.new( File.read(Rails.root.join('public','motif_2.pwm')) ).round(3)
       }
     }
   end
