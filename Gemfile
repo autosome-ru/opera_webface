@@ -60,6 +60,11 @@ group :development do
   gem 'quiet_assets'
 end
 
+group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+end
+
 gem 'macroape', '~> 4.0'
 gem 'bioinform', '~> 0.1.16'
 gem 'sequence_logo', '~>1.1.0'
