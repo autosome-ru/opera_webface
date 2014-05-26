@@ -10,7 +10,6 @@ module ScanCollection
 
     collection_name = run_params[:collection].to_s.downcase
     FileUtils.ln_s(File.join(OperaHouseConfiguration::ASSETS_PATH, 'motif_collection', 'pwm', collection_name), 'collection')
-    FileUtils.ln_s(File.join(OperaHouseConfiguration::ASSETS_PATH, 'motif_collection', 'thresholds', collection_name), 'collection_precalc')
-    FileUtils.ln_s(File.join(OperaHouseConfiguration::ASSETS_PATH, 'scan-collection.jar'), 'scan-collection.jar')
+    FileUtils.ln_s(File.join(OperaHouseConfiguration::ASSETS_PATH, 'macro-perfectos-ape.jar'), 'macro-perfectos-ape.jar')
   end
 end

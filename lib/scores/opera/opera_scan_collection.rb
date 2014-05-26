@@ -6,7 +6,7 @@ similarity_cutoff = task_params[:similarity_cutoff]
 precise_recalc_cutoff = task_params[:precise_recalc_cutoff]
 pvalue_boundary = task_params[:pvalue_boundary]
 
-command = ["java -jar scan-collection.jar query.pwm collection --precalc collection_precalc",
+command = ["java -cp macro-perfectos-ape.jar ru.autosome.perfectosape.cli.ScanCollection query.pwm collection",
             "-p #{pvalue}",
             "-c #{similarity_cutoff}",
             "--boundary #{pvalue_boundary}",
