@@ -31,7 +31,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bioinform (0.1.16)
+    bioinform (0.1.17)
       docopt (= 0.5.0)
     builder (3.1.4)
     coderay (1.1.0)
@@ -174,7 +174,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  bioinform (~> 0.1.16)
+  bioinform (~> 0.1.17)
   coffee-rails (~> 4.0.0)
   enumerize
   haml-rails

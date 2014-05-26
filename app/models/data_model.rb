@@ -80,7 +80,11 @@ class DataModel
     # Don't check model unless background is valid: it will throw an exception
     # because model evaluation with broken background is impossible
     if record.background.valid?
-      record.errors.add(:matrix, record.data_model_object.validation_errors.join(";\n"))  unless record.data_model_object.valid?
+      begin
+        record.errors.add(:matrix, record.data_model_object.validation_errors.join(";\n"))  unless record.data_model_object.valid?
+      rescue
+        record.errors.add(:matrix, 'is invalid')
+      end
     else
       record.errors.add(:base, "is invalid because it depends on invalid background value")
     end
