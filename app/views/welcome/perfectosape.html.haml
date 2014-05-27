@@ -1,5 +1,21 @@
-%h1 PERFECTOS-APE
+%h3 PERFECTOS-APE
 
 %em PERFECTOS-APE
 is an abbreviation for
-%em PrEdicting Regulatory Functional Effect by Approximate P-value Estimation
+= succeed '.' do
+  %em PrEdicting Regulatory Functional Effect by Approximate P-value Estimation
+
+%br
+%br
+PERFECTOS-APE is a tool developed to anaylise regulatory role of single nucleotide variants (SNV) or polymorphisms (SNP). It's based on idea that different SNV alleles can have different binding affinity to specific transcription factors (TF). Our software allows fast testing of SNVs against different collection of transcription factor binding site(TFBS) models represented as position weight matrices (PWM, PSSM).
+
+%br
+%br
+Also you can #{link_to 'peform', perfectosape_scan_path } your analysis on web. Web version allows you to test SNVs against several publically available TFBS models: #{link_to 'HOCOMOCO', 'http://autosome.ru/HOCOMOCO/'}, #{link_to 'JASPAR', 'http://jaspar.genereg.net/'}, HT-SELEX, #{link_to 'SwissRegulon', 'http://swissregulon.unibas.ch/fcgi/sr' }, and #{link_to 'HOMER', 'http://homer.salk.edu/homer/motif/motifDatabase.html'}.
+
+%br
+%br
+PERFECTOS-APE is written in Java and is open source. You can download #{link_to 'standalone version', '/macro-perfectos-ape.jar'} of PERFECTOS-APE and its #{link_to 'sources', '/macro-perfectos-ape_src.jar'}. It's more customizable than web version. Standalone version can also accept dinucleotide diPWM motifs.
+%br
+%br
+Manual for a standalone version will be available shortly.
