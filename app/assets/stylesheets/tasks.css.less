@@ -6,6 +6,12 @@
 
 @border_color: #cccccc;
 
+.row{
+  .span3 {
+    display: inline-block;
+  }
+}
+
 .label {
   display: inline-block;
   font-weight: bold;
@@ -28,13 +34,19 @@
   display: inline-block;
   position: absolute;
   border-left: 1px solid @border_color;
-  .task_description, .parameter_description, .errors {
+  .task_description, .task_errors {
     margin-left: 10px;
     min-height: 100px;
   }
-  .parameter_errors {
-    margin-left: 10px;
-    color: red;
+  .parameter {
+    min-height: 100px;
+    .errors {
+      margin-left: 10px;
+      color: red;
+    }
+    .description {
+      margin-left: 10px;
+    }
   }
 }
 
@@ -84,7 +96,11 @@ em {
     select { margin-right: 10px; }
   }
   .frequencies {
-    label { display: inline-block; margin-right: 5px; }
+    .frequency {
+      display: inline-block;
+      margin-right: 10px;
+      label {text-align: center;}
+    }
   }
   input {
     display: inline;
@@ -117,12 +133,15 @@ em {
 }
 
 .field_with_errors {
-  background-color: lighten(red, 20%); //$error_color;
+  border: 2px solid lighten(red, 10%);
+  padding: 2px;
+  // background-color: lighten(red, 20%); //$error_color;
   .error {
     display: block;
+    padding: 0 0 5px 10px;
   }
   input, textarea {
-    background-color: lighten(red, 40%);
+    // background-color: lighten(red, 40%);
   }
 }
 

@@ -5,10 +5,11 @@
     .task_description
       %h4= @task.task_description
     %hr
-    .parameter_description
-    .parameter_errors
+    .parameter
+      .description
+      .errors
     %hr
-    .errors
+    .task_errors
       - if @task.errors.any?
         %h4
           Please fix following errors:

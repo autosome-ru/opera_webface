@@ -23,6 +23,6 @@ module OperaWebface
     require Rails.root.join('lib','smbsm_core')
     require Rails.root.join('lib','opera_status')
 
-    config.assets.precompile += %w(application.css)
+    # config.assets.precompile += %w(application.css application.js)
   end
 end

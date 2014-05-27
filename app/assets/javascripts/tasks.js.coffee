@@ -73,8 +73,8 @@ $(document).ready ->
     event.preventDefault()
     parameter_description = $(this).closest('*[data-parameter-description]').data('parameter-description') || ''
     parameter_errors = $(this).closest('*[data-error]').data('error') || ''
-    $('#info .parameter_description').html(parameter_description)
-    $('#info .parameter_errors').html(parameter_errors)
+    $('#info .parameter .description').html(parameter_description)
+    $('#info .parameter .errors').html(parameter_errors)
 
   $('.expand_button').click ->
     $(this).next('.advanced_options').toggle()
@@ -86,3 +86,6 @@ $(document).ready ->
     advanced_section = $(this)
     if  advanced_section.find('[data-error]').size() > 0
       advanced_section.show()
+
+  # enable button if we return back in history to a page where button was disabled during submission
+  $('.task_params input[type="submit"]').attr('disabled', false)
