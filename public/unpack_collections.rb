@@ -10,18 +10,27 @@ def create_dir(folder)
   FileUtils.mkdir_p(folder)  unless Dir.exist?(folder)
 end
 
+sequence_logo_options = "--orientation both --x-unit 20 --y-unit 40"
+seq_logo_index = ARGV.index('--sequence-logo-options')
+if seq_logo_index
+  sequence_logo_options = ARGV.delete_at(seq_logo_index + 1)
+  ARGV.delete_at(seq_logo_index)
+end
+
 no_thresholds = ARGV.delete('--no-thresholds')
 no_logos = ARGV.delete('--no-logos')
+
 
 full_archive, result_folder = ARGV.first(2)
 
 unless full_archive && result_folder
   $stderr.puts '------------------------------------------'
   $stderr.puts "Usage: #{$0} <collections> <output folder> [options]"
-  $stderr.puts "Example: #{$0} ./all_collections_pack.tar.gz ./motif_collection --no-logos"
+  $stderr.puts "Example: #{$0} ./all_collections_pack.tar.gz ./motif_collection --no-thresholds --sequence-logo-options \"-x 30 -y 60 --orientation both\""
   $stderr.puts "Options:"
   $stderr.puts "          --no-logos - don't generate logos for motifs"
   $stderr.puts "          --no-thresholds - don't precalculate thresholds for motifs"
+  $stderr.puts "          --sequence-logo-options \"<options>\" - options for logo generation"
   $stderr.puts
   $stderr.puts "Collections should be either folder or tar/tar.gz archive with collections(e.g. folder with hocomoco.tar.gz and selex.tar.gz) inside."
   $stderr.puts "Don't specify single collection file (like hocomoco.tar.gz) here, put it into a folder and specify a folder"
@@ -72,7 +81,7 @@ unless no_logos
     collection_name = File.basename(pcm_collection_folder)
     pcm_filenames = Dir.glob(File.join(pcm_collection_folder, '*.pcm'))
     output_folder = File.join(logo_folder, collection_name)
-    command = "sequence_logo --orientation both --logo-folder #{output_folder}"
+    command = "sequence_logo #{sequence_logo_options} --logo-folder #{output_folder}"
     puts "#{pcm_collection_folder} ===> #{command}"
     IO.popen(command, 'w') do |io|
       io.puts(pcm_filenames.map(&:shellescape).join("\n"))
