@@ -60,7 +60,8 @@ unless no_thresholds
     # data_model_folder = File.join(result_folder, 'pwm')
     collection_name = File.basename(pwm_collection_folder)
     output_folder = File.join(thresholds_folder, collection_name)
-    run "java -cp macro-perfectos-ape.jar ru.autosome.perfectosape.cli.PrecalculateThresholdLists #{pwm_collection_folder} #{output_folder} --silence"
+    jar_path = File.expand_path('macro-perfectos-ape.jar', File.dirname(__FILE__))
+    run "java -cp #{jar_path} ru.autosome.perfectosape.cli.PrecalculateThresholdLists #{pwm_collection_folder} #{output_folder} --silence"
   end
 end
 
