@@ -132,7 +132,7 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
-    sequence_logo (1.1.0)
+    sequence_logo (1.1.1)
       rmagick (~> 2.13.1)
     simple_form (3.0.2)
       actionpack (~> 4.0)
@@ -190,7 +190,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
-  sequence_logo (~> 1.1.0)
+  sequence_logo (~> 1.1.1)
   simple_form
   sqlite3
   therubyracer

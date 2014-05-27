@@ -5,10 +5,13 @@ This is OperaHouse webface which allows users to run our lab's computational-hea
 ## Setup
 In order to setup opera house you'd check several points:
 
-* Place motif collections onto their place in `public/motif_collections/` folder.
-Each of subfolders pcm/pwm/thresholds/logo have its own subsubfolders: hocomoco/homer/swissregulon/jaspar/selex. These collection-specific folders should contain motifs in plain text formats (extensions: .pcm/.pwm/.ppm) or motif specific information: (.thr/_direct.png/_revcomp.png). Make sure that no other files are in these folders (no `.keep` files, they break tools)
+* Check for the latest versions of Java-tools (at the time it's the only file: `macro-perfectos-ape.jar`). They should be placed in public folder.
 
-* Check for the latest versions of Java-tools (`scan-collection.jar`, `multi-SNP-scan.jar`). They should be placed in public folder.
+* Place motif collections onto their place in `public/motif_collections/` folder.
+Each of subfolders pcm/pwm/thresholds/logo have its own subsubfolders: hocomoco/homer/swissregulon/jaspar/selex. These collection-specific folders should contain motifs in plain text formats (extensions: .pcm/.pwm/.ppm) or motif specific information: (.thr/_direct.png/_revcomp.png). Make sure that no other files are in these folders (no `.keep` files, they break tools).
+
+It's recomended to be done with `ruby public/unpack_collections.rb public/all_collections_pack.tar.gz public/motif_collection`
+
 
 ## Run and restart
 In order to run webface do:
