@@ -17,7 +17,7 @@
     .fold_change_cutoff
       = f.input :fold_change_cutoff, label: 'Fold change cutoff:'
 
-    = render partial:'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Background'}
+    / = render partial:'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Background'}
 
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}

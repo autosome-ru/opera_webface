@@ -10,7 +10,7 @@ rs10431961 tggcggggctggtcaggcggcgtcg[C/T]cggtacgctctgagcggcagcgtgt
     EOS
 
     { snp_list: test_snps,
-      background_attributes: {mode: :wordwise, frequencies_attributes: [0.25, 0.25, 0.25, 0.25], gc_content: 0.5 },
+      # background_attributes: {mode: :wordwise, frequencies_attributes: [0.25, 0.25, 0.25, 0.25], gc_content: 0.5 },
       collection: :hocomoco,
       pvalue_cutoff: 0.0005,
       fold_change_cutoff: 5

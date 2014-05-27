@@ -3,7 +3,7 @@ class Perfectosape::Scan < ::Task
   add_task_params :collection, &:to_sym
   add_task_params :pvalue_cutoff, &:to_f
   add_task_params :fold_change_cutoff, &:to_f
-  add_background_task_param :background
+  # add_background_task_param :background
 
   extend Enumerize
   enumerize :collection, in: [:hocomoco, :jaspar, :selex, :swissregulon, :homer]
