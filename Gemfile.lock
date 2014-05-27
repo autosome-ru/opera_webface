@@ -84,8 +84,6 @@ GEM
     minitest (4.7.5)
     multi_json (1.9.2)
     polyglot (0.3.4)
-    quiet_assets (1.0.2)
-      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -156,8 +154,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.2)
-      coffee-rails
     twitter-bootstrap-rails (2.2.8)
       actionpack (>= 3.1)
       execjs
@@ -184,7 +180,6 @@ DEPENDENCIES
   less-rails
   macroape (~> 4.0)
   mime-types
-  quiet_assets
   rails (~> 4.0.2)
   rspec
   rspec-rails
@@ -194,6 +189,5 @@ DEPENDENCIES
   simple_form
   sqlite3
   therubyracer
-  turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
