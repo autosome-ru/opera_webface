@@ -1,0 +1,9 @@
+//= require bootstrap_and_overrides
+//= require navigation
+//= require tasks
+//= require scene
+//= require welcome
+//= require_directory ./perfectosape
+//= require_directory ./macroape
+
+//= require_tree
