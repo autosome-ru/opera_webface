@@ -13,7 +13,7 @@ module Macroape::ScansHelper
       motif_info, similarity, shift, overlap, orientation, precise_mode, logo_path = *line
       1.0 - similarity
     end
-    create_table(header, lines, table_html: {class: 'colorized'})
+    create_table(header, lines, table_html: {class: 'colorized macroape_scan_results'})
   end
 
 end
