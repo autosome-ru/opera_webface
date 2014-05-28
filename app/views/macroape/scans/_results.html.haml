@@ -1,6 +1,6 @@
 .result_data
   = download_link t('task_layout.download_results'), ticket, 'task_result.txt'
-  = scan_collection_table(task_results, task_params)
+  = scan_collection_table(task_results, task_params, ticket)
 .input_data
   .matrix
     .label
