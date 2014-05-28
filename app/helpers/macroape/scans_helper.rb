@@ -13,7 +13,10 @@ module Macroape::ScansHelper
       motif_info, similarity, shift, overlap, orientation, precise_mode, logo_path = *line
       1.0 - similarity
     end
-    lines.unshift ['<span class="query_motif">Query</span>', 'N/A', 0, 'N/A', 'N/A', 'N/A', show_image(ticket, 'query.png')]  if SMBSMCore.check_content(ticket, 'query.png')
+
+    download_links = download_list ticket, {'pcm' => 'query.pcm', 'ppm' => 'query.ppm', 'pwm' => 'query.pwm'}
+    lines.unshift [ '<span class="query_motif">Query</span><br>' + download_links,
+                    'N/A', 0, 'N/A', 'N/A', 'N/A', show_image(ticket, 'query.png')]
     create_table(header, lines, table_html: {class: 'colorized macroape_scan_results'})
   end
 
