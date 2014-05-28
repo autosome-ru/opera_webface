@@ -90,3 +90,11 @@ class DataModel
     end
   end
 end
+
+module Bioinform
+  class PM
+    def matrix_rounded(n)
+      matrix.map{|pos| pos.map{|x| x.round(n) } }
+    end
+  end
+end
