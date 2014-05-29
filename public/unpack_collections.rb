@@ -10,7 +10,7 @@ def create_dir(folder)
   FileUtils.mkdir_p(folder)  unless Dir.exist?(folder)
 end
 
-sequence_logo_options = "--orientation both --x-unit 20 --y-unit 40"
+sequence_logo_options = "--orientation both --x-unit 20 --y-unit 40 --no-threshold-lines"
 seq_logo_index = ARGV.index('--sequence-logo-options')
 if seq_logo_index
   sequence_logo_options = ARGV.delete_at(seq_logo_index + 1)
