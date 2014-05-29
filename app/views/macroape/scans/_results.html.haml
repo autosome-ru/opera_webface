@@ -2,12 +2,6 @@
   = download_link t('task_layout.download_results'), ticket, 'task_result.txt'
   = scan_collection_table(task_results, task_params, ticket)
 .input_data
-  .matrix
-    .label
-      PWM
-      = download_list ticket, {'pwm' => 'query.pwm', 'pcm' => 'query.pcm', 'ppm' => 'query.ppm'}
-    %pre= Bioinform::PWM.new(task_params[:query][:pwm]).round(3)
-    .logo= show_image(ticket, 'query_direct.png')
   %h5.collection_name
     Collection:
     %em= I18n.t "enumerize.collection.#{task_params[:collection]}"
