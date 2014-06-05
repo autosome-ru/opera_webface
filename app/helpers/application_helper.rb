@@ -39,6 +39,12 @@ module ApplicationHelper
     image_tag(collection_motif_image_path(collection_name, motif, orientation))
   end
 
+  def motif_info(collection_name, motif)
+    motif + '<br>' +
+    collection_motif_links(collection_name, motif) + '<br>' +
+    uniprot_links(collection_name, motif)
+  end
+
   def uniprot_mapping
     return @uniprot_mapping  if @uniprot_mapping
     @uniprot_mapping = begin

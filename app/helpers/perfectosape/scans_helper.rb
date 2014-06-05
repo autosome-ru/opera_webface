@@ -28,10 +28,7 @@ module Perfectosape::ScansHelper
     lines = lines.map do |line|
       snp_id, motif, pos_1, orientation_1, word_1, pos_2, orientation_2, word_2, alleles, pvalue_1, pvalue_2, fold_change = line
       collection_motif_links(collection_name, motif)
-      motif_info =  motif + '<br>' +
-                    collection_motif_links(collection_name, motif) + '<br>' +
-                    uniprot_links(collection_name, motif) + '<br>' +
-                    collection_motif_image_link(collection_name, motif, 'direct')
+      motif_info = motif_info(collection_name, motif) + '<br>' + collection_motif_image_link(collection_name, motif, 'direct')
 
       alignment = alignment_text(sequence: snp_sequences[snp_id], word: motifs[motif].consensus,
                                   orientation_1: orientation_1, position_1: pos_1.to_i,

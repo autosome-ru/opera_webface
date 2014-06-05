@@ -5,7 +5,7 @@ module Macroape::ScansHelper
     lines = results_data_from_txt(task_results)
     lines = lines.map do |line|
       motif, similarity, shift, overlap, orientation, precise_mode = *line
-      motif_info = motif + '<br>' + collection_motif_links(collection_name, motif) + '<br>' + uniprot_links(collection_name, motif)
+      motif_info = motif_info(collection_name, motif)
       logo_path = collection_motif_image(collection_name, motif, orientation)
       [motif_info, similarity.to_f.round(5), shift, overlap, orientation, precise_mode, logo_path]
     end
