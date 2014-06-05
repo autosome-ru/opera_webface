@@ -27,12 +27,17 @@ module Perfectosape::ScansHelper
     lines = results_data_from_txt(task_results)
     lines = lines.map do |line|
       snp_id, motif, pos_1, orientation_1, word_1, pos_2, orientation_2, word_2, alleles, pvalue_1, pvalue_2, fold_change = line
+      pvalue_1, pvalue_2 = pvalue_1.to_f, pvalue_2.to_f
+      pos_1, pos_2 = pos_1.to_i, pos_2.to_i
       collection_motif_links(collection_name, motif)
       motif_info = motif_info(collection_name, motif) + '<br>' + collection_motif_image_link(collection_name, motif, 'direct')
 
-      alignment = alignment_text(sequence: snp_sequences[snp_id], word: motifs[motif].consensus,
-                                  orientation_1: orientation_1, position_1: pos_1.to_i,
-                                  orientation_2: orientation_2, position_2: pos_2.to_i)
+      snp = SequenceWithSNP.from_string(snp_sequences[snp_id])
+      pos = (pvalue_1 <= pvalue_2) ? pos_1 : pos_2
+
+      alignment = highlight_TFBS(snp.variant(0), snp.left.length + pos, motifs[motif].length) + '<br>' +
+                  highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length)
+
       [ snp_id,  motif_info,
         pvalue_1.to_f.round(5),  pvalue_2.to_f.round(5),  fold_change.to_f.round(5),
         alignment,
@@ -59,30 +64,8 @@ module Perfectosape::ScansHelper
     '.' * shift + word_left + '_' * snp_sequence.number_of_variants + word_mid + '_' * snp_sequence.number_of_variants + word_right + '.' * rest_length
   end
 
-  def alignment_text(snp_infos)
-    snp_sequence = SequenceWithSNP.from_string(snp_infos[:sequence])
-    if snp_infos[:orientation_1] == snp_infos[:orientation_2]
-      if snp_infos[:orientation_1].to_sym == :direct
-        '+&nbsp;' + word_align_to_snp_sequence(snp_infos[:word], snp_infos[:position_1], snp_sequence) + "<br>" +
-        '+&nbsp;' + snp_sequence.to_s + "<br>" +
-        '+&nbsp;' + word_align_to_snp_sequence(snp_infos[:word], snp_infos[:position_2], snp_sequence)
-      else
-        '-&nbsp;' + word_align_to_snp_sequence(snp_infos[:word], -(snp_infos[:word].length - 1 + snp_infos[:position_1]), snp_sequence) + "<br>" +
-        '-&nbsp;' + snp_sequence.revcomp.to_s + "<br>" +
-        '-&nbsp;' + word_align_to_snp_sequence(snp_infos[:word], -(snp_infos[:word].length - 1 + snp_infos[:position_2]), snp_sequence)
-      end
-    else
-      if snp_infos[:orientation_1].to_sym == :direct
-        '+&nbsp;' + word_align_to_snp_sequence(snp_infos[:word], snp_infos[:position_1], snp_sequence) + "<br>" +
-        '+&nbsp;' + snp_sequence.to_s + "<br>" +
-        '-&nbsp;' + snp_sequence.complement.to_s + "<br>" +
-        '-&nbsp;' + word_align_to_snp_sequence(Sequence.revcomp(snp_infos[:word]), snp_infos[:position_2], snp_sequence.complement)
-      else
-        '-&nbsp;' + word_align_to_snp_sequence(Sequence.revcomp(snp_infos[:word]), snp_infos[:position_1], snp_sequence.complement) + "<br>" +
-        '-&nbsp;' + snp_sequence.complement.to_s + "<br>" +
-        '+&nbsp;' + snp_sequence.to_s + "<br>" +
-        '+&nbsp;' + word_align_to_snp_sequence(snp_infos[:word], snp_infos[:position_2], snp_sequence)
-      end
-    end
+  # highlight_TFBS('ACGTtTGCA', 2, 6) --> AC<em>GTtTGC</em>A
+  def highlight_TFBS(sequence, tfbs_position, length)
+    sequence[0...tfbs_position] + '<span class="tfbs">' + sequence[tfbs_position, length] + '</span>' + sequence[(tfbs_position + length)..-1]
   end
 end

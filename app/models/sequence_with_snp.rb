@@ -40,4 +40,8 @@ class SequenceWithSNP
   def number_of_variants
     allele_variants.size
   end
+
+  def variant(index)
+    left + allele_variants[index] + right
+  end
 end
