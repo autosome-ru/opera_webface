@@ -20,15 +20,14 @@ module Perfectosape::ScansHelper
     motifs = motifs(collection_name)
 
     header = ["SNP name", "motif",
-              "P-value 1", "P-value 2", "Fold change", "alignment",
-              "position 2", "orientation 2",
-              "position 2", "orientation 2",
-              "allele&nbsp;1 / allele&nbsp;2"]
+              "allele&nbsp;1 / allele&nbsp;2",
+              "P-value 1", "P-value 2", "Fold change", "up/down regulate", "alignment" ]
     lines = results_data_from_txt(task_results)
     lines = lines.map do |line|
       snp_id, motif, pos_1, orientation_1, word_1, pos_2, orientation_2, word_2, alleles, pvalue_1, pvalue_2, fold_change = line
       pvalue_1, pvalue_2 = pvalue_1.to_f, pvalue_2.to_f
       pos_1, pos_2 = pos_1.to_i, pos_2.to_i
+      fold_change = fold_change.to_f
       collection_motif_links(collection_name, motif)
       motif_info = motif_info(collection_name, motif) + '<br>' + collection_motif_image_link(collection_name, motif, 'direct')
 
@@ -37,19 +36,20 @@ module Perfectosape::ScansHelper
 
       alignment = highlight_TFBS(snp.variant(0), snp.left.length + pos, motifs[motif].length) + '<br>' +
                   highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length)
+      fold_change_normed, up_down = (fold_change >= 1) ? [fold_change, 'up'] : [1.0 / fold_change, 'down']
+      [ snp_id,  motif_info, alleles, pvalue_1,  pvalue_2,  fold_change_normed, up_down, alignment ]
+    end
 
-      [ snp_id,  motif_info,
-        pvalue_1.to_f.round(5),  pvalue_2.to_f.round(5),  fold_change.to_f.round(5),
-        alignment,
-        pos_1, orientation_1,
-        pos_2, orientation_2,
-        alleles
-      ]
-    end
     lines = lines.sort_by do |line|
-      snp_id, motif_info, pvalue_1, pvalue_2, fold_change, alignment, pos_1, orientation_1, pos_2, orientation_2, alleles = *line
-      fold_change
+      snp_id, motif_info, alleles, pvalue_1, pvalue_2, fold_change_normed, up_down, alignment = *line
+      - fold_change_normed
     end
+
+    lines = lines.map do |line|
+      snp_id, motif_info, alleles, pvalue_1, pvalue_2, fold_change_normed, up_down, alignment = *line
+      [ snp_id, motif_info, alleles, pvalue_1.round(6), pvalue_2.round(6), fold_change_normed.round(2), up_down, alignment]
+    end
+
     create_table(header, lines, table_html: {class: 'colorized snp_scan_results'})
   end
 
