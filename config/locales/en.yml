@@ -18,20 +18,29 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   opera:
-    will_start_soon: 'Task will start in two seconds.'
-    task_performing: "Task is performing. You'll see results just as calculations are complete."
-    reload_manually: "This page is to be updated/reloaded in %{timeout} seconds. If it's not done automatically, click <a href=\"%{redirect_url}\">here</a>"
+    will_start_soon: 'The task will start in a few seconds.'
+    task_performing: "The task execution in progress. The results will appear below once calculations are complete."
+    reload_manually: |
+      This page will be updated in %{timeout} seconds.
+      If it's not done automatically, please click <a href="%{redirect_url}">here</a>.
     ticket_number:
-      just_submitted: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later"
-      in_queue: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Task was sheduled at %{time_scheduled} and is in queue now"
-      in_process: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Task was sheduled at %{time_scheduled} and started at %{time_started}"
-      finished: "Remember your ticket number <span class=\"ticket\">%{ticket}</span> to be able to view results later.<br>Your task have been completed at %{time_finished}"
+      just_submitted: |
+        Please save your ticket number <span class="ticket">%{ticket}</span> to be able to view results later.
+      in_queue: |
+        Please save your ticket number <span class="ticket">%{ticket}</span> to be able to view results later.<br>
+        The task was sheduled at %{time_scheduled} and is waiting in queue
+        <!-- тут бы хорошо еще вставить (your place in queue: X). -->
+      in_process: |
+        Please save your ticket number <span class="ticket">%{ticket}</span> to be able to view results later.<br>
+        The task was sheduled at %{time_scheduled} and started at %{time_started}.
+      finished: |
+        Please save your ticket number <span class="ticket">%{ticket}</span> to be able to view results later.<br>
+        Your task was completed at %{time_finished}.
   task_layout:
-    download_results: 'Download results'
-    task_details: 'Download task execution details'
+    download_results: 'Results'
+    task_details: 'Task execution details'
   enumerize:
     data_model:
       data_model:
@@ -40,7 +49,7 @@ en:
         PPM: 'PPM'
     background:
       mode:
-        wordwise: 'None - word counts'
+        wordwise: 'None: exact word counts'
         gc_content: 'GC-content'
         frequencies: 'Frequencies'
     collection:
@@ -50,41 +59,57 @@ en:
       swissregulon: 'SwissRegulon'
       homer: 'HOMER'
   task_descriptions:
-    EvaluateSimilarity: 'Evaluate similarity between two TFBS motifs using Jaccard metrics'
-    ScanCollection: 'Scan collection for TFBS motifs similar to a given one'
-    SnpScan: 'Find motifs which binds different allele variants with different affinity'
+    EvaluateSimilarity: 'Evaluate Jaccard similarity between two TFBS models (motifs).'
+    ScanCollection: 'Scan a collection for TFBS models (motifs) similar to a given query.'
+    SnpScan: 'Find TFBS motifs binding alleles of a single-nucleotide variant with different affinity.'
   task_parameters:
     Background:
-      mode: 'Background model. One can specify ACGT-frequencies or use wordwise background (uniform background represented in number of words instead of part of all words)'
-      gc_content: 'Background defined by GC-content. It should be value in range 0 to 1'
-      frequencies: 'Background defined by frequencies of ACGT-nucleotides. There should be four values in range 0 to 1, their sum should be 1'
+      mode: |
+        Default option is to explicitly count
+        uniformly distributed words from a k-mer dictionary (no
+        backround). Another option is to use an i.i.d. random model (Bernoulli,
+        ACGT-frequencies or GC-concent should be specified).
+      gc_content: 'Background defined by GC-content, value should be in 0.0 to 1.0 range.'
+      frequencies: |
+        Background defined by frequencies of individual
+        nucleotides. Values should be in 0.0 to 1.0 range summing up to
+        1.0.
       Frequencies:
-        a: 'Frequency of nucleotide A'
-        c: 'Frequency of nucleotide C'
-        g: 'Frequency of nucleotide G'
-        t: 'Frequency of nucleotide T'
+        a: 'Frequency of A nucleotide.'
+        c: 'Frequency of C nucleotide.'
+        g: 'Frequency of G nucleotide.'
+        t: 'Frequency of T nucleotide.'
     DataModel:
-      data_model: 'Data model of the motif. Can be either positional weight matrix(PWM) or positional count matrix(PCM) or positional frequency matrix(PFM)'
-      matrix: 'Positional matrix of the motif in format according to its data model'
-      effective_count: 'Effective samples set size for PPM-to-PCM-to-PWM conversion'
-      pseudocount: 'Pseudocount to convert PCM to PWM'
+      data_model: |
+        Data model of the tested motif. Can be positional
+        weight matrix(PWM),  positional count matrix(PCM), or positional
+        frequency matrix(PFM). PCM elements can be real numbers (in the
+        case original sequences were weighted). PWM elements are assumed
+        to come from a log-odds transformed PCM or PPM.
+      matrix: 'Positional matrix of the motif according to its data model.'
+      effective_count: 'Effective sample size (an assumed number of sequences) to convert PPM-to-PCM-to-PWM'
+      pseudocount: 'Pseudocount value to convert PCM to PWM, taken as log(words) by default.'
     Perfectosape:
       Scan:
-        snp_list: "List of sequences with SNPs. Each sample should be on a separate line. Samples should contain name of SNP and place of SNP surrounded with flanking sequences (it's preferable to have 25 nucleotides from each side).<br>Example:<br>rs10040172  gatttgccctgattgcagttactga[G/A]tggtacagacatcgtaataatctta"
-        collection: 'Collection of transcription factor binding site motifs to test SNPs on'
-        pvalue_cutoff: "Maximal pvalue to treat DNA subsequence as TF's site"
-        fold_change_cutoff: "Minimal fraction of P-values to treat change in affinity as significant"
+        snp_list: |
+          List of SNVs entries to be tested. Each entry should be on a separate line.
+          Each entry should consist of an SNV name and the variant with
+          flanking sequences, e.g.: <br>rs10040172&nbsp;gccctgattgcagttactga[G/A]tggtacagacatcgtaataa
+          <br>It is suggested to use flanking sequences of ~25bps.
+        collection: 'Collection of transcription factor binding site models (motifs).'
+        pvalue_cutoff: "P-value cutoff to treat a DNA subsequence as a TF binding site."
+        fold_change_cutoff: "Minimal P-value fold change."
     Macroape:
       Scan:
-        collection: 'Collection of transcription factor binding site motifs to test SNPs on'
-        pvalue: 'P-value to obtain motif thresholds'
-        pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value'
-        similarity_cutoff: 'Minimal similarity to treat motifs as similar'
-        precise_recalc_cutoff: 'Minimal similarity to recalculate similarity in precise mode (with greater discretization)'
+        collection: 'Collection of transcription factor binding site motifs to scan.'
+        pvalue: 'P-value level to select the motif thresholds.'
+        pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value.'
+        similarity_cutoff: 'Minimal similarity to report.'
+        precise_recalc_cutoff: 'Minimal similarity to recheck in precise mode (with higher discretization level).'
       Compare:
-        pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value'
-        pvalue: 'P-value to obtain motif thresholds'
-        discretization: 'PWM discretization'
+        pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value.'
+        pvalue: 'P-value level to select the motif thresholds.'
+        discretization: 'PWM discretization.'
   activemodel:
     errors:
       models:
@@ -93,12 +118,11 @@ en:
           # The value :count is available when applicable. Can be used for pluralization.
           attributes:
             mode:
-              inclusion: "should be one of list: wordwise, GC-content, frequencies, but was %{value}"
+              inclusion: "Should be one of the following: wordwise, GC-content, frequencies; the given value was %{value}"
   errors:
     attributes:
       pvalue_boundary:
-        inclusion: "should be either lower or upper but was %{value}"
-
+        inclusion: "Should be either lower or upper; the given value was %{value}"
   time:
     formats:
       # default: "%a, %d %b %Y %H:%M:%S %z"
