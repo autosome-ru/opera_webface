@@ -16,7 +16,7 @@ command = ["java -cp macro-perfectos-ape.jar ru.autosome.perfectosape.cli.ScanCo
           ].join(' ')
 
 if File.exist?('query.pcm')
-  SMBSMCore.soloist('sequence_logo query.pcm --x-unit 20 --y-unit 40 --no-threshold-lines', $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)
+  SMBSMCore.soloist('sequence_logo query.pcm --x-unit 20 --y-unit 40 --no-threshold-lines --bg-fill transparent', $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)
 end
 
 File.write('task_result.txt', SMBSMCore.soloist(command, $ticket))

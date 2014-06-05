@@ -38,7 +38,7 @@ File.write 'result.txt', Macroape::CLI::Helper.similarity_info_string(info)
 File.write 'task_results.yaml', info.to_yaml
 ['pcm_first.pcm', 'pcm_second.pcm'].each do |pcm_filename|
   if File.exist?(pcm_filename)
-    SMBSMCore.soloist("sequence_logo #{pcm_filename} --orientation both --no-threshold-lines", $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)
+    SMBSMCore.soloist("sequence_logo #{pcm_filename} --orientation both --no-threshold-lines --bg-fill transparent", $ticket) # $ticket is defined in a wrapper (so on scene it's defined in a script)
   end
 end
 
@@ -49,5 +49,5 @@ if ['pcm_first.pcm', 'pcm_second.pcm'].all?{|pcm_filename| File.exist?(pcm_filen
     fw.puts "pcm_first.pcm\t0\tdirect\t#{pwm_first.name}"
     fw.puts "pcm_second.pcm\t#{shift}\t#{orientation}\t#{pwm_second.name}"
   end
-  SMBSMCore.soloist("glue_logos alignment.png alignment.txt", $ticket)
+  SMBSMCore.soloist("glue_logos alignment.png alignment.txt --bg-fill transparent --no-threshold-lines", $ticket)
 end
