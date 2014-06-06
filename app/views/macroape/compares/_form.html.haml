@@ -6,7 +6,7 @@
           %div{class: data_model}<= matrix
       = f.fields_for :first_motif do |motif_form|
         .data_model
-          = motif_form.input :data_model, label: 'Model 1', include_blank: false
+          = motif_form.input :data_model, label: 'Model 1:', include_blank: false
         .matrix
           = motif_form.input :matrix, label: 'Matrix 1:', :as => :text
     .span4.second_model
@@ -15,7 +15,7 @@
           %div{class: data_model}<= matrix
       = f.fields_for :second_motif do |motif_form|
         .data_model
-          = motif_form.input :data_model, label: 'Model 2', include_blank: false
+          = motif_form.input :data_model, label: 'Model 2:', include_blank: false
         .matrix
           = motif_form.input :matrix, label: 'Matrix 2:', :as => :text
 
@@ -28,7 +28,7 @@
         = f.input :pvalue, label: 'P-value:'
       .span3.pvalue_boundary
         = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
-    = render partial:'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Background'}
+    = render partial:'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Background:'}
 
     .dicretization
       = f.input :discretization, label: 'Discretization:'
@@ -36,14 +36,14 @@
       .span4.data_model_specifiers.first_model
         = f.fields_for :first_motif do |motif_form|
           .pseudocount
-            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 1)'
+            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 1):'
           .effective_count
-            = motif_form.input :effective_count, label: 'Effective sample size (model 1)'
+            = motif_form.input :effective_count, label: 'Effective sample size (model 1):'
       .span4.data_model_specifiers.second_model
         = f.fields_for :second_motif do |motif_form|
           .pseudocount
-            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 2)'
+            = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 2):'
           .effective_count
-            = motif_form.input :effective_count, label: 'Effective sample size (model 2)'
+            = motif_form.input :effective_count, label: 'Effective sample size (model 2):'
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}

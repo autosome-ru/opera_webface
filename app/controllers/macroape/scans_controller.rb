@@ -32,4 +32,8 @@ protected
   def reload_page_time
     30
   end
+
+  def task_logo
+    'macroape_logo.png'
+  end
 end

@@ -96,12 +96,26 @@ en:
           Each entry should consist of an SNV name and the variant with
           flanking sequences, e.g.: <br>rs10040172&nbsp;gccctgattgcagttactga[G/A]tggtacagacatcgtaataa
           <br>It is suggested to use flanking sequences of ~25bps.
-        collection: 'Collection of transcription factor binding site models (motifs).'
+        collection: |
+          Collection of transcription factor binding site models (motifs).
+          Available collections:
+          <a href="http://autosome.ru/HOCOMOCO/">HOCOMOCO</a>,
+          <a href="http://jaspar.genereg.net/">JASPAR</a>,
+          <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
+          <a href="http://swissregulon.unibas.ch/fcgi/sr">SwissRegulon</a>,
+          and <a href="http://homer.salk.edu/homer/motif/motifDatabase.html">HOMER</a>
         pvalue_cutoff: "P-value cutoff to treat a DNA subsequence as a TF binding site."
         fold_change_cutoff: "Minimal P-value fold change."
     Macroape:
       Scan:
-        collection: 'Collection of transcription factor binding site motifs to scan.'
+        collection: |
+          Collection of transcription factor binding site motifs to scan.
+          Available collections:
+          <a href="http://autosome.ru/HOCOMOCO/">HOCOMOCO</a>,
+          <a href="http://jaspar.genereg.net/">JASPAR</a>,
+          <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
+          <a href="http://swissregulon.unibas.ch/fcgi/sr">SwissRegulon</a>,
+          and <a href="http://homer.salk.edu/homer/motif/motifDatabase.html">HOMER</a>
         pvalue: 'P-value level to select the motif thresholds.'
         pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value.'
         similarity_cutoff: 'Minimal similarity to report.'

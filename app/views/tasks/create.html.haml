@@ -1,4 +1,5 @@
 = I18n.t 'opera.will_start_soon'
+= image_tag_if_exists task_logo, class: 'task_logo'
 = notice_and_reload(url_for(action: 'perform', id: @ticket), 2)
 %h5
   = raw I18n.t('opera.ticket_number.just_submitted', ticket: @ticket)

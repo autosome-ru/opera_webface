@@ -6,31 +6,31 @@
           %div{class: data_model}<= matrix
       = f.fields_for :query do |motif_form|
         .data_model
-          = motif_form.input :data_model, label: 'Data model', include_blank: false
+          = motif_form.input :data_model, label: 'Data model:', include_blank: false
         .matrix
           = motif_form.input :matrix, label: 'Query matrix:', :as => :text
     .span4
       .collection
-        = f.input :collection, include_blank: false
+        = f.input :collection, include_blank: false, label: 'Collection:'
   Advanced options:
   .expand_button
     %a{href: '#'} [+]
   .advanced_options
-    = render partial: 'shared/background_model', locals: {form_builder: f, background_variable: :query_background, background_title: 'Query background'}
+    = render partial: 'shared/background_model', locals: {form_builder: f, background_variable: :query_background, background_title: 'Query background:'}
     .pvalue
       = f.input :pvalue, label: 'P-value:'
     .pvalue_boundary
       = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
     .similarity_cutoff
-      = f.input :similarity_cutoff, label: 'Similarity cutoff'
+      = f.input :similarity_cutoff, label: 'Similarity cutoff:'
     .precise_recalc_cutoff
-      = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode'
+      = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode:'
 
     .data_model_specifiers.query_model
       = f.fields_for :query do |motif_form|
         .pseudocount
-          = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)'
+          = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)', label: 'Pseudocount:'
         .effective_count
-          = motif_form.input :effective_count
+          = motif_form.input :effective_count, label: 'Effective count:'
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}

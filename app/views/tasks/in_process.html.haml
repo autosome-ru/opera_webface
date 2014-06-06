@@ -1,4 +1,5 @@
 = I18n.t 'opera.task_performing'
+= image_tag_if_exists task_logo, class: 'task_logo'
 = notice_and_reload(url_for(ticket), reload_page_time)
 %h5
   - if @status.start_time

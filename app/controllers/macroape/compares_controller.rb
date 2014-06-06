@@ -35,4 +35,8 @@ protected
       }
     }
   end
+
+  def task_logo
+    'macroape_logo.png'
+  end
 end

@@ -2,6 +2,7 @@
   #task.span8
     = render partial: 'form', locals: {task: @task}
   #info.span4
+    = image_tag_if_exists task_logo, class: 'task_logo'
     .task_description
       %h4= @task.task_description
     %hr

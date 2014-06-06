@@ -23,4 +23,12 @@ module TasksHelper
     options = args.extract_options!
     simple_form_for(object, *(args << options.merge(builder: TaskFormBuilder)), &block)
   end
+
+  def image_tag_if_exists(image_path, options = {})
+    if image_path && OperaWebface::Application.assets.find_asset(image_path)
+      image_tag image_path, options
+    else
+      nil
+    end
+  end
 end

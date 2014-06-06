@@ -82,5 +82,11 @@ protected
   def get_ticket
     @ticket = params[:id].try(&:strip).tap{|x| puts "ticket #{x.inspect}"}
   end
-  helper_method :reload_page_time
+
+  # path to task logo
+  def task_logo
+    nil
+  end
+
+  helper_method :reload_page_time, :task_logo
 end
