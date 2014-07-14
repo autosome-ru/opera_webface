@@ -13,17 +13,19 @@ max_hash_size = 10000000
 max_pair_hash_size = 10000
 pvalue_boundary = :upper
 
-pwm_first = Bioinform::PWM.new(params[:first_motif][:pwm]).set_parameters(background: first_background, max_hash_size: max_hash_size).discrete!(discretization)
-pwm_second = Bioinform::PWM.new(params[:second_motif][:pwm]).set_parameters(background: second_background, max_hash_size: max_hash_size).discrete!(discretization)
-cmp = Macroape::PWMCompare.new(pwm_first, pwm_second).set_parameters(max_pair_hash_size: max_pair_hash_size)
+pwm_first = Bioinform::MotifModel::PWM.from_string(params[:first_motif][:pwm]).discreted(discretization)
+pwm_second = Bioinform::MotifModel::PWM.from_string(params[:second_motif][:pwm]).discreted(discretization)
 
+counting_first = Macroape::PWMCounting.new(pwm_first, background: first_background, max_hash_size: max_hash_size)
+counting_second = Macroape::PWMCounting.new(pwm_second, background: second_background, max_hash_size: max_hash_size)
+cmp = Macroape::PWMCompare.new(counting_first, counting_second).tap{|x| x.max_pair_hash_size = max_pair_hash_size }
 
 if pvalue_boundary.to_sym == :lower
-  threshold_first = pwm_first.threshold(pvalue)
-  threshold_second = pwm_second.threshold(pvalue)
+  threshold_first = counting_first.threshold(pvalue)
+  threshold_second = counting_second.threshold(pvalue)
 else
-  threshold_first = pwm_first.weak_threshold(pvalue)
-  threshold_second = pwm_second.weak_threshold(pvalue)
+  threshold_first = counting_first.weak_threshold(pvalue)
+  threshold_second = counting_second.weak_threshold(pvalue)
 end
 
 info = cmp.jaccard(threshold_first, threshold_second)
