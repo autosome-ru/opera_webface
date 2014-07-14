@@ -9,7 +9,7 @@ module Perfectosape::ScansHelper
     @motifs ||= begin
       Hash[ Dir.glob(Rails.root.join('public/motif_collection/pwm/', collection_name.to_s, '*')).map{|filename|
         filename_wo_ext = File.basename(filename, File.extname(filename))
-        [filename_wo_ext, Bioinform::PWM.new(Bioinform::MatrixParser.new.parse(File.read(filename))) ]
+        [filename_wo_ext, Bioinform::MotifModel::PWM.from_file(filename) ]
       }]
     end
   end
