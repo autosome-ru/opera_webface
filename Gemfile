@@ -65,6 +65,6 @@ group :test do
   gem 'rspec-rails'
 end
 
-gem 'macroape', '~> 4.0'
-gem 'bioinform', '~> 0.1.17'
+gem 'macroape', '~> 4.1.0'
+gem 'bioinform', '~> 0.2.0'
 gem 'sequence_logo', '~>1.1.2'
