@@ -3,6 +3,71 @@ require 'enumerize'
 require 'bioinform'
 require_relative 'background'
 
+module OperaWebface
+  module DataModelPresenter
+    def self.get_model(data_model, matrix, name)
+      Bioinform::MotifModel.const_get(data_model).new(matrix).named(name)
+    end
+
+    def self.get_model_from_string(data_model, matrix_string)
+      motif_infos = Bioinform::MatrixParser.new.parse(matrix_string)
+      get_model(data_model, motif_infos[:matrix], motif_infos[:name])
+    end
+
+    def self.get_pwm(data_model, matrix, background, pseudocount, effective_count)
+      background = (background == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
+      input_model = get_model_from_string(data_model, matrix)
+      if Bioinform::MotifModel.acts_as_ppm?(input_model)
+        ppm2pcm_converter = Bioinform::ConversionAlgorithms::PPM2PCMConverter.new(count: effective_count)
+        pcm2pwm_converter = Bioinform::ConversionAlgorithms::PCM2PWMConverter.new(background: background, pseudocount: pseudocount || :log)
+        pcm2pwm_converter.convert(ppm2pcm_converter.convert(input_model))
+      elsif Bioinform::MotifModel.acts_as_pcm?(input_model)
+        pcm2pwm_converter = Bioinform::ConversionAlgorithms::PCM2PWMConverter.new(background: background, pseudocount: pseudocount || :log)
+        pcm2pwm_converter.convert(input_model)
+      elsif Bioinform::MotifModel.acts_as_pwm?(input_model)
+        input_model
+      else
+        raise Bioinform::Error, "Unknown input `#{input_model}`"
+      end
+    rescue => e
+      raise Bioinform::Error, "PWM creation failed (#{e})"
+    end
+
+    def self.get_pcm(data_model, matrix, effective_count)
+      input_model = get_model_from_string(data_model, matrix)
+      if Bioinform::MotifModel.acts_as_ppm?(input_model)
+        ppm2pcm_converter = Bioinform::ConversionAlgorithms::PPM2PCMConverter.new(count: effective_count)
+        ppm2pcm_converter.convert(input_model)
+      elsif Bioinform::MotifModel.acts_as_pcm?(input_model)
+        input_model
+      elsif Bioinform::MotifModel.acts_as_pwm?(input_model)
+        raise Bioinform::Error, 'Conversion PWM-->PCM not yet implemented'
+      else
+        raise Bioinform::Error, "Unknown input `#{input_model}`"
+      end
+    rescue => e
+      raise Bioinform::Error, "PCM creation failed (#{e})"
+    end
+
+    def self.get_ppm(data_model, matrix)
+      input_model = get_model_from_string(data_model, matrix)
+      if Bioinform::MotifModel.acts_as_ppm?(input_model)
+        input_model
+      elsif Bioinform::MotifModel.acts_as_pcm?(input_model)
+        pcm2ppm_converter = Bioinform::ConversionAlgorithms::PCM2PPMConverter.new
+        pcm2ppm_converter.convert(input_model)
+      elsif Bioinform::MotifModel.acts_as_pwm?(input_model)
+        raise Bioinform::Error, 'Conversion PWM-->PPM not yet implemented'
+      else
+        raise Bioinform::Error, "Unknown input `#{input_model}`"
+      end
+    rescue => e
+      raise Bioinform::Error, "PPM creation failed (#{e})"
+    end
+  end
+end
+
+
 class DataModel
   include ActiveModel::Model
   extend Enumerize
@@ -19,7 +84,7 @@ class DataModel
       result.merge(pwm: pwm.to_s)
     else
       result.merge(pwm: pwm.to_s, pcm: pcm.to_s, ppm: ppm.to_s)
-    end
+    end#.tap{|x|p x}
   end
 
   def data_model=(value)
@@ -40,13 +105,13 @@ class DataModel
   end
 
   def pwm
-    Bioinform.get_pwm(data_model, matrix, background.background, pseudocount, effective_count)
+    OperaWebface::DataModelPresenter.get_pwm(data_model, matrix, background.background, pseudocount, effective_count)
   end
 
   def pcm
     case data_model
     when :PCM, :PPM
-      Bioinform.get_pcm(data_model, matrix, effective_count)
+      OperaWebface::DataModelPresenter.get_pcm(data_model, matrix, effective_count)
     else
       nil
     end
@@ -55,7 +120,7 @@ class DataModel
   def ppm
     case data_model
     when :PCM, :PPM
-      Bioinform.get_ppm(data_model, matrix)
+      OperaWebface::DataModelPresenter.get_ppm(data_model, matrix)
     else
       nil
     end
@@ -76,12 +141,12 @@ class DataModel
   validates :pseudocount, numericality: {greater_than_or_equal_to: 0}, :if => ->(model){ [:PPM, :PCM].include?(model.data_model) && model.pseudocount }
 
   validate do |record|
-    record.errors.add(:data_model, "Unknown data model #{record.data_model}")  unless [:PWM, :PCM, :PPM].include? record.data_model
-    # Don't check model unless background is valid: it will throw an exception
-    # because model evaluation with broken background is impossible
+    # record.errors.add(:data_model, "Unknown data model #{record.data_model}")  unless [:PWM, :PCM, :PPM].include? record.data_model
+    # # Don't check model unless background is valid: it will throw an exception
+    # # because model evaluation with broken background is impossible
     if record.background.valid?
       begin
-        record.errors.add(:matrix, record.data_model_object.validation_errors.join(";\n"))  unless record.data_model_object.valid?
+        record.errors.add(:matrix, record.data_model_object.validation_errors.join(";\n"))  unless record.data_model_object#.valid?
       rescue
         record.errors.add(:matrix, 'is invalid')
       end
@@ -91,10 +156,10 @@ class DataModel
   end
 end
 
-module Bioinform
-  class PM
-    def matrix_rounded(n)
-      matrix.map{|pos| pos.map{|x| x.round(n) } }
-    end
-  end
-end
+# module Bioinform
+#   class PM
+#     def matrix_rounded(n)
+#       matrix.map{|pos| pos.map{|x| x.round(n) } }
+#     end
+#   end
+# end

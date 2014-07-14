@@ -42,23 +42,24 @@ describe DataModel do
   end
 
   it 'raises on bad matrix' do
-    expect { DataModel.new data_model: :PWM, background: background, matrix: 'akhsvfew'}.to raise_error
+    data_model = DataModel.new data_model: :PWM, background: background, matrix: 'akhsvfew'
+    expect { data_model.to_hash }.to raise_error
   end
 
   context 'from text without name' do
     subject { DataModel.new(data_model: :PWM, background: background, matrix: "1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
-    its(:name) { should be_nil  }
-    its(:matrix) { should eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
+    specify{ expect(subject.name).to be_nil }
+    specify{ expect(subject.matrix).to eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
   end
   context 'from text with name' do
     subject { DataModel.new(data_model: :PWM, background: background, matrix: "MatrixName\n1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
-    its(:name) { should eq 'MatrixName' }
-    its(:matrix) { should eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
+    specify{ expect(subject.name).to eq 'MatrixName' }
+    specify{ expect(subject.matrix).to eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
   end
   context 'from text with name, name with space' do
     subject { DataModel.new(data_model: :PWM, background: background, matrix: "Matrix Name\n1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
-    its(:name) { should eq 'Matrix Name' }
-    its(:matrix) { should eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
+    specify{ expect(subject.name).to eq 'Matrix Name' }
+    specify{ expect(subject.matrix).to eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
   end
   
   # context 'from gc-content' do

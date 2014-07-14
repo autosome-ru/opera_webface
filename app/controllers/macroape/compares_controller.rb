@@ -37,4 +37,13 @@ protected
   def task_logo
     'macroape_logo.png'
   end
+
+  def first_motif_pwm
+    Bioinform::MotifModel::PWM.from_string(task_params(@ticket)[:first_motif][:pwm])
+  end
+  def second_motif_pwm
+    Bioinform::MotifModel::PWM.from_string(task_params(@ticket)[:second_motif][:pwm])
+  end
+  helper_method :first_motif_pwm
+  helper_method :second_motif_pwm
 end

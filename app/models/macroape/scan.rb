@@ -1,5 +1,3 @@
-require 'bioinform'
-
 class Macroape::Scan < ::Task
   add_background_task_param :query_background
   add_data_model_task_param :query, :query_background

@@ -77,7 +77,7 @@ class Background
   validate do |record|
     case record.mode
     when :gc_content
-      record.errors.add(:gc_content, 'Must be in 0 to 1')  unless (0..1).include?(record.gc_content)
+      record.errors.add(:gc_content, 'Must be within [0; 1]')  unless (0..1).include?(record.gc_content)
     when :frequencies
       record.errors.add(:frequencies)  unless frequencies.valid?
     end

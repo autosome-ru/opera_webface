@@ -3,8 +3,8 @@ require 'yaml'
 
 params = YAML.load_file('task_params.yaml')
 
-first_background = params[:background]
-second_background = params[:background]
+first_background = (params[:background] == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
+second_background = (params[:background] == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
 
 discretization = params[:discretization]
 pvalue = params[:pvalue]

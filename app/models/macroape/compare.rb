@@ -1,5 +1,3 @@
-require 'bioinform'
-
 class Macroape::Compare < ::Task
   add_background_task_param :background
 

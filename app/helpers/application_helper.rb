@@ -102,4 +102,8 @@ module ApplicationHelper
       content.html_safe
     end
   end
+
+  def motif_pretty_print(motif)
+    Bioinform::MotifFormatter.new(precision: 3).format(motif)
+  end
 end
