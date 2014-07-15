@@ -57,7 +57,7 @@ module Perfectosape::ScansHelper
       [ snp_id, motif_info, alleles, pvalue_1.round(6), pvalue_2.round(6), fold_change_normed.round(2), up_down, alignment]
     end
 
-    create_table(header, lines, table_html: {class: 'colorized snp_scan_results'})
+    create_table(header, lines, table_html: {class: 'colorized lighter-column-even snp_scan_results'})
   end
 
   def word_align_to_snp_sequence(word, position, snp_sequence)

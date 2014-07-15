@@ -47,6 +47,11 @@
     .description {
       margin-left: 10px;
     }
+    .hint {
+      margin-left: 10px;
+      margin-bottom: 10px;
+      color: darken(gray, 10%);
+    }
   }
 }
 
@@ -153,23 +158,37 @@ em {
 }
 
 table.colorized {
+  margin-bottom: 30px;
   td, th { padding: 5px; }
   thead {
     th { height: 40px; }
     th:nth-child(odd) { background-color: lighten(black, 75%); }
     th:nth-child(even) { background-color: lighten(black, 65%); }
   }
-  tbody {
-    tr:nth-child(odd) {
-      td:nth-child(odd) { background-color: lighten(#ff0000, 39%); }
-      td:nth-child(even) { background-color: lighten(#ff0000, 35%); }
-    }
-    tr:nth-child(even) {
-      td:nth-child(odd) { background-color: lighten(#00ff00, 39%); }
-      td:nth-child(even) { background-color: lighten(#00ff00, 35%); }
+  &.lighter-column-odd {
+    tbody {
+      tr:nth-child(odd) {
+        td:nth-child(odd) { background-color: lighten(#ff0000, 39%); }
+        td:nth-child(even) { background-color: lighten(#ff0000, 35%); }
+      }
+      tr:nth-child(even) {
+        td:nth-child(odd) { background-color: lighten(#00ff00, 39%); }
+        td:nth-child(even) { background-color: lighten(#00ff00, 35%); }
+      }
     }
   }
-  margin-bottom: 30px;
+  &.lighter-column-even {
+    tbody {
+      tr:nth-child(odd) {
+        td:nth-child(even) { background-color: lighten(#ff0000, 39%); }
+        td:nth-child(odd) { background-color: lighten(#ff0000, 35%); }
+      }
+      tr:nth-child(even) {
+        td:nth-child(even) { background-color: lighten(#00ff00, 39%); }
+        td:nth-child(odd) { background-color: lighten(#00ff00, 35%); }
+      }
+    }
+  }
 }
 
 .input_data, .result_data {
