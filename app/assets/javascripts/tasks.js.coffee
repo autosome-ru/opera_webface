@@ -34,6 +34,11 @@ window.register_data_model_form = (dataModelSelector)->
   $model.find('.data_model select').change ->
     update_data_model_form($model)
     set_default_data_model($model)
+  $(':reset').click (event)->
+    event.preventDefault
+    if $model.closest('form')[0]
+      $model.closest('form')[0].reset()
+    update_data_model_form($model)
 
 $(document).ready ->
   update_background_model_form = (background_form)->
@@ -55,9 +60,13 @@ $(document).ready ->
       update_background_model_form(background_form)
       background_form.find('.mode select').change ->
         update_background_model_form(background_form)
+      $(':reset').click (event)->
+        event.preventDefault
+        if background_form.closest('form')[0]
+          background_form.closest('form')[0].reset()
+        update_background_model_form(background_form)
 
   register_background_model_form('.background_model')
-
 
   $('.redirect_to').first().each ->
     url = $(this).data('url')

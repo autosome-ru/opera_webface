@@ -46,4 +46,5 @@
           .effective_count
             = motif_form.input :effective_count, label: 'Effective sample size (model 2):'
   %br
-  = f.submit 'Run', data: {disable_with: 'Sending request'}
+  = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
+  = f.button :button, 'Reset', :type => 'reset', :class => 'btn btn-warning'

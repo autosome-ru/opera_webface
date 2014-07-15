@@ -20,4 +20,5 @@
     / = render partial:'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Background'}
 
   %br
-  = f.submit 'Run', data: {disable_with: 'Sending request'}
+  = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
+  = f.button :button, 'Reset', :type => 'reset', :class => 'btn btn-warning'
