@@ -19,7 +19,7 @@ protected
   def default_params
     pcm = Bioinform::PCM.new( File.read(Rails.root.join('public','motif_1.pcm')) )
     { collection: :hocomoco,
-      query_background_attributes: {mode: :wordwise, gc_content: 0.5, frequencies_attributes: [0.25, 0.25, 0.25, 0.25]},
+      background_attributes: {mode: :wordwise, gc_content: 0.5, frequencies_attributes: [0.25, 0.25, 0.25, 0.25]},
       query_attributes: { matrix: Bioinform::PCM.new(matrix: pcm.matrix_rounded(0), name: pcm.name),
                           data_model: :PCM, effective_count: 100, pseudocount: nil },
       pvalue: 0.0005,

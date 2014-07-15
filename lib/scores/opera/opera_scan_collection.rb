@@ -1,17 +1,22 @@
 require 'yaml'
 task_params = YAML.load_file('task_params.yaml')
 pvalue = task_params[:pvalue]
-query_background_string = task_params[:query_background] ? "-b #{task_params[:query_background].join(',')}" : ''
+if task_params[:background]
+  background_string = (task_params[:background] == [1,1,1,1]) ? "-b wordwise" : "-b #{task_params[:background].join(',')}"
+else
+  background_string = ''
+end
 similarity_cutoff = task_params[:similarity_cutoff]
 precise_recalc_cutoff = task_params[:precise_recalc_cutoff]
 pvalue_boundary = task_params[:pvalue_boundary]
 
-command = ["java -cp macro-perfectos-ape.jar ru.autosome.perfectosape.cli.ScanCollection query.pwm collection",
+# Don't use precalc because it can't be used with different backgrounds.
+command = ["java -cp macro-perfectos-ape.jar ru.autosome.macroape.ScanCollection query.pwm collection",
             "-p #{pvalue}",
             "-c #{similarity_cutoff}",
             "--boundary #{pvalue_boundary}",
             "--precise #{precise_recalc_cutoff}",
-            query_background_string,
+            background_string,
             "--silent"
           ].join(' ')
 

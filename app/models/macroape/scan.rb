@@ -1,8 +1,8 @@
 require 'bioinform'
 
 class Macroape::Scan < ::Task
-  add_background_task_param :query_background
-  add_data_model_task_param :query, :query_background
+  add_background_task_param :background
+  add_data_model_task_param :query, :background
   add_task_params :pvalue, &:to_f
   add_task_params :pvalue_boundary, &:to_sym
   add_task_params :similarity_cutoff

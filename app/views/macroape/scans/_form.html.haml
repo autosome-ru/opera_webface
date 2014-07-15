@@ -16,7 +16,7 @@
   .expand_button
     %a{href: '#'} [+]
   .advanced_options
-    = render partial: 'shared/background_model', locals: {form_builder: f, background_variable: :query_background, background_title: 'Query background:'}
+    = render partial: 'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Query background:'}
     .pvalue
       = f.input :pvalue, label: 'P-value:'
     .pvalue_boundary
