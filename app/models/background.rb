@@ -1,85 +1,72 @@
 require 'active_model'
 require 'enumerize'
 
-class Background
+module OperaWebface
   class Frequencies
     include ActiveModel::Model
-    attr_accessor :a,:c,:g,:t
-    def frequencies
-      [a, c, g, t].map(&:to_f)
+    attr_reader :a,:c,:g,:t
+    def a=(value); @a = value.to_f; end
+    def c=(value); @c = value.to_f; end
+    def g=(value); @g = value.to_f; end
+    def t=(value); @t = value.to_f; end
+    def to_hash
+      {a: a, c: c, g: g, t: t}
     end
-    def frequencies=(value)
-      @a, @c, @g, @t = value
+    def self.from_hash(value)
+      Frequencies.new(a: value[:a].to_f, c: value[:c].to_f, g: value[:g].to_f, t: value[:t].to_f)
     end
+    def self.from_array(value)
+      Frequencies.new(a: value[0].to_f, c: value[1].to_f, g: value[2].to_f, t: value[3].to_f)
+    end
+  end
+  class Background
+    include ActiveModel::Model
+    extend Enumerize
+    attr_reader :gc_content, :mode, :frequencies
+    MODES = [:wordwise, :gc_content, :frequencies]
+    enumerize :mode, in: MODES
+
+    def gc_content=(value)
+      @gc_content = value.to_f
+    end
+
+    def mode=(value)
+      @mode = value.to_sym
+      raise "Unknown background mode #{record.mode}"  unless MODES.include?(@mode)
+    end
+
+    def frequencies_attributes=(value)
+      case value
+      when Hash
+        @frequencies = Frequencies.from_hash(value)
+      when Array
+        @frequencies = Frequencies.from_array(value)
+      else
+        raise "Unknown frequencies type"
+      end
+    end
+
+    def to_hash
+      {mode: mode, gc_content: gc_content, frequencies_attributes: frequencies.to_hash}
+    end
+
+    def value
+      case mode
+      when :wordwise
+        Bioinform::Background.wordwise
+      when :gc_content
+        Bioinform::Background.from_gc_content(gc_content)
+      when :frequencies
+        Bioinform::Background.from_frequencies([:a,:c,:g,:t].map{|letter| value[letter] })
+      end
+    end
+
     validate do |record|
-      record.errors.add(:base, 'Must give 1 being summed')  unless (record.frequencies.inject(0.0, &:+) - 1.0).abs < 0.001
-    end
-  end
-
-  include ActiveModel::Model
-  attr_reader :background, :gc_content, :mode
-  extend Enumerize
-  enumerize :mode, in: [:wordwise, :gc_content, :frequencies]
-
-  def to_hash
-    result = {mode: mode}
-    case mode
-    when :wordwise
-      # do nothing
-    when :gc_content
-      result.merge!(gc_content: gc_content)
-    when :frequencies
-      result.merge!(frequencies: frequencies.frequencies)
-    end
-    result.merge(background: background)
-  end
-
-  def frequencies
-    @frequencies ||= Frequencies.new
-  end
-
-  def frequencies_attributes=(value)
-    case value
-    when Frequencies
-      @frequencies = value
-    when Array
-      @frequencies = Frequencies.new.tap{|obj| obj.frequencies = value }
-    when Hash
-      @frequencies = Frequencies.new(a: value[:a], c: value[:c], g: value[:g], t: value[:t])
-    else
-      raise "Can't convert #{value} to Frequencies"
-    end
-  end
-
-  def gc_content=(value)
-    @gc_content = value.to_f
-  end
-
-  def mode=(value)
-    @mode = value.to_sym
-  end
-
-  def background
-    case mode
-    when :wordwise
-      [1,1,1,1]
-    when :gc_content
-      c_frequency = g_frequency = gc_content / 2.0
-      a_frequency = t_frequency = (1.0 - gc_content) / 2.0
-      [a_frequency, c_frequency, g_frequency, t_frequency]
-    when :frequencies
-      frequencies.frequencies
-    else
-      raise 'Unknown mode'
-    end
-  end
-
-  validate do |record|
-    case record.mode
-    when :gc_content
-      record.errors.add(:gc_content, 'Must be within [0; 1]')  unless (0..1).include?(record.gc_content)
-    when :frequencies
-      record.errors.add(:frequencies)  unless frequencies.valid?
+      begin
+        record.value
+      rescue => e
+        record.errors.add(:base, e.message)
+      end
     end
   end
 end

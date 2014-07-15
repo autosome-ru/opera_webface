@@ -1,10 +1,14 @@
+require 'bioinform'
 require 'macroape'
 require 'yaml'
 
 params = YAML.load_file('task_params.yaml')
 
-first_background = (params[:background] == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
-second_background = (params[:background] == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
+# first_background = (params[:background] == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
+# second_background = (params[:background] == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
+
+first_background = Bioinform::Background.from_string(params[:background]) # OperaWebface::Background.new(params[:background]).value
+second_background = Bioinform::Background.from_string(params[:background]) # OperaWebface::Background.new(params[:background]).value
 
 discretization = params[:discretization]
 pvalue = params[:pvalue]

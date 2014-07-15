@@ -15,7 +15,8 @@ module OperaWebface
     end
 
     def self.get_pwm(data_model, matrix, background, pseudocount, effective_count)
-      background = (background == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
+      # background = (background == [1,1,1,1]) ? Bioinform::Background.wordwise : Bioinform::Frequencies.new(background)
+      background = background.value
       input_model = get_model_from_string(data_model, matrix)
       if Bioinform::MotifModel.acts_as_ppm?(input_model)
         ppm2pcm_converter = Bioinform::ConversionAlgorithms::PPM2PCMConverter.new(count: effective_count)
@@ -105,7 +106,7 @@ class DataModel
   end
 
   def pwm
-    OperaWebface::DataModelPresenter.get_pwm(data_model, matrix, background.background, pseudocount, effective_count)
+    OperaWebface::DataModelPresenter.get_pwm(data_model, matrix, background, pseudocount, effective_count)
   end
 
   def pcm
