@@ -21,7 +21,7 @@ module Perfectosape::ScansHelper
 
     header = ["SNP name", "motif",
               "allele&nbsp;1 / allele&nbsp;2",
-              "P-value 1", "P-value 2", "Fold change", "up/down regulate", "alignment" ]
+              "P-value 1", "P-value 2", "Fold change", "up/down", "alignment" ]
     lines = results_data_from_txt(task_results)
     lines = lines.map do |line|
       snp_id, motif, pos_1, orientation_1, word_1, pos_2, orientation_2, word_2, alleles, pvalue_1, pvalue_2, fold_change = line
