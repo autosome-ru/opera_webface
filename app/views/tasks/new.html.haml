@@ -5,6 +5,8 @@
     = image_tag_if_exists task_logo, class: 'task_logo'
     .task_description
       %h4= @task.task_description
+      = link_to action: 'description' do
+        .help_img
     %hr
     .parameter
       .description

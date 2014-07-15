@@ -1,4 +1,8 @@
 class Perfectosape::ScansController < ::TasksController
+  def description
+    redirect_to controller: '/welcome', action: 'perfectosape'
+  end
+
   protected
 
   def default_params
@@ -19,5 +23,9 @@ rs10431961 tggcggggctggtcaggcggcgtcg[C/T]cggtacgctctgagcggcagcgtgt
 
   def task_results(ticket)
     SMBSMCore.get_content(ticket, 'task_result.txt')  if SMBSMCore.check_content(ticket, 'task_result.txt')
+  end
+
+  def task_logo
+    'perfectosape_logo.png'
   end
 end

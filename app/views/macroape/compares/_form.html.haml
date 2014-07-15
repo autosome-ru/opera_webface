@@ -23,10 +23,10 @@
   .expand_button
     %a{href: '#'} [+]
   .advanced_options
-    .row
-      .span3.pvalue
+    .pvalue_options
+      .pvalue
         = f.input :pvalue, label: 'P-value:'
-      .span3.pvalue_boundary
+      .pvalue_boundary
         = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
     = render partial:'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Background:'}
 

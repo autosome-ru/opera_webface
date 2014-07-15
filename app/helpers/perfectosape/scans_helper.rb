@@ -29,13 +29,20 @@ module Perfectosape::ScansHelper
       pos_1, pos_2 = pos_1.to_i, pos_2.to_i
       fold_change = fold_change.to_f
       collection_motif_links(collection_name, motif)
-      motif_info = motif_info(collection_name, motif) + '<br>' + collection_motif_image_link(collection_name, motif, 'direct')
 
       snp = SequenceWithSNP.from_string(snp_sequences[snp_id])
-      pos = (pvalue_1 <= pvalue_2) ? pos_1 : pos_2
+      if pvalue_1 <= pvalue_2
+        pos = pos_1
+        orientation = orientation_1
+      else
+        pos = pos_2
+        orientation = orientation_2
+      end
 
-      alignment = highlight_TFBS(snp.variant(0), snp.left.length + pos, motifs[motif].length) + '<br>' +
-                  highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length)
+      motif_info = motif_info(collection_name, motif) + '<br>' + collection_motif_image(collection_name, motif, orientation)
+
+      alignment = highlight_TFBS(snp.variant(0), snp.left.length + pos, motifs[motif].length, snp.left.length) + '<br>' +
+                  highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length, snp.left.length)
       fold_change_normed, up_down = (fold_change >= 1) ? [fold_change, 'up'] : [1.0 / fold_change, 'down']
       [ snp_id,  motif_info, alleles, pvalue_1,  pvalue_2,  fold_change_normed, up_down, alignment ]
     end
@@ -65,7 +72,11 @@ module Perfectosape::ScansHelper
   end
 
   # highlight_TFBS('ACGTtTGCA', 2, 6) --> AC<em>GTtTGC</em>A
-  def highlight_TFBS(sequence, tfbs_position, length)
-    sequence[0...tfbs_position] + '<span class="tfbs">' + sequence[tfbs_position, length] + '</span>' + sequence[(tfbs_position + length)..-1]
+  def highlight_TFBS(sequence, tfbs_position, length, snp_position)
+    sequence[0...tfbs_position] + '<span class="tfbs">' +
+      sequence[tfbs_position...snp_position] +
+      "<span class=\"snp-position snp-position-#{sequence[snp_position].upcase}\">" + sequence[snp_position] + '</span>' +
+      sequence[(snp_position + 1)...(tfbs_position + length)] +
+      '</span>' + sequence[(tfbs_position + length)..-1]
   end
 end

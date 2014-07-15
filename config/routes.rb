@@ -17,17 +17,20 @@ OperaWebface::Application.routes.draw do
     get 'scan' => 'scans#new'
     resources :scans, only: [:new, :create, :show], path: 'scan' do
       get 'perform', :on => :member
+      get 'description', :on => :collection
     end
 
     get 'compare' => 'compares#new'
     resources :compares, only: [:new, :create, :show], path: 'compare' do
       get 'perform', :on => :member
+      get 'description', :on => :collection
     end
   end
   namespace :perfectosape do
     get 'scan' => 'scans#new'
     resources :scans, only: [:new, :create, :show], path: 'scan' do
       get 'perform', :on => :member
+      get 'description', :on => :collection
     end
   end
 

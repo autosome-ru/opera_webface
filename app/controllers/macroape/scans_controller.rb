@@ -1,6 +1,10 @@
 require Rails.root.join('app/models/data_model')
 
 class Macroape::ScansController < ::TasksController
+  def description
+    redirect_to controller: '/welcome', action: 'macroape'
+  end
+
 protected
   def query_matrix_examples
     pcm = Bioinform::PCM.new( File.read(Rails.root.join('public','motif_1.pcm')) )
