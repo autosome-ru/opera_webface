@@ -51,6 +51,7 @@
 49 - обновить названия классов perfectosape.MultiSNPScan --> perfectosape.SNPScan в театре
 50 - обновить названия классов в скриптах для подготовки коллекций (предподсчет порогов)
 51 - подумать о включении tablesorter-а в perfectosape и м.б. в scan_collection
+52 - переместить unpack_collection из папки public
 
 100 - повесить align-motifs, sequence-logo, collect-distance-matrix & clusterize - на сеть
 
