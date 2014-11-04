@@ -59,7 +59,9 @@ module ApplicationHelper
 
   def uniprot_links(collection_name, motif)
     motif_id = motif.split.first # names in uniprot mapping aren't complete names but just first parts (e.g. `MA0512.1` for `MA0512.1 Rxra`)
-    uniprot_mapping[collection_name.to_sym][motif_id].map{|uniprot_name|
+    uniprot_names = uniprot_mapping[collection_name.to_sym][motif_id]
+    return ''  unless uniprot_names
+    uniprot_names.map{|uniprot_name|
       uniprot_link("#{uniprot_name}", uniprot_name)
       }.join("<br>").html_safe
   end
