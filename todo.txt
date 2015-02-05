@@ -58,6 +58,7 @@
 56 - анализ не только снипов, но и инделов (по сути пар последовательностей)
 57 - написать в веб-версии и в даунлоадсах, что наши коллекции human, mouse and, possibly, other vertebrates
               (+) 58 - веб-версия запарывается на снипе "AFP_HNF-1 TAAAGTAACAGATATACCAACAAAAGGTTA[C/A]TAGTTAACAGGCATTGCCTGAAAAGAGTAT" Вероятно, дефис в имени
+59(!) - если театр запускается не из под рута, а автоматически, то логи рисуются, а выравнивание - нет. Права доступа? Библиотеки? Что вообще за нафиг?
 
 100 - повесить align-motifs, sequence-logo, collect-distance-matrix & clusterize - на сеть
 
