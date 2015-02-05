@@ -15,14 +15,14 @@ class Sequence
   end
 
   def self.complement(sequence)
-    sequence.tr('acgtACGT', 'tgcaTGCA')
+    sequence.tr('acgtnACGTN', 'tgcanTGCAN')
   end
   def self.revcomp(sequence)
     complement(sequence).reverse
   end
 
   def self.valid_sequence?(sequence)
-    sequence.match /\A[acgt]+\z/i
+    sequence.match /\A[acgtn]+\z/i
   end
   def to_s
     sequence

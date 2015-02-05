@@ -41,6 +41,8 @@ module Perfectosape::ScansHelper
 
       motif_info = motif_info(collection_name, motif) + '<br>' + collection_motif_image(collection_name, motif, orientation)
 
+      # alignment = highlight_TFBS(snp.variant(0), snp.left.length + pos, motifs[motif].length, snp.left.length).gsub(/^n+/i, '').gsub(/n+$/i, '') + '<br>' +
+      #             highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length, snp.left.length).gsub(/^n+/i, '').gsub(/n+$/i, '')
       alignment = highlight_TFBS(snp.variant(0), snp.left.length + pos, motifs[motif].length, snp.left.length) + '<br>' +
                   highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length, snp.left.length)
       fold_change_normed, up_down = (fold_change >= 1) ? [fold_change, 'up'] : [1.0 / fold_change, 'down']

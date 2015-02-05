@@ -5,7 +5,7 @@ class SequenceWithSNP
   def initialize(left, allele_variants, right, options = {})
     raise unless Sequence.valid_sequence?(left)
     raise unless Sequence.valid_sequence?(right)
-    raise unless allele_variants.all?{|letter| %w[A C G T].include?(letter.upcase) }
+    raise unless allele_variants.all?{|letter| %w[A C G T N].include?(letter.upcase) }
     @left, @allele_variants, @right = left, allele_variants, right
     @name = options[:name] || (left + '_' + allele_variants.join('-') + '_' + right)
   end
