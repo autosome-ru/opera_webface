@@ -70,7 +70,7 @@ unless no_thresholds
     collection_name = File.basename(pwm_collection_folder)
     output_folder = File.join(thresholds_folder, collection_name)
     jar_path = File.expand_path('macro-perfectos-ape.jar', File.dirname(__FILE__))
-    run "java -cp #{jar_path} ru.autosome.ape.PrecalculateThresholds #{pwm_collection_folder} #{output_folder} --silence"
+    run "java -cp #{jar_path} ru.autosome.ape.PrecalculateThresholds #{pwm_collection_folder} #{output_folder} --silent"
   end
 end
 

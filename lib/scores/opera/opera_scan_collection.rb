@@ -17,7 +17,6 @@ command = ["java -cp macro-perfectos-ape.jar ru.autosome.macroape.ScanCollection
             "--boundary #{pvalue_boundary}",
             "--precise #{precise_recalc_cutoff}",
             background_string,
-            "--silent"
           ].join(' ')
 
 if File.exist?('query.pcm')
