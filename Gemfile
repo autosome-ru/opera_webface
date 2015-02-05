@@ -57,7 +57,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
 
-  # gem 'quiet_assets'
+  gem 'quiet_assets'
 end
 
 group :test do
@@ -68,3 +68,5 @@ end
 gem 'macroape', '~> 4.0'
 gem 'bioinform', '~> 0.1.17'
 gem 'sequence_logo', '~>1.1.2'
+
+# gem 'active_form'
