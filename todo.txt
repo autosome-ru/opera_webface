@@ -48,16 +48,16 @@
 46 - лого SELEX-ов
 47 - перетащить eval_similarity на java
 48 - перейти на новые рубевые bioinform и macroape
-49 - обновить названия классов perfectosape.MultiSNPScan --> perfectosape.SNPScan в театре
+              (+) 49 - обновить названия классов perfectosape.MultiSNPScan --> perfectosape.SNPScan в театре
 50 - обновить названия классов в скриптах для подготовки коллекций (предподсчет порогов)
 51(!) - подумать о включении tablesorter-а в perfectosape и м.б. в scan_collection
 52 - переместить unpack_collection из папки public
-53(!) - починить восприятие пустых строк в перфектосе
+              (+) 53(!) - починить восприятие пустых строк в перфектосе
 54(!) - сделать  возможность вбивать dbSNP-идентификаторы
 55 - сделать обобщенную базу мотивов
 56 - анализ не только снипов, но и инделов (по сути пар последовательностей)
 57 - написать в веб-версии и в даунлоадсах, что наши коллекции human, mouse and, possibly, other vertebrates
-58 - веб-версия запарывается на снипе "AFP_HNF-1 TAAAGTAACAGATATACCAACAAAAGGTTA[C/A]TAGTTAACAGGCATTGCCTGAAAAGAGTAT" Вероятно, дефис в имени
+              (+) 58 - веб-версия запарывается на снипе "AFP_HNF-1 TAAAGTAACAGATATACCAACAAAAGGTTA[C/A]TAGTTAACAGGCATTGCCTGAAAAGAGTAT" Вероятно, дефис в имени
 
 100 - повесить align-motifs, sequence-logo, collect-distance-matrix & clusterize - на сеть
 
