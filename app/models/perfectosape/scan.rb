@@ -33,7 +33,7 @@ class Perfectosape::Scan < ::Task
   end
 
   def self.valid_SNP_line?(line)
-    line.strip.match(/\A\w+\s+[ACGTN]*\[[ACGTN]\/[ACGTN]\][ACGTN]+\z/i)
+    line.strip.match(/\A\S+\s+[ACGTN]*\[[ACGTN]\/[ACGTN]\][ACGTN]+\z/i)
   end
 
   def snp_list_file=(value)
