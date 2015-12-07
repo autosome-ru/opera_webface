@@ -15,7 +15,7 @@ class Macroape::Scan < ::Task
 
   extend Enumerize
   enumerize :pvalue_boundary, in: [:lower, :upper]
-  enumerize :collection, in: [:hocomoco, :jaspar, :selex, :swissregulon, :homer]
+  enumerize :collection, in: [:hocomoco_10_human, :hocomoco_10_mouse, :hocomoco, :jaspar, :selex, :swissregulon, :homer]
 
   def self.task_type
     'ScanCollection'

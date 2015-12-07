@@ -53,7 +53,9 @@ en:
         gc_content: 'GC-content'
         frequencies: 'Frequencies'
     collection:
-      hocomoco: 'HOCOMOCO'
+      hocomoco: 'HOCOMOCO-9'
+      hocomoco_10_human: 'HOCOMOCO-10 (human)'
+      hocomoco_10_mouse: 'HOCOMOCO-10 (mouse)'
       jaspar: 'JASPAR'
       selex: 'HT-SELEX'
       swissregulon: 'SwissRegulon'

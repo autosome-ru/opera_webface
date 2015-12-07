@@ -20,7 +20,7 @@ class Perfectosape::Scan < ::Task
   # add_background_task_param :background
 
   extend Enumerize
-  enumerize :collection, in: [:hocomoco, :jaspar, :selex, :swissregulon, :homer]
+  enumerize :collection, in: [:hocomoco_10_human, :hocomoco_10_mouse, :hocomoco, :jaspar, :selex, :swissregulon, :homer]
 
   add_task_permitted_param(:snp_list_file)
 
