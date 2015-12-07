@@ -65,8 +65,10 @@ group :test do
   gem 'rspec-rails'
 end
 
+gem 'rmagick'
+
 gem 'macroape', '~> 4.0'
-gem 'bioinform', '~> 0.1.17'
-gem 'sequence_logo', '~>1.1.2'
+# gem 'bioinform', '~> 0.1.17'
+gem 'sequence_logo', '~> 1.2'
 
 # gem 'active_form'
