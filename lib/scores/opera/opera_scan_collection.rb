@@ -11,7 +11,7 @@ precise_recalc_cutoff = task_params[:precise_recalc_cutoff]
 pvalue_boundary = task_params[:pvalue_boundary]
 
 # Don't use precalc because it can't be used with different backgrounds.
-command = ["java -cp macro-perfectos-ape.jar ru.autosome.macroape.ScanCollection query.pwm collection",
+command = ["java -cp ape.jar ru.autosome.macroape.ScanCollection query.pwm collection",
             "-p #{pvalue}",
             "-c #{similarity_cutoff}",
             "--boundary #{pvalue_boundary}",

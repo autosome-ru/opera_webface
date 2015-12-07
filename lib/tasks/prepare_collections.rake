@@ -2,7 +2,7 @@ require 'rake'
 require 'shellwords'
 
 def generate_thresholds(pwm_folder:, output_folder:)
-  sh 'java', '-cp', 'public/macro-perfectos-ape.jar', 'ru.autosome.ape.PrecalculateThresholds', pwm_folder, output_folder, '--silent'
+  sh 'java', '-cp', 'public/ape.jar', 'ru.autosome.ape.PrecalculateThresholds', pwm_folder, output_folder, '--silent'
 end
 
 def generate_logos(pcm_folder:, output_folder:, sequence_logo_options: '--orientation both --x-unit 20 --y-unit 40 --no-threshold-lines --bg-fill transparent')
