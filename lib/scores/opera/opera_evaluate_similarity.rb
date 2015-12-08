@@ -13,8 +13,8 @@ max_hash_size = 10000000
 max_pair_hash_size = 10000
 pvalue_boundary = :upper
 
-pwm_first = Bioinform::PWM.new(params[:first_motif][:pwm]).set_parameters(background: first_background, max_hash_size: max_hash_size).discrete!(discretization)
-pwm_second = Bioinform::PWM.new(params[:second_motif][:pwm]).set_parameters(background: second_background, max_hash_size: max_hash_size).discrete!(discretization)
+pwm_first = Bioinform::MotifModel::PWM.new(params[:first_motif][:pwm]).set_parameters(background: first_background, max_hash_size: max_hash_size).discrete!(discretization)
+pwm_second = Bioinform::MotifModel::PWM.new(params[:second_motif][:pwm]).set_parameters(background: second_background, max_hash_size: max_hash_size).discrete!(discretization)
 cmp = Macroape::PWMCompare.new(pwm_first, pwm_second).set_parameters(max_pair_hash_size: max_pair_hash_size)
 
 
