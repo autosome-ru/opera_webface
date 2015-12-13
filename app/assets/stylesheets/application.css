@@ -7,3 +7,8 @@
 //= require_directory ./macroape
 
 //= require_tree
+
+.grant {
+  font-size: 0.8em;
+  margin-top: 40px;
+}
