@@ -10,5 +10,15 @@
 
 .grant {
   font-size: 0.8em;
+  color: #666;
   margin-top: 40px;
+}
+
+.webface-link, .paper, .manual {
+  font-weight: bolder;
+  font-size: 1.2em;
+  background-color: #B3FFB3;
+  border: 1px solid #BFBFBF;
+  border-radius: 7px;
+  padding: 0 4px;
 }
