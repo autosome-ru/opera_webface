@@ -1,11 +1,9 @@
 require 'yaml'
+require 'bioinform'
+
 task_params = YAML.load_file('task_params.yaml')
 pvalue = task_params[:pvalue]
-if task_params[:background]
-  background_string = (task_params[:background] == [1,1,1,1]) ? "-b wordwise" : "-b #{task_params[:background].join(',')}"
-else
-  background_string = ''
-end
+background_string = task_params[:background] ? "-b #{task_params[:background]}" : ''
 similarity_cutoff = task_params[:similarity_cutoff]
 precise_recalc_cutoff = task_params[:precise_recalc_cutoff]
 pvalue_boundary = task_params[:pvalue_boundary]

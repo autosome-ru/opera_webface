@@ -2,8 +2,9 @@ require 'active_model'
 require 'enumerize'
 require 'bioinform'
 require_relative 'background'
+require_relative 'model_creation'
 
-class DataModel
+class DataModelForm
   include ActiveModel::Model
   extend Enumerize
   enumerize :data_model, in: [:PCM, :PWM, :PPM]
@@ -33,7 +34,7 @@ class DataModel
   def pseudocount=(value)
     @pseudocount = case value
     when String
-      value.blank? ? nil : value.to_f
+      value.blank? ? :log : value.to_f
     else
       value
     end
@@ -73,28 +74,24 @@ class DataModel
   end
 
   validates :effective_count, presence: true, numericality: {greater_than: 0}, :if => ->(model){ model.data_model == :PPM }
-  validates :pseudocount, numericality: {greater_than_or_equal_to: 0}, :if => ->(model){ [:PPM, :PCM].include?(model.data_model) && model.pseudocount }
+  validates :pseudocount, numericality: {greater_than_or_equal_to: 0}, :if => ->(model){ [:PPM, :PCM].include?(model.data_model) && model.pseudocount && model.pseudocount !=  :log }
 
   validate do |record|
     record.errors.add(:data_model, "Unknown data model #{record.data_model}")  unless [:PWM, :PCM, :PPM].include? record.data_model
     # Don't check model unless background is valid: it will throw an exception
     # because model evaluation with broken background is impossible
-    if record.background.valid?
-      begin
-        record.errors.add(:matrix, record.data_model_object.validation_errors.join(";\n"))  unless record.data_model_object.valid?
-      rescue
-        record.errors.add(:matrix, 'is invalid')
-      end
-    else
+    if !record.background.valid?
       record.errors.add(:base, "is invalid because it depends on invalid background value")
-    end
-  end
-end
-
-module Bioinform
-  class PM
-    def matrix_rounded(n)
-      matrix.map{|pos| pos.map{|x| x.round(n) } }
+    else
+      parser = Bioinform::MatrixParser.new
+      if parser.valid?(record.matrix)
+        matrix_infos = parser.parse!(record.matrix)
+        validator = Bioinform.get_model_class(record.data_model).const_get(:VALIDATOR)
+        validation_results = validator.validate_params(matrix_infos[:matrix], Bioinform::NucleotideAlphabet)
+        record.errors.add(:matrix, validation_results.to_s)  unless validation_results.valid?
+      else
+        record.errors.add(:matrix, "Can't parse matrix")
+      end
     end
   end
 end

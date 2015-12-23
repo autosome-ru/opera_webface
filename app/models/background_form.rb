@@ -1,23 +1,10 @@
 require 'active_model'
 require 'enumerize'
+require_relative 'frequencies_form'
 
-class Background
-  class Frequencies
-    include ActiveModel::Model
-    attr_accessor :a,:c,:g,:t
-    def frequencies
-      [a, c, g, t].map(&:to_f)
-    end
-    def frequencies=(value)
-      @a, @c, @g, @t = value
-    end
-    validate do |record|
-      record.errors.add(:base, 'Must give 1 being summed')  unless (record.frequencies.inject(0.0, &:+) - 1.0).abs < 0.001
-    end
-  end
-
+class BackgroundForm
   include ActiveModel::Model
-  attr_reader :background, :gc_content, :mode
+  attr_reader :frequencies, :gc_content, :mode
   extend Enumerize
   enumerize :mode, in: [:wordwise, :gc_content, :frequencies]
 
@@ -34,18 +21,14 @@ class Background
     result.merge(background: background)
   end
 
-  def frequencies
-    @frequencies ||= Frequencies.new
-  end
-
   def frequencies_attributes=(value)
     case value
-    when Frequencies
+    when FrequenciesForm
       @frequencies = value
     when Array
-      @frequencies = Frequencies.new.tap{|obj| obj.frequencies = value }
+      @frequencies = FrequenciesForm.new.tap{|obj| obj.frequencies = value }
     when Hash
-      @frequencies = Frequencies.new(a: value[:a], c: value[:c], g: value[:g], t: value[:t])
+      @frequencies = FrequenciesForm.new(value)
     else
       raise "Can't convert #{value} to Frequencies"
     end
@@ -62,11 +45,9 @@ class Background
   def background
     case mode
     when :wordwise
-      [1,1,1,1]
+      Bioinform::Background.wordwise
     when :gc_content
-      c_frequency = g_frequency = gc_content / 2.0
-      a_frequency = t_frequency = (1.0 - gc_content) / 2.0
-      [a_frequency, c_frequency, g_frequency, t_frequency]
+      Bioinform::Background.from_gc_content(gc_content)
     when :frequencies
       frequencies.frequencies
     else

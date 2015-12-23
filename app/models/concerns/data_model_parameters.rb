@@ -10,7 +10,7 @@ module DataModelParameters
 
       add_task_permitted_param("#{param_name}_attributes" => [:data_model, :matrix, :effective_count, :pseudocount])
       define_method "#{param_name}_attributes=" do |value|
-        instance_variable_set("@#{param_name}", DataModel.new({background: background_attribute_name.to_proc.call(self) }.merge value))
+        instance_variable_set("@#{param_name}", DataModelForm.new({background: background_attribute_name.to_proc.call(self) }.merge value))
       end
 
       add_task_submission_param(param_name) do |task, value|

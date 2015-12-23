@@ -1,8 +1,8 @@
 require 'rspec'
-require 'app/models/background'
+require 'app/models/background_form'
 
-describe Background do
-  let(:background_instance) { Background.new(attributes) }
+describe BackgroundForm do
+  let(:background_instance) { BackgroundForm.new(attributes) }
 
   context 'from frequencies' do
     let(:attributes) { {mode: :frequencies, frequencies_attributes: {a: '0.2', c: '0.3', g: '0.3', t: '0.2'} } }

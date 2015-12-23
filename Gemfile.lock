@@ -32,7 +32,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bioinform (0.2.2)
+    bioinform (0.3.0)
     builder (3.1.4)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -83,8 +83,6 @@ GEM
       sprockets (> 2, < 4)
       tilt
     libv8 (3.16.14.13)
-    macroape (4.1.0)
-      bioinform (~> 0.2.0)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.99)
@@ -190,6 +188,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  bioinform (~> 0.3.0)
   coffee-rails (~> 4.0.0)
   enumerize
   haml-rails
@@ -197,7 +196,6 @@ DEPENDENCIES
   jquery-rails
   js-routes
   less-rails
-  macroape (~> 4.0)
   mime-types
   quiet_assets
   rails (~> 4.0.2)
@@ -215,4 +213,4 @@ DEPENDENCIES
   unicorn
 
 BUNDLED WITH
-   1.10.6
+   1.11.0

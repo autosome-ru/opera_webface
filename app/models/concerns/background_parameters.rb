@@ -14,7 +14,7 @@ module BackgroundParameters
       attr_reader param_name
 
       define_method "#{param_name}_attributes=" do |value|
-        instance_variable_set("@#{param_name}", Background.new(value))
+        instance_variable_set("@#{param_name}", BackgroundForm.new(value))
       end
       add_deep_validation_for(param_name)
     end

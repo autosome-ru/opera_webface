@@ -24,7 +24,7 @@ module SubmissionParameters
         next nil  if options[:if] && !options[:if].to_proc.call(self)
         [param_name.to_sym, evaluate_param(param_name, block)]
       rescue => e
-        exception = SubmissionParameters::Error.new "Submission of task failed due to exception `#{e.to_s}` in evaluating value of #{param_name}"
+        exception = SubmissionParameters::Error.new "Submission of task failed due to exception `#{e.to_s}` in evaluating value of `#{param_name}` parameter:\n" + e.backtrace.join("\n")
         errors.add(:base, exception.message)
         exception.reason = e
         raise exception

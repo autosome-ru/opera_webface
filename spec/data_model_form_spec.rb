@@ -1,9 +1,9 @@
 require 'rspec'
-require 'app/models/data_model'
+require 'app/models/data_model_form'
 
-describe DataModel do
-  let(:model_instance) { DataModel.new(attributes) }
-  let(:background) {Background.new(mode: :wordwise)}
+describe DataModelForm do
+  let(:model_instance) { DataModelForm.new(attributes) }
+  let(:background) {BackgroundForm.new(mode: :wordwise)}
 
   context 'pwm' do
     let(:pwm_matrix) {"1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1"}
@@ -14,11 +14,11 @@ describe DataModel do
     it { model_instance.to_hash.should have_key(:pwm) }
     it { model_instance.to_hash[:pwm].should match /\A1.0\s+3.5\s+2.0\s+4.0\n2.55\s+7.34\s+-14.3\s+-9.0\n15.0\s+0.0\s+25.0\s+1.0\z/ }
     it 'allows matrix name' do
-      DataModel.new({data_model: :PWM, background: background, matrix: "motif_name\n" + pwm_matrix }).data_model_object.matrix.should == model_instance.data_model_object.matrix
+      DataModelForm.new({data_model: :PWM, background: background, matrix: "motif_name\n" + pwm_matrix }).data_model_object.matrix.should == model_instance.data_model_object.matrix
     end
     # Fails in bioinform
     # it 'allows matrix name with spaces' do
-    #   DataModel.new({data_model: :PWM, background: background, matrix: "motif name\n" + pwm_matrix }).data_model_object.matrix.should == model_instance.data_model_object.matrix
+    #   DataModelForm.new({data_model: :PWM, background: background, matrix: "motif name\n" + pwm_matrix }).data_model_object.matrix.should == model_instance.data_model_object.matrix
     # end
   end
   context 'pcm' do
@@ -42,21 +42,21 @@ describe DataModel do
   end
 
   it 'raises on bad matrix' do
-    expect { DataModel.new data_model: :PWM, background: background, matrix: 'akhsvfew'}.to raise_error
+    expect { DataModelForm.new data_model: :PWM, background: background, matrix: 'akhsvfew'}.to raise_error
   end
 
   context 'from text without name' do
-    subject { DataModel.new(data_model: :PWM, background: background, matrix: "1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
+    subject { DataModelForm.new(data_model: :PWM, background: background, matrix: "1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
     its(:name) { should be_nil  }
     its(:matrix) { should eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
   end
   context 'from text with name' do
-    subject { DataModel.new(data_model: :PWM, background: background, matrix: "MatrixName\n1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
+    subject { DataModelForm.new(data_model: :PWM, background: background, matrix: "MatrixName\n1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
     its(:name) { should eq 'MatrixName' }
     its(:matrix) { should eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
   end
   context 'from text with name, name with space' do
-    subject { DataModel.new(data_model: :PWM, background: background, matrix: "Matrix Name\n1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
+    subject { DataModelForm.new(data_model: :PWM, background: background, matrix: "Matrix Name\n1 3.5 2 4\n2.55 7.34 -14.3 -9\r\n15 0 25 1").pwm }
     its(:name) { should eq 'Matrix Name' }
     its(:matrix) { should eq [[1, 3.5, 2, 4],[2.55, 7.34, -14.3, -9],[15, 0, 25, 1]] }
   end
