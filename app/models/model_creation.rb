@@ -1,12 +1,6 @@
-module Bioinform
-  module MotifModel
-    class PM
-      def matrix_rounded(n)
-        matrix.map{|pos| pos.map{|x| x.round(n) } }
-      end
-    end
-  end
+require 'bioinform'
 
+module Bioinform
   def self.get_model_class(data_model)
     Bioinform::MotifModel.const_get(data_model)
   end
