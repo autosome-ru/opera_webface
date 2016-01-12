@@ -13,8 +13,7 @@ rs10208293 cttcatacatttatgtccagtacct[A/G]tggaccctccttgtgaactcttctc
 rs10431961 tggcggggctggtcaggcggcgtcg[C/T]cggtacgctctgagcggcagcgtgt
     EOS
 
-    { snp_list: test_snps,
-      # background_attributes: {mode: :wordwise, frequencies_attributes: [0.25, 0.25, 0.25, 0.25], gc_content: 0.5 },
+    { snp_list: TextOrFileForm.new(text: test_snps),
       collection: :hocomoco_10_human,
       pvalue_cutoff: 0.0005,
       fold_change_cutoff: 5
@@ -27,5 +26,9 @@ rs10431961 tggcggggctggtcaggcggcgtcg[C/T]cggtacgctctgagcggcagcgtgt
 
   def task_logo
     'perfectosape_logo.png'
+  end
+
+  def self.model_class
+    Perfectosape::ScanForm
   end
 end

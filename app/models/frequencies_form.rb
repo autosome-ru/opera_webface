@@ -1,9 +1,12 @@
 require 'virtus'
+require 'active_model'
 require 'bioinform'
+require_relative 'task_form'
 
 class FrequenciesForm
   include ActiveModel::Model
   include Virtus.model(nullify_blank: true)
+  include TaskForm
   attribute :a, Float
   attribute :c, Float
   attribute :g, Float

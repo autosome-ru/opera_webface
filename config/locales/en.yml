@@ -60,12 +60,19 @@ en:
       selex: 'HT-SELEX'
       swissregulon: 'SwissRegulon'
       homer: 'HOMER'
+    pvalue_boundary:
+      lower: 'Lower'
+      upper: 'Upper'
+    motif_type:
+        PCM: 'PCM'
+        PWM: 'PWM'
+        PPM: 'PPM'
   task_descriptions:
     EvaluateSimilarity: 'Evaluate Jaccard similarity between two TFBS models (motifs).'
     ScanCollection: 'Scan a collection for TFBS models (motifs) similar to a given query.'
     SnpScan: 'Find TFBS motifs binding alleles of a single-nucleotide variant with different affinity.'
   task_parameters:
-    Background:
+    BackgroundForm:
       mode: |
         Default option is to explicitly count
         uniformly distributed words from a k-mer dictionary (no
@@ -76,12 +83,12 @@ en:
         Background defined by frequencies of individual
         nucleotides. Values should be in 0.0 to 1.0 range summing up to
         1.0.
-      Frequencies:
-        a: 'Frequency of A nucleotide.'
-        c: 'Frequency of C nucleotide.'
-        g: 'Frequency of G nucleotide.'
-        t: 'Frequency of T nucleotide.'
-    DataModel:
+    FrequenciesForm:
+      a: 'Frequency of A nucleotide.'
+      c: 'Frequency of C nucleotide.'
+      g: 'Frequency of G nucleotide.'
+      t: 'Frequency of T nucleotide.'
+    DataModelForm:
       data_model: |
         Data model of the tested motif. Can be positional
         weight matrix(PWM),  positional count matrix(PCM), or positional
@@ -92,7 +99,7 @@ en:
       effective_count: 'Effective sample size (an assumed number of sequences) to convert PPM-to-PCM-to-PWM.'
       pseudocount: 'Pseudocount value to convert PCM to PWM, taken as log(words) by default.'
     Perfectosape:
-      Scan:
+      ScanForm:
         snp_list: |
           List of SNVs entries to be tested. Each entry should be on a separate line.
           Each entry should consist of an SNV name and the variant with
@@ -109,7 +116,7 @@ en:
         pvalue_cutoff: "P-value cutoff to treat a DNA subsequence as a TF binding site."
         fold_change_cutoff: "Minimal P-value fold change."
     Macroape:
-      Scan:
+      ScanForm:
         collection: |
           Collection of transcription factor binding site motifs to scan.
           Available collections:
@@ -122,23 +129,30 @@ en:
         pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value.'
         similarity_cutoff: 'Minimal similarity to report.'
         precise_recalc_cutoff: 'Minimal similarity to recheck in precise mode (with higher discretization level).'
-      Compare:
+      CompareForm:
         pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value.'
         pvalue: 'P-value level to select the motif thresholds.'
         discretization: 'PWM discretization.'
+  # The values :model, :attribute and :value are always available for interpolation
+  # The value :count is available when applicable. Can be used for pluralization.
   activemodel:
     errors:
       models:
-        background:
-          # The values :model, :attribute and :value are always available for interpolation
-          # The value :count is available when applicable. Can be used for pluralization.
+        background_form:
           attributes:
             mode:
               inclusion: "Should be one of the following: wordwise, GC-content, frequencies; the given value was %{value}."
+        data_model_form:
+          attributes:
+            motif_type:
+              inclusion: 'Unknown motif type `%{value}`'
   errors:
     attributes:
+      collection:
+        inclusion: 'Unknown collection name `%{value}`'
       pvalue_boundary:
         inclusion: "Should be either lower or upper; the given value was %{value}."
+      # attributes common for many models
   time:
     formats:
       # default: "%a, %d %b %Y %H:%M:%S %z"

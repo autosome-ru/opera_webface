@@ -3,9 +3,9 @@ require 'ostruct'
 
 # to work from box, params should be saved into task_params.yaml (in overture), results - into task_results.yaml (in opera)
 class TasksController < ApplicationController
-  rescue_from SubmissionParameters::Error do |e|
-    render action: 'new'
-  end
+  # rescue_from SubmissionParameters::Error do |e|
+  #   render action: 'new'
+  # end
 
   before_action :get_ticket, only: [:perform, :show]
 
@@ -51,7 +51,8 @@ protected
   end
 
   def permitted_params
-    params.permit(:task => model_class.permitted_params_list)
+    # params.permit(:task => model_class.permitted_params_list)
+    params.permit!
   end
 
   def default_params

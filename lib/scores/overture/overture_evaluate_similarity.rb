@@ -1,13 +1,15 @@
 require 'bioinform'
+require_relative '../../../app/models/model_creation'
+require_relative '../../../app/models/background_form'
 
 module EvaluateSimilarity
-  def self.perform_overture(opera_status, run_params)
-    File.write('task_params.yaml', run_params.to_yaml)
-    File.write('pwm_first.pwm', run_params[:first_motif][:pwm])
-    File.write('pwm_second.pwm', run_params[:second_motif][:pwm])
-    File.write('pcm_first.pcm', run_params[:first_motif][:pcm])  if run_params[:first_motif][:pcm]
-    File.write('pcm_second.pcm', run_params[:second_motif][:pcm])  if run_params[:second_motif][:pcm]
-    File.write('ppm_first.ppm', run_params[:first_motif][:ppm])  if run_params[:first_motif][:ppm]
-    File.write('ppm_second.ppm', run_params[:second_motif][:ppm])  if run_params[:second_motif][:ppm]
+  def self.perform_overture(opera_status, task_params)
+    File.write('task_params.yaml', task_params.to_yaml)
+
+    background = BackgroundForm.new(task_params[:background]).background
+    save_motif_in_different_types(task_params[:first_motif], background: background, basename: 'first')
+    save_motif_in_different_types(task_params[:second_motif], background: background, basename: 'second')
+
+    FileUtils.ln_s(File.join(OperaHouseConfiguration::ASSETS_PATH, 'ape.jar'), 'ape.jar')
   end
 end

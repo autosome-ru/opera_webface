@@ -1,30 +1,31 @@
 require 'virtus'
+require 'active_model'
 require 'bioinform'
+require_relative 'task_form'
+require_relative 'frequencies_form'
+require_relative '../validators/recursive_valid_validator'
+require_relative '../validators/background_mode_validator'
 
 class BackgroundForm
   include ActiveModel::Model
   include Virtus.model(nullify_blank: true)
+  include TaskForm
   attribute :mode, Symbol, default: :wordwise
-  attribute :gc_content, Float
-  attribute :frequencies, FrequenciesForm
+  attribute :gc_content, Float, default: 0.5
+  attribute :frequencies, FrequenciesForm, default: FrequenciesForm.uniform
 
   MODE_VARIANTS = [:wordwise, :gc_content, :frequencies]
-  validates :mode,  inclusion: {in: MODE_VARIANTS, message: 'Unknown background mode `%{value}`'}
-  validate do |record|
-    case record.mode
-    when :gc_content
-      record.errors.add(:gc_content, 'Must be in 0 to 1')  unless (0..1).include?(record.gc_content)
-    when :frequencies
-      record.errors.add(:frequencies)  unless frequencies.valid?
-    end
-  end
+  validates :frequencies, recursive_valid: true
+  validates :mode, background_mode: true
+  validates :gc_content, inclusion: {in: 0..1, message: 'GC-content must be in [0,1] range'}, if: ->(record){ record.mode == :gc_content }
 
-  def frequencies_attributes=(value)
+  def frequencies=(value)
     case value
-    when Hash
-      self.frequencies = value
+    when Hash, FrequenciesForm
+      super
     when Array
-      self.frequencies = [:a,:c,:g,:t].zip(value).inject({}){|res, (letter, frequency)| res.merge(letter => frequency) }
+      frequencies = [:a,:c,:g,:t].zip(value).inject({}){|res, (letter, frequency)| res.merge(letter => frequency) }
+      super(frequencies)
     end
   end
 
@@ -37,7 +38,7 @@ class BackgroundForm
     when :frequencies
       frequencies.background
     else
-      raise 'Unknown mode'
+      raise 'Unknown background mode'
     end
   end
 

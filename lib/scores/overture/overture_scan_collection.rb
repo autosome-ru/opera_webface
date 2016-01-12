@@ -1,14 +1,16 @@
 require 'bioinform'
 require 'fileutils'
+require_relative '../../../app/models/model_creation'
+require_relative '../../../app/models/background_form'
 
 module ScanCollection
-  def self.perform_overture(opera_status, run_params)
-    File.write('task_params.yaml', run_params.to_yaml)
-    File.write('query.pwm', run_params[:query][:pwm])
-    File.write('query.pcm', run_params[:query][:pcm])  if run_params[:query][:pcm]
-    File.write('query.ppm', run_params[:query][:ppm])  if run_params[:query][:ppm]
+  def self.perform_overture(opera_status, task_params)
+    File.write('task_params.yaml', task_params.to_yaml)
 
-    collection_name = run_params[:collection].to_s.downcase
+    background = BackgroundForm.new(task_params[:background]).background
+    save_motif_in_different_types(task_params[:query], background: background, basename: 'query')
+
+    collection_name = task_params[:collection].to_s.downcase
     FileUtils.ln_s(File.join(OperaHouseConfiguration::ASSETS_PATH, 'motif_collection', 'pwm', collection_name), 'collection')
     FileUtils.ln_s(File.join(OperaHouseConfiguration::ASSETS_PATH, 'ape.jar'), 'ape.jar')
   end

@@ -46,8 +46,8 @@
               (+) 44 - новый java-пакет. Передача фона
               (+) 45 - проверить, ломаются ли все еще в IE переводы строк у матриц
 46 - лого SELEX-ов
-47 - перетащить eval_similarity на java
-48 - перейти на новые рубевые bioinform и macroape
+              (+) 47 - перетащить eval_similarity на java
+              (+) 48 - перейти на новые рубевые bioinform и macroape
               (+) 49 - обновить названия классов perfectosape.MultiSNPScan --> perfectosape.SNPScan в театре
               (+) 50 - обновить названия классов в скриптах для подготовки коллекций (предподсчет порогов)
 51(!) - подумать о включении tablesorter-а в perfectosape и м.б. в scan_collection

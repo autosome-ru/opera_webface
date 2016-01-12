@@ -1,39 +1,26 @@
 require 'virtus'
 require 'active_model'
 require 'bioinform'
+require_relative '../task_form'
+require_relative '../text_or_file_form'
+require_relative '../../validators/recursive_valid_validator'
+require_relative '../../validators/motif_collection_validator'
+require_relative '../../validators/snp_list_validator'
 
 class Perfectosape::ScanForm
   include ActiveModel::Model
-  include Virtus.model(nullify_blank: true) # , strict: true
+  include Virtus.model(nullify_blank: true)
   include TaskForm
 
-  # attribute :snp_list, SNPListInput
   attribute :snp_list, TextOrFileForm
   attribute :collection, Symbol
   attribute :pvalue_cutoff, Float
   attribute :fold_change_cutoff, Float
 
-  alias_method :snp_list_attributes=, :snp_list=
-
-  SNP_PATTERN = /\A[ACGTN]*\[[ACGTN]\/[ACGTN]\][ACGTN]+\z/i
-  COLLECTION_VARIANTS = [:hocomoco_10_human, :hocomoco_10_mouse, :hocomoco, :jaspar, :selex, :swissregulon, :homer]
-
-  validates :collection,  inclusion: {in: COLLECTION_VARIANTS, message: 'Unknown collection `%{value}`'}
+  validates :snp_list, recursive_valid: true, snp_list: {wrapped_attribute: :value}
+  validates :collection, motif_collection: true
   validates :pvalue_cutoff, presence: true, numericality: {less_than_or_equal_to: 1, greater_than_or_equal_to: 0}
   validates :fold_change_cutoff, presence: true, numericality: {greater_than: 0}
-  validate do |task|
-    task.errors.add(:snp_list, 'SNP sequences are in wrong format')  unless valid_snp_list?(task.snp_list.value)
-  end
-
-  def self.valid_snp_format?(line)
-    seq = line.strip.split(/[[:space:]]+/, 2)[1] || ''
-    seq.gsub(/[[:space:]]/, '').match(SNP_PATTERN)
-  end
-  def self.valid_snp_list?(text)
-    text.lines.all?{|line|
-      valid_snp_format?(line)
-    } && !text.lines.empty?
-  end
 
   def self.task_type; 'SnpScan'; end
 end

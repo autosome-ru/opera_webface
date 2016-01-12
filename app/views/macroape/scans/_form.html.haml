@@ -1,33 +1,33 @@
-= task_form_for task, :as => :task, html: {class: 'task_params'} do |f|
+= task_form_for task, :as => :task, url: macroape_scan_path, html: {class: 'task_params'} do |f|
   .row
     .span4.query_model
       .data_model_examples
         - query_matrix_examples.each do |data_model, matrix|
-          %div{class: data_model}<= matrix
-      = f.fields_for :query do |motif_form|
+          %textarea{class: data_model}<= matrix
+      = f.fields_for :query, task.query do |motif_form|
         .data_model
-          = motif_form.input :data_model, label: 'Data model:', include_blank: false
+          = motif_form.input :data_model, label: 'Data model:', as: :motif_type_selector
         .matrix
           = motif_form.input :matrix, label: 'Query matrix:', :as => :text
     .span4
       .collection
-        = f.input :collection, include_blank: false, label: 'Collection:'
+        = f.input :collection, label: 'Collection:', as: :motif_collection_selector
   Advanced options:
   .expand_button
     %a{href: '#'} [+]
   .advanced_options
-    = render partial: 'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Query background:'}
+    = render partial: 'shared/background_model', locals: {form_builder: f, object_name: :background, object_value: task.background, background_title: 'Query background:'}
     .pvalue
       = f.input :pvalue, label: 'P-value:'
     .pvalue_boundary
-      = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
+      = f.input :pvalue_boundary, label: 'P-value boundary:', as: :pvalue_boundary_selector
     .similarity_cutoff
       = f.input :similarity_cutoff, label: 'Similarity cutoff:'
     .precise_recalc_cutoff
       = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode:'
 
     .data_model_specifiers.query_model
-      = f.fields_for :query do |motif_form|
+      = f.fields_for :query, task.query do |motif_form|
         .pseudocount
           = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)', label: 'Pseudocount:'
         .effective_count

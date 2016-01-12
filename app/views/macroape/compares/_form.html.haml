@@ -1,21 +1,22 @@
-= task_form_for task, :as => :task, html: {class: 'task_params'} do |f|
+= task_form_for task, :as => :task, url: macroape_compare_path, html: {class: 'task_params'} do |f|
   .row
     .span4.first_model
       .data_model_examples
         - first_matrix_examples.each do |data_model, matrix|
-          %div{class: data_model}<= matrix
-      = f.fields_for :first_motif do |motif_form|
+          / Don't know why but usual div adds extra spaces, so use textarea
+          %textarea{class: data_model}<= matrix
+      = f.fields_for :first_motif, task.first_motif do |motif_form|
         .data_model
-          = motif_form.input :data_model, label: 'Model 1:', include_blank: false
+          = motif_form.input :data_model, label: 'Model 1:', as: :motif_type_selector
         .matrix
           = motif_form.input :matrix, label: 'Matrix 1:', :as => :text
     .span4.second_model
       .data_model_examples
         - second_matrix_examples.each do |data_model, matrix|
-          %div{class: data_model}<= matrix
-      = f.fields_for :second_motif do |motif_form|
+          %textarea{class: data_model}<= matrix
+      = f.fields_for :second_motif, task.second_motif do |motif_form|
         .data_model
-          = motif_form.input :data_model, label: 'Model 2:', include_blank: false
+          = motif_form.input :data_model, label: 'Model 2:', as: :motif_type_selector
         .matrix
           = motif_form.input :matrix, label: 'Matrix 2:', :as => :text
 
@@ -27,20 +28,20 @@
       .pvalue
         = f.input :pvalue, label: 'P-value:'
       .pvalue_boundary
-        = f.input :pvalue_boundary, label: 'P-value boundary:', include_blank: false
-    = render partial:'shared/background_model', locals: {form_builder: f, background_variable: :background, background_title: 'Background:'}
+        = f.input :pvalue_boundary, label: 'P-value boundary:', as: :pvalue_boundary_selector
+    = render partial:'shared/background_model', locals: {form_builder: f, object_name: :background, object_value: task.background, background_title: 'Background:'}
 
     .dicretization
       = f.input :discretization, label: 'Discretization:'
     .row
       .span4.data_model_specifiers.first_model
-        = f.fields_for :first_motif do |motif_form|
+        = f.fields_for :first_motif, task.first_motif do |motif_form|
           .pseudocount
             = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 1):'
           .effective_count
             = motif_form.input :effective_count, label: 'Effective sample size (model 1):'
       .span4.data_model_specifiers.second_model
-        = f.fields_for :second_motif do |motif_form|
+        = f.fields_for :second_motif, task.second_motif do |motif_form|
           .pseudocount
             = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 2):'
           .effective_count
