@@ -14,10 +14,9 @@ class BackgroundForm
   attribute :gc_content, Float, default: 0.5
   attribute :frequencies, FrequenciesForm, default: FrequenciesForm.uniform
 
-  MODE_VARIANTS = [:wordwise, :gc_content, :frequencies]
   validates :frequencies, recursive_valid: true
   validates :mode, background_mode: true
-  validates :gc_content, inclusion: {in: 0..1, message: 'GC-content must be in [0,1] range'}, if: ->(record){ record.mode == :gc_content }
+  validates :gc_content, numericality: true, inclusion: {in: 0..1, message: 'GC-content must be in [0,1] range'}, if: ->(record){ record.mode == :gc_content }
 
   def frequencies=(value)
     case value

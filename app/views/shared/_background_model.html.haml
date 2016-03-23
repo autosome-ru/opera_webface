@@ -3,6 +3,6 @@
     .mode
       = background_form.input :mode, label: background_title, as: :background_mode_selector
     .gc_content
-      = background_form.input :gc_content, label: 'GC-content:'
+      = background_form.input :gc_content, label: 'GC-content:', as: :float, input_html: {min: 0, max: 1, step: 0.01}
     .frequencies
       = background_form.input :frequencies, as: :nucleotide_frequencies

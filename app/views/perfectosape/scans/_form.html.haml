@@ -3,9 +3,9 @@
     = f.fields_for :snp_list, task.snp_list do |snp_list_form|
       %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequences to scan
       .row.sequence_list
-        .span6.snp_list_text= snp_list_form.input :text, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side):', :as => :text
+        .span6.snp_list_text= snp_list_form.input :text, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side):', :as => :text, i18n_description: 'task_parameters.Perfectosape.ScanForm.snp_list'
       .row
-        .span6.snp_list_file= snp_list_form.input :file, label: 'or load a file with SNP-sequences:', :as => :file
+        .span6.snp_list_file= snp_list_form.input :file, label: 'or load a file with SNP-sequences:', :as => :file, i18n_description: 'task_parameters.Perfectosape.ScanForm.snp_list'
   .collection
     = f.input :collection, label: 'TFBS motif collection:', as: :motif_collection_selector
 

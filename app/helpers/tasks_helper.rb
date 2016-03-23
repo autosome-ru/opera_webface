@@ -10,7 +10,7 @@ module TasksHelper
       all_errors += object.errors.full_messages_for(attribute)  if all_errors.empty?
       additional_options[:error] = all_errors.join(";\n")  unless all_errors.empty?
 
-      i18n_path = ['task_parameters', task_type, attribute].compact.join('.')
+      i18n_path = options[:i18n_description] || ['task_parameters', task_type, attribute].compact.join('.')
       additional_options[:parameter_description] = I18n.t(i18n_path, default: "Description not provided (#{i18n_path})")
      
       options[:input_html] ||= {}

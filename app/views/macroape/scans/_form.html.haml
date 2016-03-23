@@ -22,9 +22,9 @@
     .pvalue_boundary
       = f.input :pvalue_boundary, label: 'P-value boundary:', as: :pvalue_boundary_selector
     .similarity_cutoff
-      = f.input :similarity_cutoff, label: 'Similarity cutoff:'
+      = f.input :similarity_cutoff, label: 'Similarity cutoff:', as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
     .precise_recalc_cutoff
-      = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode:'
+      = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode:', as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
 
     .data_model_specifiers.query_model
       = f.fields_for :query, task.query do |motif_form|
