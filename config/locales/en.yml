@@ -67,10 +67,23 @@ en:
         PCM: 'PCM'
         PWM: 'PWM'
         PPM: 'PPM'
+    sequence_weighting_mode:
+      simple: 'Simple'
+      peak: 'Peak'
+      weighted: 'Weighted'
+    occurences_per_sequence:
+      oops: 'OOPS'
+      zoops_flexible: 'ZOOPS flexible'
+      zoops_strict: 'ZOOPS strict'
+    motif_shape_prior:
+      flat: 'flat'
+      single: 'single'
+      double: 'double'
   task_descriptions:
     EvaluateSimilarity: 'Evaluate Jaccard similarity between two TFBS models (motifs).'
     ScanCollection: 'Scan a collection for TFBS models (motifs) similar to a given query.'
     SnpScan: 'Find TFBS motifs binding alleles of a single-nucleotide variant with different affinity.'
+    MotifDiscovery: 'ChIPMunk is a fast heuristic DNA motif digger based on greedy approach accompanied by bootstrapping. ChIPMunk identifies the strong motif with the maximum Discrete Information Content in a set of DNA sequences. ChIPMunk uses (extended) multifasta as the input format and supports IUPAC DNA letters in the input sequences. '
   task_parameters:
     BackgroundForm:
       mode: |
@@ -97,7 +110,7 @@ en:
         to come from a log-odds transformed PCM or PPM.
       matrix: 'Positional matrix of the motif according to its data model.'
       effective_count: 'Effective sample size (an assumed number of sequences) to convert PPM-to-PCM-to-PWM.'
-      pseudocount: 'Pseudocount value to convert PCM to PWM, taken as log(words) by default.'
+      pseudocount: 'Pseudocount value to convert PCM to PWM, taken as log(words) by default. Positive numeric constant can be used instead of log.'
     Perfectosape:
       ScanForm:
         snp_list: |
