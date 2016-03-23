@@ -1,4 +1,5 @@
 require 'yaml'
+require 'shellwords'
 
 task_params = YAML.load_file('task_params.yaml')
 
@@ -9,7 +10,7 @@ command = ["java -cp ape.jar ru.autosome.perfectosape.SNPScan collection snp_lis
             "--pvalue-cutoff #{max_relevant_pvalue}",
             "--fold-change-cutoff #{min_affinity_change}",
             "-b wordwise"
-          ].join(' ')
+          ].shelljoin
 
 puts command
 
