@@ -1,4 +1,6 @@
 class Sequence
+  SEQUENCE_PATTERN = /\A[ACGTN]+\z/i
+
   attr_reader :sequence, :name
   def initialize(sequence, options = {})
     raise 'Wrong sequence' unless Sequence.valid_sequence?(sequence)
@@ -22,8 +24,21 @@ class Sequence
   end
 
   def self.valid_sequence?(sequence)
-    sequence.match /\A[acgtn]+\z/i
+    !!sequence.match(SEQUENCE_PATTERN)
   end
+
+  def ==(other)
+    other.is_a?(IupacSequence) && other.sequence == sequence
+  end
+
+  def eql?(other)
+    other.class == self.class && other.sequence == sequence
+  end
+
+  def hash
+    sequence.hash
+  end
+
   def to_s
     sequence
   end
