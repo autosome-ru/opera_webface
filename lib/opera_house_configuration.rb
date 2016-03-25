@@ -12,9 +12,12 @@ module OperaHouseConfiguration
   TICKETS_PATH = File.join(root_path, 'log', 'tickets')
   STORIES_PATH = File.join(root_path, 'log', 'stories')
 
-  task_names = {'EvaluateSimilarity' => 'evaluate_similarity',
-                'ScanCollection' => 'scan_collection',
-                'SnpScan' => 'snp_scan' }
+  task_names = {
+    'EvaluateSimilarity' => 'evaluate_similarity',
+    'ScanCollection' => 'scan_collection',
+    'SnpScan' => 'snp_scan',
+    'MotifDiscovery' => 'motif_discovery',
+  }
   OVERTURE_PATH = Hash[ task_names.map{|task_name, task_script| [task_name, File.join(SCORES_PATH, 'overture', "overture_#{task_script}.rb")] } ]
   OPERA_PATH = Hash[ task_names.map{|task_name, task_script| [task_name, File.join(SCORES_PATH, 'opera', "opera_#{task_script}.rb")] } ]
 

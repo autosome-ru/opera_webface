@@ -28,6 +28,9 @@
           = drop_down 'PERFECTOS-APE' do
             = menu_item 'rSNP functional annotation', new_perfectosape_scan_path
             = menu_item 'Description', perfectosape_description_path
+          = drop_down 'ChIPMunk' do
+            = menu_item 'Motif discovery', new_chipmunk_discovery_path
+            = menu_item 'Description', chipmunk_description_path
         = form_tag search_tasks_path, class: 'pull-right navbar-search' do
           = label_tag do
             Ticket number:
