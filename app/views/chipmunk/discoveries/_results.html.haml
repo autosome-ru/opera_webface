@@ -1,38 +1,49 @@
 .motif_logo
   .direct
-    %span.label Primary motif:
+    .label Primary motif:
     = show_image(ticket, 'motif_small_direct.png')
   .revcomp
-    %span.label Reverse complement:
+    .label Reverse complement:
     = show_image(ticket, 'motif_small_revcomp.png')
-- pcm = Bioinform::MotifModel::PCM.from_string( SMBSMCore.get_content(ticket, 'motif.pcm') )
-.dic
-  DIC
-  = pcm.dic
+
+.matrices
+  .pcm
+    .label PCM
+    %span.download= download_link 'Download', ticket, 'motif.pcm'
+    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: t('matrices_rounded_hint')}}
+    %pre><= @chipmunk_infos.pcm.rounded(precision: 3)
+  .pwm
+    .label PWM
+    %span.download= download_link 'Download', ticket, 'motif.pwm'
+    %pre><= @chipmunk_infos.pwm.rounded(precision: 3)
+  .ppm
+    .label PPM
+    %span.download= download_link 'Download', ticket, 'motif.ppm'
+    %pre><= @chipmunk_infos.ppm.rounded(precision: 3)
+
+.threshold
+  .label Threshold
+  = @chipmunk_infos.threshold.round(5)
 .kdic
-  KDIC
-  = pcm.kdic(Bioinform::Background::Uniform.frequencies)
-
-.ppm
-  .label PPM
-  %pre><= Bioinform::MotifModel::PPM.from_string( SMBSMCore.get_content(ticket, 'motif.ppm') ).rounded(precision: 3)
-.pwm
-  .label PWM
-  %pre><= Bioinform::MotifModel::PWM.from_string( SMBSMCore.get_content(ticket, 'motif.pwm') ).rounded(precision: 3)
-
+  .label KDIC
+  = @chipmunk_infos.kdic.round(5)
+.weight
+  .label Weight
+  = @chipmunk_infos.weight
+.diagnosis
+  .label Diagnosis
+  = @chipmunk_infos.diagnosis
+.iupac_consensus
+  .label IUPAC consensus
+  = @chipmunk_infos.iupac_sequence
+.background
+  .label Background
+  = @chipmunk_infos.background
 
 .result_data
-  = download_link t('task_layout.download_results'), ticket, 'task_result.txt'
-  -# = snp_scan_table(task_results, task_params)
+  .chipmunk_results= download_link t('task_layout.download_results'), ticket, 'task_result.txt'
+  .occurences= download_link t('task_layout.download_occurences'), ticket, 'occurences.txt'
 .input_data
-  -# %h5.collection_name
-  -#   Collection:
-  -#   %em= I18n.t "enumerize.collection.#{task_params.collection}"
-  -# .snp_list
-  -#   .my-label
-  -#     SNP list
-  -#     = download_list ticket, {'txt' => 'snp_list.txt'}
-  -#   %pre= (task_params.snp_list.lines.size <= 5) ? task_params.snp_list : task_params.snp_list.lines.first(5).join("\n") + "\n...\n"
   .show_task_params
     .download_sequences= download_link t('task_layout.sequences'), ticket, 'sequences.mfa'
     .download_params= download_link t('task_layout.task_details'), ticket, 'task_params.yaml'

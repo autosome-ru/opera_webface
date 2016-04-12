@@ -27,7 +27,7 @@ class DataModelForm
   validate :check_matrix_valid
 
   private def need_pseudocount?
-    [:PPM, :PCM].include?(data_model) && pseudocount !=  :log
+    [:PPM, :PCM].include?(data_model) && (pseudocount != :log)
   end
 
   private def model_class

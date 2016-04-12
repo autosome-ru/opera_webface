@@ -17,12 +17,21 @@ class Chipmunk::MotifDiscoveryForm
   attribute :min_motif_length, Integer, default: 6
   attribute :sequence_weighting_mode, Symbol, default: :simple
   attribute :occurences_per_sequence, Symbol, default: :oops
-  attribute :gc_content, Float, default: 0.5
+  attribute :gc_content, Object, default: :auto
   attribute :motif_shape_prior, Symbol, default: :flat
-  attribute :try_limit, Integer, default: 100
-  attribute :step_limit, Integer, default: 10
-  attribute :iteration_limit, Integer, default: 1
+  attribute :speed_mode, Symbol, default: :fast
 
+
+  def gc_content=(value)
+    if !value || value.blank? || value.to_s.downcase == 'auto'
+      super(:auto)
+    elsif  value.to_s.downcase == 'uniform'
+      super(:uniform)
+    else
+      val = Float(value) rescue value
+      super(val)
+    end
+  end
 
   validates :max_motif_length, numericality: true, inclusion: { in: 5..22 }
   validates :min_motif_length, numericality: true, inclusion: { in: 5..22 }
@@ -31,13 +40,11 @@ class Chipmunk::MotifDiscoveryForm
   validates :sequence_weighting_mode, inclusion: { in: [:simple, :peak, :weighted] }
   validate :check_sequence_list_validity
 
-  validates :occurences_per_sequence, inclusion: { in: [:oops, :zoops_flexible, :zoops_strict] }
-  validates :gc_content, numericality: true, inclusion: { in: 0..1, message: 'GC-content must be in [0,1] range' }
+  validates :occurences_per_sequence, inclusion: { in: [:oops, :zoops] }
+  validates :gc_content, numericality: true, inclusion: { in: 0..1, message: 'GC-content must be in [0,1] range' }, if: ->(form){ ! [:auto, :uniform].include?(form.gc_content) }
   validates :motif_shape_prior, inclusion: { in: [:flat, :single, :double] }
 
-  validates :try_limit, numericality: true, inclusion: { in: 1...200 }
-  validates :step_limit, numericality: true, inclusion: { in: 1...20 }
-  validates :iteration_limit, numericality: true, inclusion: { in: 1...2 }
+  validates :speed_mode, inclusion: { in: [:fast, :precise] }
 
   def self.task_type; 'MotifDiscovery'; end
 
@@ -76,7 +83,7 @@ class Chipmunk::MotifDiscoveryForm
     when :peak
       errors.add(:sequence_list, "Header of each sequence should be a list of weights (one weight for each nucleotide)")  unless fasta_records.all?{|record|
         weights = record.header.split
-        weights.length == sequence.length && weights.all?{|value| Float(value) rescue false }
+        weights.length == record.length && weights.all?{|value| Float(value) rescue false }
       }
     else
       errors.add(:sequence_weighting_mode, "Unknown weighting mode")

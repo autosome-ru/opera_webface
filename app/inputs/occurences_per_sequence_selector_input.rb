@@ -1,4 +1,4 @@
 class OccurencesPerSequenceSelectorInput < SelectorFromEnumInput
-  variants [:oops, :zoops_flexible, :zoops_strict]
+  variants [:oops, :zoops]
   i18n_scope 'enumerize.occurences_per_sequence'
 end

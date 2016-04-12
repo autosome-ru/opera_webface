@@ -2,26 +2,24 @@
 Toy examples for the #{link_to 'simple', chipmunk_discoveries_path(example: :simple) }, #{link_to 'weighted', chipmunk_discoveries_path(example: :weighted) }, #{link_to 'peak', chipmunk_discoveries_path(example: :peak) } data sets.
 = task_form_for task, :as => :task, url: chipmunk_discovery_path, html: {class: 'task_params chipmunk_discovery'} do |f|
   .motif_discovery_options
-    = f.input :max_motif_length, label: 'Maximum motif length:', as: :integer, input_html: {min: 6, max: 30}
-    = f.input :min_motif_length, label: 'Minimum motif length:', as: :integer, input_html: {min: 6, max: 30}
     = f.input :sequence_weighting_mode, label: 'Sequence weighting mode:', as: :sequence_weighting_mode_selector
-    = f.input :occurences_per_sequence, label: 'Occurences per sequence:', as: :occurences_per_sequence_selector
-    = f.input :gc_content, label: 'Background GC percent:', as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
-    = f.input :motif_shape_prior, label: 'Motif shape prior:', as: :motif_shape_prior_selector
   .sequence_list
     = f.fields_for :sequence_list, task.sequence_list do |sequence_list_form|
       %h5 Paste a list of sequences in a textarea or select a file with sequences to scan
       .sequence_list
-        .sequence_list_text= sequence_list_form.input :text, label: 'Sequence set in the extended multi-fasta format:', :as => :text
-      .sequence_list_file= sequence_list_form.input :file, label: 'or load a file with sequences:', :as => :file
+        .sequence_list_text= sequence_list_form.input :text, label: 'Sequence set in the extended multi-fasta format:', :as => :text, i18n_description: 'task_parameters.Chipmunk.MotifDiscoveryForm.sequence_list'
+      .sequence_list_file= sequence_list_form.input :file, label: 'or load a file with sequences:', :as => :file, i18n_description: 'task_parameters.Chipmunk.MotifDiscoveryForm.sequence_list'
 
   Advanced options:
   .expand_button
     %a{href: '#'} [+]
   .advanced_options
-    = f.input :try_limit, label: 'Try-limit:' , as: :integer
-    = f.input :step_limit, label: 'Step-limit:' , as: :integer
-    = f.input :iteration_limit, label: 'Iteration-limit:' , as: :integer
+    = f.input :speed_mode, label: 'Speed mode:' , as: :speed_mode_selector
+    = f.input :max_motif_length, label: 'Maximum motif length:', as: :integer, input_html: {min: 6, max: 30}
+    = f.input :min_motif_length, label: 'Minimum motif length:', as: :integer, input_html: {min: 6, max: 30}
+    = f.input :occurences_per_sequence, label: 'Occurences per sequence:', as: :occurences_per_sequence_selector
+    = f.input :motif_shape_prior, label: 'Motif shape prior:', as: :motif_shape_prior_selector
+    = f.input :gc_content, label: 'Background GC percent:'#, as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
 
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'

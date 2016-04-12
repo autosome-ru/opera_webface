@@ -1,4 +1,3 @@
-# require 'bioinform'
 require 'fileutils'
 module MotifDiscovery
   def self.perform_overture(opera_status, task_params)

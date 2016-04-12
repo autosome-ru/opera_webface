@@ -73,8 +73,10 @@ en:
       weighted: 'Weighted'
     occurences_per_sequence:
       oops: 'OOPS'
-      zoops_flexible: 'ZOOPS flexible'
-      zoops_strict: 'ZOOPS strict'
+      zoops: 'ZOOPS'
+    speed_mode:
+      fast: 'Fast'
+      precise: 'Precise'
     motif_shape_prior:
       flat: 'flat'
       single: 'single'
@@ -146,6 +148,18 @@ en:
         pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value.'
         pvalue: 'P-value level to select the motif thresholds.'
         discretization: 'PWM discretization.'
+    Chipmunk:
+      MotifDiscoveryForm:
+        max_motif_length: 'Maximal length of motif to look for.'
+        min_motif_length: 'Minimal length of motif to look for.'
+        occurences_per_sequence: 'Number of occurences per sequence. <em>OOPS</em> is for one occurence per sequence. <em>ZOOPS</em> is for zero or one occurence per sequence.'
+        sequence_weighting_mode: 'Sequence weighting mode: <em>simple</em> for unweighted sequences, <em>weight</em> for weighted sequences, <em>peak</em> for a sequence with nucleotides weighted differently.'
+        speed_mode: '<em>Fast mode</em>: use to roughly and quickly estimate the motif in a given lenghts range.<br/><em>Precise mode</em>: use to produce an accurate motif representation in a smaller lengths range.'
+        motif_shape_prior: "<em>Flat</em> (no prior); <em>single</em> box and <em>double</em> box motif shapes. Note, that motif shape prior won't affect very strong motifs or well-consistent data sets."
+        sequence_list: 'List of sequences.'
+        gc_content: 'Background GC-content. Use `auto` to estimate nucleotide frequencies from the provided set of input sequences or a value in a range from&nbsp;0&nbsp;to&nbsp;1.'
+
+  matrices_rounded_hint: 'Rounded version of matrices are shown, download precise version.'
   # The values :model, :attribute and :value are always available for interpolation
   # The value :count is available when applicable. Can be used for pluralization.
   activemodel:

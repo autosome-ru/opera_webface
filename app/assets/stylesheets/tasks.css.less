@@ -46,6 +46,11 @@
     }
     .description {
       margin-left: 10px;
+      em {
+        font-weight: bolder;
+        font-style: italic;
+        font-size: 1.1em;
+      }
     }
     .hint {
       margin-left: 10px;
@@ -114,7 +119,7 @@ em {
   }
   input {
     display: inline;
-    width: 35px;
+    width: 45px;
   }
 }
 
@@ -207,4 +212,27 @@ table.colorized {
 
 button[type="reset"] {
   float: right;
+}
+
+.pcm, .ppm, .pwm {
+  display: inline-block;
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+  pre {
+    width: 250px;
+  }
+}
+
+.help-icon {
+  width: 16px;
+  height: 16px;
+  background-size: 16px 16px;
+  margin-left: 5px;
+  vertical-align: bottom;
+  background-image: url("help-icon.png");
+  display: inline-block;
+  &:hover {
+    cursor: pointer;
+  }
 }
