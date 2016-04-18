@@ -9,9 +9,11 @@ module ChIPMunk
       :iupac_sequence, :diagnosis)
 
   class Result
+    Nucleotides = ['A', 'C', 'G', 'T']
     def initialize(*args, &block)
       super
       raise ArgumentError, 'PCM and PWM are inconsistent (have different length)'  unless pcm.length == pwm.length
+      raise ArgumentError, 'PCM and occurences are inconsistent (have different length)'  unless occurences.all?{|word| word.length == pcm.length }
     end
 
     def self.from_hash(hsh)
@@ -35,15 +37,15 @@ module ChIPMunk
     private_class_method :parse_chipmunk_output
 
     def self.extract_pcm(infos)
-      matrix = ['A', 'C', 'G', 'T'].map{|letter|
+      matrix = Nucleotides.map{|letter|
         infos[letter].split.map(&:to_f)
       }.transpose
       Bioinform::MotifModel::PCM.new(matrix)
     end
 
     def self.extract_pwm(infos)
-      matrix = ['PWMA', 'PWMC', 'PWMG', 'PWMT'].map{|letter|
-        infos[letter].split.map(&:to_f)
+      matrix = Nucleotides.map{|letter|
+        infos["PWM#{letter}"].split.map(&:to_f)
       }.transpose
       Bioinform::MotifModel::PWM.new(matrix)
     end

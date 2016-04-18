@@ -17,6 +17,7 @@ module OperaHouseConfiguration
     'ScanCollection' => 'scan_collection',
     'SnpScan' => 'snp_scan',
     'MotifDiscovery' => 'motif_discovery',
+    'MotifDiscoveryDi' => 'motif_discovery_di',
   }
   OVERTURE_PATH = Hash[ task_names.map{|task_name, task_script| [task_name, File.join(SCORES_PATH, 'overture', "overture_#{task_script}.rb")] } ]
   OPERA_PATH = Hash[ task_names.map{|task_name, task_script| [task_name, File.join(SCORES_PATH, 'opera', "opera_#{task_script}.rb")] } ]

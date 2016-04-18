@@ -41,10 +41,19 @@ OperaWebface::Application.routes.draw do
   end
 
   namespace :chipmunk do
-    get 'discovery' => 'discoveries#new'
-    resources :discoveries, only: [:new, :create, :show], path: 'discovery' do
-      get 'perform', :on => :member
-      get 'description', :on => :collection
+    namespace :discovery do
+      get '/' => 'mono#new'
+      get 'mono' => 'mono#new'
+      resources :mono, only: [:new, :create, :show], path: 'mono' do
+        get 'perform', :on => :member
+        get 'description', :on => :collection
+      end
+
+      get 'di' => 'di#new'
+      resources :di, only: [:new, :create, :show], path: 'di' do
+        get 'perform', :on => :member
+        get 'description', :on => :collection
+      end
     end
   end
 

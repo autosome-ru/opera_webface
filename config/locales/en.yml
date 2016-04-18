@@ -86,6 +86,7 @@ en:
     ScanCollection: 'Scan a collection for TFBS models (motifs) similar to a given query.'
     SnpScan: 'Find TFBS motifs binding alleles of a single-nucleotide variant with different affinity.'
     MotifDiscovery: 'ChIPMunk is a fast heuristic DNA motif digger based on greedy approach accompanied by bootstrapping. ChIPMunk identifies the strong motif with the maximum Discrete Information Content in a set of DNA sequences. ChIPMunk uses (extended) multifasta as the input format and supports IUPAC DNA letters in the input sequences. '
+    MotifDiscoveryDi: 'diChIPMunk is a fast heuristic DNA motif digger based on greedy approach accompanied by bootstrapping. ChIPMunk identifies the strong motif with the maximum Discrete Information Content in a set of DNA sequences. ChIPMunk uses (extended) multifasta as the input format and supports IUPAC DNA letters in the input sequences. Dinucleotide version'
   task_parameters:
     BackgroundForm:
       mode: |

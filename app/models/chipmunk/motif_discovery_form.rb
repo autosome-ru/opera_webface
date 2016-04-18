@@ -71,10 +71,6 @@ class Chipmunk::MotifDiscoveryForm
       errors.add(:sequence_list, "Total length of sequences in web version can't be greater than 102400 bp")
     end
 
-    unless fasta_records.all?{|record| record.length >= max_motif_length }
-      errors.add(:sequence_list, "Motif length can't be greater than sequence length")
-    end
-
     case sequence_weighting_mode
     when :simple
       # pass
