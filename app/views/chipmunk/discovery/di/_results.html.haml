@@ -9,16 +9,16 @@
 .matrices
   .pcm
     .label PCM
-    %span.download= download_link 'Download', ticket, 'motif.pcm'
+    %span.download= download_link 'Download', ticket, 'motif.dpcm'
     .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: t('matrices_rounded_hint')}}
     -# %pre><= @chipmunk_infos.pcm.rounded(precision: 3)
   .pwm
     .label PWM
-    %span.download= download_link 'Download', ticket, 'motif.pwm'
+    %span.download= download_link 'Download', ticket, 'motif.dpwm'
     -# %pre><= @chipmunk_infos.pwm.rounded(precision: 3)
   .ppm
     .label PPM
-    %span.download= download_link 'Download', ticket, 'motif.ppm'
+    %span.download= download_link 'Download', ticket, 'motif.dppm'
     -# %pre><= @chipmunk_infos.ppm.rounded(precision: 3)
 
 .threshold

@@ -5,6 +5,7 @@ require 'bioinform'
 
 require 'chipmunk_runner'
 require 'chipmunk_dinucleotide_result'
+require 'sequence_logo_generator'
 
 # choose orientation such that total Cytosines are not greater than total Guanines
 def pcm_prefered_orientation(pcm)
@@ -38,15 +39,18 @@ File.write('occurences.txt', ['#' + ChIPMunk::Occurence.headers.join("\t"), *inf
 
 case pcm_prefered_orientation(infos.pcm)
 when :direct
-  File.write('motif.pcm', infos.pcm.named($ticket))
-  File.write('motif.pwm', infos.pwm.named($ticket))
-  File.write('motif.ppm', infos.ppm.named($ticket))
+  File.write('motif.dpcm', infos.pcm.named($ticket))
+  File.write('motif.dpwm', infos.pwm.named($ticket))
+  File.write('motif.dppm', infos.ppm.named($ticket))
 when :revcomp
-  File.write('motif.pcm', infos.pcm.revcomp.named($ticket))
-  File.write('motif.pwm', infos.pwm.revcomp.named($ticket))
-  File.write('motif.ppm', infos.ppm.revcomp.named($ticket))
+  File.write('motif.dpcm', infos.pcm.revcomp.named($ticket))
+  File.write('motif.dpwm', infos.pwm.revcomp.named($ticket))
+  File.write('motif.dppm', infos.ppm.revcomp.named($ticket))
 end
 
-FileUtils.cp 'motif.pcm', 'motif_small.pcm' # Hack to make logos with different name
-SMBSMCore.soloist("sequence_logo motif.pcm --dinucleotide --x-unit 45 --y-unit 90 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
-SMBSMCore.soloist("sequence_logo motif_small.pcm --dinucleotide --x-unit 20 --y-unit 40 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
+FileUtils.cp 'motif.dpcm', 'motif_small.dpcm' # Hack to make logos with different name
+# SMBSMCore.soloist("sequence_logo motif.dpcm --dinucleotide --x-unit 45 --y-unit 90 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
+# SMBSMCore.soloist("sequence_logo motif_small.dpcm --dinucleotide --x-unit 20 --y-unit 40 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
+
+SequenceLogoGenerator.run_dinucleotide(pcm_files: ['motif.dpcm'], output_folder: '.', orientation: 'both', x_unit: 30, y_unit: 60)
+SequenceLogoGenerator.run_dinucleotide(pcm_files: ['motif_small.dpcm'], output_folder: '.', orientation: 'both', x_unit: 20, y_unit: 40)
