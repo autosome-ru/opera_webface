@@ -1,6 +1,7 @@
 OperaWebface::Application.routes.draw do
 
   root 'welcome#index'
+  get 'contacts' => 'welcome#contacts'
   get "scene/:id/download/:filename" => "scene#download", :as => :download_from_scene, filename: /[^\/]+/
   get "scene/:id/show/:filename" => "scene#show", :as => :show_from_scene, filename: /[^\/]+/
 

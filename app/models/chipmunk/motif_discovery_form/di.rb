@@ -1,4 +1,7 @@
 class Chipmunk::MotifDiscoveryForm::Di < Chipmunk::MotifDiscoveryForm
+  attribute :gc_content, Symbol, default: :auto
+  validates :gc_content, inclusion: { in: [:auto, :uniform] }
+
   def self.task_type; 'MotifDiscoveryDi'; end
 
   private def check_sequence_list_validity

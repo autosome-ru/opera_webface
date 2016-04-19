@@ -5,6 +5,10 @@ class Chipmunk::DiscoveryController < ::TasksController
 
   protected
 
+  def reload_page_time
+    30
+  end
+
   def default_params
     common_options = {
       min_motif_length: 6, max_motif_length: 15,
@@ -33,7 +37,7 @@ class Chipmunk::DiscoveryController < ::TasksController
       specific_options = {
         sequence_weighting_mode: :peak,
         sequence_list: TextOrFileForm.new(text: peak_sequences),
-        gc_content: 0.5,
+        gc_content: :uniform,
       }
     end
 

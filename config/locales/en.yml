@@ -63,6 +63,9 @@ en:
     pvalue_boundary:
       lower: 'Lower'
       upper: 'Upper'
+    gc_content:
+      auto: 'Detect GC-content automatically'
+      uniform: 'Uniform background'
     motif_type:
         PCM: 'PCM'
         PWM: 'PWM'

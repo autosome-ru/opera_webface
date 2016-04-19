@@ -19,8 +19,7 @@ Toy examples for the #{link_to 'simple', chipmunk_discovery_mono_path(example: :
     = f.input :min_motif_length, label: 'Minimum motif length:', as: :integer, input_html: {min: 6, max: 30}
     = f.input :occurences_per_sequence, label: 'Occurences per sequence:', as: :occurences_per_sequence_selector
     = f.input :motif_shape_prior, label: 'Motif shape prior:', as: :motif_shape_prior_selector
-    = f.input :gc_content, label: 'Background GC percent:'#, as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
-
+    = f.input :gc_content, label: 'Background GC percent:', as: :gc_content_selector
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
   = f.button :button, 'Reset', :type => 'reset', :class => 'btn btn-warning'

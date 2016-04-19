@@ -17,21 +17,8 @@ class Chipmunk::MotifDiscoveryForm
   attribute :min_motif_length, Integer, default: 6
   attribute :sequence_weighting_mode, Symbol, default: :simple
   attribute :occurences_per_sequence, Symbol, default: :oops
-  attribute :gc_content, Object, default: :auto
   attribute :motif_shape_prior, Symbol, default: :flat
   attribute :speed_mode, Symbol, default: :fast
-
-
-  def gc_content=(value)
-    if !value || value.blank? || value.to_s.downcase == 'auto'
-      super(:auto)
-    elsif  value.to_s.downcase == 'uniform'
-      super(:uniform)
-    else
-      val = Float(value) rescue value
-      super(val)
-    end
-  end
 
   validates :max_motif_length, numericality: true, inclusion: { in: 5..22 }
   validates :min_motif_length, numericality: true, inclusion: { in: 5..22 }
