@@ -71,7 +71,7 @@ end
 
 gem 'rmagick'
 
-gem 'bioinform', '~> 0.3.0'
-gem 'sequence_logo', '~> 1.2'
+gem 'bioinform', '~> 0.3.1'
+gem 'sequence_logo', '~> 1.2.2'
 
 # gem 'active_form'
