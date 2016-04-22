@@ -32,7 +32,7 @@ class TasksController < ApplicationController
     @status = SMBSMCore.get_status(@ticket)
     render action: 'ticket_not_found' and return  unless @status
 
-    if model_class.task_type != @status.opera_name
+    if self.class != choose_opera_controller(@status.opera_name)
       redirect_to controller: choose_opera_controller(@status.opera_name).controller_path, action: 'show', id: @ticket
       return
     end
@@ -47,7 +47,8 @@ class TasksController < ApplicationController
 protected
 
   def choose_opera_controller(opera_name)
-    [Macroape::ScansController, Macroape::ComparesController, Perfectosape::ScansController].detect{|cntrl| cntrl.model_class.task_type == opera_name}
+    task_controllers = [Macroape::ScansController, Macroape::ComparesController, Perfectosape::ScansController, Chipmunk::Discovery::DiController, Chipmunk::Discovery::MonoController]
+    task_controllers.detect{|cntrl| cntrl.model_class.task_type == opera_name}
   end
 
   def permitted_params
