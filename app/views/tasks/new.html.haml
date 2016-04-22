@@ -19,4 +19,4 @@
           Please fix following errors:
         %ul
           - @task.errors.full_messages.each do |msg|
-            %li= msg
+            %li= msg.html_safe

@@ -178,6 +178,7 @@ en:
             motif_type:
               inclusion: 'Unknown motif type `%{value}`'
   errors:
+    format: '<div class="attribute-name">%{attribute}:</div> %{message}'
     attributes:
       collection:
         inclusion: 'Unknown collection name `%{value}`'
