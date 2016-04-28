@@ -5,16 +5,14 @@ module TaskForm
     def task_type
       name
     end
+  end
 
-    # def permitted_params_list
-    #   attributes.map{|attr|
-    #     attr.respond_to?(permitted_params) 
-    #   }
-    # end
+  def task_attributes
+    attributes
   end
 
   def task_params
-    attributes.map{|attr_key, attr_value|
+    task_attributes.map{|attr_key, attr_value|
       if attr_value.respond_to?(:task_params)
         val = attr_value.task_params
       elsif attr_value.respond_to?(:attributes)
