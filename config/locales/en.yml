@@ -88,8 +88,8 @@ en:
     EvaluateSimilarity: 'Evaluate Jaccard similarity between two TFBS models (motifs).'
     ScanCollection: 'Scan a collection for TFBS models (motifs) similar to a given query.'
     SnpScan: 'Find TFBS motifs binding alleles of a single-nucleotide variant with different affinity.'
-    MotifDiscovery: 'ChIPMunk is a fast heuristic DNA motif digger based on greedy approach accompanied by bootstrapping. ChIPMunk identifies the strong motif with the maximum Discrete Information Content in a set of DNA sequences. ChIPMunk uses (extended) multifasta as the input format and supports IUPAC DNA letters in the input sequences. '
-    MotifDiscoveryDi: 'diChIPMunk is a fast heuristic DNA motif digger based on greedy approach accompanied by bootstrapping. ChIPMunk identifies the strong motif with the maximum Discrete Information Content in a set of DNA sequences. ChIPMunk uses (extended) multifasta as the input format and supports IUPAC DNA letters in the input sequences. Dinucleotide version'
+    MotifDiscovery: 'De novo motif discovery in nucleotide sequences.'
+    MotifDiscoveryDi: 'De novo dinucleotide motif discovery in nucleotide sequences.'
   task_parameters:
     BackgroundForm:
       mode: |
@@ -154,14 +154,28 @@ en:
         discretization: 'PWM discretization.'
     Chipmunk:
       MotifDiscoveryForm:
-        sequence_weighting_mode: 'Use <em>simple/standard</em> mode for basic sequences,<br/><em>weighted</em> mode for sequences with prior reliability data (higher weight = more impact on resulting motif),<br/><em>peak</em> mode for sequences with positional prior data (higher prior values = preferred motif location),<br/><em>single-stranded</em> mode for RNA motif discovery (ATGC alphabet).'
+        sequence_weighting_mode: |
+          Use <em>simple/standard</em> mode for basic sequences,<br/>
+          <em>weighted</em> mode for sequences with prior reliability data (higher weight = more impact on resulting motif),<br/>
+          <em>peak</em> mode for sequences with positional prior data (higher prior values = preferred motif location),<br/>
+          <em>single-stranded</em> mode for RNA motif discovery (ATGC alphabet).
         sequence_list: 'Paste a set of sequences in multi-fasta format. See toy examples and the <a href="/downloads/chipmunk-userguide-v6.pdf">program manual</a> for details.'
-        speed_mode: '<em>fast</em> - rough mode to quickly check your data for putative pattern.<br/><em>precise</em> - detailed analysis providing more robust results. For practical applications requiring the most precise motif models we suggest the stand-alone version and manual parameter settings.'
+        speed_mode: |
+          <em>fast</em> - rough mode to quickly check your data for putative pattern.<br/>
+          <em>precise</em> - detailed analysis providing more robust results.<br/>
+          For practical applications requiring the most precise motif models we suggest the stand-alone version and manual parameter settings.
         max_motif_length: ''
         min_motif_length: ''
-        occurences_per_sequence: 'Occurences per sequence:<br/><em>OOPS</em> - one occurrence per sequence (classic gapless local multiple alignment).<br/><em>ZOOPS</em> - zero or one occurrence per sequence (automatic threshold selection to filter sequences w/o reliable motif occurrences).'
-        motif_shape_prior: "<em>flat</em> - no prior on motif shape;<br/><em>single</em> - single-box motif shape (prefer motifs fitting one DNA helix pitch, motif lengths around 10-11bps are recommended)<br/><em>double</em> - double-box motif shape (prefer motifs with two boxes, longer motif lengths of 15 to 21 are recommended)."
-        gc_content: 'Background GC-content. Use `auto` to estimate nucleotide frequencies from the provided set of input sequences or a value in a range from&nbsp;0&nbsp;to&nbsp;1.'
+        occurences_per_sequence: |
+          Occurences per sequence:<br/>
+          <em>OOPS</em> - one occurrence per sequence (classic gapless local multiple alignment).<br/>
+          <em>ZOOPS</em> - zero or one occurrence per sequence (automatic threshold selection to filter sequences w/o reliable motif occurrences).
+        motif_shape_prior: |
+          <em>flat</em> - no prior on motif shape;<br/>
+          <em>single</em> - single-box motif shape (prefer motifs fitting one DNA helix pitch, motif lengths around 10-11bps are recommended)<br/>
+          <em>double</em> - double-box motif shape (prefer motifs with two boxes, longer motif lengths of 15 to 21 are recommended).
+        gc_content: |
+          Background GC-content. Use <em>auto</em> to estimate nucleotide frequencies from the provided set of input sequences or a value in a range from&nbsp;0&nbsp;to&nbsp;1.
   label:
     Chipmunk:
       MotifDiscoveryForm:
@@ -169,8 +183,8 @@ en:
         sequence_list_text: 'Sequence set in extended multi-fasta format:'
         sequence_list_file: 'or load a file with sequences:'
         speed_mode: 'Speed mode:'
-        min_motif_length: 'Minimum motif length:'
-        max_motif_length: 'Maximum motif length:'
+        min_motif_length: 'Minimal motif length:'
+        max_motif_length: 'Maximal motif length:'
         occurences_per_sequence: 'Occurences per sequence:'
         motif_shape_prior: 'Motif shape prior:'
         gc_content: 'Background GC percent:'
