@@ -76,10 +76,22 @@ module Perfectosape::ScansHelper
 
   # highlight_TFBS('ACGTtTGCA', 2, 6) --> AC<em>GTtTGC</em>A
   def highlight_TFBS(sequence, tfbs_position, length, snp_position)
+    if tfbs_position < 0
+      sequence = ('n' * tfbs_position.abs + sequence)
+      snp_position += tfbs_position.abs
+      tfbs_position = 0
+    end
+    if tfbs_position + length < sequence.length
+      right_flank = ''
+      right_after_flank = sequence[(tfbs_position + length)..-1]
+    else
+      right_flank = 'n' * (tfbs_position + length - sequence.length)
+      right_after_flank = ''
+    end
     sequence[0...tfbs_position] + '<span class="tfbs">' +
       sequence[tfbs_position...snp_position] +
       "<span class=\"snp-position snp-position-#{sequence[snp_position].upcase}\">" + sequence[snp_position] + '</span>' +
-      sequence[(snp_position + 1)...(tfbs_position + length)] +
-      '</span>' + sequence[(tfbs_position + length)..-1]
+      sequence[(snp_position + 1)...(tfbs_position + length)] + right_flank +
+      '</span>' + right_after_flank
   end
 end
