@@ -95,6 +95,7 @@ $(document).ready ->
     advanced_section = $(this)
     if  advanced_section.find('[data-error]').size() > 0
       advanced_section.show()
+      $('.expand_button').html('<a href="#">[&ndash;]</a>')
 
   # enable button if we return back in history to a page where button was disabled during submission
   $('.task_params input[type="submit"]').attr('disabled', false)
