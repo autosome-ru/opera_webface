@@ -21,6 +21,7 @@ class Chipmunk::MotifDiscoveryForm
   attribute :occurences_per_sequence, Symbol, default: :oops
   attribute :motif_shape_prior, Symbol, default: :flat
   attribute :speed_mode, Symbol, default: :fast
+  attribute :gc_content, Symbol, default: :auto
 
   validates :max_motif_length, numericality: true, inclusion: { in: 5..22 }
   validates :min_motif_length, numericality: true, inclusion: { in: 5..22 }
@@ -30,9 +31,8 @@ class Chipmunk::MotifDiscoveryForm
   validate :check_sequence_list_validity_text_or_file
 
   validates :occurences_per_sequence, inclusion: { in: [:oops, :zoops] }
-  validates :gc_content, numericality: true, inclusion: { in: 0..1, message: 'GC-content must be in [0,1] range' }, if: ->(form){ ! [:auto, :uniform].include?(form.gc_content) }
+  validates :gc_content, inclusion: { in: [:auto, :uniform] }
   validates :motif_shape_prior, inclusion: { in: [:flat, :single, :double] }
-
   validates :speed_mode, inclusion: { in: [:fast, :precise] }
 
   def task_attributes

@@ -64,8 +64,8 @@ en:
       lower: 'Lower'
       upper: 'Upper'
     gc_content:
-      auto: 'Detect GC-content automatically'
-      uniform: 'Uniform background'
+      auto: 'Auto-detect'
+      uniform: 'Uniform'
     motif_type:
         PCM: 'PCM'
         PWM: 'PWM'
@@ -183,6 +183,10 @@ en:
           <em>double</em> - double-box motif shape (prefer motifs with two boxes, longer motif lengths of 15 to 21 are recommended).
         gc_content: |
           Background GC-content. Use <em>auto</em> to estimate nucleotide frequencies from the provided set of input sequences or a value in a range from&nbsp;0&nbsp;to&nbsp;1.
+        Di:
+          gc_content: |
+            Background model. Use <em>auto</em> to estimate nucleotide frequencies from the provided set of input sequences or <em>uniform</em> to treat all nucleotides equiprobable.
+
   label:
     Perfectosape:
       ScanForm:
@@ -213,6 +217,8 @@ en:
         occurences_per_sequence: 'Occurences per sequence:'
         motif_shape_prior: 'Motif shape prior:'
         gc_content: 'Background GC percent:'
+        Di:
+          gc_content: 'Background dinucleotide composition:'
 
   matrices_rounded_hint: 'Rounded version of matrices are shown, download precise version.'
   # The values :model, :attribute and :value are always available for interpolation

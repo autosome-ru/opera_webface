@@ -1,18 +1,14 @@
 class Chipmunk::MotifDiscoveryForm::Mono < Chipmunk::MotifDiscoveryForm
-  attribute :gc_content, Object, default: :auto
+  def self.task_type; 'MotifDiscovery'; end
 
-  def gc_content=(value)
-    if !value || value.blank? || value.to_s.downcase == 'auto'
-      super(:auto)
-    elsif !value || value.blank? || value.to_s.downcase == 'uniform'
-      super(0.5)
+  def task_attributes
+    result = super
+    if result[:gc_content] == :uniform
+      result.merge(gc_content: 0.5)
     else
-      val = Float(value) rescue value
-      super(val)
+      result
     end
   end
-
-  def self.task_type; 'MotifDiscovery'; end
 
   private def check_sequence_list_validity(sequence_list_attribute, sequence_list_value)
     super
