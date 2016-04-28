@@ -119,11 +119,14 @@ en:
       pseudocount: 'Pseudocount value to convert PCM to PWM, taken as log(words) by default. Positive numeric constant can be used instead of log.'
     Perfectosape:
       ScanForm:
-        snp_list: |
+        snp_list: &snp_list |
           List of SNVs entries to be tested. Each entry should be on a separate line.
           Each entry should consist of an SNV name and the variant with
-          flanking sequences, e.g.: <br>rs10040172&nbsp;gccctgattgcagttactga[G/A]tggtacagacatcgtaataa
-          <br>It is suggested to use flanking sequences of ~25bps.
+          flanking sequences, e.g.: <br/>
+          <tt>rs10040172&nbsp;cagttactga[G/A]tggtacagac</tt><br/>
+          It is suggested to use flanking sequences of ~25bps.
+        snp_list_text: *snp_list
+        snp_list_file: *snp_list
         collection: |
           Collection of transcription factor binding site models (motifs).
           Available collections:
@@ -159,7 +162,11 @@ en:
           <em>weighted</em> mode for sequences with prior reliability data (higher weight = more impact on resulting motif),<br/>
           <em>peak</em> mode for sequences with positional prior data (higher prior values = preferred motif location),<br/>
           <em>single-stranded</em> mode for RNA motif discovery (ATGC alphabet).
-        sequence_list: 'Paste a set of sequences in multi-fasta format. See toy examples and the <a href="/downloads/chipmunk-userguide-v6.pdf">program manual</a> for details.'
+        sequence_list: &sequence_list |
+          Paste a set of sequences in multi-fasta format.<br/>
+          See toy examples and the <a href="/downloads/chipmunk-userguide-v6.pdf">program manual</a> for details.
+        sequence_list_text: *sequence_list
+        sequence_list_file: *sequence_list
         speed_mode: |
           <em>fast</em> - rough mode to quickly check your data for putative pattern.<br/>
           <em>precise</em> - detailed analysis providing more robust results.<br/>
@@ -177,6 +184,13 @@ en:
         gc_content: |
           Background GC-content. Use <em>auto</em> to estimate nucleotide frequencies from the provided set of input sequences or a value in a range from&nbsp;0&nbsp;to&nbsp;1.
   label:
+    Perfectosape:
+      ScanForm:
+        snp_list_text: 'SNPs with flanking sequences (at least 25 nucleotides from each side):'
+        snp_list_file: 'or load a file with SNP-sequences:'
+        collection: 'TFBS motif collection:'
+        pvalue_cutoff: 'P-value cutoff:'
+        fold_change_cutoff: 'Fold change cutoff:'
     Chipmunk:
       MotifDiscoveryForm:
         sequence_weighting_mode: 'Mode:'

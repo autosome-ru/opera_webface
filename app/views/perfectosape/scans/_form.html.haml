@@ -1,24 +1,21 @@
 = task_form_for task, :as => :task, url: perfectosape_scan_path, html: {class: 'task_params'} do |f|
   .snp_list
-    = f.fields_for :snp_list, task.snp_list do |snp_list_form|
-      %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequences to scan
-      .row.sequence_list
-        .span6.snp_list_text= snp_list_form.input :text, label: 'SNPs with flanking sequences (at least 25 nucleotides from each side):', :as => :text, i18n_description: 'task_parameters.Perfectosape.ScanForm.snp_list'
-      .row
-        .span6.snp_list_file= snp_list_form.input :file, label: 'or load a file with SNP-sequences:', :as => :file, i18n_description: 'task_parameters.Perfectosape.ScanForm.snp_list'
+    %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequences to scan
+    .row.sequence_list
+      .span6.snp_list_text= f.input :snp_list_text, :as => :text
+    .row
+      .span6.snp_list_file= f.input :snp_list_file, :as => :file
   .collection
-    = f.input :collection, label: 'TFBS motif collection:', as: :motif_collection_selector
+    = f.input :collection, as: :motif_collection_selector
 
   Advanced options:
   .expand_button
     %a{href: '#'} [+]
   .advanced_options
     .pvalue_cutoff
-      = f.input :pvalue_cutoff, label: 'P-value cutoff:'
+      = f.input :pvalue_cutoff
     .fold_change_cutoff
-      = f.input :fold_change_cutoff, label: 'Fold change cutoff:'
-
-    / = render partial:'shared/background_model', locals: {form_builder: f, object_name: :background, object_value: task.background, background_title: 'Background'}
+      = f.input :fold_change_cutoff
 
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
