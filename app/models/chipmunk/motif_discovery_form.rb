@@ -12,7 +12,9 @@ class Chipmunk::MotifDiscoveryForm
   include Virtus.model(nullify_blank: true)
   include TaskForm
 
-  attribute :sequence_list, TextOrFileForm
+  attribute :sequence_list_text, String
+  attribute :sequence_list_file, IO, default: nil # `default` is necessary because otherwise `IO.new` will be invoked (without arguments it raises)
+
   attribute :max_motif_length, Integer, default: 15
   attribute :min_motif_length, Integer, default: 6
   attribute :sequence_weighting_mode, Symbol, default: :simple
@@ -25,13 +27,23 @@ class Chipmunk::MotifDiscoveryForm
   validate :check_min_motif_length_not_greater_than_max
 
   validates :sequence_weighting_mode, inclusion: { in: [:simple, :peak, :weighted] }
-  validate :check_sequence_list_validity
+  validate :check_sequence_list_validity_text_or_file
 
   validates :occurences_per_sequence, inclusion: { in: [:oops, :zoops] }
   validates :gc_content, numericality: true, inclusion: { in: 0..1, message: 'GC-content must be in [0,1] range' }, if: ->(form){ ! [:auto, :uniform].include?(form.gc_content) }
   validates :motif_shape_prior, inclusion: { in: [:flat, :single, :double] }
 
   validates :speed_mode, inclusion: { in: [:fast, :precise] }
+
+  def task_attributes
+    result = attributes.reject{|attr_name, attr_value|
+      [:sequence_list_text, :sequence_list_file].include?(attr_name)
+    }.merge(sequence_list: sequence_list)
+  end
+
+  def sequence_list
+    @sequence_list ||= sequence_list_file ? sequence_list_file.read : sequence_list_text
+  end
 
   def self.task_type; 'MotifDiscovery'; end
 
@@ -42,29 +54,37 @@ class Chipmunk::MotifDiscoveryForm
     end
   end
 
-  private def check_sequence_list_validity
-    text = sequence_list.value
-    errors.add(:sequence_list, 'Sequences are not a valid multi-FASTA')  unless FastaRecord.all_records_valid?(text)
+  private def check_sequence_list_validity_text_or_file
+    if sequence_list_file
+      check_sequence_list_validity(:sequence_list_file, sequence_list)
+    else
+      check_sequence_list_validity(:sequence_list_text, sequence_list)
+    end
+  end
 
-    fasta_records = FastaRecord.each_record(text)
+  private def check_sequence_list_validity(sequence_list_attribute, sequence_list_value)
+    errors.add(sequence_list_attribute, 'No sequences provided')  if sequence_list_value.blank?
+    errors.add(sequence_list_attribute, 'Sequences are not a valid multi-FASTA')  unless FastaRecord.all_records_valid?(sequence_list_value)
 
-    errors.add(:sequence_list, "Specify at least two sequences")  unless fasta_records.size >= 2
+    fasta_records = FastaRecord.each_record(sequence_list_value)
+
+    errors.add(sequence_list_attribute, "Specify at least two sequences")  unless fasta_records.size >= 2
 
     unless fasta_records.all?{|record|  IupacSequence.valid_sequence?(record.sequence)  }
-      errors.add(:sequence_list, 'Sequences are not IUPAC sequences')
+      errors.add(sequence_list_attribute, 'Sequences are not IUPAC sequences')
     end
 
     unless fasta_records.map(&:length).inject(0, &:+) <= 102400
-      errors.add(:sequence_list, "Total length of sequences in web version can't be greater than 102400 bp")
+      errors.add(sequence_list_attribute, "Total length of sequences in web version can't be greater than 102400 bp")
     end
 
     case sequence_weighting_mode
     when :simple
       # pass
     when :weighted
-      errors.add(:sequence_list, "Header of each sequence should be a weight")  unless fasta_records.all?{|record| Float(record.header) rescue false }
+      errors.add(sequence_list_attribute, "Header of each sequence should be a weight")  unless fasta_records.all?{|record| Float(record.header) rescue false }
     when :peak
-      errors.add(:sequence_list, "Header of each sequence should be a list of weights (one weight for each nucleotide)")  unless fasta_records.all?{|record|
+      errors.add(sequence_list_attribute, "Header of each sequence should be a list of weights (one weight for each nucleotide)")  unless fasta_records.all?{|record|
         weights = record.header.split
         weights.length == record.length && weights.all?{|value| Float(value) rescue false }
       }

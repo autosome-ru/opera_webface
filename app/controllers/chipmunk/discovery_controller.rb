@@ -19,24 +19,21 @@ class Chipmunk::DiscoveryController < ::TasksController
 
     case (params[:example] || :simple).to_sym
     when :simple
-      simple_sequences = File.read( Rails.root.join('public/chipmunk_sequences_simple.txt') )
       specific_options = {
         sequence_weighting_mode: :simple,
-        sequence_list: TextOrFileForm.new(text: simple_sequences),
+        sequence_list_text: File.read( Rails.root.join('public/chipmunk_sequences_simple.txt') ),
         gc_content: :auto,
       }
     when :weighted
-      weighted_sequences = File.read( Rails.root.join('public/chipmunk_sequences_weighted.txt') )
       specific_options = {
         sequence_weighting_mode: :weighted,
-        sequence_list: TextOrFileForm.new(text: weighted_sequences),
+        sequence_list_text: File.read( Rails.root.join('public/chipmunk_sequences_weighted.txt') ),
         gc_content: :auto,
       }
     when :peak
-      peak_sequences = File.read( Rails.root.join('public/chipmunk_sequences_peak.txt') )
       specific_options = {
         sequence_weighting_mode: :peak,
-        sequence_list: TextOrFileForm.new(text: peak_sequences),
+        sequence_list_text: File.read( Rails.root.join('public/chipmunk_sequences_peak.txt') ),
         gc_content: :uniform,
       }
     end

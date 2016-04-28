@@ -166,7 +166,7 @@ en:
     Chipmunk:
       MotifDiscoveryForm:
         sequence_weighting_mode: 'Mode:'
-        sequence_list: 'Sequence set in extended multi-fasta format:'
+        sequence_list_text: 'Sequence set in extended multi-fasta format:'
         sequence_list_file: 'or load a file with sequences:'
         speed_mode: 'Speed mode:'
         min_motif_length: 'Minimum motif length:'
