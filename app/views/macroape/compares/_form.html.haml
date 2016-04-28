@@ -28,11 +28,11 @@
       .pvalue
         = f.input :pvalue, label: 'P-value:'
       .pvalue_boundary
-        = f.input :pvalue_boundary, label: 'P-value boundary:', as: :pvalue_boundary_selector
+        = f.input :pvalue_boundary, as: :pvalue_boundary_selector
     = render partial:'shared/background_model', locals: {form_builder: f, object_name: :background, object_value: task.background, background_title: 'Background:'}
 
     .dicretization
-      = f.input :discretization, label: 'Discretization:'
+      = f.input :discretization
     .row
       .span4.data_model_specifiers.first_model
         = f.fields_for :first_motif, task.first_motif do |motif_form|

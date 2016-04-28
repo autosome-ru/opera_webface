@@ -11,20 +11,20 @@
           = motif_form.input :matrix, label: 'Query matrix:', :as => :text
     .span4
       .collection
-        = f.input :collection, label: 'Collection:', as: :motif_collection_selector
+        = f.input :collection, as: :motif_collection_selector
   Advanced options:
   .expand_button
     %a{href: '#'} [+]
   .advanced_options
     = render partial: 'shared/background_model', locals: {form_builder: f, object_name: :background, object_value: task.background, background_title: 'Query background:'}
     .pvalue
-      = f.input :pvalue, label: 'P-value:'
+      = f.input :pvalue
     .pvalue_boundary
-      = f.input :pvalue_boundary, label: 'P-value boundary:', as: :pvalue_boundary_selector
+      = f.input :pvalue_boundary, as: :pvalue_boundary_selector
     .similarity_cutoff
-      = f.input :similarity_cutoff, label: 'Similarity cutoff:', as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
+      = f.input :similarity_cutoff, as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
     .precise_recalc_cutoff
-      = f.input :precise_recalc_cutoff, label: 'Minimal similarity to recalculate in precise mode:', as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
+      = f.input :precise_recalc_cutoff, as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
 
     .data_model_specifiers.query_model
       = f.fields_for :query, task.query do |motif_form|

@@ -191,6 +191,17 @@ en:
         collection: 'TFBS motif collection:'
         pvalue_cutoff: 'P-value cutoff:'
         fold_change_cutoff: 'Fold change cutoff:'
+    Macroape:
+      CompareForm:
+        pvalue_boundary: 'P-value boundary:'
+        discretization: 'Discretization:'
+      ScanForm:
+        collection: 'Collection:'
+        pvalue: 'P-value:'
+        pvalue_boundary: 'P-value boundary:'
+        similarity_cutoff: 'Similarity cutoff:'
+        precise_recalc_cutoff: 'Minimal similarity to recalculate in precise mode:'
+        pseudocount: 'Pseudocount:'
     Chipmunk:
       MotifDiscoveryForm:
         sequence_weighting_mode: 'Mode:'
