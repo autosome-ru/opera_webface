@@ -15,8 +15,8 @@ Toy examples for the #{link_to 'simple', chipmunk_discovery_mono_path(example: :
     %a{href: '#'} [+]
   .advanced_options
     = f.input :speed_mode, as: :speed_mode_selector
-    = f.input :min_motif_length, as: :integer, input_html: {min: 6, max: 30}
-    = f.input :max_motif_length, as: :integer, input_html: {min: 6, max: 30}
+    = f.input :min_motif_length, as: :integer, input_html: {min: 5, max: 22}
+    = f.input :max_motif_length, as: :integer, input_html: {min: 5, max: 22}
     = f.input :occurences_per_sequence, as: :occurences_per_sequence_selector
     = f.input :motif_shape_prior, as: :motif_shape_prior_selector
     = f.input :gc_content, as: :gc_content_selector

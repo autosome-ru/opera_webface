@@ -11,7 +11,7 @@ class Chipmunk::DiscoveryController < ::TasksController
 
   def default_params
     common_options = {
-      min_motif_length: 6, max_motif_length: 15,
+      min_motif_length: 7, max_motif_length: 20,
       motif_shape_prior: :flat,
       occurences_per_sequence: :zoops,
       speed_mode: :fast,
