@@ -1,15 +1,22 @@
 %h3 ChIPMunk: fast and efficient motif discovery tool
 %p
-  %h5 Citing ChIPMunk
-  %p
-    Deep and wide digging for binding motifs in ChIP-Seq data. Kulakovskiy et al., 2010, #{link_to 'PubMed', 'http://www.ncbi.nlm.nih.gov/pubmed/20736340'}
-  %p
-    From binding motifs in ChIP-Seq data to improved models of transcription factor binding sites. Kulakovskiy et al., 2013, #{link_to 'PubMed', 'http://www.ncbi.nlm.nih.gov/pubmed/23427986'}
-  %p
-    Application of experimentally verified transcription factor binding sites models for computational analysis of ChIP-Seq data. Levitsky et al., 2014, #{link_to 'PubMed', 'http://www.ncbi.nlm.nih.gov/pubmed/24472686'}
+  #{content_tag :b, 'ChIPMunk'} is fast heuristic motif discovery tool for analysis of high-throughput sequencing data.
 %p
-  #{link_to 'Web interface', chipmunk_discovery_path}
+  #{content_tag :b, 'ChIPMunk'} utilizes both classic mononucleotide and advanced dinucleotide position weight matrices (#{content_tag :b, 'diChIPMunk'}) to process your ChIP-Seq, HT-SELEX, DNase footprints & similar data. Motif discovery for RNA-binding proteins (single-stranded search) is also supported.
 %p
-  Standalone command-line version (requires Java 1.6) is available for download (#{link_to 'binary', '/downloads/chipmunk-v6.jar'}).
+  #{content_tag :b, 'ChIPMunk'} identifies the strong motif with the maximum Kullback Discrete Information Content in a given set of nucletide sequences. #{content_tag :b, 'ChIPMunk'} uses extended multifasta as the input format.
+
 %p
-  User guide is available #{link_to 'here', '/downloads/chipmunk-userguide-v6.pdf'}.
+  #{link_to 'Web interface', chipmunk_discovery_path, class: 'webface-link'}
+
+%p
+  %b Please cite:
+  .citation
+    %p
+      Deep and wide digging for binding motifs in ChIP-Seq data. Kulakovskiy et al., 2010, #{link_to 'PubMed', 'http://www.ncbi.nlm.nih.gov/pubmed/20736340'}
+    %p
+      From binding motifs in ChIP-Seq data to improved models of transcription factor binding sites. Kulakovskiy et al., 2013, #{link_to 'PubMed', 'http://www.ncbi.nlm.nih.gov/pubmed/23427986'}
+    %p
+      Application of experimentally verified transcription factor binding sites models for computational analysis of ChIP-Seq data. Levitsky et al., 2014, #{link_to 'PubMed', 'http://www.ncbi.nlm.nih.gov/pubmed/24472686'}
+%p
+  Standalone command-line version (requires Java 1.6) and manual are available for download at #{link_to 'ChIPMunk homepage', 'http://autosome.ru/ChIPMunk/', class: 'manual'}.

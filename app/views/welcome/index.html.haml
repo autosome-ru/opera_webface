@@ -1,12 +1,10 @@
 %h3 Welcome to the bioinformatics ‘Opera House’ opera.autosome.ru
-– a web portal to bioinformatics tools provided for remote usage by
-the autosome.ru team.
+– a web access to sequence motif analysis tools developed by the #{link_to 'autosome.ru', 'http://autosome.ru/'} team.
 %br
 %br
 %p
-  = link_to 'MACRO-APE', macroape_path
-  and
-  = link_to 'PERFECTOS-APE', perfectosape_path
-  are currently available for motif comparison and regulatory SNV analysis.
+  #{link_to 'MACRO-APE', macroape_path} and #{link_to 'PERFECTOS-APE', perfectosape_path} are available for motif comparison and regulatory SNV analysis.
 %p
-  ChIPMunk for motif discovery is coming next.
+  #{link_to 'ChIPMunk', chipmunk_path} and #{link_to 'diChIPMunk', chipmunk_path} are intended for motif discovery in nucleotide sequences.
+%p
+  You may also visit #{link_to 'HOCOMOCO', 'http://hocomoco.autosome.ru/'} database of transcription factor binding models (motifs) for human and mouse TFs and #{link_to 'EpiFactors', 'http://epifactors.autosome.ru/'} database of epigenetic regulators.
