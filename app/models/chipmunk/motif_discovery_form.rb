@@ -26,7 +26,7 @@ class Chipmunk::MotifDiscoveryForm
   validates :min_motif_length, numericality: true, inclusion: { in: 5..22 }
   validate :check_min_motif_length_not_greater_than_max
 
-  validates :sequence_weighting_mode, inclusion: { in: [:simple, :peak, :weighted] }
+  validates :sequence_weighting_mode, inclusion: { in: [:simple, :peak, :weighted, :simple_single_stranded] }
   validate :check_sequence_list_validity_text_or_file
 
   validates :occurences_per_sequence, inclusion: { in: [:oops, :zoops] }
@@ -78,7 +78,7 @@ class Chipmunk::MotifDiscoveryForm
     end
 
     case sequence_weighting_mode
-    when :simple
+    when :simple, :simple_single_stranded
       # pass
     when :weighted
       errors.add(sequence_list_attribute, "Header of each sequence should be a weight")  unless fasta_records.all?{|record| Float(record.header) rescue false }

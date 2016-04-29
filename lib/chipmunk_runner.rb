@@ -19,6 +19,8 @@ module ChIPMunk
         'w'
       when :peak
         'p'
+      when :simple_single_stranded
+        'r'
       else
         raise ArgumentError, "Unknown sequence_weighting_mode value `#{params[:sequence_weighting_mode]}`"
       end

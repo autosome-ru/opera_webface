@@ -37,20 +37,24 @@ infos = ChIPMunk::Di::Result.from_chipmunk_output(full_results)
 
 File.write('occurences.txt', ['#' + ChIPMunk::Occurence.headers.join("\t"), *infos.occurences.map(&:to_s)].join("\n"))
 
-case pcm_prefered_orientation(infos.pcm)
-when :direct
+if task_params[:sequence_weighting_mode] == :simple_single_stranded
+  # impossible right now
   File.write('motif.dpcm', infos.pcm.named($ticket))
   File.write('motif.dpwm', infos.pwm.named($ticket))
   File.write('motif.dppm', infos.ppm.named($ticket))
-when :revcomp
-  File.write('motif.dpcm', infos.pcm.revcomp.named($ticket))
-  File.write('motif.dpwm', infos.pwm.revcomp.named($ticket))
-  File.write('motif.dppm', infos.ppm.revcomp.named($ticket))
+else
+  case pcm_prefered_orientation(infos.pcm)
+  when :direct
+    File.write('motif.dpcm', infos.pcm.named($ticket))
+    File.write('motif.dpwm', infos.pwm.named($ticket))
+    File.write('motif.dppm', infos.ppm.named($ticket))
+  when :revcomp
+    File.write('motif.dpcm', infos.pcm.revcomp.named($ticket))
+    File.write('motif.dpwm', infos.pwm.revcomp.named($ticket))
+    File.write('motif.dppm', infos.ppm.revcomp.named($ticket))
+  end
 end
 
 FileUtils.cp 'motif.dpcm', 'motif_small.dpcm' # Hack to make logos with different name
-# SMBSMCore.soloist("sequence_logo motif.dpcm --dinucleotide --x-unit 45 --y-unit 90 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
-# SMBSMCore.soloist("sequence_logo motif_small.dpcm --dinucleotide --x-unit 20 --y-unit 40 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
-
 SequenceLogoGenerator.run_dinucleotide(pcm_files: ['motif.dpcm'], output_folder: '.', orientation: 'both', x_unit: 30, y_unit: 60)
 SequenceLogoGenerator.run_dinucleotide(pcm_files: ['motif_small.dpcm'], output_folder: '.', orientation: 'both', x_unit: 20, y_unit: 40)

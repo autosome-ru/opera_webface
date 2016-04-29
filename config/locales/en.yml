@@ -74,6 +74,7 @@ en:
       simple: 'Simple'
       peak: 'Peak'
       weighted: 'Weighted'
+      simple_single_stranded: 'Single strand (RNA)'
     occurences_per_sequence:
       oops: 'OOPS'
       zoops: 'ZOOPS'
@@ -161,7 +162,7 @@ en:
           Use <em>simple/standard</em> mode for basic sequences,<br/>
           <em>weighted</em> mode for sequences with prior reliability data (higher weight = more impact on resulting motif),<br/>
           <em>peak</em> mode for sequences with positional prior data (higher prior values = preferred motif location),<br/>
-          <em>single-stranded</em> mode for RNA motif discovery (ATGC alphabet).
+          <em>single-stranded</em> mode for RNA motif discovery (ATGC alphabet, unweighted).
         sequence_list: &sequence_list |
           Paste a set of sequences in multi-fasta format.<br/>
           See toy examples and the <a href="/downloads/chipmunk-userguide-v6.pdf">program manual</a> for details.

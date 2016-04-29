@@ -36,15 +36,21 @@ infos = ChIPMunk::Result.from_chipmunk_output(full_results)
 
 File.write('occurences.txt', ['#' + ChIPMunk::Occurence.headers.join("\t"), *infos.occurences.map(&:to_s)].join("\n"))
 
-case pcm_prefered_orientation(infos.pcm)
-when :direct
+if task_params[:sequence_weighting_mode] == :simple_single_stranded
   File.write('motif.pcm', infos.pcm.named($ticket))
   File.write('motif.pwm', infos.pwm.named($ticket))
   File.write('motif.ppm', infos.ppm.named($ticket))
-when :revcomp
-  File.write('motif.pcm', infos.pcm.revcomp.named($ticket))
-  File.write('motif.pwm', infos.pwm.revcomp.named($ticket))
-  File.write('motif.ppm', infos.ppm.revcomp.named($ticket))
+else
+  case pcm_prefered_orientation(infos.pcm)
+  when :direct
+    File.write('motif.pcm', infos.pcm.named($ticket))
+    File.write('motif.pwm', infos.pwm.named($ticket))
+    File.write('motif.ppm', infos.ppm.named($ticket))
+  when :revcomp
+    File.write('motif.pcm', infos.pcm.revcomp.named($ticket))
+    File.write('motif.pwm', infos.pwm.revcomp.named($ticket))
+    File.write('motif.ppm', infos.ppm.revcomp.named($ticket))
+  end
 end
 
 FileUtils.cp 'motif.pcm', 'motif_small.pcm' # Hack to make logos with different name

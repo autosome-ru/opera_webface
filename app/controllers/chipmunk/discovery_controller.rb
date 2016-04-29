@@ -40,4 +40,18 @@ class Chipmunk::DiscoveryController < ::TasksController
 
     common_options.merge(specific_options)
   end
+
+  def chipmunk_infos
+    @chipmunk_infos ||= task_results(@ticket)
+  end
+
+  def chipmunk_task_params
+    @chipmunk_task_params ||= task_params(@ticket)
+  end
+
+  def single_stranded?
+    chipmunk_task_params.sequence_weighting_mode == :simple_single_stranded
+  end
+
+  helper_method :chipmunk_infos, :chipmunk_task_params, :single_stranded?
 end

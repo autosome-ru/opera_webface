@@ -2,46 +2,47 @@
   .direct
     .label Primary motif:
     = show_image(ticket, 'motif_small_direct.png')
-  .revcomp
-    .label Reverse complement:
-    = show_image(ticket, 'motif_small_revcomp.png')
+  - unless single_stranded?
+    .revcomp
+      .label Reverse complement:
+      = show_image(ticket, 'motif_small_revcomp.png')
 
 .matrices
   .pcm
     .label PCM
     %span.download= download_link 'Download', ticket, 'motif.pcm'
     .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: t('matrices_rounded_hint')}}
-    %pre><= @chipmunk_infos.pcm.rounded(precision: 3)
+    %pre><= chipmunk_infos.pcm.rounded(precision: 3)
   .pwm
     .label PWM
     %span.download= download_link 'Download', ticket, 'motif.pwm'
-    %pre><= @chipmunk_infos.pwm.rounded(precision: 3)
+    %pre><= chipmunk_infos.pwm.rounded(precision: 3)
   .ppm
     .label PPM
     %span.download= download_link 'Download', ticket, 'motif.ppm'
-    %pre><= @chipmunk_infos.ppm.rounded(precision: 3)
+    %pre><= chipmunk_infos.ppm.rounded(precision: 3)
 
 .threshold
   .label Threshold
-  = @chipmunk_infos.threshold.round(5)
+  = chipmunk_infos.threshold.round(5)
 .kdic
   .label KDIC
-  = @chipmunk_infos.kdic.round(5)
+  = chipmunk_infos.kdic.round(5)
 .weight
   .label Weight
-  = @chipmunk_infos.weight
+  = chipmunk_infos.weight
 .motif_length
   .label Motif length
-  = @chipmunk_infos.length
+  = chipmunk_infos.length
 .diagnosis
   .label Diagnosis
-  = @chipmunk_infos.diagnosis
+  = chipmunk_infos.diagnosis
 .iupac_consensus
   .label IUPAC consensus
-  = @chipmunk_infos.iupac_sequence
+  = chipmunk_infos.iupac_sequence
 .background
   .label Background
-  = @chipmunk_infos.background.frequencies.map{|el| el.round(5) }.join(', ')
+  = chipmunk_infos.background.frequencies.map{|el| el.round(5) }.join(', ')
 
 .result_data
   .chipmunk_results= download_link t('task_layout.download_results'), ticket, 'task_result.txt'
