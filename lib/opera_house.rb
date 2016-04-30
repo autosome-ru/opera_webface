@@ -27,8 +27,9 @@ class OperaHouse
 
     @ticket_service = Opera.last_ticket_number
 
-    @actions = [OperaAction.new(OperaStatus.new(nil, OperaStatus::PERFORMANCE_FINISHED, nil)),
-                OperaAction.new(OperaStatus.new(nil, OperaStatus::PERFORMANCE_FINISHED, nil))]
+    @actions = Array.new(OperaHouseConfiguration::NumThreads) {
+        OperaAction.new(OperaStatus.new(nil, OperaStatus::PERFORMANCE_FINISHED, nil))
+    }
 
     # run performers
     oh_performer

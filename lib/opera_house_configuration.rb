@@ -1,6 +1,8 @@
 module OperaHouseConfiguration
   DRubyURI = 'druby://localhost:1111'
 
+  NumThreads = 4
+
   root_path = File.expand_path("../../", __FILE__)
 
   OPERAHOUSE_PATH = File.join(root_path, 'lib')
