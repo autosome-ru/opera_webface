@@ -49,6 +49,7 @@ gem 'simple_form'
 gem 'mime-types'
 gem 'enumerize'
 gem 'js-routes'
+gem 'draper'
 
 gem 'virtus'
 
