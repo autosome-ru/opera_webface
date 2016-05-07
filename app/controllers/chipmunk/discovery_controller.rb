@@ -42,7 +42,7 @@ class Chipmunk::DiscoveryController < ::TasksController
   end
 
   def chipmunk_infos
-    @chipmunk_infos ||= task_results(@ticket)
+    @chipmunk_infos ||= ChipmunkResultsDecorator.decorate(task_results(@ticket))
   end
 
   def chipmunk_task_params

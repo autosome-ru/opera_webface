@@ -10,19 +10,19 @@
         = show_image(ticket, 'motif_small_revcomp.png')
 
 .matrices
-  .pcm
-    .label PCM
+  .matrix_container
+    .label.title PCM
     %span.download= download_link 'Download', ticket, 'motif.pcm'
-    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: t('matrices_rounded_hint')}}
-    %pre><= chipmunk_infos.pcm.rounded(precision: 3)
-  .pwm
-    .label PWM
+    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Rounded values are shown'}}
+    = chipmunk_infos.pcm
+  .matrix_container
+    .label.title PWM
     %span.download= download_link 'Download', ticket, 'motif.pwm'
-    %pre><= chipmunk_infos.pwm.rounded(precision: 3)
-  .ppm
-    .label PPM
+    = chipmunk_infos.pwm
+  .matrix_container
+    .label.title PPM
     %span.download= download_link 'Download', ticket, 'motif.ppm'
-    %pre><= chipmunk_infos.ppm.rounded(precision: 3)
+    = chipmunk_infos.ppm
 
 .threshold
   .label Threshold
