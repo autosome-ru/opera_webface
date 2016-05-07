@@ -1,15 +1,6 @@
 class Chipmunk::MotifDiscoveryForm::Mono < Chipmunk::MotifDiscoveryForm
   def self.task_type; 'MotifDiscovery'; end
 
-  def task_attributes
-    result = super
-    if result[:gc_content] == :uniform
-      result.merge(gc_content: 0.5)
-    else
-      result
-    end
-  end
-
   private def check_sequence_list_validity(sequence_list_attribute, sequence_list_value)
     super
     fasta_records = FastaRecord.each_record(sequence_list_value)
