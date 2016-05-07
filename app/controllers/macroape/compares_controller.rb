@@ -60,6 +60,8 @@ protected
       pvalue_second: infos['P2'],
       threshold_first: infos['T1'],
       threshold_second: infos['T2'],
+      first_pwm: Bioinform::MotifModel::PWM.from_string(SMBSMCore.get_content(ticket, 'first.pwm')),
+      second_pwm: Bioinform::MotifModel::PWM.from_string(SMBSMCore.get_content(ticket, 'second.pwm')),
     })
   end
 

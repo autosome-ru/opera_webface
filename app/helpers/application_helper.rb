@@ -123,7 +123,7 @@ module ApplicationHelper
     header = table_header(letters)
     body = table_body_for_matrix(matrix_rounded(matrix, round: round))
 
-    content_tag(:table, (header + body).html_safe, class: 'matrix')
+    content_tag(:table, (header + body).html_safe, class: 'output_matrix')
   end
 
 

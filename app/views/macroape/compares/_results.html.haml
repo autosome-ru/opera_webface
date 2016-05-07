@@ -6,18 +6,18 @@
     .alignment_logo= show_image(ticket, 'alignment.png')
 .input_data
   .row
-    .matrix.span3
-      .logo= show_image(ticket, 'first_direct.png')
-      .my-label
-        First PWM
+    .span3
+      .motif-label
         = download_list ticket, {'pcm' => 'first.pcm', 'ppm' => 'first.ppm', 'pwm' => 'first.pwm'}
-      %pre= pwm_from_file('first.pwm', ticket).rounded(precision: 3)
-    .matrix.span3
-      .logo= show_image(ticket, "second_#{task_results[:orientation]}.png")
-      .my-label
-        Second PWM
+        .name= task_results.first_pwm.name
+      .logo= show_image(ticket, 'first_direct.png')
+      = format_matrix_as_table(task_results.first_pwm.matrix, arity: :mono, round: 3)
+    .span3
+      .motif-label
         = download_list ticket, {'pcm' => 'second.pcm', 'ppm' => 'second.ppm', 'pwm' => 'second.pwm'}
-      %pre= pwm_from_file('second.pwm', ticket).rounded(precision: 3)
+        .name= task_results.second_pwm.name
+      .logo= show_image(ticket, "second_#{task_results[:orientation]}.png")
+      = format_matrix_as_table(task_results.second_pwm.matrix, arity: :mono, round: 3)
   .row
     .span3
       = download_link t('task_layout.task_details'), ticket, 'task_params.yaml'
