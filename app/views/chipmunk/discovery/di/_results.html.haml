@@ -30,9 +30,22 @@
 .kdic
   .label KDIC
   = chipmunk_infos.kdic.round(5)
-.weight
-  .label Weight
-  = chipmunk_infos.weight
+.alignment_infos
+  .weight
+    .label Weight
+    = chipmunk_infos.weight.round(5)
+  .total_sequences_in_input_data
+    .label Input
+    = chipmunk_infos.total_sequences_in_input_data
+    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Total sequences in the input data'}}
+  .num_resulting_words
+    .label Words
+    = chipmunk_infos.num_resulting_words
+    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Words in the resulting alignment'}}
+  .num_resulting_sequences
+    .label Sequences
+    = chipmunk_infos.num_resulting_sequences
+    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Sequences in the resulting alignment'}}
 .motif_length
   .label Motif (not occurence) length
   = chipmunk_infos.length

@@ -6,7 +6,11 @@ module ChIPMunk
       :pcm, :pwm,
       :threshold, :weight, :kdic,
       :background, :occurences,
-      :iupac_sequence, :diagnosis)
+      :iupac_sequence, :diagnosis,
+      :total_sequences_in_input_data,
+      :num_resulting_words,
+      :num_resulting_sequences,
+      :pvalue)
 
   class Result
     Nucleotides = ['A', 'C', 'G', 'T']
@@ -67,6 +71,10 @@ module ChIPMunk
         diagnosis: infos['DIAG'],
         background: background,
         occurences: occurences,
+        total_sequences_in_input_data: infos['TOTL'].to_i,
+        num_resulting_words: infos['WRDS'].to_i,
+        num_resulting_sequences: infos['SEQS'].to_i,
+        pvalue: infos['PVAL'].to_f,
       })
     end
 
