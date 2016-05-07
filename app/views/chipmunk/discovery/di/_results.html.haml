@@ -27,9 +27,14 @@
 .threshold
   .label Threshold
   = chipmunk_infos.threshold.round(5)
+  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Auto-detected score threshold'}}
+.pvalue
+  .label P-value
+  = chipmunk_infos.pvalue
 .kdic
   .label KDIC
   = chipmunk_infos.kdic.round(5)
+
 .alignment_infos
   .weight
     .label Weight
@@ -46,9 +51,11 @@
     .label Sequences
     = chipmunk_infos.num_resulting_sequences
     .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Sequences in the resulting alignment'}}
+
 .motif_length
-  .label Motif (not occurence) length
-  = chipmunk_infos.length
+  .label Motif length
+  = chipmunk_infos.motif_length
+  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Number of rows in dinucleotide matrix is motif length minus 1'}}
 .diagnosis
   .label Diagnosis
   = chipmunk_infos.diagnosis
@@ -57,6 +64,7 @@
   = chipmunk_infos.iupac_sequence
 .background
   .label Background
+  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Dinucleotide frequencies are in the following order: AA,AC,AG,AT,CA,...,TT'}}
   = chipmunk_infos.background.map{|el| el.round(5) }.join(', ')
 
 .result_data

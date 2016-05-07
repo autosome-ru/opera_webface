@@ -122,6 +122,10 @@ module ChIPMunk
       def length
         pcm.length
       end
+
+      def motif_length
+        pcm.length
+      end
     end
   end
 end
