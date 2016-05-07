@@ -70,6 +70,10 @@ module ChIPMunk
       })
     end
 
+    def arity
+      :mono
+    end
+
     def ppm
       Bioinform::ConversionAlgorithms::PCM2PPMConverter.new.convert(pcm)
     end

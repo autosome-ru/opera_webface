@@ -255,3 +255,29 @@ button[type="reset"] {
     cursor: pointer;
   }
 }
+
+.matrix {
+  border: 1px solid black;
+  thead, tbody tr td:first-child {
+    font-weight: bold;
+  }
+  tr, td, th {
+    border: 1px solid black;
+    padding: 2px 4px;
+  }
+}
+
+.matrix_container {
+  display: inline-block;
+
+  margin-top: 15px;
+  margin-right: 25px;
+  .title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .matrix {
+    margin-top: 5px;
+  }
+}

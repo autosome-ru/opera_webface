@@ -99,6 +99,10 @@ module ChIPMunk
         })
       end
 
+      def arity
+        :di
+      end
+
       def ppm
         matrix = pcm.matrix.map do |pos|
           count = pos.inject(0.0, &:+)

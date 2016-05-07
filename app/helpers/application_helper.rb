@@ -104,4 +104,55 @@ module ApplicationHelper
       content.html_safe
     end
   end
+
+########################################################################
+
+  NUCLEOTIDES = ['A', 'C', 'G', 'T']
+  DINUCLEOTIDES = NUCLEOTIDES.product(NUCLEOTIDES).map(&:join)
+
+  def format_matrix_as_table(matrix, arity:, round: nil)
+    case arity
+    when :mono
+      letters = NUCLEOTIDES
+    when :di
+      letters = DINUCLEOTIDES
+    else
+      raise IllegalArgumentException, "Unknown arity `#{arity}`"
+    end
+
+    header = table_header(letters)
+    body = table_body_for_matrix(matrix_rounded(matrix, round: round))
+
+    content_tag(:table, (header + body).html_safe, class: 'matrix')
+  end
+
+
+  def table_header(column_names)
+    content_tag(:thead){
+      content_tag(:tr){
+        [nil, *column_names].map{|column_name|
+          content_tag(:th, column_name)
+        }.join.html_safe
+      }
+    }
+  end
+
+  def table_body_for_matrix(matrix)
+    content_tag(:tbody){
+      matrix.each_with_index.map{|pos, index|
+        content_tag(:tr){
+          ['%02d' % (index + 1), *pos].map{|cell|
+            content_tag(:td, cell)
+          }.join.html_safe
+        }
+      }.join.html_safe
+    }
+  end
+
+  def matrix_rounded(matrix, round:)
+    return matrix   unless round
+    matrix.map{|pos|
+      pos.map{|el| el.round(round) }
+    }
+  end
 end
