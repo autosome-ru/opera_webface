@@ -183,10 +183,10 @@ en:
           <em>single</em> - single-box motif shape (prefer motifs fitting one DNA helix pitch, motif lengths around 10-11bps are recommended)<br/>
           <em>double</em> - double-box motif shape (prefer motifs with two boxes, longer motif lengths of 15 to 21 are recommended).
         gc_content: |
-          Background GC-content. Use <em>auto</em> to estimate nucleotide frequencies from the provided set of input sequences or a value in a range from&nbsp;0&nbsp;to&nbsp;1.
+          Background model. Use <em>auto</em> to estimate nucleotide frequencies from the provided set of input sequences or <em>uniform</em> to treat all nucleotides equiprobable.
         Di:
           gc_content: |
-            Background model. Use <em>auto</em> to estimate nucleotide frequencies from the provided set of input sequences or <em>uniform</em> to treat all nucleotides equiprobable.
+            Background model. Use <em>auto</em> to estimate dinucleotide frequencies from the provided set of input sequences or <em>uniform</em> to treat all dinucleotides equiprobable.
 
   label:
     Perfectosape:

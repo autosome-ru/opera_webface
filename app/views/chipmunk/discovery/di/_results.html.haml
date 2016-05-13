@@ -9,20 +9,6 @@
       = link_to show_from_scene_path(id: ticket, filename: 'motif_revcomp.png') do
         = show_image(ticket, 'motif_small_revcomp.png')
 
-.matrices
-  .matrix_container
-    .label.title PCM
-    %span.download= download_link 'Download', ticket, 'motif.dpcm'
-    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Rounded values are shown'}}
-    = chipmunk_infos.pcm
-  .matrix_container
-    .label.title PWM
-    %span.download= download_link 'Download', ticket, 'motif.dpwm'
-    = chipmunk_infos.pwm
-  .matrix_container
-    .label.title PPM
-    %span.download= download_link 'Download', ticket, 'motif.dppm'
-    = chipmunk_infos.ppm
 
 .threshold
   .label Threshold
@@ -55,7 +41,7 @@
 .motif_length
   .label Motif length
   = chipmunk_infos.motif_length
-  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Number of rows in dinucleotide matrix is motif length minus 1'}}
+  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: "Motif length is presented in dinucleotides. Corresponding site length is #{chipmunk_infos.motif_length + 1}nt"}}
 .diagnosis
   .label Diagnosis
   = chipmunk_infos.diagnosis
@@ -74,3 +60,17 @@
   .show_task_params
     .download_sequences= download_link t('task_layout.sequences'), ticket, 'sequences.mfa'
     .download_params= download_link t('task_layout.task_details'), ticket, 'task_params.yaml'
+.matrices
+  .matrix_container
+    .label.title PCM
+    %span.download= download_link 'Download', ticket, 'motif.dpcm'
+    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Rounded values are shown'}}
+    = chipmunk_infos.pcm
+  .matrix_container
+    .label.title PWM
+    %span.download= download_link 'Download', ticket, 'motif.dpwm'
+    = chipmunk_infos.pwm
+  .matrix_container
+    .label.title PPM
+    %span.download= download_link 'Download', ticket, 'motif.dppm'
+    = chipmunk_infos.ppm

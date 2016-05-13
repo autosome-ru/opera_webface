@@ -2,14 +2,17 @@
 %h3 MACRO-APE: MAtrix CompaRisOn by Approximate P-value Estimation
 
 %p
-  MACRO-APE software allows efficient comparison of transcription factor
+  #{content_tag :b, 'MACRO-APE'} software allows efficient comparison of transcription factor
   binding models (often called motifs) represented as position weight
   matrices (PWMs, also known as Position Specific Scoring Matrices,
   PSSMs) with score thresholds.
 %p
-  The paper describing MACRO-APE in detail is #{link_to 'published', 'http://www.almob.org/content/8/1/23/abstract/', class: 'paper'} in Algorithms for Molecular Biology.
-%p
   Online interface is available #{link_to 'here', macroape_compare_path, class: 'webface-link'}.
+%p
+  %b Please cite:
+  .citation
+    Jaccard index based similarity measure to compare transcription factor binding site models. Vorontsov et al., 2013, #{link_to 'PubMed', 'https://www.ncbi.nlm.nih.gov/pubmed/24074225'}
+
 %p
   Standalone command-line version (requires Java 1.6) is available for
   download (#{link_to 'binary', '/downloads/ape.jar'}, #{link_to 'sources', '/downloads/macro-perfectos-ape_src.jar'}).
