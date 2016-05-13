@@ -6,34 +6,46 @@ class Macroape::ComparesController < ::TasksController
 protected
   def first_matrix_examples
     {
-      pwm: Bioinform::MotifModel::PWM.from_file( Rails.root.join('public','motif_1.pwm') ),
-      pcm: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_1.pcm') ).rounded(precision: 0),
-      ppm: Bioinform::MotifModel::PPM.from_file( Rails.root.join('public','motif_1.ppm') )
+      PWM: Bioinform::MotifModel::PWM.from_file( Rails.root.join('public','motif_1.pwm') ),
+      PCM: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_1.pcm') ).rounded(precision: 0),
+      PPM: Bioinform::MotifModel::PPM.from_file( Rails.root.join('public','motif_1.ppm') )
     }.map{|k,v| [k, v.to_s] }.to_h
   end
   def second_matrix_examples
     {
-      pwm: Bioinform::MotifModel::PWM.from_file( Rails.root.join('public','motif_2.pwm') ),
-      pcm: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_2.pcm') ),
-      ppm: Bioinform::MotifModel::PPM.from_file( Rails.root.join('public','motif_2.ppm') )
+      PWM: Bioinform::MotifModel::PWM.from_file( Rails.root.join('public','motif_2.pwm') ),
+      PCM: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_2.pcm') ),
+      PPM: Bioinform::MotifModel::PPM.from_file( Rails.root.join('public','motif_2.ppm') )
     }.map{|k,v| [k, v.to_s] }.to_h
   end
-  helper_method :first_matrix_examples
-  helper_method :second_matrix_examples
   def default_params
-    { background: BackgroundForm.uniform,
+    common_options = { background: BackgroundForm.uniform,
       pvalue: 0.0005,
       discretization: 10,
       pvalue_boundary: :upper,
       first_motif: {
-        data_model: :PCM, effective_count: 100, pseudocount: nil,
-        matrix: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_1.pcm') ).rounded(precision: 0)
+        effective_count: 100, pseudocount: nil,
       },
       second_motif: {
-        data_model: :PCM, effective_count: 100, pseudocount: nil,
-        matrix: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_2.pcm') )
+        effective_count: 100, pseudocount: nil,
       }
     }
+
+    case (params[:example] || :PCM).to_sym
+    when :PCM, :PWM, :PPM
+      data_model = (params[:example] || :PCM).to_sym
+      specific_options = {
+        first_motif: { data_model: data_model,  matrix: first_matrix_examples[ data_model ] },
+        second_motif: { data_model: data_model,  matrix: second_matrix_examples[ data_model ] },
+      }
+    when :mixed
+      specific_options = {
+        first_motif: { data_model: :PCM,  matrix: first_matrix_examples[:PCM] },
+        second_motif: { data_model: :PWM,  matrix: second_matrix_examples[:PWM] },
+      }
+    end
+
+    common_options.deep_merge(specific_options)
   end
 
   def task_results(ticket)

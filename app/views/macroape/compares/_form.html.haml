@@ -1,19 +1,15 @@
 = task_form_for task, :as => :task, url: macroape_compare_path, html: {class: 'task_params'} do |f|
+  .toy_examples
+    Toy examples for the #{link_to 'PCM-to-PCM', macroape_compare_path(example: :PCM) }, #{link_to 'PWM-to-PWM', macroape_compare_path(example: :PWM) }, #{link_to 'PPM-to-PPM', macroape_compare_path(example: :PPM) } and #{link_to 'different types', macroape_compare_path(example: :mixed) } comparison.
+  %hr
   .row
     .span4.first_model
-      .data_model_examples
-        - first_matrix_examples.each do |data_model, matrix|
-          / Don't know why but usual div adds extra spaces, so use textarea
-          %textarea{class: data_model}<= matrix
       = f.fields_for :first_motif, task.first_motif do |motif_form|
         .data_model
           = motif_form.input :data_model, label: 'Model 1:', as: :motif_type_selector
         .matrix
           = motif_form.input :matrix, label: 'Matrix 1:', :as => :text
     .span4.second_model
-      .data_model_examples
-        - second_matrix_examples.each do |data_model, matrix|
-          %textarea{class: data_model}<= matrix
       = f.fields_for :second_motif, task.second_motif do |motif_form|
         .data_model
           = motif_form.input :data_model, label: 'Model 2:', as: :motif_type_selector

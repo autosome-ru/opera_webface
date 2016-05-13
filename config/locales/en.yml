@@ -110,11 +110,13 @@ en:
       t: 'Frequency of T nucleotide.'
     DataModelForm:
       data_model: |
-        Data model of the tested motif. Can be positional
-        weight matrix(PWM),  positional count matrix(PCM), or positional
-        frequency matrix(PFM). PCM elements can be real numbers (in the
-        case original sequences were weighted). PWM elements are assumed
-        to come from a log-odds transformed PCM or PPM.
+        Data model of the tested motif.
+        Can be positional weight matrix&nbsp;(<em>PWM</em>),
+        positional count matrix&nbsp;(<em>PCM</em>),
+        or positional frequency matrix&nbsp;(<em>PPM</em>).<br/>
+        PCM elements can be real numbers (in the
+        case original sequences were weighted).<br/>
+        PWM elements are assumed to come from a log-odds transformed PCM or PPM.
       matrix: 'Positional matrix of the motif according to its data model.'
       effective_count: 'Effective sample size (an assumed number of sequences) to convert PPM-to-PCM-to-PWM.'
       pseudocount: 'Pseudocount value to convert PCM to PWM, taken as log(words) by default. Positive numeric constant can be used instead of log.'

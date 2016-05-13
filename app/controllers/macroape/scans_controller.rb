@@ -6,25 +6,27 @@ class Macroape::ScansController < ::TasksController
 protected
   def query_matrix_examples
     {
-      pwm: Bioinform::MotifModel::PWM.from_file( Rails.root.join('public','motif_1.pwm') ),
-      pcm: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_1.pcm') ).rounded(precision: 0),
-      ppm: Bioinform::MotifModel::PPM.from_file( Rails.root.join('public','motif_1.ppm') )
+      PWM: Bioinform::MotifModel::PWM.from_file( Rails.root.join('public','motif_1.pwm') ),
+      PCM: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_1.pcm') ).rounded(precision: 0),
+      PPM: Bioinform::MotifModel::PPM.from_file( Rails.root.join('public','motif_1.ppm') )
     }
   end
   helper_method :query_matrix_examples
 
   def default_params
-    { collection: :hocomoco_10_human,
+    common_options = { collection: :hocomoco_10_human,
       background: BackgroundForm.uniform,
       query: DataModelForm.new(
-        data_model: :PCM, effective_count: 100, pseudocount: :log,
-        matrix: Bioinform::MotifModel::PCM.from_file( Rails.root.join('public','motif_1.pcm') ).rounded(precision: 0)
+        effective_count: 100, pseudocount: :log,
       ),
       pvalue: 0.0005,
       similarity_cutoff: 0.05,
       precise_recalc_cutoff: 0.05,
       pvalue_boundary: :upper
     }
+    data_model = (params[:example] || :PCM).to_sym
+    specific_query_options = { data_model: data_model,  matrix: query_matrix_examples[ data_model ] }
+    common_options.deep_merge({query: specific_query_options})
   end
 
   def task_results(ticket)

@@ -38,7 +38,7 @@ class Chipmunk::DiscoveryController < ::TasksController
       }
     end
 
-    common_options.merge(specific_options)
+    common_options.deep_merge(specific_options)
   end
 
   def chipmunk_infos
