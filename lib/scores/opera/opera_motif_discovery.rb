@@ -16,7 +16,7 @@ end
 task_params = YAML.load_file('task_params.yaml')
 default_params = { # All params which aren't specified in task params should be defined here
   seeds_set: 'random',
-  thread_count: 1,
+  thread_count: 2,
   verbose: 'yes',
 }
 

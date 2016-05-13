@@ -6,7 +6,7 @@ class Chipmunk::DiscoveryController < ::TasksController
   protected
 
   def reload_page_time
-    30
+    10
   end
 
   def default_params
