@@ -192,7 +192,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sequence_logo (1.2.2)
+    sequence_logo (1.2.3)
       bioinform (~> 0.3.1)
       rmagick (~> 2.13)
     sexp_processor (4.6.0)
@@ -262,7 +262,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   sdoc
-  sequence_logo (~> 1.2.2)
+  sequence_logo (~> 1.2.3)
   simple_form
   spring
   sqlite3
@@ -274,4 +274,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.12.0
+   1.12.3
