@@ -40,7 +40,7 @@ module Perfectosape::ScansHelper
         orientation = orientation_2
       end
 
-      motif_info = motif_info(collection_name, motif) + '<br>' + collection_motif_image(collection_name, motif, orientation)
+      motif_info = motif_info(collection_name, motif) + tag(:br) + collection_motif_image(collection_name, motif, orientation)
 
       # alignment = highlight_TFBS(snp.variant(0), snp.left.length + pos, motifs[motif].length, snp.left.length).gsub(/^n+/i, '').gsub(/n+$/i, '') + '<br>' +
       #             highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length, snp.left.length).gsub(/^n+/i, '').gsub(/n+$/i, '')

@@ -27,7 +27,15 @@ module ApplicationHelper
     link_to(name, "/motif_collection/pwm/#{collection_name}/#{motif}.pwm")
   end
   def collection_motif_links(collection_name, motif)
-    "<small>(" + collection_motif_pcm_link(collection_name, motif) + ", " + collection_motif_pwm_link(collection_name, motif) + ")</small>"
+    content_tag(:small){
+      (
+        "(" +
+        collection_motif_pcm_link(collection_name, motif).to_s +
+        ", " +
+        collection_motif_pwm_link(collection_name, motif).to_s +
+        ")"
+      ).html_safe
+    }
   end
   def collection_motif_image_path(collection_name, motif, orientation)
     "/motif_collection/logo/#{collection_name}/#{motif}_#{orientation}.png"
@@ -40,9 +48,18 @@ module ApplicationHelper
   end
 
   def motif_info(collection_name, motif)
-    motif + '<br>' +
-    collection_motif_links(collection_name, motif) + '<br>' +
-    uniprot_links(collection_name, motif)
+    if [:hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
+      motif_url = "http://hocomoco.autosome.ru/motif/#{motif}"
+    elsif collection_name == :hocomoco # v9
+      infos = /^(?<model_base>.+)_(?<model_type>f1|f2|do|si)$/.match(motif)
+      motif_url = "http://autosome.ru/HOCOMOCO/modelDetails.php?tf=#{infos[:model_base]}&model=#{infos[:model_type]}"
+    else
+      motif_url = nil
+    end
+    [ (motif_url ? link_to(motif, motif_url) : motif),
+      collection_motif_links(collection_name, motif),
+      uniprot_links(collection_name, motif),
+    ].reject(&:blank?).join( tag(:br) )
   end
 
   def uniprot_mapping
@@ -58,6 +75,10 @@ module ApplicationHelper
   end
 
   def uniprot_links(collection_name, motif)
+    if [:hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
+      uniprot_name = motif[/^(?<uniprot>.+_HUMAN|.+_MOUSE)\..*/, :uniprot]
+      return uniprot_link("#{uniprot_name}", uniprot_name)
+    end
     motif_id = motif.split.first # names in uniprot mapping aren't complete names but just first parts (e.g. `MA0512.1` for `MA0512.1 Rxra`)
     uniprot_names = uniprot_mapping[collection_name.to_sym][motif_id]
     return ''  unless uniprot_names
