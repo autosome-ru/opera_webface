@@ -48,3 +48,21 @@
 body > .container {
   margin-left: 190px;
 }
+
+body {
+  &[data-controller="perfectosape/scans"], &[data-controller="macroape/scans"] {
+    &[data-action="show"] {
+      > .container {
+        margin-left: 40px;
+      }
+    }
+  }
+
+  &[data-controller="welcome"] {
+    &[data-action="macroape"], &[data-action="perfectosape"], &[data-action="chipmunk"] {
+      > .container {
+        margin-left: 100px;
+      }
+    }
+  }
+}
