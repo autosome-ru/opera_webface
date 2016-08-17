@@ -19,4 +19,5 @@
 
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
-  = f.button :button, 'Reset', :type => 'reset', :class => 'btn btn-warning'
+  = link_to perfectosape_scan_path, class: 'reset-task' do
+    = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'

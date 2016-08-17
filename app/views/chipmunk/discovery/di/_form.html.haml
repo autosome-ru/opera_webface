@@ -1,5 +1,7 @@
-Toy examples for the #{link_to 'simple', chipmunk_discovery_di_path(example: :simple) }, #{link_to 'weighted', chipmunk_discovery_di_path(example: :weighted) }, #{link_to 'peak', chipmunk_discovery_di_path(example: :peak) } data sets.
+.toy_examples
+  Toy examples for the #{link_to 'simple', chipmunk_discovery_di_path(example: :simple) }, #{link_to 'weighted', chipmunk_discovery_di_path(example: :weighted) }, #{link_to 'peak', chipmunk_discovery_di_path(example: :peak) } data sets.
 = task_form_for task, :as => :task, url: chipmunk_discovery_di_path, html: {class: 'task_params chipmunk_discovery'} do |f|
+  = hidden_field_tag 'example', params[:example]
   .motif_discovery_options
     = f.input :sequence_weighting_mode, as: :sequence_weighting_mode_selector
   .sequence_list
@@ -20,4 +22,5 @@ Toy examples for the #{link_to 'simple', chipmunk_discovery_di_path(example: :si
     = f.input :gc_content, as: :gc_content_selector
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
-  = f.button :button, 'Reset', :type => 'reset', :class => 'btn btn-warning'
+  = link_to chipmunk_discovery_di_path(example: params[:example]), class: 'reset-task' do
+    = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'

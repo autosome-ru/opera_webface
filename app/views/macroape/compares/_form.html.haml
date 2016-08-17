@@ -1,4 +1,5 @@
 = task_form_for task, :as => :task, url: macroape_compare_path, html: {class: 'task_params'} do |f|
+  = hidden_field_tag 'example', params[:example]
   .toy_examples
     Toy examples for the #{link_to 'PCM-to-PCM', macroape_compare_path(example: :PCM) }, #{link_to 'PWM-to-PWM', macroape_compare_path(example: :PWM) }, #{link_to 'PPM-to-PPM', macroape_compare_path(example: :PPM) } and #{link_to 'different types', macroape_compare_path(example: :mixed) } comparison.
   %hr
@@ -44,4 +45,5 @@
             = motif_form.input :effective_count, label: 'Effective sample size (model 2):'
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
-  = f.button :button, 'Reset', :type => 'reset', :class => 'btn btn-warning'
+  = link_to macroape_compare_path(example: params[:example]), class: 'reset-task' do
+    = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'

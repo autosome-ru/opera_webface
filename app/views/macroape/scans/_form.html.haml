@@ -1,4 +1,5 @@
 = task_form_for task, :as => :task, url: macroape_scan_path, html: {class: 'task_params'} do |f|
+  = hidden_field_tag 'example', params[:example]
   .toy_examples
     Toy examples for the #{link_to 'PCM', macroape_scan_path(example: :PCM) }, #{link_to 'PWM', macroape_scan_path(example: :PWM) } and #{link_to 'PPM', macroape_scan_path(example: :PPM) } scanning.
   %hr
@@ -34,4 +35,5 @@
           = motif_form.input :effective_count, label: 'Effective count:'
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
-  = f.button :button, 'Reset', :type => 'reset', :class => 'btn btn-warning'
+  = link_to macroape_scan_path(example: params[:example]), class: 'reset-task' do
+    = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'
