@@ -40,6 +40,7 @@ class TasksController < ApplicationController
     if @status.finished?
       render template: 'tasks/show', locals: {ticket: @ticket, status: @status, task_params: task_params(@ticket), task_results: task_results(@ticket)}
     else
+      SMBSMCore.perform_opera(@ticket, model_class.task_type)  unless @status.start_time
       render template: 'tasks/in_process', locals: {ticket: @ticket, status: @status}
     end
   end
