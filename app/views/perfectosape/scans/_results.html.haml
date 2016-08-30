@@ -1,5 +1,5 @@
 .result_data
-  = download_link t('task_layout.download_results'), ticket, 'task_result.txt'
+  %b= download_link 'Results (download complete tsv table)', ticket, 'task_result.txt'
   = snp_scan_table(task_results, task_params)
 .input_data
   %h5.collection_name
