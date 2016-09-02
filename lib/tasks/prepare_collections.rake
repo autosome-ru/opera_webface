@@ -34,12 +34,25 @@ task :unpack_motifs do
 end
 
 task :generate_logos do
-  mkdir_p 'public/motif_collection/logo/'
+  mkdir_p 'public/motif_collection/logo_small/'
+  mkdir_p 'public/motif_collection/logo_medium/'
+  mkdir_p 'public/motif_collection/logo_large/'
+  ln_sf 'logo_small/', 'public/motif_collection/logo' # logo is a link to relative path logo_small
   Dir.glob('public/motif_collection/pcm/*') do |pcm_folder|
     generate_logos(
       pcm_folder: pcm_folder,
-      output_folder: File.join('public/motif_collection/logo/', File.basename(pcm_folder)),
+      output_folder: File.join('public/motif_collection/logo_small/', File.basename(pcm_folder)),
       sequence_logo_options: '--orientation both --x-unit 20 --y-unit 40 --no-threshold-lines --bg-fill transparent'
+    )
+    generate_logos(
+      pcm_folder: pcm_folder,
+      output_folder: File.join('public/motif_collection/logo_medium/', File.basename(pcm_folder)),
+      sequence_logo_options: '--orientation both --x-unit 45 --y-unit 90 --no-threshold-lines --bg-fill transparent'
+    )
+    generate_logos(
+      pcm_folder: pcm_folder,
+      output_folder: File.join('public/motif_collection/logo_large/', File.basename(pcm_folder)),
+      sequence_logo_options: '--orientation both --x-unit 100 --y-unit 200 --no-threshold-lines --bg-fill transparent'
     )
   end
 end
