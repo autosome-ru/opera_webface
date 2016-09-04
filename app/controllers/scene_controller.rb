@@ -3,7 +3,7 @@ class SceneController < ApplicationController
 
   def show
     filename = params[:filename]
-    send_data SMBSMCore.get_content(@ticket, filename), filename: "#{@ticket}_#{filename}", type: MIME::Types.type_for(filename), disposition: 'inline'
+    send_data SMBSMCore.get_content(@ticket, filename), filename: "#{@ticket}_#{filename}", type: MIME::Types.type_for(filename).first.try(:content_type), disposition: 'inline'
   end
 
   def download
