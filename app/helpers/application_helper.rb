@@ -40,11 +40,17 @@ module ApplicationHelper
   def collection_motif_image_path(collection_name, motif, orientation)
     "/motif_collection/logo/#{collection_name}/#{motif}_#{orientation}.png"
   end
+  def collection_motif_large_image_path(collection_name, motif, orientation)
+    "/motif_collection/logo_large/#{collection_name}/#{motif}_#{orientation}.png"
+  end
   def collection_motif_image_link(collection_name, motif, orientation, name = 'logo')
     link_to name, collection_motif_image_path(collection_name, motif, orientation)
   end
   def collection_motif_image(collection_name, motif, orientation)
-    image_tag(collection_motif_image_path(collection_name, motif, orientation))
+    link_to(
+      image_tag(collection_motif_image_path(collection_name, motif, orientation)),
+      collection_motif_large_image_path(collection_name, motif, orientation)
+    )
   end
 
   def motif_info(collection_name, motif)
