@@ -1,12 +1,12 @@
 .motif_logo
   .direct
     .label Primary motif:
-    = link_to show_from_scene_path(id: ticket, filename: 'motif_direct.png') do
+    = link_to show_from_scene_path(id: ticket, filename: 'motif_large_direct.png') do
       = show_image(ticket, 'motif_small_direct.png')
   - unless single_stranded?
     .revcomp
       .label Reverse complement:
-      = link_to show_from_scene_path(id: ticket, filename: 'motif_revcomp.png') do
+      = link_to show_from_scene_path(id: ticket, filename: 'motif_large_revcomp.png') do
         = show_image(ticket, 'motif_small_revcomp.png')
 
 .matrices

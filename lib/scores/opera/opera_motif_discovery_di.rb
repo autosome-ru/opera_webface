@@ -55,6 +55,13 @@ else
   end
 end
 
-FileUtils.cp 'motif.dpcm', 'motif_small.dpcm' # Hack to make logos with different name
-SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_files: ['motif.dpcm'], output_folder: '.', orientation: 'both', x_unit: 30, y_unit: 60)
+# Temporary files to make logos of different sizes in files with different names
+FileUtils.ln_s 'motif.dpcm', 'motif_small.dpcm'
+FileUtils.ln_s 'motif.dpcm', 'motif_medium.dpcm'
+FileUtils.ln_s 'motif.dpcm', 'motif_large.dpcm'
 SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_files: ['motif_small.dpcm'], output_folder: '.', orientation: 'both', x_unit: 20, y_unit: 40)
+SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_files: ['motif_medium.dpcm'], output_folder: '.', orientation: 'both', x_unit: 45, y_unit: 90)
+SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_files: ['motif_large.dpcm'], output_folder: '.', orientation: 'both', x_unit: 100, y_unit: 200)
+FileUtils.ln_s 'motif_small_direct.png', 'motif_direct.png'
+FileUtils.ln_s 'motif_small_revcomp.png', 'motif_revcomp.png'
+FileUtils.rm ['motif_small.dpcm', 'motif_medium.dpcm', 'motif_large.dpcm']

@@ -1,6 +1,7 @@
 require 'yaml'
 require 'bioinform'
 require 'shellwords'
+require 'fileutils'
 require_relative '../../app/models/background_form'
 
 JVM_MEMORY_LIMIT = '1G'
@@ -25,7 +26,15 @@ command = [ 'java',
 
 # $ticket is defined in a wrapper (so on scene it's defined in a script)
 if File.exist?('query.pcm')
-  SMBSMCore.soloist('sequence_logo query.pcm --x-unit 20 --y-unit 40 --no-threshold-lines --bg-fill transparent', $ticket)
+  # `sequence_logo` generate output file with name depending from input, so we create some temporary files
+  FileUtils.ln_s('query.pcm', 'query_small.pcm')
+  FileUtils.ln_s('query.pcm', 'query_medium.pcm')
+  FileUtils.ln_s('query.pcm', 'query_large.pcm')
+  SMBSMCore.soloist('sequence_logo query_small.pcm --x-unit 20 --y-unit 40 --no-threshold-lines --bg-fill transparent', $ticket)
+  SMBSMCore.soloist('sequence_logo query_medium.pcm --x-unit 45 --y-unit 90 --no-threshold-lines --bg-fill transparent', $ticket)
+  SMBSMCore.soloist('sequence_logo query_large.pcm --x-unit 100 --y-unit 200 --no-threshold-lines --bg-fill transparent', $ticket)
+  FileUtils.ln_s('query_small.png', 'query.png')
+  FileUtils.rm ['query_small.pcm', 'query_medium.pcm', 'query_large.pcm']
 end
 
 File.write('task_result.txt', SMBSMCore.soloist(command, $ticket))

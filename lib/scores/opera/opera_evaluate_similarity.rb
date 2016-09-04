@@ -25,9 +25,18 @@ command = [ 'java',
 results_text = SMBSMCore.soloist(command, $ticket)
 File.write('task_result.txt', results_text)
 
-['first.pcm', 'second.pcm'].each do |pcm_filename|
-  if File.exist?(pcm_filename)
-    SMBSMCore.soloist("sequence_logo #{pcm_filename} --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
+['first', 'second'].each do |pcm_filename|
+  if File.exist?("#{pcm_filename}.pcm")
+    # `sequence_logo` generate output file with name depending from input, so we create some temporary files
+    FileUtils.ln_s "#{pcm_filename}.pcm", "#{pcm_filename}_small.pcm"
+    FileUtils.ln_s "#{pcm_filename}.pcm", "#{pcm_filename}_medium.pcm"
+    FileUtils.ln_s "#{pcm_filename}.pcm", "#{pcm_filename}_large.pcm"
+    SMBSMCore.soloist("sequence_logo #{pcm_filename}_small.pcm --x-unit 20 --y-unit 40 --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
+    SMBSMCore.soloist("sequence_logo #{pcm_filename}_medium.pcm --x-unit 45 --y-unit 90  --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
+    SMBSMCore.soloist("sequence_logo #{pcm_filename}_large.pcm --x-unit 100 --y-unit 200  --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
+    FileUtils.ln_s "#{pcm_filename}_small_direct.png", "#{pcm_filename}_direct.png"
+    FileUtils.ln_s "#{pcm_filename}_small_revcomp.png", "#{pcm_filename}_revcomp.png"
+    FileUtils.rm ["#{pcm_filename}_small.pcm", "#{pcm_filename}_medium.pcm", "#{pcm_filename}_large.pcm"]
   end
 end
 
@@ -49,5 +58,9 @@ if both_logos_exist
     fw.puts "first.pcm\t0\tdirect\t#{pwm_first.name}"
     fw.puts "second.pcm\t#{shift}\t#{orientation}\t#{pwm_second.name}"
   end
-  SMBSMCore.soloist("glue_logos alignment.png alignment.txt --bg-fill transparent --no-threshold-lines", $ticket)
+  SMBSMCore.soloist("glue_logos alignment_small.png alignment.txt --x-unit 20 --y-unit 40 --bg-fill transparent --no-threshold-lines", $ticket)
+  SMBSMCore.soloist("glue_logos alignment_medium.png alignment.txt --x-unit 45 --y-unit 90 --bg-fill transparent --no-threshold-lines", $ticket)
+  SMBSMCore.soloist("glue_logos alignment_large.png alignment.txt --x-unit 100 --y-unit 200 --bg-fill transparent --no-threshold-lines", $ticket)
+  FileUtils.ln_s "alignment_small_direct.png", "alignment_direct.png"
+  FileUtils.ln_s "alignment_small_revcomp.png", "alignment_revcomp.png"
 end

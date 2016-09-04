@@ -3,20 +3,26 @@
     .my-label Similarity:
     .value= task_results.similarity
     .download_results= download_link t('task_layout.download_results'), ticket, 'task_result.txt'
-    .alignment_logo= show_image(ticket, 'alignment.png')
+    .alignment_logo
+      = link_to show_from_scene_path(id: ticket, filename: 'alignment_large.png') do
+        = show_image(ticket, 'alignment_small.png')
 .input_data
   .row
     .span3
       .motif-label
         = download_list ticket, {'pcm' => 'first.pcm', 'ppm' => 'first.ppm', 'pwm' => 'first.pwm'}
         .name= task_results.first_pwm.name
-      .logo= show_image(ticket, 'first_direct.png')
+      .logo
+        = link_to show_from_scene_path(id: ticket, filename: 'first_large_direct.png') do
+          = show_image(ticket, 'first_small_direct.png')
       = format_matrix_as_table(task_results.first_pwm.matrix, arity: :mono, round: 3)
     .span3
       .motif-label
         = download_list ticket, {'pcm' => 'second.pcm', 'ppm' => 'second.ppm', 'pwm' => 'second.pwm'}
         .name= task_results.second_pwm.name
-      .logo= show_image(ticket, "second_#{task_results[:orientation]}.png")
+      .logo
+        = link_to show_from_scene_path(id: ticket, filename: "second_large_#{task_results[:orientation]}.png") do
+          = show_image(ticket, "second_small_#{task_results[:orientation]}.png")
       = format_matrix_as_table(task_results.second_pwm.matrix, arity: :mono, round: 3)
   .row
     .span3
