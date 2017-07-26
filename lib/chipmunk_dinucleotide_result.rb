@@ -1,5 +1,6 @@
 require 'bioinform'
 require_relative 'chipmunk_occurence'
+require 'backports/2.2.0/enumerable/slice_after.rb'
 
 DiPM = Struct.new(:matrix, :name) do
   def named(new_name)

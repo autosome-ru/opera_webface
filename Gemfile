@@ -75,4 +75,5 @@ gem 'rmagick'
 gem 'bioinform', '~> 0.3.1'
 gem 'sequence_logo', '~> 1.2.3'
 
+gem 'backports'
 # gem 'active_form'
