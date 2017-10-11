@@ -38,7 +38,7 @@ task :generate_logos do
   mkdir_p 'public/motif_collection/logo_medium/'
   mkdir_p 'public/motif_collection/logo_large/'
   ln_sf 'logo_small/', 'public/motif_collection/logo' # logo is a link to relative path logo_small
-  Dir.glob('public/motif_collection/pcm/*') do |pcm_folder|
+  Dir.glob('public/motif_collection/pcm/hocomoco_11_*') do |pcm_folder|
     generate_logos(
       pcm_folder: pcm_folder,
       output_folder: File.join('public/motif_collection/logo_small/', File.basename(pcm_folder)),

@@ -54,8 +54,10 @@ module ApplicationHelper
   end
 
   def motif_info(collection_name, motif)
-    if [:hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
-      motif_url = "http://hocomoco.autosome.ru/motif/#{motif}"
+    if [:hocomoco_11_human, :hocomoco_11_mouse].include?(collection_name)
+      motif_url = "http://hocomoco11.autosome.ru/motif/#{motif}"
+    elsif [:hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
+      motif_url = "http://hocomoco10.autosome.ru/motif/#{motif}"
     elsif collection_name == :hocomoco # v9
       infos = /^(?<model_base>.+)_(?<model_type>f1|f2|do|si)$/.match(motif)
       motif_url = "http://autosome.ru/HOCOMOCO/modelDetails.php?tf=#{infos[:model_base]}&model=#{infos[:model_type]}"
@@ -81,7 +83,7 @@ module ApplicationHelper
   end
 
   def uniprot_links(collection_name, motif)
-    if [:hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
+    if [:hocomoco_11_human, :hocomoco_11_mouse, :hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
       uniprot_name = motif[/^(?<uniprot>.+_HUMAN|.+_MOUSE)\..*/, :uniprot]
       return uniprot_link("#{uniprot_name}", uniprot_name)
     end

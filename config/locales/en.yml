@@ -56,6 +56,8 @@ en:
       hocomoco: 'HOCOMOCO-9'
       hocomoco_10_human: 'HOCOMOCO-10 (human)'
       hocomoco_10_mouse: 'HOCOMOCO-10 (mouse)'
+      hocomoco_11_human: 'HOCOMOCO-11 (human)'
+      hocomoco_11_mouse: 'HOCOMOCO-11 (mouse)'
       jaspar: 'JASPAR'
       selex: 'HT-SELEX'
       swissregulon: 'SwissRegulon'
@@ -133,7 +135,7 @@ en:
         collection: |
           Collection of transcription factor binding site models (motifs).
           Available collections:
-          <a href="http://autosome.ru/HOCOMOCO/">HOCOMOCO</a>,
+          <a href="http://hocomoco.autosome.ru/">HOCOMOCO</a>,
           <a href="http://jaspar.genereg.net/">JASPAR</a>,
           <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
           <a href="http://swissregulon.unibas.ch/fcgi/sr">SwissRegulon</a>,
