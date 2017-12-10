@@ -17,6 +17,7 @@
 .pvalue
   .label P-value
   = chipmunk_infos.pvalue
+  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Binomial P-value based on the estimated motif threhsold. Should NOT be used to distinguish good and bad motifs (use KDIC and motif logo instead).'}}
 .kdic
   .label KDIC
   = chipmunk_infos.kdic.round(5)
