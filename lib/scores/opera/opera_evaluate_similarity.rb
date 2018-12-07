@@ -27,16 +27,11 @@ File.write('task_result.txt', results_text)
 
 ['first', 'second'].each do |pcm_filename|
   if File.exist?("#{pcm_filename}.pcm")
-    # `sequence_logo` generate output file with name depending from input, so we create some temporary files
-    FileUtils.ln_s "#{pcm_filename}.pcm", "#{pcm_filename}_small.pcm"
-    FileUtils.ln_s "#{pcm_filename}.pcm", "#{pcm_filename}_medium.pcm"
-    FileUtils.ln_s "#{pcm_filename}.pcm", "#{pcm_filename}_large.pcm"
-    SMBSMCore.soloist("sequence_logo #{pcm_filename}_small.pcm --x-unit 20 --y-unit 40 --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
-    SMBSMCore.soloist("sequence_logo #{pcm_filename}_medium.pcm --x-unit 45 --y-unit 90  --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
-    SMBSMCore.soloist("sequence_logo #{pcm_filename}_large.pcm --x-unit 100 --y-unit 200  --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
+    SMBSMCore.soloist("sequence_logo #{pcm_filename}.pcm --output-file #{pcm_filename}_small.png --x-unit 20 --y-unit 40 --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
+    SMBSMCore.soloist("sequence_logo #{pcm_filename}.pcm --output-file #{pcm_filename}_medium.png --x-unit 45 --y-unit 90  --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
+    SMBSMCore.soloist("sequence_logo #{pcm_filename}.pcm --output-file #{pcm_filename}_large.png --x-unit 100 --y-unit 200  --orientation both --no-threshold-lines --bg-fill transparent", $ticket)
     FileUtils.ln_s "#{pcm_filename}_small_direct.png", "#{pcm_filename}_direct.png"
     FileUtils.ln_s "#{pcm_filename}_small_revcomp.png", "#{pcm_filename}_revcomp.png"
-    FileUtils.rm ["#{pcm_filename}_small.pcm", "#{pcm_filename}_medium.pcm", "#{pcm_filename}_large.pcm"]
   end
 end
 

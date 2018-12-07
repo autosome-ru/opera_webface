@@ -55,13 +55,9 @@ else
   end
 end
 
-# Temporary files to make logos of different sizes in files with different names
-FileUtils.ln_s 'motif.dpcm', 'motif_small.dpcm'
-FileUtils.ln_s 'motif.dpcm', 'motif_medium.dpcm'
-FileUtils.ln_s 'motif.dpcm', 'motif_large.dpcm'
-SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_files: ['motif_small.dpcm'], output_folder: '.', orientation: 'both', x_unit: 20, y_unit: 40)
-SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_files: ['motif_medium.dpcm'], output_folder: '.', orientation: 'both', x_unit: 45, y_unit: 90)
-SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_files: ['motif_large.dpcm'], output_folder: '.', orientation: 'both', x_unit: 100, y_unit: 200)
+SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_file: 'motif.dpcm', output_filename: "motif_small.png", x_unit: 20, y_unit: 40, orientation: 'both')
+SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_file: 'motif.dpcm', output_filename: "motif_medium.png", x_unit: 45, y_unit: 90, orientation: 'both')
+SequenceLogoGenerator.run_dinucleotide(ticket: $ticket, pcm_file: 'motif.dpcm', output_filename: "motif_large.png", x_unit: 100, y_unit: 200, orientation: 'both')
+
 FileUtils.ln_s 'motif_small_direct.png', 'motif_direct.png'
 FileUtils.ln_s 'motif_small_revcomp.png', 'motif_revcomp.png'
-FileUtils.rm ['motif_small.dpcm', 'motif_medium.dpcm', 'motif_large.dpcm']

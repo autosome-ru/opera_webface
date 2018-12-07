@@ -53,13 +53,8 @@ else
   end
 end
 
-# Temporary files to make logos of different sizes in files with different names
-FileUtils.ln_s 'motif.pcm', 'motif_small.pcm'
-FileUtils.ln_s 'motif.pcm', 'motif_medium.pcm'
-FileUtils.ln_s 'motif.pcm', 'motif_large.pcm'
-SMBSMCore.soloist("sequence_logo motif_small.pcm --x-unit 20 --y-unit 40 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
-SMBSMCore.soloist("sequence_logo motif_medium.pcm --x-unit 45 --y-unit 90 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
-SMBSMCore.soloist("sequence_logo motif_large.pcm --x-unit 100 --y-unit 200 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
+SMBSMCore.soloist("sequence_logo motif.pcm --output-file motif_small.png --x-unit 20 --y-unit 40 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
+SMBSMCore.soloist("sequence_logo motif.pcm --output-file motif_medium.png --x-unit 45 --y-unit 90 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
+SMBSMCore.soloist("sequence_logo motif.pcm --output-file motif_large.png --x-unit 100 --y-unit 200 --icd-mode discrete --no-threshold-lines --orientation both --logo-folder ./", $ticket)
 FileUtils.ln_s 'motif_small_direct.png', 'motif_direct.png'
 FileUtils.ln_s 'motif_small_revcomp.png', 'motif_revcomp.png'
-FileUtils.rm ['motif_small.pcm', 'motif_medium.pcm', 'motif_large.pcm']
