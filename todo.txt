@@ -1,3 +1,9 @@
+- add search through hocomoco to opera.autosome.ru
+- add conseensus sequence as one of macroape input formats
+
+У запроса в macroape/scan отвалилась картинка для query-мотива: http://opera.autosome.ru/macroape/scan/aaaaaaalgd
+
+
 Проверить, что будет, если ошибка случится внутри валидации (см. валидацию sequence_list-а в бурундуке)
 Проверить, нужен ли recursive_valid для SnpList-валидации (нужна ли recursive валидация вместе с wrapped валидацией?)
 
