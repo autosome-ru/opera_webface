@@ -1,0 +1,52 @@
+docker run -d --rm --name redis    --mount src=redis_data,dst=/data -p 6379:6379  redis:alpine  redis-server --appendonly yes
+docker run -d --rm --name rabbitmq --mount src=rabbitmq_data,dst=/var/lib/rabbitmq --hostname opera -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_USER=opera -e RABBITMQ_DEFAULT_PASS=opera  rabbitmq:3-management-alpine
+
+проблема: воркер должен оповестить координатора о своём завершении
+
+хорошо бы научиться к одному локу подписывать несколько триггеров не одновременно, а в любой момент. А еще, чтобы завершение процесса могло разлочить несколько замков
+
+--------------------------------------
+
+не так-то просто отпилить увертюры: она делает симлинк и на испольуемые ресурсы (jar-файлы, коллекции мотивов). Проблема тут в том, что симлинк на коллекцию, например, зависит от параметров задачи
+
+--------------------------------------
+Как хотелось бы писать таски:
+
+alignment = task('macroape', {ticket: ticket, cmd: "..."})
+['small', 'medium', 'large'].each{|size_type|
+  logo_1 = task('sequence_logo', {ticket: ticket, cmd: "first_#{size_type}.pcm --x-unit 20 --y-unit 40 --orientation both --no-threshold-lines --bg-fill transparent"})
+  logo_2 = task('sequence_logo', {ticket: ticket, cmd: "second_#{size_type}.pcm --x-unit 20 --y-unit 40 --orientation both --no-threshold-lines --bg-fill transparent"})
+  
+  glue_logos = task('glue_logos', {cmd: "alignment_small.png alignment.txt --x-unit 20 --y-unit 40 --bg-fill transparent --no-threshold-lines"})
+  symlink = task('bash', {cmd: "ln -s #{pcm_filename}.pcm #{pcm_filename}_large.pcm"})
+  coordinate(when: [alignment, logo_1, logo_2], then: [glue_logos])
+
+  run_now(logo_1)
+  run_now(logo_2)
+}
+run_now(alignment)
+
+--------------------------------------
+
+require 'bunny'
+require 'json'
+require 'securerandom'
+conn = Bunny.new
+conn.start
+
+channel = conn.create_channel
+channel.confirm_select
+
+queue = channel.queue('lock_coordination') # no_declare: true
+channel.queue('glue_logos')
+
+lock_id = SecureRandom.uuid
+to_be_triggered = [
+  {'routing_key' => 'glue_logos', 'msg' => {'cmd' => 'logo_1 logo_2 > logo_all'}.to_json},
+]
+msg = {'type' => 'declare', 'lock_id' => lock_id, 'jobs_to_wait' => ['logo_1', 'logo_2'], 'on_completion' => to_be_triggered}
+channel.default_exchange.publish(msg.to_json, routing_key: queue.name, persistent: true, content_type: 'application/json')
+channel.wait_for_confirms
+
+channel.default_exchange.publish({type: 'complete', lock_id: lock_id, job: 'logo_55'}.to_json, routing_key: queue.name, persistent: true, content_type: 'application/json')
+

@@ -70,10 +70,12 @@ group :test do
   gem 'rspec-rails'
 end
 
-gem 'rmagick'
+#gem 'rmagick'
 
-gem 'bioinform', '~> 0.3.1'
-gem 'sequence_logo', '~> 1.3.2'
+gem 'bioinform', '~> 0.3.1', require: false
+#gem 'sequence_logo', '~> 1.3.2'
 
 gem 'backports'
 # gem 'active_form'
+
+gem 'bunny'

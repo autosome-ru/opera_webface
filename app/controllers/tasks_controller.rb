@@ -1,3 +1,5 @@
+require 'fileutils'
+require 'securerandom'
 require 'yaml'
 require 'ostruct'
 
@@ -20,7 +22,17 @@ class TasksController < ApplicationController
       return
     end
     @ticket = SMBSMCore.get_ticket
+    scene_folder = Opera.path_on_scene(@ticket)
     SMBSMCore.perform_overture(@ticket, @task.task_type, @task.task_params)
+
+    # ticket_2 = SecureRandom.alphanumeric(10)
+    # scene_folder = File.join(Rails.root, 'scene_2', ticket_2)
+    FileUtils.mkdir_p(scene_folder)
+    @task.store_input_data(scene_folder)
+
+    # msg = {task: @task.task_params, ticket: ticket_2}
+    
+    # AMQPManager.publish_to_default_exchange(msg.to_json, routing_key: @task.task_type, persistent: true, content_type: 'application/json')
   end
 
   def perform

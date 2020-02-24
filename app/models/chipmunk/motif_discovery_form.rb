@@ -91,4 +91,11 @@ class Chipmunk::MotifDiscoveryForm
       errors.add(:sequence_weighting_mode, "Unknown weighting mode")
     end
   end
+
+  def store_input_data(folder)
+    Dir.chdir(folder) do
+      File.write('task_params.yaml', task_params.to_yaml)
+      File.write('sequences.mfa', task_params[:sequence_list])
+    end
+  end
 end

@@ -1,6 +1,7 @@
 require 'virtus'
 require 'active_model'
 require 'bioinform'
+require_relative '../model_creation'
 require_relative '../task_form'
 require_relative '../data_model_form'
 require_relative '../background_form'
@@ -30,4 +31,12 @@ class Macroape::ScanForm
   validates :precise_recalc_cutoff, presence: true, numericality: {less_than_or_equal_to: 1, greater_than_or_equal_to: 0}
 
   def self.task_type; 'ScanCollection'; end
+  def store_input_data(folder)
+    Dir.chdir(folder) do
+      File.write('task_params.yaml', task_params.to_yaml)
+
+      background = BackgroundForm.new(task_params[:background]).background
+      save_motif_in_different_types(task_params[:query], background: background, basename: 'query')
+    end
+  end
 end

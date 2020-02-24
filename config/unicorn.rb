@@ -24,8 +24,9 @@
 # err_log    = "#{rails_root}/log/unicorn_error.log"
 # old_pid    = pid_file + '.oldbin'
 
+ENV["UNICORN"] = "true" # notify app that we it's running via unicorn
 
-deploy_to  = "/home/ilya/opera_webface"
+deploy_to  = ENV.fetch("DEPLOY_PATH", "/home/ilya/opera_webface")
 rails_root = "#{deploy_to}"
 pid_file   = "#{rails_root}/tmp/pids/unicorn.pid"
 socket_file= "#{rails_root}/tmp/sockets/unicorn.sock"
@@ -35,7 +36,8 @@ old_pid    = pid_file + '.oldbin'
 
 timeout 30
 worker_processes 4 # Здесь тоже в зависимости от нагрузки, погодных условий и текущей фазы луны
-listen socket_file, :backlog => 1024
+#listen socket_file, :backlog => 1024
+listen "0.0.0.0:3000"
 pid pid_file
 stderr_path err_log
 stdout_path log_file
@@ -67,5 +69,7 @@ after_fork do |server, worker|
   # После того как рабочий процесс создан, он устанавливает соединение с базой.
   defined?(ActiveRecord::Base) and
   ActiveRecord::Base.establish_connection
+
+  AMQPManager.start
 end
 

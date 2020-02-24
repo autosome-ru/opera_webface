@@ -48,4 +48,9 @@ class Perfectosape::ScanForm
   validates :fold_change_cutoff, presence: true, numericality: {greater_than: 0}
 
   def self.task_type; 'SnpScan'; end
+
+  def store_input_data(folder)
+    File.write(File.join(folder, 'task_params.yaml'), task_params.to_yaml)
+    File.write(File.join(folder, 'snp_list.txt'), task_params[:snp_list])
+  end
 end
