@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>5.1.0'
+gem 'rails', '~>5.2.0'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", ">= 1.1.0", require: false
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -61,6 +64,7 @@ gem "twitter-bootstrap-rails", '~> 2.2.8'
 
 group :development do
   gem 'spring'
+  gem 'listen'
   gem 'web-console', '~> 3.0'
   gem "better_errors"
   gem "binding_of_caller"
