@@ -51,7 +51,7 @@ module TasksHelper
   end
 
   def image_tag_if_exists(image_path, options = {})
-    if image_path && OperaWebface::Application.assets.find_asset(image_path)
+    if image_path && ::Rails.application.assets_manifest.assets[image_path]
       image_tag image_path, options
     else
       nil
