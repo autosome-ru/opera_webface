@@ -1,4 +1,4 @@
-OperaWebface::Application.routes.draw do
+Rails.application.routes.draw do
 
   root 'welcome#index'
   get 'contacts' => 'welcome#contacts'
