@@ -6,6 +6,6 @@
 
 User-agent: *
 Allow: /
-Host: http://opera.autosome.ru
-sitemap: http://opera.autosome.ru/sitemap.txt
+Host: https://opera.autosome.ru
+sitemap: https://opera.autosome.ru/sitemap.txt
 
