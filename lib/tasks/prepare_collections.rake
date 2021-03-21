@@ -8,7 +8,9 @@ end
 def generate_logos(pcm_folder:, output_folder:, sequence_logo_options: '--orientation both --x-unit 20 --y-unit 40 --no-threshold-lines --bg-fill transparent')
   pcm_filenames = Dir.glob(File.join(pcm_folder, '*.pcm'))
   command = "sequence_logo #{sequence_logo_options} --logo-folder #{output_folder} --from-stdin"
-
+  $stderr.puts "Run #{command}"
+  $stderr.puts "Stdin:"
+  $stderr.puts pcm_filenames.map(&:shellescape).join("\n")
   IO.popen(command, 'w') do |io|
     io.puts(pcm_filenames.map(&:shellescape).join("\n"))
     io.close_write
@@ -38,29 +40,35 @@ task :generate_logos do
   mkdir_p 'public/motif_collection/logo_small/'
   mkdir_p 'public/motif_collection/logo_medium/'
   mkdir_p 'public/motif_collection/logo_large/'
-  ln_sf 'logo_small/', 'public/motif_collection/logo' # logo is a link to relative path logo_small
   Dir.glob('public/motif_collection/pcm/*') do |pcm_folder|
+    $stderr.puts("generate_logos for #{pcm_folder} (logo_small)")
     generate_logos(
       pcm_folder: pcm_folder,
       output_folder: File.join('public/motif_collection/logo_small/', File.basename(pcm_folder)),
       sequence_logo_options: '--orientation both --x-unit 20 --y-unit 40 --no-threshold-lines --bg-fill transparent'
     )
+
+    $stderr.puts("generate_logos for #{pcm_folder} (logo_medium)")
     generate_logos(
       pcm_folder: pcm_folder,
       output_folder: File.join('public/motif_collection/logo_medium/', File.basename(pcm_folder)),
       sequence_logo_options: '--orientation both --x-unit 45 --y-unit 90 --no-threshold-lines --bg-fill transparent'
     )
+
+    $stderr.puts("generate_logos for #{pcm_folder} (logo_large)")
     generate_logos(
       pcm_folder: pcm_folder,
       output_folder: File.join('public/motif_collection/logo_large/', File.basename(pcm_folder)),
       sequence_logo_options: '--orientation both --x-unit 100 --y-unit 200 --no-threshold-lines --bg-fill transparent'
     )
   end
+  ln_sf 'logo_small/', 'public/motif_collection/logo' # logo is a link to relative path logo_small
 end
 
 task :generate_thresholds do
   mkdir_p 'public/motif_collection/thresholds'
   Dir.glob('public/motif_collection/pwm/*') do |pwm_folder|
+    $stderr.puts "generate_thresholds for #{pwm_folder}"
     generate_thresholds(
       pwm_folder: pwm_folder,
       output_folder: File.join('public/motif_collection/thresholds', File.basename(pwm_folder))
