@@ -4,7 +4,7 @@ require 'shellwords'
 require 'fileutils'
 require_relative '../../app/models/background_form'
 
-JVM_MEMORY_LIMIT = '1G'
+JVM_MEMORY_LIMIT = '512m'
 
 task_params = YAML.load_file('task_params.yaml')
 background = BackgroundForm.new(task_params[:background]).background
