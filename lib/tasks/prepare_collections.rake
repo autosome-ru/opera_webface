@@ -8,9 +8,9 @@ end
 def generate_logos(pcm_folder:, output_folder:, sequence_logo_options: '--orientation both --x-unit 20 --y-unit 40 --no-threshold-lines --bg-fill transparent')
   pcm_filenames = Dir.glob(File.join(pcm_folder, '*.pcm'))
   command = "sequence_logo #{sequence_logo_options} --logo-folder #{output_folder} --from-stdin"
-  $stderr.puts "Run #{command}"
-  $stderr.puts "Stdin:"
-  $stderr.puts pcm_filenames.map(&:shellescape).join("\n")
+  $stderr.puts "Run #{command} (motifs are passed via stdin, line-by-line)"
+  $stderr.puts "Stdin (joined into single line):"
+  $stderr.puts pcm_filenames.map(&:shellescape).join(" ")
   IO.popen(command, 'w') do |io|
     io.puts(pcm_filenames.map(&:shellescape).join("\n"))
     io.close_write
