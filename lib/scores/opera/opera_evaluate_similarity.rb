@@ -56,6 +56,5 @@ if both_logos_exist
   SMBSMCore.soloist("glue_logos alignment_small.png alignment.txt --x-unit 20 --y-unit 40 --bg-fill transparent --no-threshold-lines", $ticket)
   SMBSMCore.soloist("glue_logos alignment_medium.png alignment.txt --x-unit 45 --y-unit 90 --bg-fill transparent --no-threshold-lines", $ticket)
   SMBSMCore.soloist("glue_logos alignment_large.png alignment.txt --x-unit 100 --y-unit 200 --bg-fill transparent --no-threshold-lines", $ticket)
-  FileUtils.ln_s "alignment_small_direct.png", "alignment_direct.png"
-  FileUtils.ln_s "alignment_small_revcomp.png", "alignment_revcomp.png"
+  FileUtils.ln_s "alignment_small.png", "alignment.png"
 end
