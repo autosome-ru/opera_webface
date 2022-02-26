@@ -18,6 +18,10 @@
     = favicon_link_tag 'favicon.ico'
   %body{data: {controller: params[:controller], action: params[:action]}}
     %header
+      .stop-the-war
+        We, Russian scientists, authors and developers of HOCOMOCO would like to express our condemnation of Russian military actions in Ukraine,
+        %br
+        our condolence to all people affected and hope for the soonest turn to peace.
       = nav_bar do
         = menu_group do
           = link_to root_path, class: 'autosome_logo' do
