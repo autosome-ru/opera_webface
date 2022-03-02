@@ -45,5 +45,5 @@
             = motif_form.input :effective_count, label: 'Effective sample size (model 2):'
   %br
   = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
-  = link_to macroape_compare_path(example: params.fetch(:example, 'simple')), class: 'reset-task' do
+  = link_to macroape_compare_path(example: params.fetch(:example, 'PCM')), class: 'reset-task' do
     = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'
