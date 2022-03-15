@@ -55,12 +55,12 @@ module ApplicationHelper
 
   def motif_info(collection_name, motif)
     if [:hocomoco_11_human, :hocomoco_11_mouse].include?(collection_name)
-      motif_url = "https://hocomoco11.autosome.ru/motif/#{motif}"
+      motif_url = "https://hocomoco11.autosome.org/motif/#{motif}"
     elsif [:hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
-      motif_url = "https://hocomoco10.autosome.ru/motif/#{motif}"
+      motif_url = "https://hocomoco10.autosome.org/motif/#{motif}"
     elsif collection_name == :hocomoco # v9
       infos = /^(?<model_base>.+)_(?<model_type>f1|f2|do|si)$/.match(motif)
-      motif_url = "http://autosome.ru/HOCOMOCO/modelDetails.php?tf=#{infos[:model_base]}&model=#{infos[:model_type]}"
+      motif_url = "http://autosome.org/HOCOMOCO/modelDetails.php?tf=#{infos[:model_base]}&model=#{infos[:model_type]}"
     else
       motif_url = nil
     end

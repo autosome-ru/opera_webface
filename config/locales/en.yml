@@ -145,7 +145,7 @@ en:
         collection: |
           Collection of transcription factor binding site models (motifs).
           Available collections:
-          <a href="http://hocomoco.autosome.ru/">HOCOMOCO</a>,
+          <a href="http://hocomoco.autosome.org/">HOCOMOCO</a>,
           <a href="http://jaspar.genereg.net/">JASPAR</a>,
           <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
           <a href="http://swissregulon.unibas.ch/fcgi/sr">SwissRegulon</a>,
@@ -157,7 +157,7 @@ en:
         collection: |
           Collection of transcription factor binding site motifs to scan.
           Available collections:
-          <a href="http://autosome.ru/HOCOMOCO/">HOCOMOCO</a>,
+          <a href="http://autosome.org/HOCOMOCO/">HOCOMOCO</a>,
           <a href="http://jaspar.genereg.net/">JASPAR</a>,
           <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
           <a href="http://swissregulon.unibas.ch/fcgi/sr">SwissRegulon</a>,

@@ -11,7 +11,7 @@
 
         gtag('config', 'UA-6896924-8');
       </script>
-    %title autosome.ru Opera House: bioinformatics tools on the web
+    %title autosome.org Opera House: bioinformatics tools on the web
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -40,9 +40,9 @@
             = menu_item 'Dinucleotide motif discovery', new_chipmunk_discovery_di_path
             = menu_item 'Description', chipmunk_description_path
           = drop_down 'Databases' do
-            = menu_item 'HOCOMOCO – collection of TFBS motifs', 'https://hocomoco.autosome.ru/'
-            = menu_item 'EpiFactors – database for epigenetic regulators', 'https://epifactors.autosome.ru/'
-            = menu_item 'ADASTRA – database of allele-specific TF binding sites', 'https://adastra.autosome.ru/'
+            = menu_item 'HOCOMOCO – collection of TFBS motifs', 'https://hocomoco.autosome.org/'
+            = menu_item 'EpiFactors – database for epigenetic regulators', 'https://epifactors.autosome.org/'
+            = menu_item 'ADASTRA – database of allele-specific TF binding sites', 'https://adastra.autosome.org/'
           = menu_item 'Contacts', contacts_path
         = form_tag search_tasks_path, class: 'pull-right navbar-search' do
           = label_tag do

@@ -18,7 +18,7 @@ read more at http://www.ruby-lang.org/
 
 The small-BiSMark xml motif-files produced by this machinery
 are based on the following DTD:
-http://autosome.ru/smallBiSMark/smallbismark.dtd
+http://autosome.org/smallBiSMark/smallbismark.dtd
 
 
 2. Prerequisites >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
