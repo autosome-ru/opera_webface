@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'bioinform'
 require_relative '../../../app/models/model_creation'
 require_relative '../../../app/models/background_form'
