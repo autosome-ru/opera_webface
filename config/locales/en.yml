@@ -68,6 +68,10 @@ en:
       hocomoco_10_mouse: 'HOCOMOCO-10 (mouse)'
       hocomoco_11_human: 'HOCOMOCO-11 (human)'
       hocomoco_11_mouse: 'HOCOMOCO-11 (mouse)'
+      hocomoco_12_core: 'HOCOMOCO-12 (H12CORE)'
+      hocomoco_12_rsnp: 'HOCOMOCO-12 (H12RSNP)'
+      hocomoco_12_invivo: 'HOCOMOCO-12 (H12INVIVO)'
+      hocomoco_12_invitro: 'HOCOMOCO-12 (H12INVITRO)'
       jaspar: 'JASPAR'
       selex: 'HT-SELEX'
       swissregulon: 'SwissRegulon'
@@ -145,11 +149,11 @@ en:
         collection: |
           Collection of transcription factor binding site models (motifs).
           Available collections:
-          <a href="http://hocomoco.autosome.org/">HOCOMOCO</a>,
-          <a href="http://jaspar.genereg.net/">JASPAR</a>,
-          <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
-          <a href="http://swissregulon.unibas.ch/fcgi/sr">SwissRegulon</a>,
-          and <a href="http://homer.salk.edu/homer/motif/motifDatabase.html">HOMER</a>.
+          <a href="https://hocomoco.autosome.org/">HOCOMOCO</a>,
+          <a href="https://jaspar.uio.no/">JASPAR</a>,
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
+          <a href="https://swissregulon.unibas.ch/">SwissRegulon</a>,
+          and <a href="http://homer.ucsd.edu/homer/motif/motifDatabase.html">HOMER</a>.
         pvalue_cutoff: "P-value cutoff to treat a DNA subsequence as a TF binding site."
         fold_change_cutoff: "Minimal P-value fold change."
     Macroape:
@@ -157,11 +161,11 @@ en:
         collection: |
           Collection of transcription factor binding site motifs to scan.
           Available collections:
-          <a href="http://autosome.org/HOCOMOCO/">HOCOMOCO</a>,
-          <a href="http://jaspar.genereg.net/">JASPAR</a>,
-          <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
-          <a href="http://swissregulon.unibas.ch/fcgi/sr">SwissRegulon</a>,
-          and <a href="http://homer.salk.edu/homer/motif/motifDatabase.html">HOMER</a>.
+          <a href="https://hocomoco.autosome.org/">HOCOMOCO</a>,
+          <a href="https://jaspar.uio.no/">JASPAR</a>,
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
+          <a href="https://swissregulon.unibas.ch/">SwissRegulon</a>,
+          and <a href="http://homer.ucsd.edu/homer/motif/motifDatabase.html">HOMER</a>.
         pvalue: 'P-value level to select the motif thresholds.'
         pvalue_boundary: 'Upper boundary (default) means that the obtained P-value is greater than or equal to the requested P-value.'
         similarity_cutoff: 'Minimal similarity to report.'

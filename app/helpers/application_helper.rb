@@ -54,13 +54,15 @@ module ApplicationHelper
   end
 
   def motif_info(collection_name, motif)
-    if [:hocomoco_11_human, :hocomoco_11_mouse].include?(collection_name)
+    if [:hocomoco_12_core, :hocomoco_12_rsnp, :hocomoco_12_invivo, :hocomoco_12_invitro].include?(collection_name)
+      motif_url = "https://hocomoco12.autosome.org/motif/#{motif}"
+    elsif [:hocomoco_11_human, :hocomoco_11_mouse].include?(collection_name)
       motif_url = "https://hocomoco11.autosome.org/motif/#{motif}"
     elsif [:hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
       motif_url = "https://hocomoco10.autosome.org/motif/#{motif}"
     elsif collection_name == :hocomoco # v9
       infos = /^(?<model_base>.+)_(?<model_type>f1|f2|do|si)$/.match(motif)
-      motif_url = "http://autosome.org/HOCOMOCO/modelDetails.php?tf=#{infos[:model_base]}&model=#{infos[:model_type]}"
+      motif_url = "https://autosome.org/HOCOMOCO/modelDetails.php?tf=#{infos[:model_base]}&model=#{infos[:model_type]}"
     else
       motif_url = nil
     end
@@ -82,10 +84,28 @@ module ApplicationHelper
     end
   end
 
+  def annotation_by_h12_collection(collection_name)
+    @cache_annotation_by_collection ||= {}
+    @cache_annotation_by_collection[collection_name] ||= begin
+      collection_suffix = collection_name.split('_').last.upcase
+      annotation_fn = Rails.root.join("public/motif_collection/H12#{collection_suffix}_annotation.jsonl")
+      File.readlines(annotation_fn).map{|l|
+        JSON.parse(l)
+      }.group_by{|d|
+        d['name']
+      }.transform_values{|grp|
+        raise unless grp.size == 1
+        grp.first
+      }
+    end
+  end
+
   def uniprot_links(collection_name, motif)
     if [:hocomoco_11_human, :hocomoco_11_mouse, :hocomoco_10_human, :hocomoco_10_mouse].include?(collection_name)
       uniprot_name = motif[/^(?<uniprot>.+_HUMAN|.+_MOUSE)\..*/, :uniprot]
       return uniprot_link("#{uniprot_name}", uniprot_name)
+    elsif [:hocomoco_12_core, :hocomoco_12_rsnp, :hocomoco_12_invivo, :hocomoco_12_invitro].include?(collection_name)
+      uniprot_name = annotation_by_h12_collection(collection_name)[motif][:uniprot_id_human]
     end
     motif_id = motif.split.first # names in uniprot mapping aren't complete names but just first parts (e.g. `MA0512.1` for `MA0512.1 Rxra`)
     uniprot_names = uniprot_mapping[collection_name.to_sym][motif_id]
