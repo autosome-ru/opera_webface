@@ -87,7 +87,7 @@ module ApplicationHelper
   def annotation_by_h12_collection(collection_name)
     @cache_annotation_by_collection ||= {}
     @cache_annotation_by_collection[collection_name] ||= begin
-      collection_suffix = collection_name.split('_').last.upcase
+      collection_suffix = collection_name.to_s.split('_').last.upcase
       annotation_fn = Rails.root.join("public/motif_collection/H12#{collection_suffix}_annotation.jsonl")
       File.readlines(annotation_fn).map{|l|
         JSON.parse(l)
