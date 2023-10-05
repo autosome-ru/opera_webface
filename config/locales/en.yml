@@ -150,7 +150,7 @@ en:
           Collection of transcription factor binding site models (motifs).
           Available collections:
           <a href="https://hocomoco.autosome.org/">HOCOMOCO</a>,
-          <a href="https://jaspar.uio.no/">JASPAR</a>,
+          <a href="https://jaspar.genereg.net/">JASPAR</a>,
           <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
           <a href="https://swissregulon.unibas.ch/">SwissRegulon</a>,
           and <a href="http://homer.ucsd.edu/homer/motif/motifDatabase.html">HOMER</a>.
@@ -162,7 +162,7 @@ en:
           Collection of transcription factor binding site motifs to scan.
           Available collections:
           <a href="https://hocomoco.autosome.org/">HOCOMOCO</a>,
-          <a href="https://jaspar.uio.no/">JASPAR</a>,
+          <a href="https://jaspar.genereg.net/">JASPAR</a>,
           <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2877582/">HT-SELEX</a>,
           <a href="https://swissregulon.unibas.ch/">SwissRegulon</a>,
           and <a href="http://homer.ucsd.edu/homer/motif/motifDatabase.html">HOMER</a>.
