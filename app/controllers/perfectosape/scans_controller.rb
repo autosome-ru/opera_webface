@@ -14,7 +14,7 @@ rs10431961 tggcggggctggtcaggcggcgtcg[C/T]cggtacgctctgagcggcagcgtgt
     EOS
 
     { snp_list_text: test_snps,
-      collection: :hocomoco_12_core,
+      collection: :hocomoco_12_rsnp,
       pvalue_cutoff: 0.0005,
       fold_change_cutoff: 4
     }
