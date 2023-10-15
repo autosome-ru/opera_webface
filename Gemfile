@@ -60,7 +60,10 @@ gem 'loofah', '>= 2.3.1'
 gem 'rack', '>= 1.6.12'
 
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem "twitter-bootstrap-rails", '~> 2.2.8'
+#gem "twitter-bootstrap-rails", '~> 2.2.8'
+gem 'twitter-bootstrap-rails', :git => 'https://github.com/seyhunak/twitter-bootstrap-rails.git', :ref => "1d93c5a77049b3d21d17c847ad0531d7714fa229" #, branch: 'bootstrap3'
+
+
 
 group :development do
   gem 'spring'
