@@ -26,7 +26,10 @@
       /   caused by Russian military actions in Ukraine. 
       /   %br
       /   We express our condolences to all affected people and sincerely hope for a prompt transition to peace.
-      = nav_bar responsive: true, fluid: true, brand: (link_to(root_path, class: 'autosome_logo') { image_tag 'autosome_logo.png' }) do
+      = nav_bar responsive: true do
+        = menu_group do
+          = link_to root_path, class: 'autosome_logo' do
+            = image_tag 'autosome_logo.png'
         = menu_group do
           = drop_down 'MACRO-APE' do
             = menu_item 'Compare two motifs', new_macroape_compare_path
