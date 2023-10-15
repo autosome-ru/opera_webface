@@ -26,7 +26,7 @@
       /   caused by Russian military actions in Ukraine. 
       /   %br
       /   We express our condolences to all affected people and sincerely hope for a prompt transition to peace.
-      = nav_bar do
+      = nav_bar fluid: true do
         = menu_group do
           = link_to root_path, class: 'autosome_logo' do
             = image_tag 'autosome_logo.png'
@@ -52,7 +52,7 @@
             Ticket number:
             = text_field_tag 'id'
           = submit_tag 'Search'
-    .container
+    .container-fluid
       = yield
       .footer
         .grant Supported by RFBR grants 15-34-20423 and 16-34-01318.
