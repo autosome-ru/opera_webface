@@ -22,7 +22,7 @@ module Macroape::ScansHelper
                       show_from_scene_path(id: ticket, filename: 'query_large.png')
                     )
                   ]
-    create_table(header, lines, table_html: {class: 'colorized lighter-column-odd macroape_scan_results'})
+    create_table(header, lines, table_html: {class: 'colorized lighter-column-odd neutral-colors macroape_scan_results'})
   end
 
 end
