@@ -46,7 +46,7 @@ module Perfectosape::ScansHelper
       #             highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length, snp.left.length).gsub(/^n+/i, '').gsub(/n+$/i, '')
       alignment = highlight_TFBS(snp.variant(0), snp.left.length + pos, motifs[motif].length, snp.left.length) + '<br>' +
                   highlight_TFBS(snp.variant(1), snp.left.length + pos, motifs[motif].length, snp.left.length)
-      fold_change_normed, up_down = (fold_change >= 1) ? [fold_change, 'up'] : [1.0 / fold_change, 'down']
+      fold_change_normed, up_down = (fold_change >= 1) ? [fold_change, '<span class="arrow-up"></span>up'] : [1.0 / fold_change, '<span class="arrow-down"></span>down']
       [ snp_id,  motif_info, alleles, pvalue_1,  pvalue_2,  fold_change_normed, up_down, alignment ]
     end
 
