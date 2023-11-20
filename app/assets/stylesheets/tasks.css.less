@@ -213,6 +213,19 @@ table.colorized {
       }
     }
   }
+
+  &.lighter-column-even.neutral-colors {
+    tbody {
+      tr:nth-child(odd) {
+        td:nth-child(even) { background-color: lighten(#0000ff, 39%); }
+        td:nth-child(odd) { background-color: lighten(#0000ff, 35%); }
+      }
+      tr:nth-child(even) {
+        td:nth-child(even) { background-color: lighten(#ffff00, 43%); }
+        td:nth-child(odd) { background-color: lighten(#ffff00, 35%); }
+      }
+    }
+  }
 }
 
 .input_data, .result_data {
