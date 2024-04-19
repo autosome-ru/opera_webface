@@ -70,6 +70,7 @@ en:
       hocomoco_11_mouse: 'HOCOMOCO-11 (mouse)'
       hocomoco_12_core: 'HOCOMOCO-12 (H12CORE)'
       hocomoco_12_rsnp: 'HOCOMOCO-12 (H12RSNP)'
+      hocomoco_12_rsnp_hq: 'HOCOMOCO-12 (H12RSNP-HQ)'
       hocomoco_12_invivo: 'HOCOMOCO-12 (H12INVIVO)'
       hocomoco_12_invitro: 'HOCOMOCO-12 (H12INVITRO)'
       jaspar: 'JASPAR'
