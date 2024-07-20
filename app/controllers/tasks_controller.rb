@@ -71,11 +71,11 @@ protected
   end
 
   def task_params(ticket)
-    OpenStruct.new(YAML.load(SMBSMCore.get_content(ticket, 'task_params.yaml')))  if SMBSMCore.check_content(ticket, 'task_params.yaml')
+    OpenStruct.new(YAML.load(SMBSMCore.get_content(ticket, 'task_params.yaml').force_encoding('UTF-8')))  if SMBSMCore.check_content(ticket, 'task_params.yaml')
   end
 
   def task_results(ticket)
-    OpenStruct.new(YAML.load(SMBSMCore.get_content(ticket, 'task_results.yaml')))  if SMBSMCore.check_content(ticket, 'task_results.yaml')
+    OpenStruct.new(YAML.load(SMBSMCore.get_content(ticket, 'task_results.yaml').force_encoding('UTF-8')))  if SMBSMCore.check_content(ticket, 'task_results.yaml')
   end
 
   def reload_page_time

@@ -21,7 +21,7 @@ rs10431961 tggcggggctggtcaggcggcgtcg[C/T]cggtacgctctgagcggcagcgtgt
   end
 
   def task_results(ticket)
-    SMBSMCore.get_content(ticket, 'task_result.txt')  if SMBSMCore.check_content(ticket, 'task_result.txt')
+    SMBSMCore.get_content(ticket, 'task_result.txt').force_encoding('UTF-8')  if SMBSMCore.check_content(ticket, 'task_result.txt')
   end
 
   def task_logo

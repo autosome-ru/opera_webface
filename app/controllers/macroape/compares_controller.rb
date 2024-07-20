@@ -49,7 +49,7 @@ protected
   end
 
   def task_results(ticket)
-    results_text = SMBSMCore.get_content(ticket, 'task_result.txt')  if SMBSMCore.check_content(ticket, 'task_result.txt')
+    results_text = SMBSMCore.get_content(ticket, 'task_result.txt').force_encoding('UTF-8')  if SMBSMCore.check_content(ticket, 'task_result.txt')
     
     infos = results_text.lines.reject{|line|
       line.start_with?('#')
@@ -72,8 +72,8 @@ protected
       pvalue_second: infos['P2'],
       threshold_first: infos['T1'],
       threshold_second: infos['T2'],
-      first_pwm: Bioinform::MotifModel::PWM.from_string(SMBSMCore.get_content(ticket, 'first.pwm')),
-      second_pwm: Bioinform::MotifModel::PWM.from_string(SMBSMCore.get_content(ticket, 'second.pwm')),
+      first_pwm: Bioinform::MotifModel::PWM.from_string(SMBSMCore.get_content(ticket, 'first.pwm').force_encoding('UTF-8')),
+      second_pwm: Bioinform::MotifModel::PWM.from_string(SMBSMCore.get_content(ticket, 'second.pwm').force_encoding('UTF-8')),
     })
   end
 
