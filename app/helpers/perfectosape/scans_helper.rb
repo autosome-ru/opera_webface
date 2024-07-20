@@ -29,7 +29,6 @@ module Perfectosape::ScansHelper
       pvalue_1, pvalue_2 = pvalue_1.to_f, pvalue_2.to_f
       pos_1, pos_2 = pos_1.to_i, pos_2.to_i
       fold_change = fold_change.to_f
-      collection_motif_links(collection_name, motif)
 
       snp = SequenceWithSNP.from_string(snp_sequences[snp_id])
       if pvalue_1 <= pvalue_2
