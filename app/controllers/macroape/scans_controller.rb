@@ -14,7 +14,7 @@ protected
   helper_method :query_matrix_examples
 
   def default_params
-    common_options = { collection: :hocomoco_12_core,
+    common_options = { collection: :hocomoco_13_core,
       background: BackgroundForm.uniform,
       query: DataModelForm.new(
         effective_count: 100, pseudocount: :log,
