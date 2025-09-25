@@ -57,7 +57,7 @@ gem 'virtus'
 
 gem 'nokogiri', '>= 1.10.4'
 gem 'loofah', '>= 2.3.1'
-gem 'rack', '>= 1.6.12'
+gem 'rack', '>= 2.2.18'
 
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails", '~> 2.2.8'
