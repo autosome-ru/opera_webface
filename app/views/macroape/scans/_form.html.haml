@@ -12,7 +12,8 @@
           = motif_form.input :matrix, label: 'Query matrix:', :as => :text
     .span4
       .collection
-        = f.input :collection, as: :motif_collection_selector
+        = hidden_field_tag 'task[collection]', 'hocomoco_14_core'
+        / = f.input :collection, as: :motif_collection_selector
   Advanced options:
   .expand_button
     %a{href: '#'} [+]
