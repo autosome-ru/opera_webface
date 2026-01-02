@@ -23,3 +23,10 @@
 /public/motif_collection/pwm/
 /public/motif_collection/ppm/
 /public/motif_collection/thresholds/
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

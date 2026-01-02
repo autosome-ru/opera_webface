@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>5.2.0'
+gem 'rails', '~>6.0.0'
+gem 'concurrent-ruby', '1.3.4'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", ">= 1.1.0", require: false
+gem "bootsnap", ">= 1.4.2", require: false
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails' # , '~> 4.0.0'
@@ -58,7 +59,9 @@ gem 'virtus'
 gem 'nokogiri', '>= 1.10.4'
 gem 'loofah', '>= 2.3.1'
 gem 'rack', '>= 2.2.18'
+gem 'webpacker'
 
+gem 'sprockets', '~> 3.0'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails", '~> 2.2.8'
 
@@ -68,6 +71,7 @@ group :development do
   gem 'web-console', '~> 3.0'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'webrick'
 end
 
 group :test do
@@ -77,7 +81,7 @@ end
 
 gem 'rmagick'
 
-gem 'bioinform', '~> 0.3.1'
+gem 'bioinform', '~> 0.3.2'
 gem 'sequence_logo', '~> 1.3.2'
 
 gem 'backports'
