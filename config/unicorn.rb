@@ -25,7 +25,7 @@ err_log    = "/var/log/unicorn/#{app_name}.error.log"
 old_pid    = pid_file + '.oldbin'
 
 timeout 30
-worker_processes 4
+worker_processes 2
 listen socket_file, :backlog => 1024
 pid pid_file
 stderr_path err_log
