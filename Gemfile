@@ -60,6 +60,8 @@ gem 'nokogiri', '>= 1.10.4'
 gem 'loofah', '>= 2.3.1'
 gem 'rack', '>= 2.2.18'
 gem 'webpacker'
+gem 'net-http'
+
 
 gem 'sprockets', '~> 3.0'
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
