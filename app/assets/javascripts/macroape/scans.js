@@ -9,14 +9,14 @@ $(document).ready(function() {
   const parse_shift = row => Number(row.find('td:nth-child(3)')[0].innerText);
   $('.macroape_scan_results tr').each(function() {
     const row = $(this);
-    if (!(row.find('th').size() > 0)) { // header
+    if (!(row.find('th').length > 0)) { // header
       const shift = parse_shift(row);
       if (shift < min_shift) { min_shift = shift; }
     }
   });
   $('.macroape_scan_results tr').each(function() {
     const row = $(this);
-    if (!(row.find('th').size() > 0)) { // header
+    if (!(row.find('th').length > 0)) { // header
       const shift = parse_shift(row);
       const logo = row.find('td:last-child');
 

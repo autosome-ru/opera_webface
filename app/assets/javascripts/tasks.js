@@ -89,7 +89,7 @@ $(document).ready(function() {
   });
   $('.advanced_options').each(function() {
     const advanced_section = $(this);
-    if  (advanced_section.find('[data-error]').size() > 0) {
+    if  (advanced_section.find('[data-error]').length > 0) {
       advanced_section.show();
       $('.expand_button').html('<a href="#">[&ndash;]</a>');
     }
