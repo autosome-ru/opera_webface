@@ -6,8 +6,8 @@ JsRoutes.setup do |c|
   # Legacy setup for no modules system.
   # Sets up a global variable `Routes`
   # that holds route helpers.
-  c.module_type = nil
-  c.namespace = "Routes"
+  # c.module_type = nil
+  # c.namespace = "Routes"
 
   # Follow javascript naming convention
   # but lose the ability to match helper name

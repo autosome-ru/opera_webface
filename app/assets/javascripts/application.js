@@ -12,5 +12,4 @@
 //
 //= require tasks
 //= require_tree .
-//= require js-routes
 //
