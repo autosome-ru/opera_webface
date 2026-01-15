@@ -1,8 +1,10 @@
-= I18n.t 'opera.task_performing'
-= image_tag_if_exists task_logo, class: 'task_logo'
-= notice_and_reload(url_for(ticket), reload_page_time)
-%h5
-  - if @status.start_time
-    = raw I18n.t('opera.ticket_number.in_process', ticket: ticket, time_scheduled: I18n.l(@status.queue_time), time_started: I18n.l(@status.start_time))
-  - else
-    = raw I18n.t('opera.ticket_number.in_queue', ticket: ticket, time_scheduled: I18n.l(@status.queue_time))
+.row
+  .col-12
+    = I18n.t 'opera.task_performing'
+    = image_tag_if_exists task_logo, class: 'task_logo'
+    = notice_and_reload(url_for(ticket), reload_page_time)
+    %h5
+      - if @status.start_time
+        = raw I18n.t('opera.ticket_number.in_process', ticket: ticket, time_scheduled: I18n.l(@status.queue_time), time_started: I18n.l(@status.start_time))
+      - else
+        = raw I18n.t('opera.ticket_number.in_queue', ticket: ticket, time_scheduled: I18n.l(@status.queue_time))

@@ -1,26 +1,48 @@
-.toy_examples
-  Toy examples for the #{link_to 'simple', chipmunk_discovery_mono_path(example: :simple) }, #{link_to 'weighted', chipmunk_discovery_mono_path(example: :weighted) }, #{link_to 'peak', chipmunk_discovery_mono_path(example: :peak) } data sets.
+.row.toy_examples.mt-3.mb-3
+  .col-12
+    Toy examples for the #{link_to 'simple', chipmunk_discovery_mono_path(example: :simple) }, #{link_to 'weighted', chipmunk_discovery_mono_path(example: :weighted) }, #{link_to 'peak', chipmunk_discovery_mono_path(example: :peak) } data sets.
+    %hr
 = task_form_for task, :as => :task, url: chipmunk_discovery_mono_path, html: {class: 'task_params chipmunk_discovery'} do |f|
   = hidden_field_tag 'example', params.fetch(:example, 'simple')
-  .motif_discovery_options
-    = f.input :sequence_weighting_mode, as: :sequence_weighting_mode_selector
-  .sequence_list
-    %h5 Paste a list of sequences in a textarea or select a file with sequences to scan
-    .sequence_list
+  .row
+    .col-6
+      .motif_discovery_options
+        = f.input :sequence_weighting_mode, as: :sequence_weighting_mode_selector
+  .row
+    .col-12
+      %h5 Paste a list of sequences in a textarea or select a file with sequences to scan
+  .row.sequence_list
+    .col-12
       .sequence_list_text= f.input :sequence_list_text, :as => :text
-    .sequence_list_file= f.input :sequence_list_file, :as => :file
+  .row
+    .col-6
+      .sequence_list_file= f.input :sequence_list_file, :as => :file
 
-  Advanced options:
-  .expand_button
-    %a{href: '#'} [+]
-  .advanced_options
-    = f.input :speed_mode, as: :speed_mode_selector
-    = f.input :min_motif_length, as: :integer, input_html: {min: 5, max: 22}
-    = f.input :max_motif_length, as: :integer, input_html: {min: 5, max: 22}
-    = f.input :occurences_per_sequence, as: :occurences_per_sequence_selector
-    = f.input :motif_shape_prior, as: :motif_shape_prior_selector
-    = f.input :gc_content, as: :gc_content_selector
-  %br
-  = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
-  = link_to chipmunk_discovery_mono_path(example: params.fetch(:example, 'simple')), class: 'reset-task' do
-    = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'
+  .row
+    .col-12
+      Advanced options:
+      .expand_button
+        %a{href: '#'} [+]
+      .advanced_options
+        .row
+          .col-6
+            = f.input :speed_mode, as: :speed_mode_selector
+        .row
+          .col-6
+            = f.input :min_motif_length, as: :integer, input_html: {min: 5, max: 22}
+          .col-6
+            = f.input :max_motif_length, as: :integer, input_html: {min: 5, max: 22}
+        .row
+          .col-6
+            = f.input :occurences_per_sequence, as: :occurences_per_sequence_selector
+        .row
+          .col-6
+            = f.input :motif_shape_prior, as: :motif_shape_prior_selector
+        .row
+          .col-6
+            = f.input :gc_content, as: :gc_content_selector
+      .row
+        .col-4
+          = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
+          = link_to chipmunk_discovery_mono_path(example: params.fetch(:example, 'simple')), class: 'reset-task' do
+            = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'

@@ -1,11 +1,13 @@
 .result_data
-  .similarity
-    .my-label Similarity:
-    .value= task_results.similarity
-    .download_results= download_link t('task_layout.download_results'), ticket, 'task_result.txt'
-    .alignment_logo
-      = link_to show_from_scene_path(id: ticket, filename: 'alignment_large.png') do
-        = show_image(ticket, 'alignment_small.png')
+  .row
+    .col-12
+      .similarity
+        .my-label Similarity:
+        .value= task_results.similarity
+        .download_results.mt-2.mb-2= download_link t('task_layout.download_results'), ticket, 'task_result.txt'
+        .alignment_logo
+          = link_to show_from_scene_path(id: ticket, filename: 'alignment_large.png') do
+            = show_image(ticket, 'alignment_small.png')
 .input_data
   .row
     .col-3
@@ -24,6 +26,6 @@
         = link_to show_from_scene_path(id: ticket, filename: "second_large_#{task_results[:orientation]}.png") do
           = show_image(ticket, "second_small_#{task_results[:orientation]}.png")
       = format_matrix_as_table(task_results.second_pwm.matrix, arity: :mono, round: 3)
-  .row
+  .row.mt-3.mb-3
     .col-3
       = download_link t('task_layout.task_details'), ticket, 'task_params.yaml'

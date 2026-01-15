@@ -1,8 +1,14 @@
-.results_header
-  = image_tag_if_exists task_logo, class: 'task_logo'
-  %h5
-    = raw I18n.t('opera.ticket_number.finished', ticket: ticket, time_finished: I18n.l(status.end_time))
-= render partial: 'results', locals: {ticket: ticket, status: status, task_params: task_params, task_results: task_results}
+.row
+  .col-12
+    .results_header
+      = image_tag_if_exists task_logo, class: 'task_logo'
+      %h5.mt-3.mb-3
+        = raw I18n.t('opera.ticket_number.finished', ticket: ticket, time_finished: I18n.l(status.end_time))
+.row
+  .col-12
+    = render partial: 'results', locals: {ticket: ticket, status: status, task_params: task_params, task_results: task_results}
 
-.footer
-  .ticket_storage_warning Please save your results for future usage, prolonged tickets storage is not guaranteed.
+.row
+  .col-12
+    .footer.mt-2.mb-2
+      .ticket_storage_warning Please save your results for future usage, prolonged tickets storage is not guaranteed.

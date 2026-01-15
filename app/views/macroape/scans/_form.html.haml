@@ -1,40 +1,46 @@
+.row.toy_examples.mt-3.mb-3
+  .col-12
+    Toy examples for the #{link_to 'PCM', macroape_scan_path(example: :PCM) }, #{link_to 'PWM', macroape_scan_path(example: :PWM) } and #{link_to 'PPM', macroape_scan_path(example: :PPM) } scanning.
+    %hr
 = task_form_for task, :as => :task, url: macroape_scan_path, html: {class: 'task_params'} do |f|
   = hidden_field_tag 'example', params.fetch(:example, 'PCM')
-  .toy_examples
-    Toy examples for the #{link_to 'PCM', macroape_scan_path(example: :PCM) }, #{link_to 'PWM', macroape_scan_path(example: :PWM) } and #{link_to 'PPM', macroape_scan_path(example: :PPM) } scanning.
-  %hr
   .row
-    .col-4.query_model
+    .col-6.query_model
       = f.fields_for :query, task.query do |motif_form|
         .data_model
           = motif_form.input :data_model, label: 'Data model:', as: :motif_type_selector
         .matrix
           = motif_form.input :matrix, label: 'Query matrix:', :as => :text
-    .col-4
-      .collection
-        = hidden_field_tag 'task[collection]', 'hocomoco_14_core'
-        / = f.input :collection, as: :motif_collection_selector
-  Advanced options:
-  .expand_button
-    %a{href: '#'} [+]
-  .advanced_options
-    = render partial: 'shared/background_model', locals: {form_builder: f, object_name: :background, object_value: task.background, background_title: 'Query background:'}
-    .pvalue
-      = f.input :pvalue
-    .pvalue_boundary
-      = f.input :pvalue_boundary, as: :pvalue_boundary_selector
-    .similarity_cutoff
-      = f.input :similarity_cutoff, as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
-    .precise_recalc_cutoff
-      = f.input :precise_recalc_cutoff, as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
+    / .col-6
+    /   .collection
+    /     = f.input :collection, as: :motif_collection_selector
+    = hidden_field_tag 'task[collection]', 'hocomoco_14_core'
+  .row
+    .col-12
+      Advanced options:
+      .expand_button
+        %a{href: '#'} [+]
+      .advanced_options
+        .row
+          .col-6
+            = render partial: 'shared/background_model', locals: {form_builder: f, object_name: :background, object_value: task.background, background_title: 'Query background:'}
+            .pvalue
+              = f.input :pvalue
+            .pvalue_boundary
+              = f.input :pvalue_boundary, as: :pvalue_boundary_selector
+            .similarity_cutoff
+              = f.input :similarity_cutoff, as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
+            .precise_recalc_cutoff
+              = f.input :precise_recalc_cutoff, as: :float, input_html: {min: 0.0, max: 1.0, step: 0.01}
 
-    .data_model_specifiers.query_model
-      = f.fields_for :query, task.query do |motif_form|
-        .pseudocount
-          = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)', label: 'Pseudocount:'
-        .effective_count
-          = motif_form.input :effective_count, label: 'Effective count:'
-  %br
-  = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
-  = link_to macroape_scan_path(example: params.fetch(:example, 'PCM')), class: 'reset-task' do
-    = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'
+            .data_model_specifiers.query_model
+              = f.fields_for :query, task.query do |motif_form|
+                .pseudocount
+                  = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of count)', label: 'Pseudocount:'
+                .effective_count
+                  = motif_form.input :effective_count, label: 'Effective count:'
+  .row
+    .col-4
+      = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
+      = link_to macroape_scan_path(example: params.fetch(:example, 'PCM')), class: 'reset-task' do
+        = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'

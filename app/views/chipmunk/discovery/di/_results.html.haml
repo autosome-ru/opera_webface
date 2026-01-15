@@ -1,77 +1,100 @@
-.motif_logo
-  .direct
-    .label Primary motif:
-    = link_to show_from_scene_path(id: ticket, filename: 'motif_large_direct.png') do
-      = show_image(ticket, 'motif_small_direct.png')
-  - unless single_stranded?
-    .revcomp
-      .label Reverse complement:
-      = link_to show_from_scene_path(id: ticket, filename: 'motif_large_revcomp.png') do
-        = show_image(ticket, 'motif_small_revcomp.png')
+.row
+  .col-12
+    .motif_logo
+      .direct
+        .badge.text-bg-secondary Primary motif:
+        = link_to show_from_scene_path(id: ticket, filename: 'motif_large_direct.png') do
+          = show_image(ticket, 'motif_small_direct.png')
+      - unless single_stranded?
+        .revcomp
+          .badge.text-bg-secondary Reverse complement:
+          = link_to show_from_scene_path(id: ticket, filename: 'motif_large_revcomp.png') do
+            = show_image(ticket, 'motif_small_revcomp.png')
 
+.row
+  .col-12
+    .threshold
+      .badge.text-bg-secondary Threshold
+      = chipmunk_infos.threshold.round(5)
+      .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Auto-detected score threshold'}}
+.row
+  .col-12
+    .pvalue
+      .badge.text-bg-secondary P-value
+      = chipmunk_infos.pvalue
+      .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Binomial P-value based on the estimated motif threhsold. Should NOT be used to distinguish good and bad motifs (use KDIC and motif logo instead).'}}
+.row
+  .col-12
+    .kdic
+      .badge.text-bg-secondary KDIC
+      = chipmunk_infos.kdic.round(5)
 
-.threshold
-  .label Threshold
-  = chipmunk_infos.threshold.round(5)
-  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Auto-detected score threshold'}}
-.pvalue
-  .label P-value
-  = chipmunk_infos.pvalue
-  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Binomial P-value based on the estimated motif threhsold. Should NOT be used to distinguish good and bad motifs (use KDIC and motif logo instead).'}}
-.kdic
-  .label KDIC
-  = chipmunk_infos.kdic.round(5)
+.row
+  .col-12
+    .alignment_infos
+      .weight
+        .badge.text-bg-secondary Weight
+        = chipmunk_infos.weight.round(5)
+      .total_sequences_in_input_data
+        .badge.text-bg-secondary Input
+        = chipmunk_infos.total_sequences_in_input_data
+        .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Total sequences in the input data'}}
+      .num_resulting_words
+        .badge.text-bg-secondary Words
+        = chipmunk_infos.num_resulting_words
+        .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Words in the resulting alignment'}}
+      .num_resulting_sequences
+        .badge.text-bg-secondary Sequences
+        = chipmunk_infos.num_resulting_sequences
+        .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Sequences in the resulting alignment'}}
 
-.alignment_infos
-  .weight
-    .label Weight
-    = chipmunk_infos.weight.round(5)
-  .total_sequences_in_input_data
-    .label Input
-    = chipmunk_infos.total_sequences_in_input_data
-    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Total sequences in the input data'}}
-  .num_resulting_words
-    .label Words
-    = chipmunk_infos.num_resulting_words
-    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Words in the resulting alignment'}}
-  .num_resulting_sequences
-    .label Sequences
-    = chipmunk_infos.num_resulting_sequences
-    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Sequences in the resulting alignment'}}
+.row
+  .col-12
+    .motif_length
+      .badge.text-bg-secondary Motif length
+      = chipmunk_infos.motif_length
+      .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: "Motif length is presented in dinucleotides. Corresponding site length is #{chipmunk_infos.motif_length + 1}nt"}}
+.row
+  .col-12
+    .diagnosis
+      .badge.text-bg-secondary Diagnosis
+      = chipmunk_infos.diagnosis
+.row
+  .col-12
+    .iupac_consensus
+      .badge.text-bg-secondary IUPAC consensus
+      = chipmunk_infos.iupac_sequence
+.row
+  .col-12
+    .background
+      .badge.text-bg-secondary Background
+      .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Dinucleotide frequencies are in the following order: AA,AC,AG,AT,CA,...,TT'}}
+      = chipmunk_infos.background.map{|el| el.round(5) }.join(', ')
 
-.motif_length
-  .label Motif length
-  = chipmunk_infos.motif_length
-  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: "Motif length is presented in dinucleotides. Corresponding site length is #{chipmunk_infos.motif_length + 1}nt"}}
-.diagnosis
-  .label Diagnosis
-  = chipmunk_infos.diagnosis
-.iupac_consensus
-  .label IUPAC consensus
-  = chipmunk_infos.iupac_sequence
-.background
-  .label Background
-  .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Dinucleotide frequencies are in the following order: AA,AC,AG,AT,CA,...,TT'}}
-  = chipmunk_infos.background.map{|el| el.round(5) }.join(', ')
-
-.result_data
-  .chipmunk_results= download_link t('task_layout.download_results'), ticket, 'task_result.txt'
-  .occurences= download_link t('task_layout.download_occurences'), ticket, 'occurences.txt'
-.input_data
-  .show_task_params
-    .download_sequences= download_link t('task_layout.sequences'), ticket, 'sequences.mfa'
-    .download_params= download_link t('task_layout.task_details'), ticket, 'task_params.yaml'
-.matrices
-  .matrix_container
-    .label.title PCM
-    %span.download= download_link 'Download', ticket, 'motif.dpcm'
-    .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Rounded values are shown'}}
-    = chipmunk_infos.pcm
-  .matrix_container
-    .label.title PWM
-    %span.download= download_link 'Download', ticket, 'motif.dpwm'
-    = chipmunk_infos.pwm
-  .matrix_container
-    .label.title PPM
-    %span.download= download_link 'Download', ticket, 'motif.dppm'
-    = chipmunk_infos.ppm
+.row
+  .col-12
+    .result_data
+      .chipmunk_results= download_link t('task_layout.download_results'), ticket, 'task_result.txt'
+      .occurences= download_link t('task_layout.download_occurences'), ticket, 'occurences.txt'
+.row
+  .col-12
+    .input_data
+      .show_task_params
+        .download_sequences= download_link t('task_layout.sequences'), ticket, 'sequences.mfa'
+        .download_params= download_link t('task_layout.task_details'), ticket, 'task_params.yaml'
+.row
+  .col-12
+    .matrices
+      .matrix_container
+        .badge.text-bg-secondary.title PCM
+        %span.download= download_link 'Download', ticket, 'motif.dpcm'
+        .help-icon.hint.has-tooltip{data: {toggle: 'tooltip', placement: 'right', title: 'Rounded values are shown'}}
+        = chipmunk_infos.pcm
+      .matrix_container
+        .badge.text-bg-secondary.title PWM
+        %span.download= download_link 'Download', ticket, 'motif.dpwm'
+        = chipmunk_infos.pwm
+      .matrix_container
+        .badge.text-bg-secondary.title PPM
+        %span.download= download_link 'Download', ticket, 'motif.dppm'
+        = chipmunk_infos.ppm

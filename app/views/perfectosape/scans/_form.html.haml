@@ -1,23 +1,31 @@
 = task_form_for task, :as => :task, url: perfectosape_scan_path, html: {class: 'task_params'} do |f|
-  .snp_list
-    %h5 Paste a list of sequences with SNPs in a textarea or select a file with sequences to scan
-    .row.sequence_list
-      .col-6.snp_list_text= f.input :snp_list_text, :as => :text
-    .row
-      .col-6.snp_list_file= f.input :snp_list_file, :as => :file
-  .collection
-    = f.input :collection, as: :motif_collection_selector
-
-  Advanced options:
-  .expand_button
-    %a{href: '#'} [+]
-  .advanced_options
-    .pvalue_cutoff
-      = f.input :pvalue_cutoff
-    .fold_change_cutoff
-      = f.input :fold_change_cutoff
-
-  %br
-  = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
-  = link_to perfectosape_scan_path, class: 'reset-task' do
-    = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'
+  .row
+    .col-12
+      .snp_list
+        %h5.mt-3.mb-3 Paste a list of sequences with SNPs in a textarea or select a file with sequences to scan
+        .row.sequence_list
+          .col-12.snp_list_text= f.input :snp_list_text, :as => :text
+        .row
+          .col-6.snp_list_file= f.input :snp_list_file, :as => :file
+  .row
+    .col-6
+      .collection
+        = f.input :collection, as: :motif_collection_selector
+  .row
+    .col-12
+      Advanced options:
+      .expand_button
+        %a{href: '#'} [+]
+      .advanced_options
+        .row
+          .col-6
+            .pvalue_cutoff
+              = f.input :pvalue_cutoff
+          .col-6
+            .fold_change_cutoff
+              = f.input :fold_change_cutoff
+  .row
+    .col-4
+      = f.submit 'Run', data: {disable_with: 'Sending request'}, class: 'btn btn-primary'
+      = link_to perfectosape_scan_path, class: 'reset-task' do
+        = f.button :button, 'Reset', :type => 'button', :class => 'btn btn-warning'
