@@ -143,7 +143,7 @@ class OperaHouse
     finales_lock.synchronize do
       ticket = File.basename(full_ticket_name)
       return nil unless File.exist?(Opera.ticket_yaml_path(ticket))
-      YAML.load_file(Opera.ticket_yaml_path(ticket))
+      YAML.safe_load_file(Opera.ticket_yaml_path(ticket), permitted_classes: [OperaStatus, Time, Date, DateTime])
     end
   end
 
