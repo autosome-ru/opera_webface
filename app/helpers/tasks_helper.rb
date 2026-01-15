@@ -50,11 +50,16 @@ module TasksHelper
     simple_form_for(object, *(args << options.merge(builder: TaskFormBuilder)), &block)
   end
 
-  def image_tag_if_exists(image_path, options = {})
-    if image_path && ::Rails.application.assets_manifest.assets[image_path]
-      image_tag image_path, options
+  # Source - https://stackoverflow.com/a/46514978
+  def asset_exists?(path)
+    if Rails.env.production?
+      Rails.application.assets_manifest.find_sources(path) != nil
     else
-      nil
+      Rails.application.assets.find_asset(path) != nil
     end
+  end
+
+  def image_tag_if_exists(image_path, options = {})
+    asset_exists?(image_path) ? image_tag(image_path, options) : nil
   end
 end
