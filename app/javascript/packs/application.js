@@ -25,3 +25,5 @@ import "../src/bootstrap";
 import "../styles/styles";
 
 console.log('Hello World from Webpacker')
+// import {root_path} from '../routes';
+// alert(`JsRoutes installed.\nYour root path is ${root_path()}`)

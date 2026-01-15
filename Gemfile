@@ -43,7 +43,7 @@ gem 'haml-rails'
 gem 'simple_form', '>= 5.0.0'
 gem 'mime-types'
 gem 'enumerize'
-gem 'js-routes', '~> 1.4'
+gem 'js-routes', '>= 1.4'
 gem 'draper'
 gem 'virtus'
 
