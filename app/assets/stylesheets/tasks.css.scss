@@ -4,7 +4,7 @@
 
 //$error_color: lighten(red, 20%);
 
-@border_color: #cccccc;
+$border_color: #cccccc;
 
 .my-label {
   display: inline-block;
@@ -24,7 +24,7 @@
 }
 
 #info {
-  border-left: 1px solid @border_color;
+  border-left: 1px solid $border_color;
   .task_description, .task_errors {
     margin-left: 10px;
     min-height: 100px;
@@ -232,7 +232,7 @@ table.colorized {
 .input_data, .result_data {
   padding-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid @border_color;
+  border-bottom: 1px solid $border_color;
 }
 
 .help_img {

@@ -80,7 +80,6 @@ GEM
     coderay (1.1.3)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    commonjs (0.2.7)
     concurrent-ruby (1.3.4)
     crass (1.0.6)
     date (3.5.1)
@@ -124,12 +123,6 @@ GEM
       railties (>= 3.2)
       sprockets-rails
     kgio (2.11.4)
-    less (2.6.0)
-      commonjs (~> 0.2.7)
-    less-rails (4.0.0)
-      actionpack (>= 4)
-      less (~> 2.6.0)
-      sprockets (>= 2)
     libv8 (3.16.14.19)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -258,10 +251,10 @@ GEM
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     spring (2.1.0)
-    sprockets (3.7.5)
-      base64
+    sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
+      logger
+      rack (>= 2.2.4, < 4)
     sprockets-rails (3.4.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
@@ -320,7 +313,6 @@ DEPENDENCIES
   enumerize
   haml-rails
   js-routes
-  less-rails
   listen
   loofah (>= 2.3.1)
   mime-types
@@ -336,7 +328,7 @@ DEPENDENCIES
   sequence_logo (~> 1.3.2)
   simple_form (>= 5.0.0)
   spring
-  sprockets (~> 3.0)
+  sprockets (>= 3.0)
   sqlite3 (~> 1.4)
   therubyracer
   uglifier (>= 1.3.0)
