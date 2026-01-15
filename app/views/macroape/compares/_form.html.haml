@@ -4,13 +4,13 @@
     Toy examples for the #{link_to 'PCM-to-PCM', macroape_compare_path(example: :PCM) }, #{link_to 'PWM-to-PWM', macroape_compare_path(example: :PWM) }, #{link_to 'PPM-to-PPM', macroape_compare_path(example: :PPM) } and #{link_to 'different types', macroape_compare_path(example: :mixed) } comparison.
   %hr
   .row
-    .span4.first_model
+    .col-4.first_model
       = f.fields_for :first_motif, task.first_motif do |motif_form|
         .data_model
           = motif_form.input :data_model, label: 'Model 1:', as: :motif_type_selector
         .matrix
           = motif_form.input :matrix, label: 'Matrix 1:', :as => :text
-    .span4.second_model
+    .col-4.second_model
       = f.fields_for :second_motif, task.second_motif do |motif_form|
         .data_model
           = motif_form.input :data_model, label: 'Model 2:', as: :motif_type_selector
@@ -31,13 +31,13 @@
     .dicretization
       = f.input :discretization
     .row
-      .span4.data_model_specifiers.first_model
+      .col-4.data_model_specifiers.first_model
         = f.fields_for :first_motif, task.first_motif do |motif_form|
           .pseudocount
             = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 1):'
           .effective_count
             = motif_form.input :effective_count, label: 'Effective sample size (model 1):'
-      .span4.data_model_specifiers.second_model
+      .col-4.data_model_specifiers.second_model
         = f.fields_for :second_motif, task.second_motif do |motif_form|
           .pseudocount
             = motif_form.input :pseudocount, placeholder: 'Leave empty to use default value (logarithm of sample size)', label: 'Pseudocount (model 2):'

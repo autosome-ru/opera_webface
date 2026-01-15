@@ -8,7 +8,7 @@
         = show_image(ticket, 'alignment_small.png')
 .input_data
   .row
-    .span3
+    .col-3
       .motif-label
         = download_list ticket, {'pcm' => 'first.pcm', 'ppm' => 'first.ppm', 'pwm' => 'first.pwm'}
         .name= task_results.first_pwm.name
@@ -16,7 +16,7 @@
         = link_to show_from_scene_path(id: ticket, filename: 'first_large_direct.png') do
           = show_image(ticket, 'first_small_direct.png')
       = format_matrix_as_table(task_results.first_pwm.matrix, arity: :mono, round: 3)
-    .span3
+    .col-3
       .motif-label
         = download_list ticket, {'pcm' => 'second.pcm', 'ppm' => 'second.ppm', 'pwm' => 'second.pwm'}
         .name= task_results.second_pwm.name
@@ -25,5 +25,5 @@
           = show_image(ticket, "second_small_#{task_results[:orientation]}.png")
       = format_matrix_as_table(task_results.second_pwm.matrix, arity: :mono, round: 3)
   .row
-    .span3
+    .col-3
       = download_link t('task_layout.task_details'), ticket, 'task_params.yaml'

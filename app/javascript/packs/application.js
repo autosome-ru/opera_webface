@@ -19,6 +19,9 @@ import $ from 'jquery'
 window.$ = $
 window.jQuery = $
 
+import "bootstrap"
+
+import "../src/bootstrap";
 import "../styles/styles";
 
 console.log('Hello World from Webpacker')
