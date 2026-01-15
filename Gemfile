@@ -72,10 +72,10 @@ group :test do
   gem 'rspec-rails'
 end
 
-gem 'rmagick', '~> 4.0'
+gem 'rmagick', '~> 5.0'
 
 gem 'bioinform', '~> 0.3.2'
-gem 'sequence_logo', '1.3.4'
+gem 'sequence_logo', '~> 1.3.4'
 
 gem 'backports'
 # gem 'active_form'
