@@ -254,9 +254,9 @@ GEM
       bioinform (~> 0.3.1)
       rmagick (~> 2.13)
     sexp_processor (4.17.4)
-    simple_form (5.0.2)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
+    simple_form (5.3.1)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     spring (2.1.0)
     sprockets (3.7.5)
       base64
