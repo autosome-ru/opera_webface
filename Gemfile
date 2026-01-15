@@ -43,7 +43,7 @@ gem 'haml-rails'
 gem 'simple_form', '>= 5.0.0'
 gem 'mime-types'
 gem 'enumerize'
-gem 'js-routes'
+gem 'js-routes', '~> 1.4'
 gem 'draper'
 gem 'virtus'
 
@@ -72,10 +72,11 @@ group :test do
   gem 'rspec-rails'
 end
 
-gem 'rmagick'
+gem 'rmagick', '2.16.0'
 
 gem 'bioinform', '~> 0.3.2'
-gem 'sequence_logo', '~> 1.3.2'
+gem 'sequence_logo', '1.3.2'
 
 gem 'backports'
 # gem 'active_form'
+gem 'psych'
