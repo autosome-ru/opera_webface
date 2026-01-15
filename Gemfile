@@ -45,7 +45,7 @@ gem 'mime-types'
 gem 'enumerize'
 gem 'js-routes', '>= 1.4'
 gem 'draper'
-gem 'virtus'
+gem 'virtus', '1.0.5'
 
 gem 'nokogiri', '>= 1.10.4'
 gem 'loofah', '>= 2.3.1'
@@ -72,10 +72,10 @@ group :test do
   gem 'rspec-rails'
 end
 
-gem 'rmagick', '2.16.0'
+gem 'rmagick', '~> 3.2.0'
 
 gem 'bioinform', '~> 0.3.2'
-gem 'sequence_logo', '1.3.2'
+gem 'sequence_logo', '1.3.3'
 
 gem 'backports'
 # gem 'active_form'
