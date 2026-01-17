@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>6.1.0'
+gem 'rails', '~>7.0.0'
 gem 'concurrent-ruby', '1.3.4'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -54,10 +54,8 @@ gem 'rack', '>= 2.2.18'
 gem 'webpacker'
 gem 'net-http'
 
-
 gem 'sprockets', '>= 3.0'
-# gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-# gem "twitter-bootstrap-rails", '~> 2.2.8'
+gem "sprockets-rails"
 
 group :development do
   gem 'spring'

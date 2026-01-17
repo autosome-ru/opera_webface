@@ -1,4 +1,4 @@
-class SnpListValidator
+class SNPListValidator
   SNP_PATTERN = /\A[ACGTN]*\[[ACGTN]\/[ACGTN]\][ACGTN]+\z/i
 
   def valid_snp_format?(line)

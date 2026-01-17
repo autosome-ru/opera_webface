@@ -30,7 +30,7 @@ class Perfectosape::ScanForm
 
   private def validate_snp_list(attribute_name, attribute_value)
     errors.add(attribute_name, 'No SNP sequences provided')  if attribute_value.blank?
-    errors.add(attribute_name, 'SNP sequences are in wrong format') unless SnpListValidator.new.valid?(attribute_value)
+    errors.add(attribute_name, 'SNP sequences are in wrong format') unless SNPListValidator.new.valid?(attribute_value)
   end
 
   private def validate_snp_list_text_or_file

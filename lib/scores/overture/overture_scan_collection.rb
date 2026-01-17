@@ -1,6 +1,6 @@
 require 'bioinform'
 require 'fileutils'
-require_relative '../../../app/models/model_creation'
+require_relative '../utils/model_creation'
 require_relative '../../../app/models/background_form'
 
 module ScanCollection

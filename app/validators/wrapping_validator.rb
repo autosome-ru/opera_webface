@@ -2,7 +2,7 @@
 # Validation errors are assigned to a wrapper, not to wrapped attribute
 #
 # Use-case:
-#   class SnpListValidator
+#   class SNPListValidator
 #     attribute :sequence_list, String
 #     validates :sequence_list, recursive_valid: true, sequence_list: true
 #   end
@@ -10,7 +10,7 @@
 #   # Can be rewritten to use custom input (not a string but string or file, for example):
 #   # In an example we obtain value to validate from `TextOrFileForm#value`
 #   # according to `wrapped_attribute` option
-#   class SnpListValidator
+#   class SNPListValidator
 #     prepend WrappingValidator
 #     attribute :sequence_list, TextOrFileForm
 #     validates :sequence_list, recursive_valid: true, sequence_list: {wrapped_attribute: :value}
