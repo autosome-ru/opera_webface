@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>6.0.0'
+gem 'rails', '~>6.1.0'
 gem 'concurrent-ruby', '1.3.4'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -78,6 +78,5 @@ gem 'rmagick', '~> 5.0'
 gem 'bioinform', '~> 0.3.2'
 gem 'sequence_logo', '~> 1.3.4'
 
-gem 'backports'
 # gem 'active_form'
 gem 'psych'

@@ -1,6 +1,5 @@
 require 'bioinform'
 require_relative 'chipmunk_occurence'
-require 'backports/2.2.0/enumerable/slice_after.rb'
 
 module ChIPMunk
   Result = Struct.new(

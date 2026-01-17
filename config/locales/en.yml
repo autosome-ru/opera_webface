@@ -30,6 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  hello: "Hello world"
   opera:
     will_start_soon: 'The task will start in a few seconds.'
     task_performing: "The task execution in progress. The results will appear below once calculations are complete."
