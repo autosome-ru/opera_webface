@@ -256,6 +256,7 @@ GEM
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
+    rexml (3.4.4)
     rmagick (5.5.0)
       observer (~> 0.1)
       pkg-config (~> 1.4)
@@ -377,6 +378,7 @@ DEPENDENCIES
   rack-session (~> 1.0)
   rackup (~> 1.0)
   rails (~> 7.1.0)
+  rexml
   rmagick (~> 5.0)
   rspec
   rspec-rails

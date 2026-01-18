@@ -77,6 +77,7 @@ gem 'rmagick', '~> 5.0'
 
 gem 'bioinform', '~> 0.3.2'
 gem 'sequence_logo', '~> 1.3.4'
+gem "rexml", require: false
 
 # gem 'active_form'
 gem 'psych'
