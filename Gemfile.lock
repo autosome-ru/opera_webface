@@ -144,7 +144,6 @@ GEM
     js-routes (2.3.6)
       railties (>= 5)
       sorbet-runtime
-    kgio (2.11.4)
     libv8 (3.16.14.19.1)
     listen (3.10.0)
       logger
@@ -194,6 +193,8 @@ GEM
     psych (5.3.1)
       date
       stringio
+    puma (7.2.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.21)
     rack-proxy (0.7.7)
@@ -236,7 +237,6 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
-    raindrops (0.20.1)
     rake (13.3.1)
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
@@ -323,9 +323,6 @@ GEM
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicorn (6.1.0)
-      kgio (~> 2.6)
-      raindrops (~> 0.7)
     uri (1.1.1)
     useragent (0.16.11)
     virtus (1.0.5)
@@ -369,6 +366,7 @@ DEPENDENCIES
   net-http
   nokogiri (>= 1.10.4)
   psych
+  puma
   rack (~> 2.2)
   rack-session (~> 1.0)
   rackup (~> 1.0)
@@ -388,7 +386,6 @@ DEPENDENCIES
   sqlite3 (>= 1.4)
   terser
   therubyracer
-  unicorn
   virtus (= 1.0.5)
   web-console (>= 3.0)
   webpacker
