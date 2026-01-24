@@ -24,12 +24,6 @@
 # threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
 # threads threads_count, threads_count
 
-# # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-# port ENV.fetch("PORT", 3000)
-
-# # Allow puma to be restarted by `bin/rails restart` command.
-# plugin :tmp_restart
-
 # # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # # In other environments, only set the PID file if requested.
 # pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
@@ -45,16 +39,21 @@ threads threads_count, threads_count
 # see https://github.com/puma/puma/blob/main/docs/deployment.md#single-vs-cluster-mode
 workers Integer(ENV.fetch("WEB_CONCURRENCY") { 0 })
 
-app_dir = File.expand_path("..", __dir__)
-# shared_dir = ENV.fetch("APP_SHARED_DIR") { File.join(app_dir, "..", "shared") }
-shared_dir = '/run/puma'
+shared_dir = ENV.fetch("APP_SHARED_DIR") { '/run/puma' }
+log_dir = ENV.fetch("APP_LOG_DIR") { '/var/log/puma' }
 
-bind "unix://#{shared_dir}/#{app_name}.sock?umask=0007"
+bind ENV.fetch("APP_BIND") {
+  # "tcp://0.0.0.0:3000"
+  "unix://#{shared_dir}/#{app_name}.sock?umask=0007"
+}
+# # (or shortcut)
+# # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
+# port ENV.fetch("PORT", 3000)
 
 pidfile "#{shared_dir}/#{app_name}.pid"
 state_path "#{shared_dir}/#{app_name}.state"
 
-# stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
-stdout_redirect "/var/log/puma/#{app_name}.log", "/var/log/puma/#{app_name}.error.log", true
+stdout_redirect "#{log_dir}/#{app_name}.log", "#{log_dir}/#{app_name}.error.log", true
 
+# Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
