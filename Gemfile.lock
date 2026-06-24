@@ -155,15 +155,13 @@ GEM
     js-routes (2.4.1)
       railties (>= 5)
       sorbet-runtime
-    libv8 (3.16.14.19.1)
-    libv8 (3.16.14.19.1-amd64-freebsd-10)
-    libv8 (3.16.14.19.1-amd64-freebsd-11)
-    libv8 (3.16.14.19.1-arm-linux)
-    libv8 (3.16.14.19.1-armv7l-linux)
-    libv8 (3.16.14.19.1-universal-darwin)
-    libv8 (3.16.14.19.1-x86-linux)
-    libv8 (3.16.14.19.1-x86_64-darwin)
-    libv8 (3.16.14.19.1-x86_64-linux)
+    libv8-node (24.12.0.1)
+    libv8-node (24.12.0.1-aarch64-linux)
+    libv8-node (24.12.0.1-aarch64-linux-musl)
+    libv8-node (24.12.0.1-arm64-darwin)
+    libv8-node (24.12.0.1-x86_64-darwin)
+    libv8-node (24.12.0.1-x86_64-linux)
+    libv8-node (24.12.0.1-x86_64-linux-musl)
     listen (3.10.0)
       logger
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -185,6 +183,8 @@ GEM
     mime-types-data (3.2026.0414)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
+    mini_racer (0.21.1)
+      libv8-node (~> 24.12.0.1)
     minitest (5.27.0)
     msgpack (1.8.3)
     net-http (0.9.1)
@@ -279,7 +279,6 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
-    ref (2.0.0)
     reline (0.6.3)
       io-console (~> 0.5)
     request_store (1.7.0)
@@ -359,9 +358,6 @@ GEM
     temple (0.10.4)
     terser (1.2.7)
       execjs (>= 0.3.0, < 3)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (1.5.0)
     thread_safe (0.3.6)
     tilt (2.7.0)
@@ -425,6 +421,7 @@ DEPENDENCIES
   listen
   loofah (>= 2.3.1)
   mime-types
+  mini_racer
   net-http
   nokogiri (>= 1.10.4)
   psych
@@ -447,7 +444,6 @@ DEPENDENCIES
   sprockets-rails
   sqlite3 (>= 1.4)
   terser
-  therubyracer
   virtus (= 1.0.5)
   web-console (>= 3.0)
   webpacker
