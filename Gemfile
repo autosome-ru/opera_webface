@@ -11,8 +11,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem 'sqlite3', '>= 1.4'
 
 # Use SCSS for stylesheets
-gem 'sass-rails' # , '~> 4.0.0'
-gem 'sassc'
+gem "dartsass-rails"
 
 # Use Terser as compressor for JavaScript assets
 gem 'terser'
