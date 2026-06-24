@@ -24,4 +24,6 @@ JsRoutes.setup do |c|
 
   # More options:
   # @see https://github.com/railsware/js-routes#available-options
+
+  c.include_undefined_query_parameters = false
 end
