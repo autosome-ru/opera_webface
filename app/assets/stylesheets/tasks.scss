@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-//$error_color: lighten(red, 20%);
+@use 'sass:color';
+
+//$error_color: color.adjust(red, $lightness: 20%);
 
 $border_color: #cccccc;
 
@@ -51,7 +53,7 @@ $border_color: #cccccc;
     .hint {
       margin-left: 10px;
       margin-bottom: 10px;
-      color: darken(gray, 10%);
+      color: color.adjust(gray, $lightness: -10%);
     }
   }
 }
@@ -84,7 +86,7 @@ em {
   font-size: 1.5em;
   border: 1px solid black;
   padding: 5px;
-  background-color: lighten(#00ff00, 35%);
+  background-color: color.adjust(#00ff00, $lightness: 35%);
   -webkit-transform: skew(-20deg);
    -moz-transform: skew(-20deg);
     -ms-transform: skew(-20deg);
@@ -156,9 +158,9 @@ em {
 }
 
 .field_with_errors {
-  border: 2px solid lighten(red, 10%);
+  border: 2px solid color.adjust(red, $lightness: 10%);
   padding: 2px;
-  // background-color: lighten(red, 20%); //$error_color;
+  // background-color: color.adjust(red, $lightness: 20%); //$error_color;
   .error {
     // display: block;
     padding: 0;
@@ -166,7 +168,7 @@ em {
     // padding: 0 0 5px 10px;
   }
   input, textarea {
-    // background-color: lighten(red, 40%);
+    // background-color: color.adjust(red, $lightness: 40%);
   }
 }
 
@@ -175,42 +177,42 @@ table.colorized {
   td, th { padding: 5px; }
   thead {
     th { height: 40px; }
-    th:nth-child(odd) { background-color: lighten(black, 75%); }
-    th:nth-child(even) { background-color: lighten(black, 65%); }
+    th:nth-child(odd) { background-color: color.adjust(black, $lightness: 75%); }
+    th:nth-child(even) { background-color: color.adjust(black, $lightness: 65%); }
   }
   &.lighter-column-odd {
     tbody {
       tr:nth-child(odd) {
-        td:nth-child(odd) { background-color: lighten(#ff0000, 39%); }
-        td:nth-child(even) { background-color: lighten(#ff0000, 35%); }
+        td:nth-child(odd) { background-color: color.adjust(#ff0000, $lightness: 39%); }
+        td:nth-child(even) { background-color: color.adjust(#ff0000, $lightness: 35%); }
       }
       tr:nth-child(even) {
-        td:nth-child(odd) { background-color: lighten(#00ff00, 39%); }
-        td:nth-child(even) { background-color: lighten(#00ff00, 35%); }
+        td:nth-child(odd) { background-color: color.adjust(#00ff00, $lightness: 39%); }
+        td:nth-child(even) { background-color: color.adjust(#00ff00, $lightness: 35%); }
       }
     }
   }
   &.lighter-column-odd.neutral-colors {
     tbody {
       tr:nth-child(odd) {
-        td:nth-child(odd) { background-color: lighten(#0000ff, 39%); }
-        td:nth-child(even) { background-color: lighten(#0000ff, 35%); }
+        td:nth-child(odd) { background-color: color.adjust(#0000ff, $lightness: 39%); }
+        td:nth-child(even) { background-color: color.adjust(#0000ff, $lightness: 35%); }
       }
       tr:nth-child(even) {
-        td:nth-child(odd) { background-color: lighten(#ffff00, 43%); }
-        td:nth-child(even) { background-color: lighten(#ffff00, 35%); }
+        td:nth-child(odd) { background-color: color.adjust(#ffff00, $lightness: 43%); }
+        td:nth-child(even) { background-color: color.adjust(#ffff00, $lightness: 35%); }
       }
     }
   }
   &.lighter-column-even {
     tbody {
       tr:nth-child(odd) {
-        td:nth-child(even) { background-color: lighten(#ff0000, 39%); }
-        td:nth-child(odd) { background-color: lighten(#ff0000, 35%); }
+        td:nth-child(even) { background-color: color.adjust(#ff0000, $lightness: 39%); }
+        td:nth-child(odd) { background-color: color.adjust(#ff0000, $lightness: 35%); }
       }
       tr:nth-child(even) {
-        td:nth-child(even) { background-color: lighten(#00ff00, 39%); }
-        td:nth-child(odd) { background-color: lighten(#00ff00, 35%); }
+        td:nth-child(even) { background-color: color.adjust(#00ff00, $lightness: 39%); }
+        td:nth-child(odd) { background-color: color.adjust(#00ff00, $lightness: 35%); }
       }
     }
   }
@@ -218,12 +220,12 @@ table.colorized {
   &.lighter-column-even.neutral-colors {
     tbody {
       tr:nth-child(odd) {
-        td:nth-child(even) { background-color: lighten(#0000ff, 39%); }
-        td:nth-child(odd) { background-color: lighten(#0000ff, 35%); }
+        td:nth-child(even) { background-color: color.adjust(#0000ff, $lightness: 39%); }
+        td:nth-child(odd) { background-color: color.adjust(#0000ff, $lightness: 35%); }
       }
       tr:nth-child(even) {
-        td:nth-child(even) { background-color: lighten(#ffff00, 43%); }
-        td:nth-child(odd) { background-color: lighten(#ffff00, 35%); }
+        td:nth-child(even) { background-color: color.adjust(#ffff00, $lightness: 43%); }
+        td:nth-child(odd) { background-color: color.adjust(#ffff00, $lightness: 35%); }
       }
     }
   }
