@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~>7.2.0'
-gem 'concurrent-ruby', '1.3.4'
+# gem 'concurrent-ruby', '1.3.4'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
@@ -31,9 +31,9 @@ end
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
-gem "rack", "~> 2.2"
-gem "rack-session", "~> 1.0"
-gem "rackup", "~> 1.0"
+# gem "rack", "~> 2.2"
+# gem "rack-session", "~> 1.0"
+# gem "rackup", "~> 1.0"
 gem 'puma'
 
 # Use Capistrano for deployment
