@@ -5,4 +5,4 @@ require File.expand_path('../config/application', __FILE__)
 
 OperaWebface::Application.load_tasks
 # Update js-routes file before javascript build
-task "assets:precompile" => "js:routes"
+task "javascript:build" => "js:routes"

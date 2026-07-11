@@ -26,4 +26,6 @@ JsRoutes.setup do |c|
   # @see https://github.com/railsware/js-routes#available-options
 
   c.include_undefined_query_parameters = false
+
+  c.file = Rails.root.join("app/javascript/generated/routes.js").to_s
 end

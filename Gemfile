@@ -52,7 +52,7 @@ gem 'virtus', '1.0.5'
 
 gem 'nokogiri', '>= 1.10.4'
 gem 'loofah', '>= 2.3.1'
-gem 'webpacker'
+# gem 'webpacker'
 gem 'net-http'
 
 gem 'sprockets', '>= 3.0'
@@ -80,3 +80,5 @@ gem "rexml", require: false
 
 # gem 'active_form'
 gem 'psych'
+
+gem "jsbundling-rails", "~> 1.3"

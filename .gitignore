@@ -32,8 +32,8 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore automatically generated js-routes files.
-app/javascript/routes.js
-app/javascript/routes.d.ts
+/app/javascript/generated/routes.js
+/app/javascript/generated/routes.d.ts
 
 # Built assets
 /app/assets/builds/*

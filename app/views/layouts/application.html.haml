@@ -15,10 +15,8 @@
         gtag('config', 'UA-6896924-8');
       </script>
     %title autosome.org Opera House: bioinformatics tools on the web
-    = stylesheet_link_tag 'application', media: 'all' # sprockets
-    = stylesheet_pack_tag 'application', media: 'all' # webpack
-    = javascript_pack_tag 'application', defer: true  # webpack
-    = javascript_include_tag 'application', defer: true # sprockets (after webpack)
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application', defer: true
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
   %body{data: {controller: params[:controller], action: params[:action]}}
