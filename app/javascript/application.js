@@ -2,7 +2,6 @@
 import "bootstrap"
 
 import "./initializers/bootstrap";
-// import { root_path } from "./generated/routes"
 
 import "./features/tasks"
 import "./features/macroape/compares"

@@ -30,10 +30,6 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
-# Use unicorn as the app server
-# gem "rack", "~> 2.2"
-# gem "rack-session", "~> 1.0"
-# gem "rackup", "~> 1.0"
 gem 'puma'
 
 # Use Capistrano for deployment
@@ -46,13 +42,11 @@ gem 'haml-rails'
 gem 'simple_form', '>= 5.0.0'
 gem 'mime-types'
 gem 'enumerize'
-gem 'js-routes', '>= 1.4'
 gem 'draper'
 gem 'virtus', '1.0.5'
 
 gem 'nokogiri', '>= 1.10.4'
 gem 'loofah', '>= 2.3.1'
-# gem 'webpacker'
 gem 'net-http'
 
 gem 'sprockets', '>= 3.0'
