@@ -242,7 +242,7 @@ table.colorized {
   height: 40px;
   width: 40px;
   background-size: 40px 40px;
-  background-image: image-url('question_mark.png');
+  // background-image: image-url('question_mark.png');  // see asset_urls.css.erb
 }
 
 .reset-task {
@@ -265,7 +265,7 @@ table.colorized {
   background-size: 21.3333px 21.3333px;
   // margin-left: 5px;
   vertical-align: bottom;
-  background-image: image-url("help-icon.png");
+  // background-image: image-url("help-icon.png");  // see asset_urls.css.erb
   display: inline-block;
   &:hover {
     cursor: pointer;

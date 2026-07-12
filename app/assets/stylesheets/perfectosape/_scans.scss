@@ -49,7 +49,7 @@
   background-repeat: no-repeat;
   background-size: 20px 20px;
   vertical-align: bottom;
-  background-image: image-url('green-arrow-up.png');
+  // background-image: image-url('green-arrow-up.png');  // see asset_urls.css.erb
 }
 .arrow-down {
   display: inline-block;
@@ -58,5 +58,5 @@
   background-repeat: no-repeat;
   background-size: 20px 20px;
   vertical-align: bottom;
-  background-image: image-url('red-arrow-down.png');
+  // background-image: image-url('red-arrow-down.png');  // see asset_urls.css.erb
 }
