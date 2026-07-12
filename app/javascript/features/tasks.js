@@ -33,17 +33,17 @@ window.register_data_model_form = function(dataModelSelector){
 
 $(document).ready(function() {
   const update_background_model_form = function(background_form){
-    background_form = $(background_form);
-    const mode = (background_form.find('.mode select').prop('value') || '').toLowerCase();
+    const $background_form = $(background_form);
+    const mode = ($background_form.find('.mode select').prop('value') || '').toLowerCase();
     if (mode === 'wordwise') {
-      background_form.find('.frequencies').hide();
-      background_form.find('.gc_content').hide();
+      $background_form.find('.frequencies').hide();
+      $background_form.find('.gc_content').hide();
     } else if (mode === 'gc_content') {
-      background_form.find('.frequencies').hide();
-      background_form.find('.gc_content').show();
+      $background_form.find('.frequencies').hide();
+      $background_form.find('.gc_content').show();
     } else if (mode === 'frequencies') {
-      background_form.find('.frequencies').show();
-      background_form.find('.gc_content').hide();
+      $background_form.find('.frequencies').show();
+      $background_form.find('.gc_content').hide();
     }
   };
 
