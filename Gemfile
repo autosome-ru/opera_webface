@@ -43,6 +43,7 @@ gem 'simple_form', '>= 5.0.0'
 gem 'mime-types'
 gem 'enumerize'
 gem 'draper'
+gem 'ostruct'
 gem 'virtus', '1.0.5'
 
 gem 'nokogiri', '>= 1.10.4'

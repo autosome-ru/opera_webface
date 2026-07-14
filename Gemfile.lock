@@ -248,6 +248,7 @@ GEM
     nokogiri (1.19.4-x86_64-linux-musl)
       racc (~> 1.4)
     observer (0.1.2)
+    ostruct (0.6.3)
     pkg-config (1.6.5)
     pp (0.6.4)
       prettyprint
@@ -458,6 +459,7 @@ DEPENDENCIES
   mini_racer
   net-http
   nokogiri (>= 1.10.4)
+  ostruct
   psych
   puma
   rails (~> 7.2.0)
